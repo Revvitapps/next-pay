@@ -67,7 +67,7 @@ export default function Navbar({ mode = 'home' }: NavbarProps) {
             onClick={() => {
               track('proposal_cta_click', { source: 'navbar_main' });
             }}
-            className="rounded-full bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition"
           >
             Your Proposal
           </Link>

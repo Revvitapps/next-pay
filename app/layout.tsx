@@ -18,7 +18,17 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'NEXT-PAY | Next Pay Business Solutions',
   description:
-    'Infrastructure for modern business with connected operations, integrations, and financial workflows.'
+    'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
+  openGraph: {
+    title: 'NEXT-PAY | Next Pay Business Solutions',
+    description:
+      'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
+    images: ['/images/updated-main-hero.jpeg']
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/images/updated-main-hero.jpeg']
+  }
 };
 
 export default function RootLayout({

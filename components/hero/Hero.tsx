@@ -68,7 +68,7 @@ export default function Hero() {
           <Link
             href="/proposal"
             onClick={() => track('proposal_cta_click', { source: 'hero_primary' })}
-            className="animate-pulseGlow rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
           >
             Your Proposal
           </Link>
@@ -78,7 +78,7 @@ export default function Hero() {
                   track('book_call_click', { source: 'hero_secondary' });
                   prefillAndScrollContact({ message: 'I want to review infrastructure and services for my business.' });
                 }}
-                className="rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-zinc-100 transition hover:border-cyan-200/70 hover:bg-cyan-300/10"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-zinc-100 transition hover:border-cyan-200/70 hover:bg-cyan-300/10"
               >
                 Book a Call
               </button>

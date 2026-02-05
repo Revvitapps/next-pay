@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const services = [
   {
@@ -28,6 +29,16 @@ const services = [
 ];
 
 export default function HeroVisual() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
   return (
     <div className="relative w-full">
       <div className="absolute -inset-10 rounded-[2.5rem] bg-cyan-400/10 blur-3xl" aria-hidden />
@@ -56,44 +67,38 @@ export default function HeroVisual() {
           return (
             <motion.article
               key={service.title}
-              initial={{ opacity: 0, x: isOdd ? 140 : -140, y: 26 }}
+              initial={{
+                opacity: 0,
+                x: isOdd ? (isMobile ? 60 : 140) : isMobile ? -60 : -140,
+                y: isMobile ? 16 : 26
+              }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 1.4, ease: 'easeOut' }}
-              className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card backdrop-blur md:p-8"
+              transition={{ duration: isMobile ? 0.9 : 1.4, ease: 'easeOut' }}
+              className="group overflow-hidden rounded-3xl border border-white/15 bg-slate-950/90 shadow-card"
             >
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 p-6 md:p-8">
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      sizes="100vw"
-                      className="object-contain object-center"
-                    />
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-950/88 via-slate-950/80 to-slate-950/95" />
+              <div className="w-full overflow-hidden border-b border-white/10 bg-slate-900/80">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={1400}
+                  height={800}
+                  className="h-48 w-full object-cover object-center transition duration-700 group-hover:scale-[1.02] sm:h-56 md:h-64"
+                />
               </div>
 
-              <div className="relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-                <div className="space-y-4">
-                  <div className="h-px w-full bg-gradient-to-r from-cyan-300/50 via-white/10 to-transparent" />
-                  <h3 className="font-heading text-2xl font-bold text-zinc-100 md:text-3xl">{service.title}</h3>
-                  <p className="text-sm leading-relaxed text-zinc-200">{service.description}</p>
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-4 p-6 md:p-8">
+                <div className="h-px w-full bg-gradient-to-r from-cyan-300/60 via-white/10 to-transparent" />
+                <h3 className="font-heading text-2xl font-bold text-zinc-100 md:text-3xl">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-white/90">{service.description}</p>
+                <ul className="space-y-2 text-sm text-white/90">
                   {service.bullets.map((bullet) => (
-                    <div
-                      key={bullet}
-                      className="rounded-2xl border border-white/20 bg-slate-950/92 px-4 py-3 text-sm text-white"
-                    >
-                      {bullet}
-                    </div>
+                    <li key={bullet} className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                      <span>{bullet}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </motion.article>
           );
