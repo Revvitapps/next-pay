@@ -52,12 +52,12 @@ export default function HeroVisual() {
       >
         <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Services</p>
         <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-          Hospitality-grade platform services built to convert and retain
+          Enterprise power. Right-sized for your business.
         </h2>
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
-          Our team aligns operations, integrations, and infrastructure with how you operate so the stack feels
-          seamless to staff and reliable to customers. Each service layer is designed to accelerate execution,
-          improve trust, and simplify operations.
+        <p className="mt-4 text-sm font-semibold leading-relaxed text-white/90">
+          Whether you’re just getting started or scaling fast, we provide the same reliable systems used by larger
+          enterprises — including payments, POS, automation, and integrations — designed to meet you where you are
+          today and grow with you tomorrow.
         </p>
       </motion.div>
 
