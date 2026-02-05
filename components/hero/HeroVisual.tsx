@@ -17,14 +17,14 @@ const services = [
     description:
       'Design the customer journey to keep service moving, reduce friction, and build trust across every touchpoint.',
     bullets: ['Fast onboarding + training', 'Simplified reporting', 'Live service visibility'],
-    image: '/images/mobile-pos-system.webp'
+    image: '/images/service-delivery-workflow.jpg'
   },
   {
     title: 'Automation + Enablement',
     description:
       'Activate workflows, automations, and reporting that protect margin and improve long-term performance.',
     bullets: ['Automation playbooks', 'Integrated reporting', 'System + CRM sync'],
-    image: '/images/full-pos-system.jpeg'
+    image: '/images/automation-enablement.jpg'
   }
 ];
 
@@ -77,14 +77,15 @@ export default function HeroVisual() {
               transition={{ duration: isMobile ? 0.9 : 1.4, ease: 'easeOut' }}
               className="group overflow-hidden rounded-3xl border border-white/15 bg-slate-950/90 shadow-card"
             >
-              <div className="w-full overflow-hidden border-b border-white/10 bg-slate-900/80">
+              <div className="relative h-44 w-full overflow-hidden border-b border-white/10 bg-slate-950/85 sm:h-52 md:h-60">
                 <Image
                   src={service.image}
                   alt={service.title}
-                  width={1400}
-                  height={800}
-                  className="h-48 w-full object-cover object-center transition duration-700 group-hover:scale-[1.02] sm:h-56 md:h-64"
+                  fill
+                  sizes="100vw"
+                  className="object-cover object-center opacity-45 transition duration-700 group-hover:scale-[1.02]"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-slate-950/55 to-slate-950/80" />
               </div>
 
               <div className="space-y-4 p-6 md:p-8">
