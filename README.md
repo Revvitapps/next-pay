@@ -22,3 +22,4 @@ NextPayPOS marketing + proposal platform.
 
 ## Vercel Deployment
 This project is optimized for Vercel. Import the repository into Vercel and deploy with the default Next.js settings.
+# NEXT-PAY
