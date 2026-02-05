@@ -48,7 +48,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.76, delay: index * 0.07 }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-card"
+              className="rounded-2xl border border-white/15 bg-slate-950/85 p-6 shadow-card"
             >
               <Quote className="h-5 w-5 text-cyan-200" />
               <p className="mt-4 text-sm leading-relaxed text-zinc-200">“{item.quote}”</p>

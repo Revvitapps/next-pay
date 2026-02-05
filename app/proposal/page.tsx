@@ -21,7 +21,7 @@ export default function ProposalPage() {
                   className="h-full w-full bg-cover bg-center"
                   style={{
                     backgroundImage: useNextPay
-                      ? "url('/images/nextpay.webp')"
+                      ? "url('/images/proposal-background.jpg')"
                       : "url('/images/revvit-mockup-copy.jpg')"
                   }}
                 />

@@ -77,8 +77,8 @@ export default function IndustrySelector() {
                 }}
                 className={`group rounded-2xl border p-4 text-left transition ${
                   isActive
-                    ? 'border-cyan-300/70 bg-cyan-300/10'
-                    : 'border-white/10 bg-white/[0.03] hover:border-cyan-200/40 hover:bg-white/10'
+                    ? 'border-cyan-300/70 bg-slate-950/85'
+                    : 'border-white/15 bg-slate-950/75 hover:border-cyan-200/40 hover:bg-slate-950/85'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -98,7 +98,7 @@ export default function IndustrySelector() {
           transition={{ duration: 0.8 }}
           className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
         >
-          <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <article className="rounded-2xl border border-white/15 bg-slate-950/85 p-6">
             <h3 className="text-xl font-bold text-zinc-100">Recommended Business Stack</h3>
             <ul className="mt-4 space-y-2 text-sm text-zinc-300">
               {activeProfile.recommendedSetup.map((item) => (
@@ -113,20 +113,20 @@ export default function IndustrySelector() {
             <p className="mt-2 text-sm leading-relaxed text-zinc-300">{activeProfile.bestFor}</p>
 
             <h4 className="mt-7 text-sm font-semibold uppercase tracking-[0.15em] text-cyan-200">Operational Wins</h4>
-            <ul className="mt-3 grid gap-2 text-sm text-zinc-200 sm:grid-cols-3">
+            <ul className="mt-3 grid gap-2 text-sm text-white sm:grid-cols-3">
               {activeProfile.operationalWins.map((item) => (
-                <li key={item} className="rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2">
+                <li key={item} className="rounded-xl border border-white/15 bg-slate-950/90 px-3 py-2">
                   {item}
                 </li>
               ))}
             </ul>
           </article>
 
-          <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <article className="rounded-2xl border border-white/15 bg-slate-950/85 p-6">
             <h3 className="text-xl font-bold text-zinc-100">Recommended Tools &amp; Infrastructure</h3>
             <div className="mt-4 space-y-3">
               {activeProfile.suggestedHardware.map((hardware) => (
-                <div key={hardware.name} className="rounded-xl border border-white/10 bg-slate-900/65 p-4">
+                <div key={hardware.name} className="rounded-xl border border-white/15 bg-slate-950/90 p-4">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-sm font-semibold text-cyan-100">{hardware.name}</p>
                     <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.15em] text-zinc-400">

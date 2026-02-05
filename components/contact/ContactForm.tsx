@@ -67,7 +67,7 @@ export default function ContactForm() {
   return (
     <section id="contact" className="px-6 py-20 lg:px-12">
       <MotionDiv variant="right">
-        <div className="mx-auto w-full max-w-none rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-card md:p-10">
+        <div className="mx-auto w-full max-w-none rounded-3xl border border-white/15 bg-slate-950/85 p-6 shadow-card md:p-10">
           <div className="mb-8">
             <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Contact / Book a Call</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">

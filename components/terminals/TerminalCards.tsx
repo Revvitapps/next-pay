@@ -53,7 +53,7 @@ export default function TerminalCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: index * 0.07 }}
-              className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-card transition hover:-translate-y-1 hover:border-cyan-200/45"
+              className="group overflow-hidden rounded-3xl border border-white/15 bg-slate-950/85 shadow-card transition hover:-translate-y-1 hover:border-cyan-200/45"
             >
               <div className="relative border-b border-white/10 bg-slate-900/75 p-4">
                 <div className="absolute inset-0 bg-gradient-to-b from-cyan-300/8 via-transparent to-transparent" />

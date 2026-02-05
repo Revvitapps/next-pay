@@ -13,7 +13,7 @@ function AboutSection() {
   return (
     <section id="about" className="px-6 py-20 lg:px-12">
       <MotionDiv variant="left">
-        <div className="mx-auto grid w-full max-w-none gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:grid-cols-[1fr_1.1fr] md:p-10">
+        <div className="mx-auto grid w-full max-w-none gap-6 rounded-3xl border border-white/15 bg-slate-950/85 p-6 md:grid-cols-[1fr_1.1fr] md:p-10">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">About</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
@@ -41,7 +41,7 @@ function TrustComplianceSection() {
   return (
     <section className="px-6 py-20 lg:px-12">
       <MotionDiv variant="right">
-        <div className="mx-auto w-full max-w-none rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-10">
+        <div className="mx-auto w-full max-w-none rounded-3xl border border-white/15 bg-slate-950/85 p-6 md:p-10">
           <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Trust + Compliance</p>
           <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
             Security, privacy, and reliability are built into every deployment

@@ -74,7 +74,7 @@ export default function HeroVisual() {
                     />
                   </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-950/70 to-slate-950/90" />
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-950/88 via-slate-950/80 to-slate-950/95" />
               </div>
 
               <div className="relative z-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -88,7 +88,7 @@ export default function HeroVisual() {
                   {service.bullets.map((bullet) => (
                     <div
                       key={bullet}
-                      className="rounded-2xl border border-white/15 bg-slate-950/85 px-4 py-3 text-sm text-zinc-100"
+                      className="rounded-2xl border border-white/20 bg-slate-950/92 px-4 py-3 text-sm text-white"
                     >
                       {bullet}
                     </div>

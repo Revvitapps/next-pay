@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function HeroGyrateShimmer() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
 
       <motion.div
         className="absolute left-1/2 top-1/2 z-10 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"

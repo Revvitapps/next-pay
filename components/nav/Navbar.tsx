@@ -69,7 +69,7 @@ export default function Navbar({ mode = 'home' }: NavbarProps) {
             }}
             className="rounded-full bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition"
           >
-            Proposal
+            Your Proposal
           </Link>
           <button
             type="button"

@@ -45,7 +45,7 @@ export default function BlogPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: index * 0.06 }}
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-cyan-200/50"
+              className="group rounded-2xl border border-white/15 bg-slate-950/85 p-5 transition hover:-translate-y-1 hover:border-cyan-200/50"
             >
               <div className="rounded-xl border border-white/10 bg-gradient-to-br from-cyan-300/15 to-violet-300/10 p-4">
                 <NotebookPen className="h-5 w-5 text-cyan-200" />
