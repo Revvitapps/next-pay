@@ -10,7 +10,7 @@ const services = [
     description:
       'Align tools, service flow, and system routing with how your teams operate across locations and channels.',
     bullets: ['Front desk + field coverage', 'Unified system access', 'Role-based controls'],
-    image: '/images/counter-pos-system.webp'
+    image: '/images/operations-infrastructure-stack.jpg'
   },
   {
     title: 'Service Delivery Workflow',
