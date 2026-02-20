@@ -24,5 +24,9 @@ Next Pay Business Solutions public marketing platform.
 This project is optimized for Vercel. Import the repository into Vercel and deploy with the default Next.js settings.
 
 ## Environment Variables
+- `RESEND_API_KEY`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_TO_EMAIL`
+- `CONTACT_CC_EMAIL`
 - `CONTACT_WEBHOOK_URL`
 - `CONTACT_WEBHOOK_TOKEN`

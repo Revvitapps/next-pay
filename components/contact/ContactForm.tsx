@@ -89,7 +89,7 @@ export default function ContactForm() {
           {submitted ? (
             <div className="rounded-2xl border border-cyan-300/40 bg-cyan-300/10 p-6">
               <CheckCircle2 className="h-6 w-6 text-cyan-100" />
-              <h3 className="mt-3 text-xl font-bold text-cyan-50">Thanks — we&apos;ll reach out within 1 business day.</h3>
+              <h3 className="mt-3 text-xl font-bold text-cyan-50">Thanks — we will reach out as soon as possible.</h3>
               <p className="mt-2 text-sm text-cyan-100/90">Your consultation request has been received.</p>
             </div>
           ) : (
