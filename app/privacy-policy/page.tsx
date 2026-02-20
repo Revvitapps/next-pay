@@ -1,15 +1,41 @@
 import Link from 'next/link';
+import Navbar from '@/components/nav/Navbar';
+import SiteFooter from '@/components/nav/SiteFooter';
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="px-6 py-20">
-      <section className="mx-auto w-full max-w-4xl rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-        <h1 className="font-heading text-3xl font-extrabold text-white">Privacy Policy</h1>
-        <p className="mt-4 text-sm text-zinc-300">Placeholder content. Full policy will be published before production launch.</p>
-        <Link href="/" className="mt-6 inline-flex rounded-full border border-cyan-300/50 px-5 py-2 text-sm font-semibold text-cyan-100">
-          Back to Home
-        </Link>
-      </section>
+    <main className="pt-16">
+      <Navbar />
+      <div className="px-6 py-20 lg:px-12">
+        <section className="mx-auto w-full max-w-5xl rounded-3xl border border-white/15 bg-slate-950/90 p-8 md:p-10">
+          <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Legal</p>
+          <h1 className="font-heading text-3xl font-extrabold text-white">Privacy Policy</h1>
+          <p className="mt-4 text-base leading-relaxed text-zinc-200">
+            Next Pay Business Solutions respects your privacy. We collect contact and business information submitted
+            through forms to provide consultations, service recommendations, and customer support.
+          </p>
+          <h2 className="mt-8 text-xl font-bold text-white">How We Use Information</h2>
+          <p className="mt-2 text-base leading-relaxed text-zinc-200">
+            Submitted information may be used for communications, implementation planning, service operations, and
+            platform support. We do not sell personal information.
+          </p>
+          <h2 className="mt-8 text-xl font-bold text-white">Data Security</h2>
+          <p className="mt-2 text-base leading-relaxed text-zinc-200">
+            We apply reasonable administrative and technical safeguards to protect data submitted through this website.
+          </p>
+          <h2 className="mt-8 text-xl font-bold text-white">Policy Status</h2>
+          <p className="mt-2 text-base leading-relaxed text-zinc-200">
+            This page is placeholder legal content for launch and will be replaced with finalized legal text.
+          </p>
+          <Link
+            href="/"
+            className="mt-8 inline-flex rounded-full border border-cyan-300/50 px-5 py-2 text-sm font-semibold text-cyan-100"
+          >
+            Back to Home
+          </Link>
+        </section>
+      </div>
+      <SiteFooter />
     </main>
   );
 }

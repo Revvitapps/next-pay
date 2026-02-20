@@ -7,30 +7,33 @@ import MotionDiv from '@/components/visuals/MotionDiv';
 import { type LeadPrefillPayload, track } from '@/lib/utils';
 
 type LeadPayload = {
-  name: string;
+  fullName: string;
+  company: string;
   email: string;
-  businessName: string;
+  phone: string;
   industry: string;
-  monthlyVolume: string;
-  currentProvider: string;
   message: string;
 };
 
 const defaultForm: LeadPayload = {
-  name: '',
+  fullName: '',
+  company: '',
   email: '',
-  businessName: '',
+  phone: '',
   industry: industryOptions[0]?.value ?? '',
-  monthlyVolume: '<$10k',
-  currentProvider: '',
   message: ''
 };
 
-const volumeOptions = ['<$10k', '$10-25k', '$25-75k', '$75k+'];
-
 async function submitLead(payload: LeadPayload) {
-  // Swap this body with a fetch('/api/lead', ...) call to wire Zapier/webhooks.
-  console.log('Lead payload:', payload);
+  const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to submit lead');
+  }
 }
 
 export default function ContactForm() {
@@ -59,9 +62,14 @@ export default function ContactForm() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    track('contact_submit', { industry: formData.industry, monthlyVolume: formData.monthlyVolume });
-    await submitLead(formData);
-    setSubmitted(true);
+    track('contact_submit', { industry: formData.industry, company: formData.company });
+    try {
+      await submitLead(formData);
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong. Please try again.');
+    }
   }
 
   return (
@@ -81,19 +89,27 @@ export default function ContactForm() {
           {submitted ? (
             <div className="rounded-2xl border border-cyan-300/40 bg-cyan-300/10 p-6">
               <CheckCircle2 className="h-6 w-6 text-cyan-100" />
-              <h3 className="mt-3 text-xl font-bold text-cyan-50">Thanks, your request has been received.</h3>
-              <p className="mt-2 text-sm text-cyan-100/90">
-                We will follow up with a suggested stack and next-step call options.
-              </p>
+              <h3 className="mt-3 text-xl font-bold text-cyan-50">Thanks — we&apos;ll reach out within 1 business day.</h3>
+              <p className="mt-2 text-sm text-cyan-100/90">Your consultation request has been received.</p>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="grid gap-4 md:grid-cols-2">
               <label className="space-y-2 text-sm text-zinc-300">
-                Name
+                Full Name
                 <input
                   required
-                  value={formData.name}
-                  onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
+                  value={formData.fullName}
+                  onChange={(event) => setFormData((prev) => ({ ...prev, fullName: event.target.value }))}
+                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                />
+              </label>
+
+              <label className="space-y-2 text-sm text-zinc-300">
+                Company
+                <input
+                  required
+                  value={formData.company}
+                  onChange={(event) => setFormData((prev) => ({ ...prev, company: event.target.value }))}
                   className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
                 />
               </label>
@@ -110,11 +126,11 @@ export default function ContactForm() {
               </label>
 
               <label className="space-y-2 text-sm text-zinc-300">
-                Business Name
+                Phone
                 <input
                   required
-                  value={formData.businessName}
-                  onChange={(event) => setFormData((prev) => ({ ...prev, businessName: event.target.value }))}
+                  value={formData.phone}
+                  onChange={(event) => setFormData((prev) => ({ ...prev, phone: event.target.value }))}
                   className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
                 />
               </label>
@@ -133,31 +149,6 @@ export default function ContactForm() {
                     </option>
                   ))}
                 </select>
-              </label>
-
-              <label className="space-y-2 text-sm text-zinc-300">
-                Monthly Card Volume
-                <select
-                  required
-                  value={formData.monthlyVolume}
-                  onChange={(event) => setFormData((prev) => ({ ...prev, monthlyVolume: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
-                >
-                  {volumeOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="space-y-2 text-sm text-zinc-300">
-                Current Provider (Optional)
-                <input
-                  value={formData.currentProvider}
-                  onChange={(event) => setFormData((prev) => ({ ...prev, currentProvider: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
-                />
               </label>
 
               <label className="space-y-2 text-sm text-zinc-300 md:col-span-2">

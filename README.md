@@ -1,6 +1,6 @@
 # NEXT-PAY
 
-NextPayPOS marketing + proposal platform.
+Next Pay Business Solutions public marketing platform.
 
 ## Tech Stack
 - Next.js (App Router) + TypeScript
@@ -22,4 +22,7 @@ NextPayPOS marketing + proposal platform.
 
 ## Vercel Deployment
 This project is optimized for Vercel. Import the repository into Vercel and deploy with the default Next.js settings.
-# NEXT-PAY
+
+## Environment Variables
+- `CONTACT_WEBHOOK_URL`
+- `CONTACT_WEBHOOK_TOKEN`

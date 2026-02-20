@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Navbar from '@/components/nav/Navbar';
+import SiteFooter from '@/components/nav/SiteFooter';
 import Hero from '@/components/hero/Hero';
 import FeaturesGrid from '@/components/features/FeaturesGrid';
 import IndustrySelector from '@/components/industries/IndustrySelector';
@@ -82,33 +82,10 @@ function TrustComplianceSection() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-white/10 px-6 py-8">
-      <MotionDiv variant="left">
-        <div className="mx-auto flex w-full max-w-none flex-col gap-4 text-sm text-zinc-400 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Next Pay Business Solutions. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link href="/privacy-policy" className="transition hover:text-cyan-200">
-              Privacy Policy
-            </Link>
-            <Link href="/terms-of-service" className="transition hover:text-cyan-200">
-              Terms of Service
-            </Link>
-          </div>
-        </div>
-        <p className="mx-auto mt-3 w-full max-w-none text-xs text-zinc-500">
-          Disclaimer: Rates and approval are subject to underwriting.
-        </p>
-      </MotionDiv>
-    </footer>
-  );
-}
-
 export default function HomePage() {
   return (
-    <main>
-      <Navbar mode="home" />
+    <main className="pt-16">
+      <Navbar />
       <Hero />
       <FeaturesGrid />
       <IndustrySelector />
@@ -118,7 +95,9 @@ export default function HomePage() {
       <AboutSection />
       <TrustComplianceSection />
       <ContactForm />
-      <Footer />
+      <MotionDiv variant="left">
+        <SiteFooter />
+      </MotionDiv>
     </main>
   );
 }

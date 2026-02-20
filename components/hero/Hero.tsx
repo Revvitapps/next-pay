@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import HeroVisual from '@/components/hero/HeroVisual';
@@ -9,9 +8,9 @@ import MotionDiv from '@/components/visuals/MotionDiv';
 import { prefillAndScrollContact, track } from '@/lib/utils';
 
 const highlights = [
-  'Connected systems: operations, financial workflows, and integrations',
-  'Built to reduce friction and speed up execution',
-  'Partner-friendly delivery for businesses you serve'
+  'Unified systems across teams and locations',
+  'Automation + reporting that reduces friction',
+  'Secure infrastructure built for growth'
 ];
 
 const trustChips = ['Harbor House Group', 'Northline Inns', 'Elm Street Eats', 'Summit Service Co'];
@@ -35,9 +34,12 @@ export default function Hero() {
                 <span className="inline-flex rounded-full border border-cyan-200/60 bg-slate-950/85 px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.25)]">
                   Business Services Platform
                 </span>
+                <h1 className="mx-auto mt-6 max-w-5xl font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white sm:text-5xl md:text-6xl">
+                  Enterprise-level business services — for companies of every size
+                </h1>
                 <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-white md:text-lg">
-                  Infrastructure for modern business — technology, services, and integrations that help teams operate,
-                  scale, and connect across industries.
+                  We help businesses modernize operations with financial workflows, integrations, automation, and
+                  infrastructure that scale.
                 </p>
               </div>
             </MotionDiv>
@@ -65,22 +67,25 @@ export default function Hero() {
               transition={{ duration: 1.2, delay: 0.15 }}
               className="mt-8 flex flex-wrap items-center justify-center gap-3"
             >
-          <Link
-            href="/proposal"
-            onClick={() => track('proposal_cta_click', { source: 'hero_primary' })}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
-          >
-            Your Proposal
-          </Link>
               <button
                 type="button"
                 onClick={() => {
-                  track('book_call_click', { source: 'hero_secondary' });
-                  prefillAndScrollContact({ message: 'I want to review infrastructure and services for my business.' });
+                  track('book_call_click', { source: 'hero_primary_consultation' });
+                  prefillAndScrollContact({ message: 'I would like a consultation on modernizing my business stack.' });
+                }}
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
+              >
+                Request a Consultation
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  track('capabilities_explore_click', { source: 'hero_secondary' });
+                  document.getElementById('features')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
                 className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-zinc-100 transition hover:border-cyan-200/70 hover:bg-cyan-300/10"
               >
-                Book a Call
+                Explore Capabilities
               </button>
             </motion.div>
 

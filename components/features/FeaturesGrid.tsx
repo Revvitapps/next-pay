@@ -55,8 +55,8 @@ const capabilities = [
     icon: RefreshCcw
   },
   {
-    title: 'Partner Solutions',
-    description: 'Partner-friendly delivery that supports referrals, co-selling, and rollout at scale.',
+    title: 'Partner-ready Support',
+    description: 'Deployment support, onboarding, and expert guidance tailored to your operational model.',
     icon: ArrowRightLeft
   }
 ];
