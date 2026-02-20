@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { GradientBackground } from '@/components/visuals/GradientBackground';
 import './globals.css';
 
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body className={`${jakarta.variable} ${spaceGrotesk.variable} bg-[#05060A] font-body text-zinc-100 antialiased`}>
         <GradientBackground />
         {children}
+        <Analytics />
       </body>
     </html>
   );
