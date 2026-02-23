@@ -47,11 +47,15 @@ export default function MotionDiv({
   const adjustedDuration = isMobile ? Math.max(0.42, duration * 0.85) : duration;
   const viewportAmount = isMobile ? 0.12 : 0.18;
 
+  if (isMobile || shouldReduceMotion) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   return (
     <motion.div
       className={cn(className)}
-      initial={shouldReduceMotion ? false : { opacity: 0, ...adjustedOffset }}
-      whileInView={shouldReduceMotion ? {} : { opacity: 1, x: 0, y: 0 }}
+      initial={{ opacity: 0, ...adjustedOffset }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once, amount: viewportAmount }}
       transition={{ duration: adjustedDuration, delay, ease: 'easeOut' }}
     >
