@@ -15,31 +15,30 @@ export default function UserbackWidget() {
 
     initializedRef.current = true;
 
-    Userback(USERBACK_TOKEN, {
-      is_live: true,
-      widget_settings: {
-        trigger_type: 'page_load',
-        style: 'text',
-        position: 'left'
-      },
-      user_data: {
-        id: 'nextpay-public-visitor',
-        info: {
-          name: 'Website Visitor',
-          email: 'visitor@nextpaypos.com'
+    const initUserback = async () => {
+      const userback = await Userback(USERBACK_TOKEN, {
+        user_data: {
+          id: 'nextpay-public-visitor',
+          info: {
+            name: 'Website Visitor',
+            email: 'visitor@nextpaypos.com'
+          }
+        },
+        is_live: true,
+        widget_settings: {
+          trigger_type: 'page_load',
+          style: 'text',
+          position: 'left'
         }
-      },
-      on_init_error: () => {
-        console.error('[userback] initialization failed');
-      }
-    })
-      .then((widget) => {
-        widget.showLauncher();
-        widget.show();
-      })
-      .catch((error) => {
-        console.error('[userback] failed to load widget', error);
       });
+
+      userback.showLauncher();
+      userback.show();
+    };
+
+    initUserback().catch((error) => {
+      console.error('[userback] failed to initialize', error);
+    });
   }, []);
 
   return null;
