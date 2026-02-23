@@ -1,10 +1,27 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { industryOptions } from '@/components/industries/industryData';
 import MotionDiv from '@/components/visuals/MotionDiv';
 import { type LeadPrefillPayload, track } from '@/lib/utils';
+
+type Turnstile = {
+  render: (
+    element: HTMLElement,
+    options: {
+      sitekey: string;
+      callback: (token: string) => void;
+      'expired-callback'?: () => void;
+      'error-callback'?: () => void;
+    }
+  ) => string;
+  reset: (widgetId?: string) => void;
+};
+
+type TurnstileWindow = Window & {
+  turnstile?: Turnstile;
+};
 
 type LeadPayload = {
   fullName: string;
@@ -13,6 +30,8 @@ type LeadPayload = {
   phone: string;
   industry: string;
   message: string;
+  honeypot: string;
+  turnstileToken: string;
 };
 
 const defaultForm: LeadPayload = {
@@ -21,7 +40,9 @@ const defaultForm: LeadPayload = {
   email: '',
   phone: '',
   industry: industryOptions[0]?.value ?? '',
-  message: ''
+  message: '',
+  honeypot: '',
+  turnstileToken: ''
 };
 
 async function submitLead(payload: LeadPayload) {
@@ -39,6 +60,11 @@ async function submitLead(payload: LeadPayload) {
 export default function ContactForm() {
   const [formData, setFormData] = useState<LeadPayload>(defaultForm);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const widgetRef = useRef<HTMLDivElement | null>(null);
+  const widgetIdRef = useRef<string | null>(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   useEffect(() => {
     function handlePrefill(event: Event) {
@@ -59,16 +85,86 @@ export default function ContactForm() {
     return () => window.removeEventListener('prefill-contact', handlePrefill as EventListener);
   }, []);
 
+  useEffect(() => {
+    if (!turnstileSiteKey || typeof window === 'undefined') {
+      return;
+    }
+
+    const renderWidget = () => {
+      const container = widgetRef.current;
+      const turnstile = (window as TurnstileWindow).turnstile;
+      if (!container || !turnstile || widgetIdRef.current) {
+        return;
+      }
+
+      widgetIdRef.current = turnstile.render(container, {
+        sitekey: turnstileSiteKey,
+        callback: (token: string) => {
+          setFormData((prev) => ({ ...prev, turnstileToken: token }));
+        },
+        'expired-callback': () => {
+          setFormData((prev) => ({ ...prev, turnstileToken: '' }));
+        },
+        'error-callback': () => {
+          setFormData((prev) => ({ ...prev, turnstileToken: '' }));
+        }
+      });
+    };
+
+    const existingScript = document.getElementById('cf-turnstile-script') as HTMLScriptElement | null;
+
+    if (existingScript) {
+      if (existingScript.dataset.loaded === 'true') {
+        renderWidget();
+      } else {
+        existingScript.addEventListener('load', renderWidget, { once: true });
+      }
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.id = 'cf-turnstile-script';
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.dataset.loaded = 'false';
+    script.onload = () => {
+      script.dataset.loaded = 'true';
+      renderWidget();
+    };
+    document.head.appendChild(script);
+  }, [turnstileSiteKey]);
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setErrorMessage(null);
+
+    if (!turnstileSiteKey) {
+      setErrorMessage('Verification is temporarily unavailable. Please try again shortly.');
+      return;
+    }
+
+    if (!formData.turnstileToken) {
+      setErrorMessage('Please complete the verification challenge.');
+      return;
+    }
 
     track('contact_submit', { industry: formData.industry, company: formData.company });
+    setSubmitting(true);
     try {
       await submitLead(formData);
       setSubmitted(true);
+      setFormData(defaultForm);
     } catch (error) {
       console.error(error);
-      alert('Something went wrong. Please try again.');
+      setErrorMessage('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+      const turnstile = typeof window !== 'undefined' ? (window as TurnstileWindow).turnstile : null;
+      if (turnstile && widgetIdRef.current) {
+        turnstile.reset(widgetIdRef.current);
+      }
+      setFormData((prev) => ({ ...prev, turnstileToken: '' }));
     }
   }
 
@@ -94,6 +190,17 @@ export default function ContactForm() {
             </div>
           ) : (
             <form onSubmit={onSubmit} className="grid gap-4 md:grid-cols-2">
+              <label className="sr-only">
+                Leave this field empty
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.honeypot}
+                  onChange={(event) => setFormData((prev) => ({ ...prev, honeypot: event.target.value }))}
+                />
+              </label>
+
               <label className="space-y-2 text-sm text-zinc-300">
                 Full Name
                 <input
@@ -163,12 +270,29 @@ export default function ContactForm() {
                 />
               </label>
 
+              {turnstileSiteKey ? (
+                <div className="md:col-span-2">
+                  <div className="rounded-2xl border border-white/15 bg-slate-900/80 p-3">
+                    <div ref={widgetRef} />
+                  </div>
+                </div>
+              ) : (
+                <p className="text-sm text-amber-200 md:col-span-2">Captcha setup missing. Add Turnstile site key to enable submissions.</p>
+              )}
+
+              {errorMessage ? (
+                <p className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100 md:col-span-2">
+                  {errorMessage}
+                </p>
+              ) : null}
+
               <div className="md:col-span-2">
                 <button
                   type="submit"
+                  disabled={submitting}
                   className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                 >
-                  Submit + Book Intro Call
+                  {submitting ? 'Submitting...' : 'Submit + Book Intro Call'}
                 </button>
               </div>
             </form>

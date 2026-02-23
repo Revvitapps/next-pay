@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
+import UserbackWidget from '@/components/analytics/UserbackWidget';
 import { GradientBackground } from '@/components/visuals/GradientBackground';
 import './globals.css';
 
@@ -39,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${jakarta.variable} ${spaceGrotesk.variable} bg-[#05060A] font-body text-zinc-100 antialiased`}>
+        <UserbackWidget />
         <GradientBackground />
         {children}
       </body>

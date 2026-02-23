@@ -9,7 +9,42 @@ type ContactPayload = {
   phone?: string;
   industry?: string;
   message?: string;
+  honeypot?: string;
+  turnstileToken?: string;
 };
+
+async function verifyTurnstile(token: string, remoteIp: string | null) {
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
+
+  if (!secret) {
+    return { ok: false as const, status: 500, error: 'Captcha verification is not configured.' };
+  }
+
+  const params = new URLSearchParams();
+  params.append('secret', secret);
+  params.append('response', token);
+  if (remoteIp) {
+    params.append('remoteip', remoteIp);
+  }
+
+  const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+
+  if (!response.ok) {
+    return { ok: false as const, status: 502, error: 'Captcha verification failed.' };
+  }
+
+  const result = (await response.json()) as { success?: boolean; 'error-codes'?: string[] };
+  if (!result.success) {
+    console.warn('[contact_turnstile_rejected]', { errors: result['error-codes'] ?? [] });
+    return { ok: false as const, status: 400, error: 'Captcha verification failed.' };
+  }
+
+  return { ok: true as const };
+}
 
 export async function POST(request: Request) {
   try {
@@ -17,6 +52,22 @@ export async function POST(request: Request) {
 
     if (!body.fullName || !body.company || !body.email || !body.phone || !body.industry || !body.message) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
+    }
+
+    if (body.honeypot && body.honeypot.trim().length > 0) {
+      return NextResponse.json({ ok: true });
+    }
+
+    if (!body.turnstileToken || body.turnstileToken.trim().length < 10) {
+      return NextResponse.json({ error: 'Captcha verification required.' }, { status: 400 });
+    }
+
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const remoteIp = forwardedFor ? forwardedFor.split(',')[0]?.trim() ?? null : null;
+    const captchaCheck = await verifyTurnstile(body.turnstileToken.trim(), remoteIp);
+
+    if (!captchaCheck.ok) {
+      return NextResponse.json({ error: captchaCheck.error }, { status: captchaCheck.status });
     }
 
     const resendApiKey = process.env.RESEND_API_KEY?.trim();

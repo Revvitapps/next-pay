@@ -28,5 +28,31 @@ This project is optimized for Vercel. Import the repository into Vercel and depl
 - `CONTACT_FROM_EMAIL`
 - `CONTACT_TO_EMAIL`
 - `CONTACT_CC_EMAIL`
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+- `TURNSTILE_SECRET_KEY`
 - `CONTACT_WEBHOOK_URL`
 - `CONTACT_WEBHOOK_TOKEN`
+
+## Calculator API (Backend Foundation)
+- `GET /api/calculator`
+  - Returns industry catalog + question schema for the estimator flow.
+- `POST /api/calculator`
+  - Accepts:
+    - `industryId`
+    - `answers.businessStage`
+    - `answers.operationModel`
+    - `answers.checkoutCount`
+    - `answers.locationCount`
+    - `answers.currentTools[]`
+    - `answers.primaryNeeds[]`
+    - `answers.integrationTargets[]` (optional)
+    - `answers.monthlyVolumeBand` (optional)
+    - `answers.supportPreference`
+  - Returns a scoped recommendation:
+    - package tier
+    - complexity score
+    - projected timeline
+    - recommended business stack/modules
+    - suggested tools
+    - model-based insights
+    - next discovery questions
