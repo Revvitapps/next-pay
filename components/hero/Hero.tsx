@@ -23,10 +23,10 @@ export default function Hero() {
 
         <div className="relative z-40 w-full px-6 pb-16 pt-[28vh] sm:pb-20 sm:pt-[30vh] md:pb-24 md:pt-[30vh] lg:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 1.4, ease: 'easeOut' }}
+            transition={{ duration: 0.75, ease: 'easeOut' }}
             className="mx-auto w-full max-w-6xl text-center"
           >
             <MotionDiv>
@@ -48,10 +48,10 @@ export default function Hero() {
               {highlights.map((item, index) => (
                 <motion.li
                   key={item}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -70 : 70, y: 16 }}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -28 : 28, y: 10 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 1.2, delay: index * 0.08 }}
+                  transition={{ duration: 0.58, delay: index * 0.06 }}
                   className="inline-flex items-center gap-2 rounded-full border border-cyan-200/50 bg-slate-950/85 px-5 py-2 text-sm font-semibold shadow-[0_0_18px_rgba(34,211,238,0.2)] md:text-base"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
@@ -61,10 +61,10 @@ export default function Hero() {
             </ul>
 
             <motion.div
-              initial={{ opacity: 0, x: -70 }}
+              initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 1.2, delay: 0.15 }}
+              transition={{ duration: 0.62, delay: 0.12 }}
               className="mt-8 flex flex-wrap items-center justify-center gap-3"
             >
               <button
@@ -90,10 +90,10 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: -60 }}
+              initial={{ opacity: 0, x: -22 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 1.2, delay: 0.2 }}
+              transition={{ duration: 0.62, delay: 0.15 }}
               className="mt-10 text-center"
             >
               <p className="text-sm text-white/90">Trusted by operators across hospitality + service businesses</p>
@@ -114,10 +114,10 @@ export default function Hero() {
 
       <section className="px-6 pb-20 pt-10 md:pt-14 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, x: 110, y: 24 }}
+          initial={{ opacity: 0, x: 30, y: 14 }}
           whileInView={{ opacity: 1, x: 0, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.4, ease: 'easeOut' }}
+          transition={{ duration: 0.75, ease: 'easeOut' }}
           className="relative w-full"
         >
           <div className="mx-auto w-full max-w-none">

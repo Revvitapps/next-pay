@@ -17,7 +17,7 @@ export default function MotionDiv({
   className,
   children,
   delay = 0,
-  duration = 1.2,
+  duration = 0.72,
   variant = 'up',
   once = true
 }: MotionDivProps) {
@@ -34,18 +34,18 @@ export default function MotionDiv({
 
   const offset =
     variant === 'left'
-      ? { x: -48, y: 0 }
+      ? { x: -26, y: 0 }
       : variant === 'right'
-        ? { x: 48, y: 0 }
+        ? { x: 26, y: 0 }
         : variant === 'down'
-          ? { x: 0, y: -36 }
+          ? { x: 0, y: -22 }
           : variant === 'fade'
             ? { x: 0, y: 0 }
-            : { x: 0, y: 36 };
+            : { x: 0, y: 22 };
 
-  const adjustedOffset = isMobile ? { x: offset.x * 0.55, y: offset.y * 0.55 } : offset;
-  const adjustedDuration = isMobile ? Math.max(0.65, duration * 0.65) : duration;
-  const viewportAmount = isMobile ? 0.18 : 0.25;
+  const adjustedOffset = isMobile ? { x: offset.x * 0.5, y: offset.y * 0.5 } : offset;
+  const adjustedDuration = isMobile ? Math.max(0.42, duration * 0.85) : duration;
+  const viewportAmount = isMobile ? 0.12 : 0.18;
 
   return (
     <motion.div

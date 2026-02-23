@@ -44,10 +44,10 @@ export default function HeroVisual() {
       <div className="absolute -inset-10 rounded-[2.5rem] bg-cyan-400/10 blur-3xl" aria-hidden />
 
       <motion.div
-        initial={{ opacity: 0, x: -90, y: 16 }}
+        initial={{ opacity: 0, x: -20, y: 10 }}
         whileInView={{ opacity: 1, x: 0, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.3, ease: 'easeOut' }}
+        transition={{ duration: 0.55, ease: 'easeOut' }}
         className="mx-auto w-full max-w-none text-center"
       >
         <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Services</p>
@@ -69,12 +69,12 @@ export default function HeroVisual() {
               key={service.title}
               initial={{
                 opacity: 0,
-                x: isOdd ? (isMobile ? 60 : 140) : isMobile ? -60 : -140,
-                y: isMobile ? 16 : 26
+                x: isOdd ? (isMobile ? 18 : 24) : isMobile ? -18 : -24,
+                y: isMobile ? 10 : 12
               }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: isMobile ? 0.9 : 1.4, ease: 'easeOut' }}
+              transition={{ duration: isMobile ? 0.45 : 0.58, ease: 'easeOut' }}
               className="group overflow-hidden rounded-3xl border border-white/15 bg-slate-950/90 shadow-card"
             >
               <div className="relative h-44 w-full overflow-hidden border-b border-white/10 bg-slate-950/85 sm:h-52 md:h-60">
