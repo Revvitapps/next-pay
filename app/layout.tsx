@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
-import Script from 'next/script';
+import UserbackBootstrap from '@/components/analytics/UserbackBootstrap';
 import UserbackEdgeButton from '@/components/analytics/UserbackEdgeButton';
 import { GradientBackground } from '@/components/visuals/GradientBackground';
 import './globals.css';
@@ -16,8 +16,6 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap'
 });
-
-const userbackToken = process.env.NEXT_PUBLIC_USERBACK_TOKEN ?? 'A-HoZrXnPGvJoEmiC0zM7LtT2iN';
 
 export const metadata: Metadata = {
   title: 'NEXT-PAY | Next Pay Business Solutions',
@@ -43,34 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${jakarta.variable} ${spaceGrotesk.variable} bg-[#05060A] font-body text-zinc-100 antialiased`}>
-        <Script
-          id="userback-config"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.Userback = window.Userback || {};
-              window.Userback.access_token = "${userbackToken}";
-              window.Userback.is_live = true;
-              window.Userback.widget_settings = {
-                trigger_type: "page_load",
-                style: "text",
-                position: "left"
-              };
-              window.Userback.user_data = {
-                id: "nextpay-public-visitor",
-                info: {
-                  name: "Website Visitor",
-                  email: "visitor@nextpaypos.com"
-                }
-              };
-            `
-          }}
-        />
-        <Script
-          id="userback-loader"
-          src="https://static.userback.io/widget/v1.js"
-          strategy="afterInteractive"
-        />
+        <UserbackBootstrap />
         <UserbackEdgeButton />
         <GradientBackground />
         {children}
