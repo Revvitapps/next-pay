@@ -47,7 +47,7 @@ export default function HeroBackgroundRotator({ images }: HeroBackgroundRotatorP
           </motion.div>
         );
       })}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05060A]/48 via-[#05060A]/54 to-[#05060A]/72" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#163c4d]/48 via-[#163c4d]/54 to-[#163c4d]/72" />
     </div>
   );
 }

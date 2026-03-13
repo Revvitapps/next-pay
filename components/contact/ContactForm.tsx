@@ -67,6 +67,25 @@ export default function ContactForm() {
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const industry = params.get('industry');
+    const message = params.get('message');
+    if (!industry && !message) {
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      industry: industry ?? prev.industry,
+      message: message ?? prev.message
+    }));
+  }, []);
+
+  useEffect(() => {
     function handlePrefill(event: Event) {
       const customEvent = event as CustomEvent<LeadPrefillPayload>;
       const payload = customEvent.detail;
@@ -171,22 +190,22 @@ export default function ContactForm() {
   return (
     <section id="contact" className="px-6 py-20 lg:px-12">
       <MotionDiv variant="right">
-        <div className="mx-auto w-full max-w-none rounded-3xl border border-white/15 bg-slate-950/85 p-6 shadow-card md:p-10">
+        <div className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-10">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Contact / Book a Call</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Contact / Book a Call</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               Tell us your setup goals and we will map your rollout
             </h2>
-            <p className="mt-3 max-w-2xl text-sm text-zinc-300">
+            <p className="mt-3 max-w-2xl text-sm text-slate-100/90">
               Tell us what your business needs — we will recommend the right stack and implementation path.
             </p>
           </div>
 
           {submitted ? (
-            <div className="rounded-2xl border border-cyan-300/40 bg-cyan-300/10 p-6">
-              <CheckCircle2 className="h-6 w-6 text-cyan-100" />
-              <h3 className="mt-3 text-xl font-bold text-cyan-50">Thanks — we will reach out as soon as possible.</h3>
-              <p className="mt-2 text-sm text-cyan-100/90">Your consultation request has been received.</p>
+            <div className="rounded-2xl border border-[#46a7a6]/40 bg-[#46a7a6]/10 p-6">
+              <CheckCircle2 className="h-6 w-6 text-[#46a7a6]" />
+              <h3 className="mt-3 text-xl font-bold text-white">Thanks — we will reach out as soon as possible.</h3>
+              <p className="mt-2 text-sm text-slate-100/95">Your consultation request has been received.</p>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="grid gap-4 md:grid-cols-2">
@@ -201,54 +220,54 @@ export default function ContactForm() {
                 />
               </label>
 
-              <label className="space-y-2 text-sm text-zinc-300">
+              <label className="space-y-2 text-sm text-slate-100/90">
                 Full Name
                 <input
                   required
                   value={formData.fullName}
                   onChange={(event) => setFormData((prev) => ({ ...prev, fullName: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                  className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                 />
               </label>
 
-              <label className="space-y-2 text-sm text-zinc-300">
+              <label className="space-y-2 text-sm text-slate-100/90">
                 Company
                 <input
                   required
                   value={formData.company}
                   onChange={(event) => setFormData((prev) => ({ ...prev, company: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                  className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                 />
               </label>
 
-              <label className="space-y-2 text-sm text-zinc-300">
+              <label className="space-y-2 text-sm text-slate-100/90">
                 Email
                 <input
                   type="email"
                   required
                   value={formData.email}
                   onChange={(event) => setFormData((prev) => ({ ...prev, email: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                  className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                 />
               </label>
 
-              <label className="space-y-2 text-sm text-zinc-300">
+              <label className="space-y-2 text-sm text-slate-100/90">
                 Phone
                 <input
                   required
                   value={formData.phone}
                   onChange={(event) => setFormData((prev) => ({ ...prev, phone: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                  className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                 />
               </label>
 
-              <label className="space-y-2 text-sm text-zinc-300">
+              <label className="space-y-2 text-sm text-slate-100/90">
                 Industry
                 <select
                   required
                   value={formData.industry}
                   onChange={(event) => setFormData((prev) => ({ ...prev, industry: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                  className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                 >
                   {industryOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -258,21 +277,21 @@ export default function ContactForm() {
                 </select>
               </label>
 
-              <label className="space-y-2 text-sm text-zinc-300 md:col-span-2">
+              <label className="space-y-2 text-sm text-slate-100/90 md:col-span-2">
                 Message
                 <textarea
                   required
                   rows={5}
                   value={formData.message}
                   onChange={(event) => setFormData((prev) => ({ ...prev, message: event.target.value }))}
-                  className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-zinc-100 outline-none transition focus:border-cyan-300/60"
+                  className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                   placeholder="Tell us your timeline, locations, and integration priorities."
                 />
               </label>
 
               {turnstileSiteKey ? (
                 <div className="md:col-span-2">
-                  <div className="rounded-2xl border border-white/15 bg-slate-900/80 p-3">
+                  <div className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-3">
                     <div ref={widgetRef} />
                   </div>
                 </div>

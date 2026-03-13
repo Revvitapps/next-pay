@@ -20,7 +20,7 @@ export const industryProfiles: IndustryProfile[] = [
     label: 'Restaurant',
     icon: 'utensils',
     bestFor:
-      'Full dining rooms that need fast table turns, split checks, and dependable payment routing across lunch and dinner rushes.',
+      'Full dining rooms that need fast table turns, split checks, and dependable merchant processing across lunch and dinner rushes.',
     recommendedSetup: [
       'Cloud POS with tableside ordering sync',
       'Countertop + handheld terminal pairing',
@@ -38,7 +38,8 @@ export const industryProfiles: IndustryProfile[] = [
     id: 'hotel',
     label: 'Hotel',
     icon: 'hotel',
-    bestFor: 'Properties handling pre-auth, delayed captures, and recurring folio charges across front desk and on-site amenities.',
+    bestFor:
+      'Properties handling pre-auth, delayed captures, and recurring folio charges across front desk, events, and on-site amenities.',
     recommendedSetup: [
       'Property-management friendly gateway setup',
       'Front desk countertop terminals + mobile concierge device',
@@ -57,7 +58,7 @@ export const industryProfiles: IndustryProfile[] = [
     label: 'Bar/Nightlife',
     icon: 'martini',
     bestFor:
-      'High-volume venues that need rapid tab handling, strong fraud controls, and reliable payment acceptance during peak hours.',
+      'High-volume venues that need rapid tab handling, fraud controls, and reliable payment acceptance during peak-hour transaction spikes.',
     recommendedSetup: [
       'Tab pre-auth and card tokenization workflow',
       'Bar-top quick-entry POS profile',
@@ -76,7 +77,7 @@ export const industryProfiles: IndustryProfile[] = [
     label: 'Quick Service',
     icon: 'zap',
     bestFor:
-      'Counter-service teams optimizing speed, order accuracy, and kiosk or curbside handoff without slowing payment acceptance.',
+      'Counter-service teams optimizing speed, order accuracy, and kiosk or curbside handoff without slowing checkout performance.',
     recommendedSetup: [
       'Quick-order POS interface with combo logic',
       'Countertop terminals + pay-at-pickup mobile devices',
@@ -95,7 +96,7 @@ export const industryProfiles: IndustryProfile[] = [
     label: 'Full Service',
     icon: 'chefhat',
     bestFor:
-      'Elevated dining operations that need flexible menu logic, tableside checkout, and detailed reporting by shift and server.',
+      'Elevated dining operations that need flexible menu logic, tableside checkout, and merchant reporting by shift and server.',
     recommendedSetup: [
       'Menu and floor map POS customization',
       'Handheld payment devices for tableside close',
@@ -113,7 +114,8 @@ export const industryProfiles: IndustryProfile[] = [
     id: 'food-truck',
     label: 'Food Truck',
     icon: 'truck',
-    bestFor: 'Mobile operators that need reliable offline fallbacks, compact hardware, and simple reporting from changing locations.',
+    bestFor:
+      'Mobile operators that need reliable offline fallbacks, compact payment hardware, and simple reporting from changing locations.',
     recommendedSetup: [
       'Mobile-first POS with offline mode',
       'Battery-friendly handheld terminal package',
@@ -132,7 +134,7 @@ export const industryProfiles: IndustryProfile[] = [
     label: 'Retail',
     icon: 'store',
     bestFor:
-      'Merchants that need integrated inventory, omnichannel payments, and consistent checkout performance across front and back office.',
+      'Merchants that need integrated inventory, omnichannel payments, and consistent checkout performance across storefront and back office.',
     recommendedSetup: [
       'Inventory-linked cloud POS',
       'Countertop checkout with barcode workflows',

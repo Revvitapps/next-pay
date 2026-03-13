@@ -43,15 +43,15 @@ export default function HomeBackgroundMotion() {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(110deg, rgba(34,211,238,0.02) 10%, rgba(255,255,255,0.08) 45%, rgba(34,211,238,0.02) 75%)',
+            'linear-gradient(110deg, rgba(70,167,166,0.02) 10%, rgba(255,255,255,0.08) 45%, rgba(70,167,166,0.02) 75%)',
           backgroundSize: '200% 200%',
           x: shouldReduceMotion ? 0 : sheenX,
           opacity: 0.07
         }}
       />
 
-      <div className="absolute inset-0 bg-[#05060A]/70" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_16%,rgba(34,211,238,0.2),transparent_42%)]" />
+      <div className="absolute inset-0 bg-[#163c4d]/70" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_16%,rgba(70,167,166,0.2),transparent_42%)]" />
     </div>
   );
 }

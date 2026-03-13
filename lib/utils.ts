@@ -29,6 +29,16 @@ export function prefillAndScrollContact(payload?: LeadPrefillPayload) {
     return;
   }
 
-  window.dispatchEvent(new CustomEvent<LeadPrefillPayload>('prefill-contact', { detail: payload }));
-  scrollToSection('contact');
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    window.dispatchEvent(new CustomEvent<LeadPrefillPayload>('prefill-contact', { detail: payload }));
+    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  const params = new URLSearchParams();
+  if (payload?.industry) params.set('industry', payload.industry);
+  if (payload?.message) params.set('message', payload.message);
+  const queryString = params.toString();
+  window.location.href = queryString ? `/contact?${queryString}` : '/contact';
 }

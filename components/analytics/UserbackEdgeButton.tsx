@@ -66,7 +66,7 @@ export default function UserbackEdgeButton() {
       type="button"
       aria-label="Open feedback"
       onClick={openFeedback}
-      className="fixed left-0 top-1/2 z-[9999] -translate-y-1/2 rounded-r-xl border border-cyan-200/60 bg-cyan-300 px-2 py-3 text-xs font-bold tracking-wide text-slate-950 shadow-[0_0_24px_rgba(34,211,238,0.35)] [writing-mode:vertical-rl]"
+      className="fixed left-0 top-1/2 z-[9999] -translate-y-1/2 rounded-r-xl border border-[#46a7a6]/60 bg-[#46a7a6] px-2 py-3 text-xs font-bold tracking-wide text-slate-950 shadow-[0_0_24px_rgba(70,167,166,0.35)] [writing-mode:vertical-rl]"
     >
       Feedback
     </button>

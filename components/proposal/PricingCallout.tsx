@@ -9,15 +9,15 @@ export default function PricingCallout({ title, lines, highlight = false }: Pric
     <div
       className={`rounded-2xl border p-5 ${
         highlight
-          ? 'border-cyan-300/55 bg-cyan-300/10 text-cyan-50 shadow-glow'
-          : 'border-white/10 bg-white/5 text-zinc-100'
+          ? 'border-[#46a7a6]/55 bg-[#46a7a6]/10 text-white shadow-glow'
+          : 'border-[#46a7a6]/25 bg-[#163c4d]/75 text-white'
       }`}
     >
-      <p className="text-xs uppercase tracking-[0.2em] text-zinc-400">{title}</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-slate-200/80">{title}</p>
       <ul className="mt-3 space-y-2 text-sm leading-relaxed">
         {lines.map((line) => (
           <li key={line} className="flex gap-2">
-            <span className={`mt-1 h-1.5 w-1.5 rounded-full ${highlight ? 'bg-cyan-100' : 'bg-cyan-300'}`} />
+            <span className={`mt-1 h-1.5 w-1.5 rounded-full ${highlight ? 'bg-[#46a7a6]' : 'bg-[#46a7a6]'}`} />
             <span>{line}</span>
           </li>
         ))}

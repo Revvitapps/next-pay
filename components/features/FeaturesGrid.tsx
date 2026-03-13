@@ -67,12 +67,12 @@ export default function FeaturesGrid() {
       <div className="mx-auto w-full max-w-none">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">How It Works</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">How It Works</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               Launch a business services stack that matches your operation
             </h2>
           </div>
-          <p className="text-sm leading-relaxed text-zinc-300">
+          <p className="text-sm leading-relaxed text-slate-100/90">
             Every deployment is mapped around service flow, ticket volume, and approval health so the platform feels
             intuitive to staff and reliable to guests.
           </p>
@@ -85,26 +85,26 @@ export default function FeaturesGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.9, delay: index * 0.08 }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-card backdrop-blur transition hover:-translate-y-1 hover:border-cyan-200/40"
+              className="rounded-2xl border border-[#46a7a6]/20 bg-[#163c4d]/70 p-6 shadow-card backdrop-blur transition hover:-translate-y-1 hover:border-[#46a7a6]/40"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-[0.22em] text-zinc-400">Step {index + 1}</span>
-                <BadgeCheck className="h-5 w-5 text-cyan-300" />
+                <span className="text-xs uppercase tracking-[0.22em] text-slate-200/80">Step {index + 1}</span>
+                <BadgeCheck className="h-5 w-5 text-[#46a7a6]" />
               </div>
-              <h3 className="mt-4 font-heading text-2xl font-bold text-zinc-100">{step.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-300">{step.description}</p>
+              <h3 className="mt-4 font-heading text-2xl font-bold text-white">{step.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-100/90">{step.description}</p>
             </motion.article>
           ))}
         </div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Platform Capabilities</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Platform Capabilities</p>
             <h3 className="mt-3 font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
               Infrastructure modules that scale with modern teams
             </h3>
           </div>
-          <p className="text-sm leading-relaxed text-zinc-300">
+          <p className="text-sm leading-relaxed text-slate-100/90">
             Each module is designed to connect operations, financial workflows, and integrations without added
             complexity.
           </p>
@@ -117,11 +117,11 @@ export default function FeaturesGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: index * 0.05 }}
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-cyan-200/45 hover:bg-white/10"
+              className="group rounded-2xl border border-[#46a7a6]/20 bg-[#163c4d]/70 p-5 transition hover:-translate-y-1 hover:border-[#46a7a6]/45 hover:bg-[#163c4d]/85"
             >
-              <capability.icon className="h-5 w-5 text-cyan-300" />
-              <p className="mt-3 text-base font-semibold text-zinc-100">{capability.title}</p>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-300">{capability.description}</p>
+              <capability.icon className="h-5 w-5 text-[#46a7a6]" />
+              <p className="mt-3 text-base font-semibold text-white">{capability.title}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-100/90">{capability.description}</p>
             </motion.article>
           ))}
         </div>

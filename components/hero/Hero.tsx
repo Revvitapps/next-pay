@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import HeroVisual from '@/components/hero/HeroVisual';
@@ -16,6 +17,8 @@ const highlights = [
 const trustChips = ['Harbor House Group', 'Northline Inns', 'Elm Street Eats', 'Summit Service Co'];
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <section id="home" className="w-full">
       <div className="relative isolate flex w-full min-h-screen min-h-[100svh] items-center overflow-hidden">
@@ -31,7 +34,7 @@ export default function Hero() {
           >
             <MotionDiv>
               <div className="text-center">
-                <span className="inline-flex rounded-full border border-cyan-200/60 bg-slate-950/85 px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.25)]">
+                <span className="inline-flex rounded-full border border-[#46a7a6]/60 bg-[#163c4d]/85 px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#46a7a6] shadow-[0_0_18px_rgba(70,167,166,0.25)]">
                   Business Services Platform
                 </span>
                 <h1 className="mx-auto mt-6 max-w-5xl font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white sm:text-5xl md:text-6xl">
@@ -52,9 +55,9 @@ export default function Hero() {
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.58, delay: index * 0.06 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-cyan-200/50 bg-slate-950/85 px-5 py-2 text-sm font-semibold shadow-[0_0_18px_rgba(34,211,238,0.2)] md:text-base"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#46a7a6]/50 bg-[#163c4d]/85 px-5 py-2 text-sm font-semibold shadow-[0_0_18px_rgba(70,167,166,0.2)] md:text-base"
                 >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-[#46a7a6]" />
                   <span>{item}</span>
                 </motion.li>
               ))}
@@ -81,9 +84,9 @@ export default function Hero() {
                 type="button"
                 onClick={() => {
                   track('capabilities_explore_click', { source: 'hero_secondary' });
-                  document.getElementById('features')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  router.push('/features');
                 }}
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-zinc-100 transition hover:border-cyan-200/70 hover:bg-cyan-300/10"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/70 hover:bg-[#46a7a6]/10"
               >
                 Explore Capabilities
               </button>
@@ -96,12 +99,12 @@ export default function Hero() {
               transition={{ duration: 0.62, delay: 0.15 }}
               className="mt-10 text-center"
             >
-              <p className="text-sm text-white/90">Trusted by operators across hospitality + service businesses</p>
+              <p className="text-sm text-slate-100/95">Trusted by operators across hospitality + service businesses</p>
               <div className="mt-3 flex flex-wrap justify-center gap-2">
                 {trustChips.map((chip) => (
                   <span
                     key={chip}
-                    className="rounded-full border border-white/35 bg-black/55 px-3 py-1 text-xs font-medium text-white/90"
+                    className="rounded-full border border-white/35 bg-[#163c4d]/65 px-3 py-1 text-xs font-medium text-slate-100/95"
                   >
                     {chip}
                   </span>

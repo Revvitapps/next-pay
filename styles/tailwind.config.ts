@@ -9,23 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['var(--font-space-grotesk)', 'sans-serif'],
-        body: ['var(--font-jakarta)', 'sans-serif']
+        heading: ['var(--font-roboto)', 'sans-serif'],
+        body: ['var(--font-roboto)', 'sans-serif']
       },
       boxShadow: {
-        glow: '0 0 0 1px rgba(34, 211, 238, 0.35), 0 0 40px rgba(34, 211, 238, 0.12)',
+        glow: '0 0 0 1px rgba(70, 167, 166, 0.35), 0 0 40px rgba(70, 167, 166, 0.12)',
         card: '0 24px 60px rgba(0, 0, 0, 0.35)'
       },
       backgroundImage: {
-        'accent-gradient': 'linear-gradient(120deg, #06b6d4, #22d3ee 52%, #67e8f9)'
+        'accent-gradient': 'linear-gradient(120deg, #163c4d, #46a7a6 52%, #6ec9c8)'
       },
       animation: {
         pulseGlow: 'pulseGlow 3s ease-in-out infinite'
       },
       keyframes: {
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(34, 211, 238, 0.28)' },
-          '50%': { boxShadow: '0 0 0 8px rgba(34, 211, 238, 0)' }
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(70, 167, 166, 0.28)' },
+          '50%': { boxShadow: '0 0 0 8px rgba(70, 167, 166, 0)' }
         }
       }
     }

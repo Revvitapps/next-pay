@@ -41,7 +41,7 @@ export default function HeroVisual() {
 
   return (
     <div className="relative w-full">
-      <div className="absolute -inset-10 rounded-[2.5rem] bg-cyan-400/10 blur-3xl" aria-hidden />
+      <div className="absolute -inset-10 rounded-[2.5rem] bg-[#46a7a6]/10 blur-3xl" aria-hidden />
 
       <motion.div
         initial={isMobile ? false : { opacity: 0, x: -20, y: 10 }}
@@ -50,11 +50,11 @@ export default function HeroVisual() {
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="mx-auto w-full max-w-none text-center"
       >
-        <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/85">Services</p>
+        <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Services</p>
         <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
           Enterprise power. Right-sized for your business.
         </h2>
-        <p className="mt-4 text-sm font-semibold leading-relaxed text-white/90">
+        <p className="mt-4 text-sm font-semibold leading-relaxed text-slate-100/95">
           Whether you’re just getting started or scaling fast, we provide the same reliable systems used by larger
           enterprises — including payments, POS, automation, and integrations — designed to meet you where you are
           today and grow with you tomorrow.
@@ -79,9 +79,9 @@ export default function HeroVisual() {
               whileInView={isMobile ? {} : { opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="group overflow-hidden rounded-3xl border border-white/15 bg-slate-950/90 shadow-card"
+              className="group overflow-hidden rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/90 shadow-card"
             >
-              <div className="relative h-44 w-full overflow-hidden border-b border-white/10 bg-slate-950/85 sm:h-52 md:h-60">
+              <div className="relative h-44 w-full overflow-hidden border-b border-[#46a7a6]/20 bg-[#163c4d]/85 sm:h-52 md:h-60">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -93,13 +93,13 @@ export default function HeroVisual() {
               </div>
 
               <div className="space-y-4 p-6 md:p-8">
-                <div className="h-px w-full bg-gradient-to-r from-cyan-300/60 via-white/10 to-transparent" />
+                <div className="h-px w-full bg-gradient-to-r from-[#46a7a6]/60 via-white/10 to-transparent" />
                 <h3 className="font-heading text-2xl font-bold text-zinc-100 md:text-3xl">{service.title}</h3>
-                <p className="text-sm leading-relaxed text-white/90">{service.description}</p>
-                <ul className="space-y-2 text-sm text-white/90">
+                <p className="text-sm leading-relaxed text-slate-100/95">{service.description}</p>
+                <ul className="space-y-2 text-sm text-slate-100/95">
                   {service.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
                       <span>{bullet}</span>
                     </li>
                   ))}

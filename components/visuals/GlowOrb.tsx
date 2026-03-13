@@ -11,7 +11,7 @@ export function GlowOrb({ className, colorClassName }: GlowOrbProps) {
       aria-hidden
       className={cn(
         'pointer-events-none absolute rounded-full blur-3xl',
-        colorClassName ?? 'bg-cyan-400/20',
+        colorClassName ?? 'bg-[#46a7a6]/20',
         className
       )}
     />

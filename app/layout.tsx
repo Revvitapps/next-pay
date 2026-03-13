@@ -1,35 +1,27 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import UserbackBootstrap from '@/components/analytics/UserbackBootstrap';
+import JsonLd from '@/components/seo/JsonLd';
 import { GradientBackground } from '@/components/visuals/GradientBackground';
+import { buildMetadata } from '@/lib/seo/metadata';
+import { localBusinessJsonLd, organizationJsonLd, websiteJsonLd } from '@/lib/seo/jsonLd';
+import { siteUrl } from '@/lib/seo/site';
 import './globals.css';
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: '--font-jakarta',
+const roboto = Roboto({
+  variable: '--font-roboto',
   subsets: ['latin'],
-  display: 'swap'
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space-grotesk',
-  subsets: ['latin'],
-  display: 'swap'
+  display: 'swap',
+  weight: ['300', '400', '500', '700', '900']
 });
 
 export const metadata: Metadata = {
-  title: 'NEXT-PAY | Next Pay Business Solutions',
-  description:
-    'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
-  openGraph: {
+  metadataBase: new URL(siteUrl),
+  ...buildMetadata({
     title: 'NEXT-PAY | Next Pay Business Solutions',
-    description:
-      'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
-    images: ['/images/updated-main-hero.jpeg']
-  },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['/images/updated-main-hero.jpeg']
-  }
+    description: 'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
+    path: '/'
+  })
 };
 
 export default function RootLayout({
@@ -39,7 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${jakarta.variable} ${spaceGrotesk.variable} bg-[#05060A] font-body text-zinc-100 antialiased`}>
+      <body className={`${roboto.variable} bg-[#163c4d] font-body text-slate-50 antialiased`}>
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
+        <JsonLd data={localBusinessJsonLd()} />
         <UserbackBootstrap />
         <GradientBackground />
         {children}

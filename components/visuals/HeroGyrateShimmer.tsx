@@ -10,7 +10,7 @@ export default function HeroGyrateShimmer() {
         className="absolute left-1/2 top-1/2 z-10 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
         style={{
           background:
-            "radial-gradient(circle at 30% 30%, rgba(34,211,238,0.65), transparent 60%), radial-gradient(circle at 70% 70%, rgba(167,139,250,0.45), transparent 62%)",
+            "radial-gradient(circle at 30% 30%, rgba(70,167,166,0.65), transparent 60%), radial-gradient(circle at 70% 70%, rgba(167,139,250,0.45), transparent 62%)",
           opacity: 1
         }}
         animate={{
@@ -26,7 +26,7 @@ export default function HeroGyrateShimmer() {
         className="absolute left-1/2 top-1/2 z-10 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-xl"
         style={{
           background:
-            "radial-gradient(circle at 40% 20%, rgba(34,211,238,0.35), transparent 60%), radial-gradient(circle at 70% 80%, rgba(167,139,250,0.28), transparent 62%)",
+            "radial-gradient(circle at 40% 20%, rgba(70,167,166,0.35), transparent 60%), radial-gradient(circle at 70% 80%, rgba(167,139,250,0.28), transparent 62%)",
           opacity: 0.9
         }}
         animate={{
