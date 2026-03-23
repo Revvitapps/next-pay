@@ -10,21 +10,21 @@ const services = [
     description:
       'Align tools, service flow, and system routing with how your teams operate across locations and channels.',
     bullets: ['Front desk + field coverage', 'Unified system access', 'Role-based controls'],
-    image: '/images/operations-infastructure-stack.jpg'
+    image: '/images/business-operations.png'
   },
   {
     title: 'Service Delivery Workflow',
     description:
       'Design the customer journey to keep service moving, reduce friction, and build trust across every touchpoint.',
     bullets: ['Fast onboarding + training', 'Simplified reporting', 'Live service visibility'],
-    image: '/images/service-delivery-workflow.jpg'
+    image: '/images/reporting-visibility.png'
   },
   {
     title: 'Automation + Enablement',
     description:
       'Activate workflows, automations, and reporting that protect margin and improve long-term performance.',
     bullets: ['Automation playbooks', 'Integrated reporting', 'System + CRM sync'],
-    image: '/images/automation-enablement.jpg'
+    image: '/images/technology-integrations.png'
   }
 ];
 
@@ -79,27 +79,27 @@ export default function HeroVisual() {
               whileInView={isMobile ? {} : { opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="group overflow-hidden rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/90 shadow-card"
+              className="group relative overflow-hidden rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/90 shadow-card"
             >
-              <div className="relative h-44 w-full overflow-hidden border-b border-[#46a7a6]/20 bg-[#163c4d]/85 sm:h-52 md:h-60">
+              <div className="relative h-[320px] w-full overflow-hidden bg-[#163c4d]/90 sm:h-[360px] md:h-[400px]">
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
                   sizes="100vw"
-                  className="object-cover object-center opacity-45 transition duration-700 group-hover:scale-[1.02]"
+                  className="object-cover object-center opacity-90 transition duration-700 group-hover:scale-[1.01]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-slate-950/55 to-slate-950/80" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-slate-950/45 to-slate-950/70" />
               </div>
 
-              <div className="space-y-4 p-6 md:p-8">
+              <div className="relative z-10 mx-4 -mt-20 mb-4 space-y-4 rounded-2xl border border-[#46a7a6]/35 bg-[#1b4e61]/88 p-6 text-center backdrop-blur-md md:mx-6 md:-mt-24 md:p-8">
                 <div className="h-px w-full bg-gradient-to-r from-[#46a7a6]/60 via-white/10 to-transparent" />
                 <h3 className="font-heading text-2xl font-bold text-zinc-100 md:text-3xl">{service.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-100/95">{service.description}</p>
-                <ul className="space-y-2 text-sm text-slate-100/95">
+                <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-100/95">{service.description}</p>
+                <ul className="mx-auto flex w-full max-w-2xl flex-col items-center space-y-2 text-center text-sm text-slate-100/95">
                   {service.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                    <li key={bullet} className="flex items-center justify-center gap-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
                       <span>{bullet}</span>
                     </li>
                   ))}

@@ -1,13 +1,14 @@
 export type IndustryId =
-  | 'restaurant'
-  | 'hotel'
-  | 'bar-nightlife'
-  | 'quick-service'
-  | 'full-service'
-  | 'food-truck'
-  | 'retail'
-  | 'service-businesses'
-  | 'multi-location';
+  | 'automotive-businesses'
+  | 'beauty-and-personal-care'
+  | 'entertainment-and-specialty-businesses'
+  | 'fitness-and-membership-businesses'
+  | 'healthcare-and-medical-practices'
+  | 'high-risk'
+  | 'home-services-and-contractors'
+  | 'professional-and-business-services'
+  | 'restaurants-and-hospitality'
+  | 'retail-businesses';
 
 export type QuestionType = 'single-select' | 'multi-select' | 'number';
 
@@ -34,9 +35,7 @@ export type IndustryBlueprint = {
   id: IndustryId;
   label: string;
   positioning: string;
-  defaultModules: string[];
-  baseWins: string[];
-  discoveryPrompts: string[];
+  solutionPathDefaults: string[];
 };
 
 export type CalculatorSubmission = {
@@ -44,24 +43,20 @@ export type CalculatorSubmission = {
   answers: Record<string, unknown>;
 };
 
-export type SuggestedTool = {
-  name: string;
-  summary: string;
-  idealFor: string;
+export type SavingsRange = {
+  low: number;
+  high: number;
 };
 
 export type CalculatorResult = {
   industryId: IndustryId;
   industryLabel: string;
-  packageTier: 'Core Foundation' | 'Growth Acceleration' | 'Enterprise Orchestrated';
-  complexityScore: number;
-  projectedTimelineWeeks: {
-    min: number;
-    max: number;
-  };
-  recommendedBusinessStack: string[];
-  operationalWins: string[];
-  suggestedTools: SuggestedTool[];
-  modelInsights: string[];
-  nextDiscoveryQuestions: string[];
+  monthlyProcessingVolume: number;
+  averageTicket: number;
+  pricingPreference: 'dual-pricing' | 'interchange-plus';
+  estimatedMonthlyCost: number;
+  estimatedEffectiveRate: number;
+  possibleSavingsRange: SavingsRange;
+  potentialSavingsOpportunity: number;
+  disclaimer: string;
 };

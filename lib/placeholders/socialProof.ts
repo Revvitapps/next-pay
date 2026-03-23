@@ -19,7 +19,7 @@ export const clientLogos = [
   'Blue Mesa Restaurant Collective',
   'Crownline Auto Care',
   'Granite Peak Lodging',
-  'Union Street Dental Partners',
+  'Union Street Dental Group',
   'Atlas Home Systems'
 ];
 

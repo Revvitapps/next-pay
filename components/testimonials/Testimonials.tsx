@@ -12,12 +12,11 @@ export default function Testimonials() {
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Testimonials</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Teams switching to Next Pay Business Solutions see immediate operational lift
+              Teams using NextPay report measurable operational lift
             </h2>
           </div>
           <p className="text-sm leading-relaxed text-slate-100/90">
-            Trusted operators use Next Pay Business Solutions to unify operations, integrations, and financial workflows.
-            Names and brands below are placeholders for visual planning.
+            Operators use NextPay to unify operations, integrations, and financial workflows across multiple locations and service models.
           </p>
         </div>
         <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">

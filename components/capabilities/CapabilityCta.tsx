@@ -14,8 +14,8 @@ export default function CapabilityCta({
       <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">{title}</h2>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-100/90">{description}</p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <Link href="/contact" className="inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow">
-          Request a Consultation
+        <Link href="/contact?intent=quote" className="inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow">
+          Get a Custom Quote
         </Link>
         <Link
           href="/services"

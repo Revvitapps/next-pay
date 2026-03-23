@@ -86,7 +86,7 @@ export function contactPageJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    name: 'Contact Next Pay Business Solutions',
+    name: 'Contact NextPay',
     url: absoluteUrl('/contact'),
     about: {
       '@type': 'Organization',

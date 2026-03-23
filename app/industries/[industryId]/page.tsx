@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ConversionCtas from '@/components/cta/ConversionCtas';
 import { industryProfiles } from '@/components/industries/industryData';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
@@ -26,14 +27,14 @@ export async function generateMetadata({ params }: IndustryDetailPageProps): Pro
 
   if (!industry) {
     return buildMetadata({
-      title: 'Industry Not Found | Next Pay Business Solutions',
+      title: 'Industry Not Found | NextPay',
       description: 'The requested industry page could not be found.',
       path: `/industries/${industryId}`
     });
   }
 
   return buildMetadata({
-    title: `${industry.label} Solutions | Next Pay Business Solutions`,
+    title: `${industry.label} | NextPay`,
     description: industry.bestFor,
     path: `/industries/${industry.id}`
   });
@@ -65,6 +66,17 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
+              <h2 className="text-xl font-bold text-white">Common Business Types</h2>
+              <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
+                {industry.businessTypes.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
               <h2 className="text-xl font-bold text-white">Recommended Setup</h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
                 {industry.recommendedSetup.map((item) => (
@@ -76,7 +88,7 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
               </ul>
             </article>
 
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
+            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5 md:col-span-2">
               <h2 className="text-xl font-bold text-white">Operational Wins</h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
                 {industry.operationalWins.map((item) => (
@@ -102,25 +114,28 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
             </div>
           </article>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={`/contact?industry=${encodeURIComponent(industry.label)}&message=${encodeURIComponent(`I want a ${industry.label} stack consultation.`)}`}
-              className="inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
-            >
-              Request Consultation
-            </Link>
-            <Link
-              href="/industries#assessment"
-              className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
-            >
-              Start Guided Assessment
-            </Link>
-            <Link
-              href="/industries"
-              className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
-            >
-              Back to Industries
-            </Link>
+          <div className="mt-8 space-y-3">
+            <ConversionCtas primary="customQuote" secondary="uploadStatement" />
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/services"
+                className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
+              >
+                Explore Services
+              </Link>
+              <Link
+                href="/case-studies"
+                className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
+              >
+                View Savings Examples
+              </Link>
+              <Link
+                href="/industries"
+                className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
+              >
+                Back to Industries
+              </Link>
+            </div>
           </div>
         </section>
       </div>

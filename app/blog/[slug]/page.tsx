@@ -23,14 +23,14 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
 
   if (!post) {
     return buildMetadata({
-      title: 'Article Not Found | Next Pay Business Solutions',
+      title: 'Article Not Found | NextPay',
       description: 'The requested blog article could not be found.',
       path: `/blog/${slug}`
     });
   }
 
   return buildMetadata({
-    title: `${post.title} | Next Pay Business Solutions`,
+    title: `${post.title} | NextPay`,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     image: post.image

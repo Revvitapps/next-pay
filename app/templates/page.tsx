@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Templates | Next Pay Business Solutions',
+  title: 'Templates | NextPay',
   description: 'Preview reusable page templates for service offers, industry landers, and conversion workflows.',
   path: '/templates'
 });

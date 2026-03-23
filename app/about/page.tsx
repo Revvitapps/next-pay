@@ -22,9 +22,9 @@ const values = [
 ];
 
 export const metadata: Metadata = buildMetadata({
-  title: 'About | Next Pay Business Solutions',
+  title: 'About | NextPay',
   description:
-    'Learn how Next Pay Business Solutions helps organizations improve efficiency, visibility, execution, and long-term performance.',
+    'Learn how NextPay helps organizations improve efficiency, visibility, execution, and long-term performance.',
   path: '/about'
 });
 
@@ -42,11 +42,11 @@ export default function AboutPage() {
         <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
           <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">About</p>
           <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            About Next Pay Business Solutions
+            About NextPay
           </h1>
           <p className="mt-4 max-w-3xl text-slate-100/90">
-            Next Pay Business Solutions helps organizations operate with more clarity, efficiency, and confidence. We
-            partner with businesses from multiple operational angles to strengthen the systems, processes, and
+            NextPay helps organizations operate with more clarity, efficiency, and confidence. We
+            work with businesses from multiple operational angles to strengthen the systems, processes, and
             services that keep companies moving forward.
           </p>
           <p className="mt-4 max-w-4xl text-slate-100/90">
@@ -59,7 +59,7 @@ export default function AboutPage() {
             operations, and improved cash flow.
           </p>
           <p className="mt-4 max-w-4xl text-slate-100/90">
-            Next Pay Business Solutions works with companies that want practical solutions, not unnecessary complexity.
+            NextPay works with companies that want practical solutions, not unnecessary complexity.
             Whether the goal is refining internal systems, improving operational efficiency, strengthening service
             delivery, or preparing for growth, we focus on building infrastructure that works in the real world.
           </p>
@@ -83,7 +83,7 @@ export default function AboutPage() {
           <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/90 p-5">
             <h2 className="text-xl font-bold text-white">Service Areas</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-100/90">
-              Next Pay Business Solutions supports businesses across multiple industries and operational environments.
+              NextPay supports businesses across multiple industries and operational environments.
             </p>
             <ul className="mt-3 space-y-2 text-sm text-slate-100/95">
               {serviceAreaPoints.map((point) => (
@@ -101,7 +101,7 @@ export default function AboutPage() {
         </div>
 
           <div className="mt-8 rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/90 p-5">
-            <h2 className="text-xl font-bold text-white">Why Next Pay</h2>
+            <h2 className="text-xl font-bold text-white">Why NextPay</h2>
             <ul className="mt-4 space-y-2 text-sm text-slate-100/95">
               {values.map((value) => (
                 <li key={value} className="flex items-start gap-3">
@@ -113,15 +113,15 @@ export default function AboutPage() {
         </div>
 
         <p className="mt-8 max-w-4xl text-sm leading-relaxed text-slate-100/95">
-          Next Pay Business Solutions exists to help businesses operate better, grow smarter, and build stronger
+          NextPay exists to help businesses operate better, grow smarter, and build stronger
           foundations for the future.
         </p>
 
         <Link
-          href="/contact"
+          href="/contact?intent=quote"
           className="mt-8 inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
           >
-            Request a Consultation
+            Get a Custom Quote
           </Link>
         </section>
       </div>

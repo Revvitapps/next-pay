@@ -1,0 +1,109 @@
+{
+  "initializedAt": "2026-03-16T14:20:46.847Z",
+  "leads": [
+    {
+      "id": "lead_r2opcprjmmt9tsan",
+      "submissionType": "statement-upload",
+      "businessName": "Summit Bistro Group",
+      "contactName": "Alex Rivera",
+      "email": "ops@summitbistro.example",
+      "phone": "(555) 101-2020",
+      "currentProcessor": "Legacy Processor Co.",
+      "monthlyVolume": "$120,000",
+      "serviceInterest": "Payment Processing & Merchant Services",
+      "createdAt": "2026-03-16T14:20:46.847Z",
+      "status": "manual_review_required",
+      "assignedReviewer": null,
+      "statementId": "stmt_63ya1k7ummt9tsan"
+    }
+  ],
+  "statements": [
+    {
+      "id": "stmt_63ya1k7ummt9tsan",
+      "leadId": "lead_r2opcprjmmt9tsan",
+      "businessName": "Summit Bistro Group",
+      "email": "ops@summitbistro.example",
+      "phone": "(555) 101-2020",
+      "currentProcessor": "Legacy Processor Co.",
+      "monthlyVolume": "$120,000",
+      "sourceForm": "statement-upload",
+      "submittedAt": "2026-03-16T14:20:46.847Z",
+      "originalFileName": "march-merchant-statement.pdf",
+      "contentType": "application/pdf",
+      "fileSize": 284001,
+      "uploadedAt": "2026-03-16T14:20:46.847Z",
+      "storageReference": null,
+      "signedDownloadUrl": null,
+      "fileStatus": "storage_pending",
+      "extraction": {
+        "rawText": null,
+        "extractionMethod": "unknown",
+        "pageCount": null,
+        "warnings": [
+          "Seed data only."
+        ],
+        "extractionConfidence": null,
+        "extractedAt": null
+      },
+      "analysis": {
+        "id": "analysis_sgv9pem0mmt9tsan",
+        "statementId": "stmt_63ya1k7ummt9tsan",
+        "analysisStatus": "manual_review_required",
+        "confidenceScore": 0.62,
+        "manualReviewRequired": true,
+        "manualReviewReason": "OCR detected ambiguous fee labels. Confirm interchange and markup totals.",
+        "warnings": [
+          "Low OCR confidence for fee summary table."
+        ],
+        "rawExtractionMetadata": null,
+        "normalizedOutput": null,
+        "processorName": "Legacy Processor Co.",
+        "statementPeriod": "2026-02-01 to 2026-02-29",
+        "totalVolume": 118742.11,
+        "transactionCount": 1634,
+        "averageTicket": 72.67,
+        "effectiveRate": 3.41,
+        "interchangeFees": 1822.12,
+        "duesAndAssessments": 285.11,
+        "processorMarkup": 1048.42,
+        "monthlyFees": 95,
+        "gatewayFees": 39,
+        "equipmentFees": 29,
+        "pciFees": 12,
+        "batchFees": 0,
+        "chargebackFees": 0,
+        "notes": [
+          "Seed record."
+        ],
+        "updatedAt": "2026-03-16T14:20:46.847Z"
+      },
+      "savingsEstimate": {
+        "currentEstimatedEffectiveRate": 3.41,
+        "currentEstimatedMonthlyCost": 4046,
+        "nextPayEstimatedRate": 2.61,
+        "nextPayEstimatedMonthlyCost": 3098,
+        "estimatedMonthlySavings": 948,
+        "estimatedAnnualSavings": 11376,
+        "recommendedPricingModel": "interchange-plus"
+      }
+    }
+  ],
+  "quotes": [
+    {
+      "id": "quote_7wn68oz7mmt9tsan",
+      "leadId": "lead_r2opcprjmmt9tsan",
+      "statementId": "stmt_63ya1k7ummt9tsan",
+      "status": "manual_review_required",
+      "pricingModelUnderConsideration": "undetermined",
+      "requiredFollowUpItems": [
+        "Resolve manual review items"
+      ],
+      "quoteReadiness": "pending_review",
+      "recommendedNextStep": "review_statement_manually",
+      "updatedAt": "2026-03-16T14:20:46.847Z"
+    }
+  ],
+  "notes": [],
+  "statusHistory": [],
+  "auditLogs": []
+}

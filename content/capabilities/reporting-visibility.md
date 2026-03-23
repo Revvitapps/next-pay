@@ -12,7 +12,7 @@ order: 5
 
 Data plays a critical role in modern business decision-making. However, many organizations struggle with fragmented reporting systems that make it difficult to understand the true performance of the business.
 
-Next Pay Business Solutions helps organizations create unified reporting environments that bring operational and financial insights into one cohesive view.
+NextPay helps organizations create unified reporting environments that bring operational and financial insights into one cohesive view.
 
 With stronger reporting infrastructure, leadership teams can make more informed decisions and respond faster to changing market conditions.
 
@@ -20,7 +20,7 @@ With stronger reporting infrastructure, leadership teams can make more informed 
 
 Operational reporting helps businesses understand how effectively their teams and systems are performing.
 
-Next Pay Business Solutions helps organizations implement reporting frameworks that provide visibility into:
+NextPay helps organizations implement reporting frameworks that provide visibility into:
 
 - operational efficiency
 - service delivery performance

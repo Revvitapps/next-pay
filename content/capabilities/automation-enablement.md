@@ -12,7 +12,7 @@ order: 4
 
 Automation has become one of the most powerful tools for improving operational efficiency. Businesses that rely heavily on manual processes often experience slower execution, higher operational costs, and increased risk of human error.
 
-Next Pay Business Solutions helps organizations implement automation frameworks that streamline workflows and improve consistency across teams.
+NextPay helps organizations implement automation frameworks that streamline workflows and improve consistency across teams.
 
 Our goal is not to automate everything, but to identify areas where automation provides meaningful improvements in efficiency and reliability.
 
@@ -34,7 +34,7 @@ These improvements allow organizations to reduce delays and maintain consistent 
 
 Automation works best when it supports a well-designed operational environment.
 
-Next Pay Business Solutions focuses on implementing automation in ways that empower teams rather than replacing them.
+NextPay focuses on implementing automation in ways that empower teams rather than replacing them.
 
 Automation can help organizations:
 
@@ -55,4 +55,4 @@ Successful automation programs typically follow several principles:
 - avoid unnecessary complexity
 - align automation with operational workflows
 
-Next Pay Business Solutions helps organizations apply these principles to create sustainable automation environments.
+NextPay helps organizations apply these principles to create sustainable automation environments.

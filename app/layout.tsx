@@ -18,7 +18,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   ...buildMetadata({
-    title: 'NEXT-PAY | Next Pay Business Solutions',
+    title: 'NextPay | Payments, POS, and Business Services',
     description: 'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
     path: '/'
   })
@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${roboto.variable} bg-[#163c4d] font-body text-slate-50 antialiased`}>
+      <body className={`${roboto.variable} bg-[#0a0c10] font-body text-slate-50 antialiased`}>
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={localBusinessJsonLd()} />

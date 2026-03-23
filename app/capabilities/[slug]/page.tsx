@@ -36,14 +36,14 @@ export async function generateMetadata({ params }: CapabilityDetailPageProps): P
 
   if (!capability) {
     return buildMetadata({
-      title: 'Capability Not Found | Next Pay Business Solutions',
+      title: 'Capability Not Found | NextPay',
       description: 'The capability page you requested could not be found.',
       path: `/capabilities/${slug}`
     });
   }
 
   return buildMetadata({
-    title: `${capability.title} | Capabilities | Next Pay Business Solutions`,
+    title: `${capability.title} | Capabilities | NextPay`,
     description: capability.description,
     path: `/capabilities/${capability.slug}`,
     image: capability.image

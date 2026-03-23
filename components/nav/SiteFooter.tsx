@@ -4,7 +4,7 @@ export default function SiteFooter() {
   return (
     <footer className="border-t border-[#46a7a6]/20 px-6 py-8">
       <div className="mx-auto flex w-full max-w-none flex-col gap-4 text-sm text-slate-200/80 md:flex-row md:items-center md:justify-between lg:px-6">
-        <p>© {new Date().getFullYear()} Next Pay Business Solutions. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} NextPay. All rights reserved.</p>
         <div className="flex flex-wrap items-center gap-4">
           <Link href="/services" className="transition hover:text-[#46a7a6]">
             Services

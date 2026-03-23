@@ -7,9 +7,10 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Site Score | Next Pay Business Solutions',
+  title: 'Site Score | NextPay',
   description: 'Run a structured site score to prioritize SEO, GEO/AEO, and conversion improvements.',
-  path: '/site-score'
+  path: '/site-score',
+  noIndex: true
 });
 
 export default function SiteScorePage() {

@@ -20,6 +20,30 @@ body {
   position: relative;
 }
 
+main:not([data-admin]) {
+  text-align: center;
+}
+
+main:not([data-admin]) .text-left {
+  text-align: left !important;
+}
+
+main:not([data-admin]) [class*='max-w-'] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main:not([data-admin]) .rounded-2xl,
+main:not([data-admin]) .rounded-3xl {
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+main:not([data-admin]) .flex.flex-wrap.gap-3 {
+  justify-content: center;
+}
+
 a {
   text-decoration: none;
 }
@@ -74,4 +98,53 @@ a {
 .capability-markdown li {
   margin-top: 0.4rem;
   color: rgba(241, 245, 249, 0.92);
+}
+
+.logo-marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+  animation: logo-marquee 92s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee-track-reverse {
+  animation-direction: reverse;
+  animation-duration: 110s;
+}
+
+.logo-chip {
+  backdrop-filter: none;
+}
+
+.logo-image-clear {
+  filter: grayscale(1) brightness(0.18) contrast(1.24);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  opacity: 0.95;
+}
+
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-track,
+  .logo-marquee-track-reverse {
+    animation: none;
+  }
 }

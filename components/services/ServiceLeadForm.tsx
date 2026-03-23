@@ -1,7 +1,9 @@
 'use client';
 
 import { FormEvent, useMemo, useState } from 'react';
+import ComplianceNote from '@/components/compliance/ComplianceNote';
 import { isBusinessFinancingService, isPayrollWorkersCompService } from '@/lib/services/catalog';
+import { emptyStatementExtractedData, fileToDataUrl, validateStatementFile } from '@/lib/forms/statementUpload';
 
 type ServiceLeadFormProps = {
   serviceSlug: string;
@@ -41,6 +43,21 @@ type ServiceLeadFormState = {
   businessOwnedSince: string;
   businessWebsite: string;
   homeOwnership: string;
+  currentProcessor: string;
+  estimatedMonthlyVolume: string;
+  statementFileName: string;
+  statementFileType: string;
+  statementFileSize: number;
+  statementFileDataUrl: string;
+  statementExtractedData: {
+    totalVolume: string | null;
+    effectiveRate: string | null;
+    interchangeFees: string | null;
+    processorMarkup: string | null;
+    monthlyFees: string | null;
+    gatewayFees: string | null;
+    estimatedSavingsOpportunity: string | null;
+  };
   honeypot: string;
 };
 
@@ -77,6 +94,13 @@ const defaultState: ServiceLeadFormState = {
   businessOwnedSince: '',
   businessWebsite: '',
   homeOwnership: 'Rent',
+  currentProcessor: '',
+  estimatedMonthlyVolume: '',
+  statementFileName: '',
+  statementFileType: '',
+  statementFileSize: 0,
+  statementFileDataUrl: '',
+  statementExtractedData: emptyStatementExtractedData,
   honeypot: ''
 };
 
@@ -89,6 +113,36 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
   const needsPayrollWorkersCompFields = useMemo(() => isPayrollWorkersCompService(serviceSlug), [serviceSlug]);
   const needsFinancingFields = useMemo(() => isBusinessFinancingService(serviceSlug), [serviceSlug]);
 
+  async function onStatementFileChange(file: File | null) {
+    if (!file) {
+      setFormData((prev) => ({
+        ...prev,
+        statementFileName: '',
+        statementFileType: '',
+        statementFileSize: 0,
+        statementFileDataUrl: '',
+        statementExtractedData: emptyStatementExtractedData
+      }));
+      return;
+    }
+
+    const fileValidation = validateStatementFile(file);
+    if (fileValidation) {
+      setErrorMessage(fileValidation);
+      return;
+    }
+
+    const dataUrl = await fileToDataUrl(file);
+    setFormData((prev) => ({
+      ...prev,
+      statementFileName: file.name,
+      statementFileType: file.type,
+      statementFileSize: file.size,
+      statementFileDataUrl: dataUrl,
+      statementExtractedData: emptyStatementExtractedData
+    }));
+  }
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage(null);
@@ -99,6 +153,7 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          submissionType: 'service-lead',
           serviceSlug,
           fullName: formData.fullName,
           legalBusinessName: formData.legalBusinessName,
@@ -132,6 +187,17 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
           businessOwnedSince: formData.businessOwnedSince,
           businessWebsite: formData.businessWebsite,
           homeOwnership: formData.homeOwnership,
+          currentProcessor: formData.currentProcessor,
+          estimatedMonthlyVolume: formData.estimatedMonthlyVolume,
+          statementFile: formData.statementFileName
+            ? {
+                name: formData.statementFileName,
+                type: formData.statementFileType,
+                size: formData.statementFileSize,
+                dataUrl: formData.statementFileDataUrl
+              }
+            : undefined,
+          statementExtractedData: formData.statementFileName ? formData.statementExtractedData : undefined,
           honeypot: formData.honeypot
         })
       });
@@ -152,8 +218,8 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
 
   return (
     <div className="rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-8">
-      <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Request This Service</p>
-      <h2 className="mt-3 text-2xl font-bold text-white">{serviceName} Lead Form</h2>
+      <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Get a Custom Quote</p>
+      <h2 className="mt-3 text-2xl font-bold text-white">{serviceName} Request Form</h2>
       <p className="mt-2 text-sm text-slate-100/90">Submit core business details and we will route your request internally.</p>
 
       {submitted ? (
@@ -496,6 +562,36 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
             </>
           ) : null}
 
+          <label className="space-y-2 text-sm text-slate-100/90">
+            Current Processor (Optional)
+            <input
+              value={formData.currentProcessor}
+              onChange={(event) => setFormData((prev) => ({ ...prev, currentProcessor: event.target.value }))}
+              className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none"
+            />
+          </label>
+
+          <label className="space-y-2 text-sm text-slate-100/90">
+            Monthly Processing Volume (Optional)
+            <input
+              value={formData.estimatedMonthlyVolume}
+              onChange={(event) => setFormData((prev) => ({ ...prev, estimatedMonthlyVolume: event.target.value }))}
+              placeholder="Example: $85,000"
+              className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none"
+            />
+          </label>
+
+          <label className="space-y-2 text-sm text-slate-100/90 md:col-span-2">
+            Merchant Statement (Optional: PDF/JPG/PNG)
+            <input
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png"
+              onChange={(event) => onStatementFileChange(event.target.files?.[0] ?? null)}
+              className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none"
+            />
+            <ComplianceNote text="statementUpload" tone="soft" />
+          </label>
+
           <label className="space-y-2 text-sm text-slate-100/90 md:col-span-2">
             Notes / Goals
             <textarea
@@ -526,7 +622,7 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
               onChange={(event) => setFormData((prev) => ({ ...prev, dataProcessingConsent: event.target.checked }))}
               className="mt-1"
             />
-            <span>I acknowledge and consent to data processing for lead qualification and partner routing.</span>
+            <span>I acknowledge and consent to data processing for qualification and advisory routing.</span>
           </label>
 
           {errorMessage ? (
@@ -541,7 +637,7 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
               disabled={submitting}
               className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
             >
-              {submitting ? 'Submitting...' : 'Submit Service Lead'}
+              {submitting ? 'Submitting...' : 'Get a Custom Quote'}
             </button>
           </div>
         </form>

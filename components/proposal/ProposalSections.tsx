@@ -21,7 +21,7 @@ export default function ProposalSections() {
           <h3 className="text-2xl font-bold text-[#46a7a6]">What We&apos;re Building</h3>
           <p className="mt-4 text-sm leading-relaxed text-slate-100/95">
             We&apos;re delivering a fully integrated, conversion-first platform designed to support your payments, POS,
-            and merchant services sales motion — while establishing a long-term strategic partnership between our
+            and merchant services sales motion — while establishing a long-term strategic service teamhip between our
             teams.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-slate-100/95">This is not a generic website.</p>
@@ -34,7 +34,7 @@ export default function ProposalSections() {
         <Divider />
 
         <article id="phase-1">
-          <h3 className="text-2xl font-bold text-[#46a7a6]">PHASE 1: Custom Website + Funnel Build (Partner Rate)</h3>
+          <h3 className="text-2xl font-bold text-[#46a7a6]">PHASE 1: Custom Website + Funnel Build (Preferred Rate)</h3>
           <p className="mt-4 text-sm leading-relaxed text-slate-100/95">
             We will design and deploy a sleek, mobile-first website and sales funnel tailored specifically to your
             brand, verticals, and payment offerings.
@@ -63,7 +63,7 @@ export default function ProposalSections() {
               lines={['$5,000 one-time setup', '$750/month ongoing support & optimization']}
             />
             <PricingCallout
-              title="Partner-Only Investment"
+              title="Preferred Investment"
               highlight
               lines={[
                 '$2,000 total setup',
@@ -74,15 +74,15 @@ export default function ProposalSections() {
             />
           </div>
 
-          <p className="mt-5 text-sm text-slate-100/90">This pricing reflects a strategic partner rate and is not public pricing.</p>
+          <p className="mt-5 text-sm text-slate-100/90">This pricing reflects a strategic service team rate and is not public pricing.</p>
         </article>
 
         <Divider />
 
         <article id="phase-2">
-          <h3 className="text-2xl font-bold text-[#46a7a6]">PHASE 2: Partnership Development Framework</h3>
+          <h3 className="text-2xl font-bold text-[#46a7a6]">PHASE 2: Growth Development Framework</h3>
           <p className="mt-4 text-sm leading-relaxed text-slate-100/95">
-            Beyond the platform itself, we&apos;re proposing an ongoing partnership designed to create shared upside
+            Beyond the platform itself, we&apos;re proposing an ongoing service teamhip designed to create shared upside
             without operational complexity.
           </p>
 
@@ -191,7 +191,7 @@ export default function ProposalSections() {
             ))}
           </ul>
           <p className="mt-5 text-sm text-slate-100/95">
-            This partnership is designed to increase close rates, improve retention, and raise average deal size
+            This service teamhip is designed to increase close rates, improve retention, and raise average deal size
             without adding operational drag.
           </p>
         </article>
@@ -202,7 +202,7 @@ export default function ProposalSections() {
           <h3 className="text-2xl font-bold text-[#46a7a6]">Next Steps</h3>
           <ol className="mt-4 space-y-2 text-sm text-slate-100/95">
             {[
-              'Approve Phase 1 build and partner pricing',
+              'Approve Phase 1 build and service team pricing',
               'Finalize scope and launch timeline',
               'Deploy prototype → live platform',
               'Activate referral and integration framework'
@@ -222,7 +222,7 @@ export default function ProposalSections() {
           <ul className="mt-4 space-y-2 text-sm text-slate-100/95">
             {[
               'Tone: premium SaaS, clean, confident',
-              'Focus: payments-centric funnels + partner scalability',
+              'Focus: payments-centric funnels + service team scalability',
               'Emphasis: ownership, automation, conversion, trust',
               'Avoid: generic "web design" language',
               'Outcome: revenue system, not a website'
@@ -245,14 +245,14 @@ export default function ProposalSections() {
         <p className="text-xs uppercase tracking-[0.2em] text-[#46a7a6]">Decision Block</p>
         <h3 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white">Ready to greenlight Phase 1?</h3>
         <p className="mt-3 text-sm text-slate-100/95">
-          Partner Investment: $2,000 setup total and $100/month ongoing support. Payment schedule: $1,000 due at
+          Investment: $2,000 setup total and $100/month ongoing support. Payment schedule: $1,000 due at
           project start, $1,000 due upon completion.
         </p>
 
         <ul className="mt-5 space-y-2 text-sm text-slate-100/95">
           <li className="flex gap-2">
             <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
-            Partner Investment summary includes setup + monthly support.
+            Investment summary includes setup + monthly support.
           </li>
           <li className="flex gap-2">
             <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
@@ -262,7 +262,7 @@ export default function ProposalSections() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="mailto:partnerships@nextpaypos.com?subject=Approve%20Phase%201%20Build"
+            href="mailto:service teamhips@nextpaypos.com?subject=Approve%20Phase%201%20Build"
             onClick={() => track('proposal_cta_click', { source: 'proposal_decision_primary' })}
             className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
           >
@@ -273,13 +273,13 @@ export default function ProposalSections() {
             onClick={() => track('book_call_click', { source: 'proposal_decision_secondary' })}
             className="rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/70 hover:bg-[#46a7a6]/10"
           >
-            Schedule Kickoff Call
+            Get a Custom Quote
           </Link>
         </div>
       </motion.section>
 
       <section className="mt-6 rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 px-5 py-4 text-sm text-slate-100/90 backdrop-blur-sm">
-        <span className="font-semibold text-white">Questions?</span> Email: partnerships@nextpaypos.com | Phone:
+        <span className="font-semibold text-white">Questions?</span> Email: service teamhips@nextpaypos.com | Phone:
         (000) 000-0000
       </section>
     </div>

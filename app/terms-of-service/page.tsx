@@ -7,8 +7,8 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Terms of Service | Next Pay Business Solutions',
-  description: 'Review the terms for using Next Pay Business Solutions website and informational service content.',
+  title: 'Terms of Service | NextPay',
+  description: 'Review the terms for using NextPay website and informational service content.',
   path: '/terms-of-service'
 });
 

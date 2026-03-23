@@ -136,7 +136,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: 'Building a Durable Operating Platform',
         paragraphs: [
-          'Durable systems are designed for change. New services, locations, and partners should plug into a known framework rather than creating separate processes.',
+          'Durable systems are designed for change. New services, locations, and channels should plug into a known framework rather than creating separate processes.',
           'When that foundation is in place, leadership can focus on growth strategy instead of firefighting operational breakdowns.'
         ]
       }

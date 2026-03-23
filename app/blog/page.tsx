@@ -9,7 +9,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { blogPostingJsonLd, breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Blog | Next Pay Business Solutions',
+  title: 'Blog | NextPay',
   description: 'Insights on business infrastructure, operational integrations, and payment workflow execution.',
   path: '/blog'
 });

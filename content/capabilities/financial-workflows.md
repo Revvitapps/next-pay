@@ -12,7 +12,7 @@ order: 2
 
 Strong financial workflows are critical to the long-term health of any business. Revenue may come from multiple sources, but without structured financial systems, companies often struggle with billing complexity, delayed payments, and limited financial visibility.
 
-Next Pay Business Solutions helps organizations design financial workflows that support predictable revenue operations and healthier cash flow.
+NextPay helps organizations design financial workflows that support predictable revenue operations and healthier cash flow.
 
 Our approach focuses on aligning payment systems, billing processes, and financial reporting so that organizations can operate with greater clarity and control.
 
@@ -34,7 +34,7 @@ When financial systems operate smoothly, organizations gain greater stability an
 
 Financial friction often occurs when billing systems and operational systems are disconnected.
 
-Next Pay Business Solutions helps businesses align financial processes with operational workflows so that billing events, service delivery, and financial reporting remain synchronized.
+NextPay helps businesses align financial processes with operational workflows so that billing events, service delivery, and financial reporting remain synchronized.
 
 Areas we frequently address include:
 

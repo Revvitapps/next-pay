@@ -1,6 +1,6 @@
-# NEXT-PAY
+# NextPay
 
-Next Pay Business Solutions public marketing platform.
+NextPay public marketing platform.
 
 ## Tech Stack
 - Next.js (App Router) + TypeScript

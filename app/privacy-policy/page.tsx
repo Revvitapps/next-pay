@@ -7,8 +7,8 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Privacy Policy | Next Pay Business Solutions',
-  description: 'Read how Next Pay Business Solutions collects and uses submitted business and contact information.',
+  title: 'Privacy Policy | NextPay',
+  description: 'Read how NextPay collects and uses submitted business and contact information.',
   path: '/privacy-policy'
 });
 
@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
           <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Legal</p>
           <h1 className="font-heading text-3xl font-extrabold text-white">Privacy Policy</h1>
           <p className="mt-4 text-base leading-relaxed text-slate-100/95">
-            Next Pay Business Solutions respects your privacy. We collect contact and business information submitted
+            NextPay respects your privacy. We collect contact and business information submitted
             through forms to provide consultations, service recommendations, and customer support.
           </p>
           <h2 className="mt-8 text-xl font-bold text-white">How We Use Information</h2>

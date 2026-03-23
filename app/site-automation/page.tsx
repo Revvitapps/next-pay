@@ -7,9 +7,10 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Site Automation | Next Pay Business Solutions',
+  title: 'Site Automation | NextPay',
   description: 'Multi-step intake to generate a service blueprint and preview-launch record.',
-  path: '/site-automation'
+  path: '/site-automation',
+  noIndex: true
 });
 
 export default function SiteAutomationPage() {

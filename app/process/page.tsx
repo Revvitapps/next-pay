@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Process | Next Pay Business Solutions',
+  title: 'Process | NextPay',
   description: 'Review the discovery, qualification, implementation, and optimization process for service engagements.',
   path: '/process'
 });
@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMetadata({
 export default function ProcessPage() {
   const steps = [
     'Discovery and qualification',
-    'Service fit and partner routing',
+    'Service fit and service routing',
     'Implementation planning',
     'Launch and optimization'
   ];

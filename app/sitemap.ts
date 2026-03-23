@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
 import { blogPosts } from '@/lib/content/blogPosts';
-import { verticals } from '@/lib/content/verticals';
 import { industryProfiles } from '@/components/industries/industryData';
 import { getAllCapabilities } from '@/lib/capabilities/content';
 import { serviceOfferings } from '@/lib/services/catalog';
@@ -15,20 +14,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/capabilities',
     '/services',
     '/industries',
-    '/verticals',
-    '/features',
     '/blog',
     '/contact',
     '/privacy-policy',
     '/terms-of-service',
     '/case-studies',
     '/faq',
-    '/site-score',
-    '/site-automation',
-    '/preview-launch',
     '/process',
-    '/pricing',
-    '/templates'
+    '/pricing'
   ];
 
   const now = new Date();
@@ -42,13 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const industryEntries = industryProfiles.map((industry) => ({
     url: absoluteUrl(`/industries/${industry.id}`),
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7
-  }));
-
-  const verticalEntries = verticals.map((vertical) => ({
-    url: absoluteUrl(`/verticals/${vertical.id}`),
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.7
@@ -75,5 +61,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8
   }));
 
-  return [...staticEntries, ...industryEntries, ...verticalEntries, ...serviceEntries, ...capabilityEntries, ...blogEntries];
+  return [...staticEntries, ...industryEntries, ...serviceEntries, ...capabilityEntries, ...blogEntries];
 }

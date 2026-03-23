@@ -7,9 +7,17 @@ type BuildMetadataInput = {
   path: string;
   keywords?: string[];
   image?: string;
+  noIndex?: boolean;
 };
 
-export function buildMetadata({ title, description, path, keywords, image = '/images/updated-main-hero.jpeg' }: BuildMetadataInput): Metadata {
+export function buildMetadata({
+  title,
+  description,
+  path,
+  keywords,
+  image = '/images/updated-main-hero.jpeg',
+  noIndex = false
+}: BuildMetadataInput): Metadata {
   const canonical = absoluteUrl(path);
 
   return {
@@ -32,6 +40,10 @@ export function buildMetadata({ title, description, path, keywords, image = '/im
       title,
       description,
       images: [image]
+    },
+    robots: {
+      index: !noIndex,
+      follow: !noIndex
     }
   };
 }

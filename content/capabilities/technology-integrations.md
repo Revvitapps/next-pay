@@ -12,7 +12,7 @@ order: 3
 
 Modern organizations rely on a wide range of technology platforms to manage operations, finance, communication, and customer relationships. However, when these systems operate independently, data becomes fragmented and teams lose valuable visibility.
 
-Next Pay Business Solutions helps businesses connect their technology ecosystem through structured integrations and operational data architecture.
+NextPay helps businesses connect their technology ecosystem through structured integrations and operational data architecture.
 
 By aligning systems across the organization, businesses can eliminate manual work, improve reporting accuracy, and enable better decision-making.
 
@@ -36,7 +36,7 @@ These integrations allow organizations to maintain a unified view of operations 
 
 Customer relationship management systems, operational platforms, and financial tools often operate in separate environments.
 
-Next Pay Business Solutions works with companies to connect these systems so that customer data, operational activity, and financial records remain aligned.
+NextPay works with companies to connect these systems so that customer data, operational activity, and financial records remain aligned.
 
 When these systems are integrated, businesses gain:
 
@@ -55,4 +55,4 @@ Organizations with mature technology environments often follow these integration
 - secure system interoperability
 - scalable integration frameworks
 
-Next Pay Business Solutions helps organizations implement these practices while maintaining flexibility as the technology stack evolves.
+NextPay helps organizations implement these practices while maintaining flexibility as the technology stack evolves.

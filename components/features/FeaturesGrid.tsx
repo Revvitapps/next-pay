@@ -55,7 +55,7 @@ const capabilities = [
     icon: RefreshCcw
   },
   {
-    title: 'Partner-ready Support',
+    title: 'Implementation Support',
     description: 'Deployment support, onboarding, and expert guidance tailored to your operational model.',
     icon: ArrowRightLeft
   }

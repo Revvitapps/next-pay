@@ -11,9 +11,10 @@ type PreviewLaunchPageProps = {
 };
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Preview to Launch | Next Pay Business Solutions',
+  title: 'Preview to Launch | NextPay',
   description: 'Track preview status, expiration, and purchase-to-launch transitions.',
-  path: '/preview-launch'
+  path: '/preview-launch',
+  noIndex: true
 });
 
 export default async function PreviewLaunchPage({ searchParams }: PreviewLaunchPageProps) {

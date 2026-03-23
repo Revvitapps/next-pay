@@ -15,7 +15,7 @@ const CAPABILITY_IMAGE_FALLBACKS: Record<string, string> = {
   'technology-integrations': '/images/technology-integrations.png',
   'automation-enablement': '/images/automation-enablement.png',
   'reporting-visibility': '/images/reporting-visibility.png',
-  'partner-ready-support': '/images/partner-ready-support.png'
+  'implementation-support': '/images/implementation-support.png'
 };
 
 export type CapabilityFrontmatter = {

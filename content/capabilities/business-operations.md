@@ -12,7 +12,7 @@ order: 1
 
 Operational structure is the foundation of a successful business. Companies that grow quickly often discover that the systems and processes that worked early on begin to break down as complexity increases. Teams become disconnected, responsibilities become unclear, and execution slows.
 
-Next Pay Business Solutions helps organizations design operational infrastructure that aligns people, processes, and systems into a unified operating model.
+NextPay helps organizations design operational infrastructure that aligns people, processes, and systems into a unified operating model.
 
 Rather than relying on fragmented tools and disconnected workflows, we focus on helping companies create operational frameworks that support efficient day-to-day execution while enabling long-term growth.
 
@@ -36,7 +36,7 @@ These operational systems allow businesses to maintain consistency even as they 
 
 Companies operating across multiple offices, service regions, or locations face additional complexity. Without structured processes, communication gaps and inconsistent execution often appear between locations.
 
-Next Pay Business Solutions works with organizations to build operational frameworks that maintain consistency across distributed teams.
+NextPay works with organizations to build operational frameworks that maintain consistency across distributed teams.
 
 This includes:
 
@@ -60,4 +60,4 @@ The most effective operational organizations share several characteristics:
 
 Businesses that adopt these best practices tend to operate with greater efficiency, faster execution, and stronger long-term scalability.
 
-Next Pay Business Solutions focuses on helping companies implement these operational best practices in a practical and sustainable way.
+NextPay focuses on helping companies implement these operational best practices in a practical and sustainable way.

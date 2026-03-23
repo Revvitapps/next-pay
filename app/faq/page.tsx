@@ -7,12 +7,12 @@ import { breadcrumbJsonLd, faqPageJsonLd } from '@/lib/seo/jsonLd';
 
 const faqItems = [
   {
-    question: 'What services does Next Pay offer?',
+    question: 'What services does NextPay offer?',
     answer: 'Core offerings include payroll, workers compensation, business financing, HR benefits, time attendance, tax credit advisory, and POS payments.'
   },
   {
-    question: 'How are leads routed to partners?',
-    answer: 'All leads are captured internally first and then routed to the relevant partner using service and qualification rules.'
+    question: 'How are leads routed after submission?',
+    answer: 'All leads are captured internally first and then routed to the relevant NextPay advisory queue using service and qualification rules.'
   },
   {
     question: 'Can one business submit for multiple services?',
@@ -21,7 +21,7 @@ const faqItems = [
 ];
 
 export const metadata: Metadata = buildMetadata({
-  title: 'FAQ | Next Pay Business Solutions',
+  title: 'FAQ | NextPay',
   description: 'Answers to common questions about service offerings, lead routing, and consultation workflows.',
   path: '/faq'
 });

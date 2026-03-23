@@ -1,11 +1,21 @@
 import { NextResponse } from 'next/server';
+import { createLeadFromServiceSubmission } from '@/lib/admin/repository';
+import { sendLeadNotification } from '@/lib/server/email/resendService';
+import { ingestStatementUpload } from '@/lib/server/statement/pipeline';
 import { isBusinessFinancingService, isPayrollWorkersCompService, getServiceBySlug } from '@/lib/services/catalog';
 import { routeServiceLead, type ServiceLeadPayload } from '@/lib/services/routing';
 
 export const runtime = 'nodejs';
 
 type ServiceLeadRequest = Partial<ServiceLeadPayload> & {
+  submissionType?: 'service-lead';
   honeypot?: string;
+  statementFile?: {
+    name?: string;
+    type?: string;
+    size?: number;
+    dataUrl?: string;
+  };
 };
 
 function isNonEmpty(value: unknown): value is string {
@@ -13,11 +23,7 @@ function isNonEmpty(value: unknown): value is string {
 }
 
 function validatePayload(body: ServiceLeadRequest) {
-  if (!isNonEmpty(body.serviceSlug)) {
-    return { ok: false as const, error: 'Missing required core fields.' };
-  }
-
-  const serviceSlug = body.serviceSlug;
+  if (!isNonEmpty(body.serviceSlug)) return { ok: false as const, error: 'Missing required core fields.' };
 
   const coreValid =
     isNonEmpty(body.fullName) &&
@@ -34,11 +40,9 @@ function validatePayload(body: ServiceLeadRequest) {
     body.consentToContact === true &&
     body.dataProcessingConsent === true;
 
-  if (!coreValid) {
-    return { ok: false as const, error: 'Missing required core fields.' };
-  }
+  if (!coreValid) return { ok: false as const, error: 'Missing required core fields.' };
 
-  if (isPayrollWorkersCompService(serviceSlug)) {
+  if (isPayrollWorkersCompService(body.serviceSlug)) {
     const payrollValid =
       Number.isFinite(body.employeeCountW2) &&
       Number.isFinite(body.employeeCount1099) &&
@@ -49,12 +53,10 @@ function validatePayload(body: ServiceLeadRequest) {
       isNonEmpty(body.employeeWorkStates) &&
       isNonEmpty(body.desiredEffectiveDate);
 
-    if (!payrollValid) {
-      return { ok: false as const, error: 'Missing required payroll/workers comp fields.' };
-    }
+    if (!payrollValid) return { ok: false as const, error: 'Missing required payroll/workers comp fields.' };
   }
 
-  if (isBusinessFinancingService(serviceSlug)) {
+  if (isBusinessFinancingService(body.serviceSlug)) {
     const financingValid =
       isNonEmpty(body.fundingType) &&
       isNonEmpty(body.businessStructure) &&
@@ -64,47 +66,10 @@ function validatePayload(body: ServiceLeadRequest) {
       isNonEmpty(body.businessOwnedSince) &&
       isNonEmpty(body.homeOwnership);
 
-    if (!financingValid) {
-      return { ok: false as const, error: 'Missing required business financing fields.' };
-    }
+    if (!financingValid) return { ok: false as const, error: 'Missing required business financing fields.' };
   }
 
   return { ok: true as const };
-}
-
-async function sendResendEmail(params: {
-  apiKey: string;
-  from: string;
-  to: string[];
-  cc?: string[];
-  replyTo?: string;
-  subject: string;
-  text: string;
-  html: string;
-}) {
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${params.apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      from: params.from,
-      to: params.to,
-      cc: params.cc?.length ? params.cc : undefined,
-      reply_to: params.replyTo,
-      subject: params.subject,
-      text: params.text,
-      html: params.html
-    })
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Resend error ${response.status}: ${errorText}`);
-  }
-
-  return (await response.json()) as { id?: string };
 }
 
 function toLeadPayload(body: ServiceLeadRequest): ServiceLeadPayload {
@@ -141,7 +106,9 @@ function toLeadPayload(body: ServiceLeadRequest): ServiceLeadPayload {
     businessDateFounded: body.businessDateFounded?.trim(),
     businessOwnedSince: body.businessOwnedSince?.trim(),
     businessWebsite: body.businessWebsite?.trim(),
-    homeOwnership: body.homeOwnership?.trim()
+    homeOwnership: body.homeOwnership?.trim(),
+    currentProcessor: body.currentProcessor?.trim(),
+    estimatedMonthlyVolume: body.estimatedMonthlyVolume?.trim()
   };
 }
 
@@ -165,124 +132,48 @@ export async function POST(request: Request) {
     }
 
     const route = routeServiceLead(leadPayload);
-    const leadId = `svc_${Date.now().toString(36)}`;
 
-    const resendApiKey = process.env.RESEND_API_KEY?.trim();
-    const fromEmail = process.env.CONTACT_FROM_EMAIL?.trim();
-    const internalToRaw = process.env.SERVICE_LEAD_INTERNAL_TO?.trim() || process.env.CONTACT_TO_EMAIL?.trim() || '';
-    const internalCcRaw = process.env.SERVICE_LEAD_INTERNAL_CC?.trim() || process.env.CONTACT_CC_EMAIL?.trim() || '';
+    const adminLead = createLeadFromServiceSubmission({
+      serviceSlug: leadPayload.serviceSlug,
+      fullName: leadPayload.fullName,
+      legalBusinessName: leadPayload.legalBusinessName,
+      email: leadPayload.email,
+      phone: leadPayload.phone,
+      currentProcessor: leadPayload.currentProcessor,
+      estimatedMonthlyVolume: leadPayload.estimatedMonthlyVolume
+    });
 
-    const internalTo = internalToRaw
-      .split(',')
-      .map((value) => value.trim())
-      .filter(Boolean);
-    const internalCc = internalCcRaw
-      .split(',')
-      .map((value) => value.trim())
-      .filter(Boolean);
+    await sendLeadNotification({
+      submissionType: 'service-lead',
+      businessName: adminLead.businessName,
+      contactName: adminLead.contactName,
+      email: adminLead.email,
+      phone: adminLead.phone,
+      serviceInterest: adminLead.serviceInterest,
+      leadId: adminLead.id
+    });
 
-    const internalSubject = `[Service Lead][${service.name}] ${leadPayload.legalBusinessName} (${leadId})`;
-    const internalText = [
-      `Lead ID: ${leadId}`,
-      `Service: ${service.name} (${leadPayload.serviceSlug})`,
-      `Routed Partner: ${route.partnerName} <${route.partnerEmail}>`,
-      `Routing Rule: ${route.ruleMatched}`,
-      '',
-      `Full Name: ${leadPayload.fullName}`,
-      `Business Legal Name: ${leadPayload.legalBusinessName}`,
-      `DBA: ${leadPayload.dba}`,
-      `Email: ${leadPayload.email}`,
-      `Phone: ${leadPayload.phone}`,
-      `Industry: ${leadPayload.industry}`,
-      `Business Address: ${leadPayload.businessAddress}`,
-      `Years in Business: ${leadPayload.yearsInBusiness}`,
-      `Locations: ${leadPayload.locationCount}`,
-      `Preferred Contact Time: ${leadPayload.preferredContactTime}`,
-      `Notes / Goals: ${leadPayload.notesGoals}`,
-      `Consent to Contact: ${leadPayload.consentToContact ? 'Yes' : 'No'}`,
-      `Data Processing Consent: ${leadPayload.dataProcessingConsent ? 'Yes' : 'No'}`,
-      `Employee Count W-2: ${leadPayload.employeeCountW2 ?? 'N/A'}`,
-      `Employee Count 1099: ${leadPayload.employeeCount1099 ?? 'N/A'}`,
-      `Total Monthly Payroll: ${leadPayload.totalMonthlyPayroll ?? 'N/A'}`,
-      `Current Payroll Provider: ${leadPayload.currentPayrollProvider ?? 'N/A'}`,
-      `Current Workers' Comp Carrier: ${leadPayload.currentWorkersCompCarrier ?? 'N/A'}`,
-      `Current Workers' Comp Premium Annual: ${leadPayload.currentWorkersCompPremiumAnnual ?? 'N/A'}`,
-      `Claims History Past 3 Years: ${leadPayload.claimsHistoryPast3Years ?? 'N/A'}`,
-      `Job Classes / Roles: ${leadPayload.jobClassesRoles ?? 'N/A'}`,
-      `FEIN: ${leadPayload.fein ?? 'N/A'}`,
-      `Employee Work States: ${leadPayload.employeeWorkStates ?? 'N/A'}`,
-      `Desired Effective Date: ${leadPayload.desiredEffectiveDate ?? 'N/A'}`,
-      `Funding Type: ${leadPayload.fundingType ?? 'N/A'}`,
-      `Business Structure: ${leadPayload.businessStructure ?? 'N/A'}`,
-      `Federal Tax ID: ${leadPayload.federalTaxId ?? 'N/A'}`,
-      `Average Monthly Deposits: ${leadPayload.averageMonthlyDeposits ?? 'N/A'}`,
-      `Business Date Founded: ${leadPayload.businessDateFounded ?? 'N/A'}`,
-      `Business Owned Since: ${leadPayload.businessOwnedSince ?? 'N/A'}`,
-      `Business Website: ${leadPayload.businessWebsite ?? 'N/A'}`,
-      `Home Ownership: ${leadPayload.homeOwnership ?? 'N/A'}`
-    ].join('\n');
-
-    const internalHtml = internalText.replace(/\n/g, '<br />');
-
-    const partnerSubject = `New routed lead: ${service.name} (${leadId})`;
-    const partnerText = [
-      `Lead ID: ${leadId}`,
-      `Service: ${service.name}`,
-      '',
-      `Full Name: ${leadPayload.fullName}`,
-      `Business Legal Name: ${leadPayload.legalBusinessName}`,
-      `DBA: ${leadPayload.dba}`,
-      `Email: ${leadPayload.email}`,
-      `Phone: ${leadPayload.phone}`,
-      `Industry: ${leadPayload.industry}`,
-      `Locations: ${leadPayload.locationCount}`,
-      `Preferred Contact Time: ${leadPayload.preferredContactTime}`,
-      `Notes / Goals: ${leadPayload.notesGoals}`
-    ].join('\n');
-
-    const partnerHtml = partnerText.replace(/\n/g, '<br />');
-
-    if (resendApiKey && fromEmail && internalTo.length) {
-      // Data ownership: full lead is always delivered to internal recipients first.
-      await sendResendEmail({
-        apiKey: resendApiKey,
-        from: fromEmail,
-        to: internalTo,
-        cc: internalCc,
-        replyTo: leadPayload.email,
-        subject: internalSubject,
-        text: internalText,
-        html: internalHtml
-      });
-
-      await sendResendEmail({
-        apiKey: resendApiKey,
-        from: fromEmail,
-        to: [route.partnerEmail],
-        replyTo: leadPayload.email,
-        subject: partnerSubject,
-        text: partnerText,
-        html: partnerHtml
-      });
-
-      console.info('[service_lead_routed]', {
-        leadId,
-        serviceSlug: leadPayload.serviceSlug,
-        partnerId: route.partnerId,
-        ruleMatched: route.ruleMatched
-      });
-    } else {
-      console.info('[service_lead_submission_local]', {
-        leadId,
-        payload: leadPayload,
-        route,
-        hasResendApiKey: Boolean(resendApiKey),
-        hasFromEmail: Boolean(fromEmail),
-        hasInternalTo: Boolean(internalTo.length)
+    if (body.statementFile?.name && body.statementFile?.type && typeof body.statementFile?.size === 'number' && body.statementFile?.dataUrl) {
+      await ingestStatementUpload({
+        leadId: adminLead.id,
+        sourceForm: 'service-lead',
+        businessName: leadPayload.legalBusinessName,
+        email: leadPayload.email,
+        phone: leadPayload.phone,
+        currentProcessor: leadPayload.currentProcessor ?? 'Unknown Processor',
+        monthlyVolume: leadPayload.estimatedMonthlyVolume ?? 'Unknown',
+        file: body.statementFile,
+        linkedLead: {
+          type: 'service-lead',
+          fullName: leadPayload.fullName,
+          legalBusinessName: leadPayload.legalBusinessName,
+          serviceSlug: leadPayload.serviceSlug,
+          estimatedMonthlyVolume: leadPayload.estimatedMonthlyVolume
+        }
       });
     }
 
-    return NextResponse.json({ ok: true, leadId, routedPartner: route.partnerId });
+    return NextResponse.json({ ok: true, routedQueue: route.queueId, leadId: adminLead.id });
   } catch (error) {
     console.error('[service_lead_api_error]', error);
     return NextResponse.json({ error: 'Unexpected server error.' }, { status: 500 });

@@ -1,50 +1,107 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
+  CarFront,
   BriefcaseBusiness,
-  ChefHat,
-  Hotel,
-  Martini,
-  Store,
-  Truck,
+  Dumbbell,
+  Hammer,
+  HeartPulse,
+  ShieldAlert,
+  Sparkles,
+  Ticket,
   UtensilsCrossed,
-  Zap
+  Store
 } from 'lucide-react';
-import { industryProfiles } from '@/components/industries/industryData';
+import { industryProfiles, slugifySubSector } from '@/components/industries/industryData';
 import { prefillAndScrollContact, track } from '@/lib/utils';
 
-const iconMap = {
-  utensils: UtensilsCrossed,
-  hotel: Hotel,
-  martini: Martini,
-  zap: Zap,
-  chefhat: ChefHat,
-  truck: Truck,
-  store: Store,
-  briefcase: BriefcaseBusiness
+const industryVisuals: Record<
+  string,
+  {
+    icon: React.ComponentType<{ className?: string }>;
+    badge: string;
+  }
+> = {
+  'automotive-businesses': {
+    icon: CarFront,
+    badge: 'bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_18px_rgba(34,211,238,0.28)]'
+  },
+  'beauty-and-personal-care': {
+    icon: Sparkles,
+    badge: 'bg-gradient-to-br from-pink-400 to-fuchsia-600 shadow-[0_0_18px_rgba(232,121,249,0.26)]'
+  },
+  'entertainment-and-specialty-businesses': {
+    icon: Ticket,
+    badge: 'bg-gradient-to-br from-violet-500 to-purple-700 shadow-[0_0_18px_rgba(139,92,246,0.26)]'
+  },
+  'fitness-and-membership-businesses': {
+    icon: Dumbbell,
+    badge: 'bg-gradient-to-br from-lime-400 to-green-600 shadow-[0_0_18px_rgba(132,204,22,0.24)]'
+  },
+  'healthcare-and-medical-practices': {
+    icon: HeartPulse,
+    badge: 'bg-gradient-to-br from-teal-400 to-cyan-600 shadow-[0_0_18px_rgba(45,212,191,0.24)]'
+  },
+  'high-risk': {
+    icon: ShieldAlert,
+    badge: 'bg-gradient-to-br from-orange-500 to-red-600 shadow-[0_0_18px_rgba(249,115,22,0.24)]'
+  },
+  'home-services-and-contractors': {
+    icon: Hammer,
+    badge: 'bg-gradient-to-br from-amber-400 to-yellow-600 shadow-[0_0_18px_rgba(245,158,11,0.24)]'
+  },
+  'professional-and-business-services': {
+    icon: BriefcaseBusiness,
+    badge: 'bg-gradient-to-br from-slate-500 to-indigo-600 shadow-[0_0_18px_rgba(99,102,241,0.20)]'
+  },
+  'restaurants-and-hospitality': {
+    icon: UtensilsCrossed,
+    badge: 'bg-gradient-to-br from-orange-400 to-rose-500 shadow-[0_0_18px_rgba(251,146,60,0.24)]'
+  },
+  'retail-businesses': {
+    icon: Store,
+    badge: 'bg-gradient-to-br from-sky-400 to-indigo-600 shadow-[0_0_18px_rgba(56,189,248,0.24)]'
+  }
 };
 
 export default function IndustrySelector() {
   const [activeIndustryId, setActiveIndustryId] = useState(industryProfiles[0].id);
+  const [activeSector, setActiveSector] = useState<'restaurants' | 'retail' | 'services' | 'high-risk'>('services');
 
   const activeProfile = useMemo(
     () => industryProfiles.find((item) => item.id === activeIndustryId) ?? industryProfiles[0],
     [activeIndustryId]
   );
 
+  const sectorTiles = useMemo(
+    () => [
+      { id: 'restaurants', label: 'Restaurants', subtitle: 'Food & beverage operators' },
+      { id: 'retail', label: 'Retail', subtitle: 'Storefront and specialty retail' },
+      { id: 'services', label: 'Services', subtitle: 'Professional and field services' },
+      { id: 'high-risk', label: 'High-Risk Businesses', subtitle: 'Specialized underwriting lanes' }
+    ],
+    []
+  );
+
+  const filteredIndustries = useMemo(
+    () => industryProfiles.filter((industry) => industry.sector === activeSector),
+    [activeSector]
+  );
+
   return (
     <section id="industries" className="px-6 py-20 lg:px-12">
-      <div className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/20 bg-[#163c4d]/55 p-6 shadow-card md:p-10">
+      <div className="mx-auto w-full max-w-[1380px] rounded-3xl border border-[#46a7a6]/20 bg-[#163c4d]/55 p-6 shadow-card md:p-10">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Industries We Serve</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Select your industry and preview a recommended business stack
+              Industries We Serve
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-100/90">
-              Each vertical receives a tailored recommendation for operations, integrations, and infrastructure wins.
+              NextPay provides payment processing, POS systems, and business solutions for businesses across many industries. Our platform is designed to adapt to the unique needs of each industry while providing reliable payment technology and operational tools.
             </p>
           </div>
           <button
@@ -58,35 +115,114 @@ export default function IndustrySelector() {
             }}
             className="justify-self-start rounded-full border border-[#46a7a6]/50 px-5 py-2.5 text-sm font-semibold text-[#46a7a6] transition hover:border-[#46a7a6] hover:bg-[#46a7a6]/10"
           >
-            Request a Suggested Stack
+            Get a Custom Quote
           </button>
         </div>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {industryProfiles.map((industry) => {
-            const Icon = iconMap[industry.icon];
+          {sectorTiles.map((sector) => {
+            const isActive = activeSector === sector.id;
+            return (
+              <div
+                key={sector.id}
+                className={`rounded-2xl border p-4 text-left transition ${
+                  isActive
+                    ? 'border-[#46a7a6]/65 bg-[#163c4d]/90'
+                    : 'border-[#46a7a6]/25 bg-[#163c4d]/75 hover:border-[#46a7a6]/40 hover:bg-[#163c4d]/85'
+                }`}
+              >
+                <p className="text-[10px] uppercase tracking-[0.2em] text-[#46a7a6]/85">Sector</p>
+                <p className="mt-2 text-base font-semibold text-white">{sector.label}</p>
+                <p className="mt-1 text-xs text-slate-100/75">{sector.subtitle}</p>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveSector(sector.id as 'restaurants' | 'retail' | 'services' | 'high-risk');
+                      const first = industryProfiles.find((industry) => industry.sector === sector.id);
+                      if (first) {
+                        setActiveIndustryId(first.id);
+                      }
+                    }}
+                    className="inline-flex rounded-full border border-[#46a7a6]/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/65 hover:bg-[#46a7a6]/10"
+                  >
+                    Preview
+                  </button>
+                  <Link
+                    href={`/industries/sectors/${sector.id}`}
+                    className="inline-flex rounded-full border border-[#46a7a6]/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/65 hover:bg-[#46a7a6]/10"
+                  >
+                    Open Page
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {filteredIndustries.map((industry) => {
+            const visual = industryVisuals[industry.id];
+            const Icon = visual?.icon ?? BriefcaseBusiness;
             const isActive = activeProfile.id === industry.id;
 
             return (
-              <button
+              <div
                 key={industry.id}
-                type="button"
-                onClick={() => {
-                  setActiveIndustryId(industry.id);
-                  track('industry_select', { industry: industry.label });
-                }}
                 className={`group rounded-2xl border p-4 text-left transition ${
                   isActive
                     ? 'border-[#46a7a6]/70 bg-[#163c4d]/85'
                     : 'border-[#46a7a6]/25 bg-[#163c4d]/75 hover:border-[#46a7a6]/40 hover:bg-[#163c4d]/85'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <Icon className={`h-5 w-5 ${isActive ? 'text-[#46a7a6]' : 'text-slate-200/80 group-hover:text-[#46a7a6]'}`} />
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-slate-200/70">Industry</span>
+                <div className="flex items-center gap-4">
+                  <div
+                    className={[
+                      'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10',
+                      'transition-all duration-200',
+                      'group-hover:-translate-y-0.5 group-hover:scale-[1.03]',
+                      isActive ? 'ring-1 ring-white/25' : '',
+                      visual?.badge ?? 'bg-white/10'
+                    ].join(' ')}
+                  >
+                    <Icon className="h-5 w-5 text-white" />
+                  </div>
+
+                  <div className="min-w-0">
+                    <p className={`text-sm font-semibold ${isActive ? 'text-white' : 'text-slate-100/95'}`}>{industry.label}</p>
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/55">Industry</p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {industry.subSectors.slice(0, 3).map((subSector) => (
+                        <Link
+                          key={`${industry.id}-${subSector}`}
+                          href={`/industries/sub-sectors/${slugifySubSector(subSector)}`}
+                          className="rounded-full border border-[#46a7a6]/25 px-2 py-0.5 text-[10px] text-slate-100/80 transition hover:border-[#46a7a6]/55"
+                        >
+                          {subSector}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <p className={`mt-5 text-sm font-semibold ${isActive ? 'text-[#46a7a6]' : 'text-slate-100/95'}`}>{industry.label}</p>
-              </button>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveIndustryId(industry.id);
+                      track('industry_select', { industry: industry.label });
+                    }}
+                    className="rounded-full border border-[#46a7a6]/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/60"
+                  >
+                    Preview
+                  </button>
+                  <Link
+                    href={`/industries/${industry.id}`}
+                    className="rounded-full border border-[#46a7a6]/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/60"
+                  >
+                    Open Page
+                  </Link>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -99,7 +235,7 @@ export default function IndustrySelector() {
           className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
         >
           <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6">
-            <h3 className="text-xl font-bold text-white">Recommended Business Stack</h3>
+            <h3 className="text-xl font-bold text-white">Recommended Setup</h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
               {activeProfile.recommendedSetup.map((item) => (
                 <li key={item} className="flex gap-2">

@@ -1,38 +1,22 @@
 'use client';
 
 import { FormEvent, useEffect, useMemo, useState } from 'react';
+import ComplianceNote from '@/components/compliance/ComplianceNote';
+import ConversionCtas from '@/components/cta/ConversionCtas';
+import { fetchCalculatorConfig, submitCalculatorAnswers } from '@/lib/calculator/client';
 import type { CalculatorQuestion, CalculatorResult, IndustryBlueprint } from '@/lib/calculator/types';
 
-type CalculatorConfigResponse = {
-  ok: boolean;
-  config: {
-    industries: IndustryBlueprint[];
-    questions: CalculatorQuestion[];
-  };
+type Answers = Record<string, string | number>;
+
+type IndustryAssessmentWizardProps = {
+  compact?: boolean;
+  heading?: string;
 };
 
-type CalculatorSubmissionResponse = {
-  ok: boolean;
-  result?: CalculatorResult;
-  error?: string;
-  fields?: Array<{ field: string; message: string }>;
-};
-
-type Answers = Record<string, string | string[] | number>;
-
-function normalizeQuestionValue(question: CalculatorQuestion, value: string | string[] | number | undefined): string {
-  if (question.type === 'multi-select') {
-    return Array.isArray(value) ? value.join(', ') : '';
-  }
-  if (question.type === 'number') {
-    return typeof value === 'number' ? String(value) : '';
-  }
-  return typeof value === 'string' ? value : '';
-}
-
-export default function IndustryAssessmentWizard() {
+export default function IndustryAssessmentWizard({ compact = false, heading }: IndustryAssessmentWizardProps) {
   const [industries, setIndustries] = useState<IndustryBlueprint[]>([]);
   const [questions, setQuestions] = useState<CalculatorQuestion[]>([]);
+  const [disclaimer, setDisclaimer] = useState('Estimates only. Final pricing depends on underwriting and statement review.');
   const [industryId, setIndustryId] = useState('');
   const [answers, setAnswers] = useState<Answers>({});
   const [stepIndex, setStepIndex] = useState(0);
@@ -45,14 +29,13 @@ export default function IndustryAssessmentWizard() {
     async function loadConfig() {
       setLoadingConfig(true);
       try {
-        const response = await fetch('/api/calculator');
-        if (!response.ok) throw new Error('Unable to load calculator config');
-        const payload = (await response.json()) as CalculatorConfigResponse;
+        const payload = await fetchCalculatorConfig();
         setIndustries(payload.config.industries);
         setQuestions(payload.config.questions);
+        setDisclaimer(payload.config.disclaimer);
       } catch (error) {
         console.error(error);
-        setErrorMessage('Unable to load assessment questions right now.');
+        setErrorMessage('Unable to load calculator questions right now.');
       } finally {
         setLoadingConfig(false);
       }
@@ -62,7 +45,6 @@ export default function IndustryAssessmentWizard() {
   }, []);
 
   const selectedIndustry = useMemo(() => industries.find((industry) => industry.id === industryId) ?? null, [industries, industryId]);
-
   const currentQuestion = questions[stepIndex] ?? null;
 
   const progressPercent = useMemo(() => {
@@ -74,10 +56,6 @@ export default function IndustryAssessmentWizard() {
     const value = answers[question.id];
 
     if (!question.required) return true;
-
-    if (question.type === 'multi-select') {
-      return Array.isArray(value) && value.length > 0;
-    }
 
     if (question.type === 'number') {
       return typeof value === 'number' && Number.isFinite(value) && value >= (question.min ?? 0);
@@ -93,14 +71,6 @@ export default function IndustryAssessmentWizard() {
   function updateNumberAnswer(questionId: string, value: string) {
     const parsed = Number(value);
     setAnswers((prev) => ({ ...prev, [questionId]: Number.isFinite(parsed) ? parsed : 0 }));
-  }
-
-  function toggleMultiAnswer(questionId: string, optionValue: string) {
-    setAnswers((prev) => {
-      const existing = Array.isArray(prev[questionId]) ? (prev[questionId] as string[]) : [];
-      const next = existing.includes(optionValue) ? existing.filter((value) => value !== optionValue) : [...existing, optionValue];
-      return { ...prev, [questionId]: next };
-    });
   }
 
   function onNext() {
@@ -137,24 +107,15 @@ export default function IndustryAssessmentWizard() {
     setSubmitting(true);
 
     try {
-      const response = await fetch('/api/calculator', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          industryId,
-          answers
-        })
+      const calculatedResult = await submitCalculatorAnswers({
+        industryId,
+        answers
       });
 
-      const payload = (await response.json()) as CalculatorSubmissionResponse;
-      if (!response.ok || !payload.ok || !payload.result) {
-        throw new Error(payload.error ?? 'Unable to generate recommendation');
-      }
-
-      setResult(payload.result);
+      setResult(calculatedResult);
     } catch (error) {
       console.error(error);
-      setErrorMessage('Unable to calculate recommendation right now. Please try again.');
+      setErrorMessage('Unable to calculate estimate right now. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -171,7 +132,7 @@ export default function IndustryAssessmentWizard() {
     return (
       <section id="assessment" className="px-6 py-20 lg:px-12">
         <div className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-          <p className="text-sm text-slate-100/90">Loading assessment...</p>
+          <p className="text-sm text-slate-100/90">Loading calculator...</p>
         </div>
       </section>
     );
@@ -179,66 +140,16 @@ export default function IndustryAssessmentWizard() {
 
   if (result) {
     return (
-      <section id="assessment" className="px-6 py-20 lg:px-12">
-        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Assessment Result</p>
-          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">Recommended Path: {result.packageTier}</h2>
-          <p className="mt-3 text-sm text-slate-100/90">
-            Industry: {result.industryLabel} | Complexity Score: {result.complexityScore} | Timeline: {result.projectedTimelineWeeks.min}-{result.projectedTimelineWeeks.max} weeks
+      <section id="assessment" className={`${compact ? 'px-0 py-0' : 'px-6 py-20 lg:px-12'}`}>
+        <div className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
+          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Merchant Pricing Calculator</p>
+          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">Estimated Effective Rate: {result.estimatedEffectiveRate}%</h2>
+          <p className="mt-3 text-sm text-slate-100/90">Estimated Monthly Processing Cost: ${result.estimatedMonthlyCost.toLocaleString()}</p>
+          <p className="mt-2 text-sm text-slate-100/90">Potential Savings Opportunity: ${result.potentialSavingsOpportunity.toLocaleString()} / month</p>
+          <p className="mt-2 text-sm text-slate-100/90">
+            Savings Range: ${result.possibleSavingsRange.low.toLocaleString()} - ${result.possibleSavingsRange.high.toLocaleString()} / month
           </p>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
-              <h3 className="text-lg font-bold text-white">Recommended Business Stack</h3>
-              <ul className="mt-3 space-y-2 text-sm text-slate-100/90">
-                {result.recommendedBusinessStack.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
-              <h3 className="text-lg font-bold text-white">Operational Wins</h3>
-              <ul className="mt-3 space-y-2 text-sm text-slate-100/90">
-                {result.operationalWins.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
-              <h3 className="text-lg font-bold text-white">Suggested Tools</h3>
-              <ul className="mt-3 space-y-2 text-sm text-slate-100/90">
-                {result.suggestedTools.map((tool) => (
-                  <li key={tool.name}>
-                    <p className="font-semibold text-white">{tool.name}</p>
-                    <p>{tool.summary}</p>
-                    <p className="text-xs text-slate-200/80">Ideal for: {tool.idealFor}</p>
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
-              <h3 className="text-lg font-bold text-white">Next Discovery Questions</h3>
-              <ul className="mt-3 space-y-2 text-sm text-slate-100/90">
-                {result.nextDiscoveryQuestions.map((question) => (
-                  <li key={question} className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
-                    <span>{question}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
+          <ComplianceNote text={result.disclaimer} className="mt-4" />
 
           <div className="mt-6 flex flex-wrap gap-3">
             <button
@@ -246,14 +157,9 @@ export default function IndustryAssessmentWizard() {
               onClick={resetAssessment}
               className="rounded-full border border-[#46a7a6]/30 px-5 py-2 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
             >
-              Start New Assessment
+              Run Another Estimate
             </button>
-            <a
-              href="/contact"
-              className="rounded-full bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow"
-            >
-              Book Strategy Call
-            </a>
+            <ConversionCtas primary="customQuote" secondary="uploadStatement" />
           </div>
         </div>
       </section>
@@ -261,15 +167,12 @@ export default function IndustryAssessmentWizard() {
   }
 
   return (
-    <section id="assessment" className="px-6 py-20 lg:px-12">
-      <form onSubmit={onSubmit} className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-        <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Guided Assessment</p>
+    <section id="assessment" className={`${compact ? 'px-0 py-0' : 'px-6 py-20 lg:px-12'}`}>
+      <form onSubmit={onSubmit} className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
+        <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Merchant Pricing Calculator</p>
         <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-          Find the best-fit setup for your operation
+          {heading ?? 'Estimate your processing costs and effective rate'}
         </h2>
-        <p className="mt-3 max-w-3xl text-sm text-slate-100/90">
-          Select your industry, answer a short sequence of qualification questions, and we will map a recommendation based on your operational model and goals.
-        </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <label className="space-y-2 text-sm text-slate-100/90">
@@ -290,7 +193,7 @@ export default function IndustryAssessmentWizard() {
           </label>
 
           <div className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-sm text-slate-100/90">
-            {selectedIndustry ? selectedIndustry.positioning : 'Choose an industry to see context for your assessment.'}
+            {selectedIndustry ? selectedIndustry.positioning : 'Choose an industry to personalize your estimate.'}
           </div>
         </div>
 
@@ -312,36 +215,22 @@ export default function IndustryAssessmentWizard() {
               {currentQuestion.type === 'single-select' ? (
                 <div className="grid gap-2">
                   {currentQuestion.options?.map((option) => (
-                    <label key={option.value} className="flex items-start gap-3 rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-sm text-slate-100/90">
-                      <input
-                        type="radio"
-                        name={currentQuestion.id}
-                        checked={answers[currentQuestion.id] === option.value}
-                        onChange={() => updateSingleAnswer(currentQuestion.id, option.value)}
-                        className="mt-0.5"
-                      />
-                      <span>{option.label}</span>
-                    </label>
-                  ))}
-                </div>
-              ) : null}
-
-              {currentQuestion.type === 'multi-select' ? (
-                <div className="grid gap-2">
-                  {currentQuestion.options?.map((option) => {
-                    const currentValues = Array.isArray(answers[currentQuestion.id]) ? (answers[currentQuestion.id] as string[]) : [];
-                    return (
-                      <label key={option.value} className="flex items-start gap-3 rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-sm text-slate-100/90">
+                    <label key={option.value} className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-sm text-slate-100/90">
+                      <div className="flex items-start gap-3">
                         <input
-                          type="checkbox"
-                          checked={currentValues.includes(option.value)}
-                          onChange={() => toggleMultiAnswer(currentQuestion.id, option.value)}
+                          type="radio"
+                          name={currentQuestion.id}
+                          checked={answers[currentQuestion.id] === option.value}
+                          onChange={() => updateSingleAnswer(currentQuestion.id, option.value)}
                           className="mt-0.5"
                         />
-                        <span>{option.label}</span>
-                      </label>
-                    );
-                  })}
+                        <div>
+                          <p>{option.label}</p>
+                          {option.hint ? <p className="mt-1 text-xs text-slate-300/80">{option.hint}</p> : null}
+                        </div>
+                      </div>
+                    </label>
+                  ))}
                 </div>
               ) : null}
 
@@ -351,46 +240,38 @@ export default function IndustryAssessmentWizard() {
                   min={currentQuestion.min}
                   max={currentQuestion.max}
                   step={currentQuestion.step ?? 1}
-                  value={normalizeQuestionValue(currentQuestion, answers[currentQuestion.id])}
+                  value={typeof answers[currentQuestion.id] === 'number' ? String(answers[currentQuestion.id]) : ''}
                   onChange={(event) => updateNumberAnswer(currentQuestion.id, event.target.value)}
                   placeholder={currentQuestion.placeholder}
                   className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none"
                 />
               ) : null}
             </div>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={onBack}
+                disabled={stepIndex === 0}
+                className="rounded-full border border-[#46a7a6]/30 px-5 py-2 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10 disabled:opacity-40"
+              >
+                Back
+              </button>
+              {stepIndex < questions.length - 1 ? (
+                <button type="button" onClick={onNext} className="rounded-full bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow">
+                  Continue
+                </button>
+              ) : (
+                <button type="submit" disabled={submitting} className="rounded-full bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow">
+                  {submitting ? 'Calculating...' : 'Estimate My Rates'}
+                </button>
+              )}
+            </div>
           </div>
         ) : null}
 
-        {errorMessage ? <p className="mt-4 text-sm text-red-200">{errorMessage}</p> : null}
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={onBack}
-            disabled={stepIndex === 0}
-            className="rounded-full border border-[#46a7a6]/30 px-5 py-2 text-sm font-semibold text-white transition disabled:opacity-50"
-          >
-            Back
-          </button>
-
-          {stepIndex < questions.length - 1 ? (
-            <button
-              type="button"
-              onClick={onNext}
-              className="rounded-full bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow"
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              type="submit"
-              disabled={submitting}
-              className="rounded-full bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow disabled:opacity-60"
-            >
-              {submitting ? 'Calculating...' : 'Get Recommendation'}
-            </button>
-          )}
-        </div>
+        {errorMessage ? <p className="mt-4 rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100">{errorMessage}</p> : null}
+        <ComplianceNote text={disclaimer} tone="soft" className="mt-4" />
       </form>
     </section>
   );

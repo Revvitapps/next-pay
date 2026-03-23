@@ -1,7 +1,7 @@
 # REVVIT GROWTH ENGINE QA REPORT
 
 Date: 2026-03-12
-Project: NEXT-PAY (Next.js App Router)
+Project: NextPay (Next.js App Router)
 
 ## Build, Type, and Lint
 

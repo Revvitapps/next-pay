@@ -10,7 +10,7 @@ import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Capabilities | Next Pay Business Solutions',
+  title: 'Capabilities | NextPay',
   description:
     'Explore business operations, financial workflows, integrations, automation, reporting, and support capabilities built for operational clarity and growth.',
   path: '/capabilities',
@@ -52,7 +52,7 @@ export default async function CapabilitiesPage() {
             Strategic Capabilities For Operationally Strong Businesses
           </h1>
           <p className="mt-4 max-w-4xl text-base leading-relaxed text-slate-100/92">
-            Next Pay Business Solutions helps businesses become more streamlined, efficient, and financially healthier by
+            NextPay helps businesses become more streamlined, efficient, and financially healthier by
             strengthening operations, financial workflows, integrations, automation, reporting, and implementation support.
           </p>
           <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-100/88">

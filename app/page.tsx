@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
-import BlogPreview from '@/components/blog/BlogPreview';
-import CaseStudies from '@/components/case-studies/CaseStudies';
-import FeaturesGrid from '@/components/features/FeaturesGrid';
+import StatementUploadForm from '@/components/contact/StatementUploadForm';
 import Hero from '@/components/hero/Hero';
+import IndustrySelector from '@/components/industries/IndustrySelector';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import MerchantSavingsCards from '@/components/savings/MerchantSavingsCards';
+import SavingsAnalyzerCta from '@/components/savings/SavingsAnalyzerCta';
 import ServicesSection from '@/components/services/ServicesSection';
-import TerminalCards from '@/components/terminals/TerminalCards';
-import Testimonials from '@/components/testimonials/Testimonials';
-import MotionDiv from '@/components/visuals/MotionDiv';
+import LogoBand from '@/components/trust/LogoBand';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { paymentsTrustLogos } from '@/lib/content/logos';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'NEXT-PAY | Next Pay Business Solutions',
-  description: 'Business infrastructure and partner services for payroll, workers comp, financing, POS payments, and operations.',
+  title: 'NextPay | Payments, POS, and Business Services',
+  description: 'Accept payments anywhere and run your entire business with NextPay.',
   path: '/'
 });
 
@@ -29,22 +29,31 @@ export default function HomePage() {
       />
       <JsonLd
         data={serviceJsonLd({
-          name: 'Business Infrastructure Services',
-          description: 'Connected operations, payments, and partner-led services for growing businesses.',
+          name: 'NextPay Business Services',
+          description: 'Payment processing, POS systems, business funding, payroll, and growth services in one platform.',
           path: '/services'
         })}
       />
       <Navbar />
       <Hero />
-      <FeaturesGrid />
+
+      <LogoBand eyebrow="Payment Networks" title="Trusted Payment Network Integrations" logos={paymentsTrustLogos} />
+
       <ServicesSection />
-      <TerminalCards />
-      <Testimonials />
-      <CaseStudies />
-      <BlogPreview />
-      <MotionDiv variant="left">
-        <SiteFooter />
-      </MotionDiv>
+      <IndustrySelector />
+
+      <MerchantSavingsCards />
+
+      <StatementUploadForm />
+
+      <SavingsAnalyzerCta
+        title="Ready to Launch with NextPay?"
+        description="Get a tailored quote and rollout plan for payments, POS, pricing strategy, and operational setup."
+        primary="customQuote"
+        secondary="uploadStatement"
+      />
+
+      <SiteFooter />
     </main>
   );
 }
