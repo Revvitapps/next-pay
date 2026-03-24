@@ -69,28 +69,26 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       <Navbar />
       <div className="px-6 py-16 lg:px-12">
         <section className="mx-auto w-full max-w-[1380px] overflow-hidden rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85">
-          <div className="relative isolate h-[300px] w-full md:h-[360px] lg:h-[420px]">
+          <div className="relative isolate h-[220px] w-full md:h-[280px] lg:h-[340px]">
             <Image
               src={getServiceImage(service.slug)}
               alt={`${service.name} hero`}
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/25" />
-            <div className="relative z-10 flex h-full items-end p-6 md:p-10">
-              <div className="max-w-3xl text-left">
-                <p className="text-xs uppercase tracking-[0.2em] text-[#63d7d5]">Business Service</p>
-                <h1 className="mt-3 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-                  {service.name}
-                </h1>
-                <p className="mt-3 text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
           </div>
 
           <div className="p-8 md:p-10">
-            <p className="max-w-4xl text-left text-slate-100/90">{service.summary}</p>
+            <div className="max-w-4xl text-left">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#63d7d5]">Business Service</p>
+              <h1 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+                {service.name}
+              </h1>
+              <p className="mt-3 text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
+              <p className="mt-5 text-slate-100/90">{service.summary}</p>
+            </div>
 
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5 text-left">
