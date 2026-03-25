@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/site-score', '/site-automation', '/preview-launch', '/admin', '/api/']
+        disallow: ['/site-score', '/site-automation', '/preview-launch', '/admin', '/api/', '/pos-redesign-spec', '/pos-redesign-spec-services']
       }
     ],
     sitemap: `${siteUrl}/sitemap.xml`
