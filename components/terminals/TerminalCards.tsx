@@ -19,13 +19,13 @@ const terminalCards: TerminalCard[] = [
   },
   {
     name: 'Countertop Hub',
-    image: '/images/counter-pos-system.webp',
+    image: '/images/futuristic-pos-nextpay.png',
     keyFeatures: ['Customer-facing service', 'Receipt and drawer support', 'Role-based permissions'],
     idealFor: 'Front desk, host stand, primary service lanes'
   },
   {
     name: 'Full Service Station',
-    image: '/images/full-pos-system.jpeg',
+    image: '/images/futuristic-pos-nextpay.png',
     keyFeatures: ['Multi-terminal syncing', 'Back-office reporting suite', 'Advanced workflow controls'],
     idealFor: 'High-volume locations and multi-station operations'
   }

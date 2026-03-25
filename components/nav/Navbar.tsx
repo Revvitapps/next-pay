@@ -53,8 +53,11 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
+  const desktopMenuClass =
+    'fixed left-1/2 top-[4.85rem] z-50 mt-0 w-[min(1120px,calc(100vw-1.5rem))] max-h-[min(72vh,620px)] -translate-x-1/2 overflow-y-auto rounded-[28px] border border-white/12 bg-black/72 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition 2xl:w-[1180px]';
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-[#46a7a6]/20 bg-[#163c4d]/85 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#132c36]/82 backdrop-blur-xl">
       <nav className="mx-auto flex w-full max-w-none items-center justify-between px-6 py-4 lg:px-12">
         <Link href="/" className="flex items-center">
           <Image
@@ -89,7 +92,9 @@ export default function Navbar() {
                 setProductsOpen((prev) => !prev);
                 setIndustriesOpen(false);
               }}
-              className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]"
+              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-white ${
+                productsOpen ? 'bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-md' : ''
+              }`}
               aria-haspopup="menu"
               aria-expanded={productsOpen}
             >
@@ -97,22 +102,22 @@ export default function Navbar() {
               <ChevronDown className={`h-3.5 w-3.5 transition ${productsOpen ? 'rotate-180' : ''}`} />
             </button>
             <div
-              className={`absolute left-1/2 top-full z-50 mt-2 w-[1040px] max-w-[92vw] -translate-x-1/2 rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/95 p-5 shadow-card transition 2xl:w-[1160px] ${
+              className={`${desktopMenuClass} ${
                 productsOpen ? 'visible opacity-100' : 'invisible opacity-0'
               }`}
               role="menu"
             >
-              <div className="grid gap-4 lg:grid-cols-4">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {productMenuColumns.map((column) => (
                   <div key={column.title} className="p-2">
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#46a7a6]">{column.title}</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-white/50">{column.title}</p>
                     <div className="mt-2 space-y-1">
                       {column.links.map((linkItem) => (
                         <Link
                           key={`${column.title}-${linkItem.label}`}
                           href={linkItem.href}
                           onClick={() => setProductsOpen(false)}
-                          className="block py-1.5 text-sm text-slate-100/90 transition hover:text-[#46a7a6]"
+                          className="block py-1.5 text-sm text-slate-100/88 transition hover:text-white"
                         >
                           {linkItem.label}
                         </Link>
@@ -121,12 +126,12 @@ export default function Navbar() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 flex items-center justify-between rounded-xl border border-[#46a7a6]/20 bg-[#163c4d]/75 p-3">
-                <p className="text-sm text-slate-100/90">Need a guided recommendation for your business stack?</p>
+              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3 md:flex-row md:items-center md:justify-between">
+                <p className="text-sm text-slate-100/82">Need a guided recommendation for your business stack?</p>
                 <Link
                   href="/pricing"
                   onClick={() => setProductsOpen(false)}
-                  className="rounded-full border border-[#46a7a6]/40 px-4 py-1.5 text-xs font-semibold text-white transition hover:border-[#46a7a6]/70 hover:bg-[#46a7a6]/10"
+                  className="rounded-full border border-white/18 bg-black/25 px-4 py-1.5 text-xs font-semibold text-white transition hover:border-white/35 hover:bg-white/5"
                 >
                   Get a Custom Quote
                 </Link>
@@ -140,7 +145,9 @@ export default function Navbar() {
                 setIndustriesOpen((prev) => !prev);
                 setProductsOpen(false);
               }}
-              className="flex items-center gap-1 rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]"
+              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-white ${
+                industriesOpen ? 'bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-md' : ''
+              }`}
               aria-haspopup="menu"
               aria-expanded={industriesOpen}
             >
@@ -148,22 +155,22 @@ export default function Navbar() {
               <ChevronDown className={`h-3.5 w-3.5 transition ${industriesOpen ? 'rotate-180' : ''}`} />
             </button>
             <div
-              className={`absolute left-1/2 top-full z-50 mt-2 w-[1040px] max-w-[92vw] -translate-x-1/2 rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/95 p-5 shadow-card transition 2xl:w-[1160px] ${
+              className={`${desktopMenuClass} ${
                 industriesOpen ? 'visible opacity-100' : 'invisible opacity-0'
               }`}
               role="menu"
             >
-              <div className="grid gap-4 lg:grid-cols-4">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {industryMenuColumns.map((column) => (
                   <div key={column.title} className="p-2">
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#46a7a6]">{column.title}</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-white/50">{column.title}</p>
                     <div className="mt-2 space-y-1">
                       {column.links.map((linkItem) => (
                         <Link
                           key={`${column.title}-${linkItem.label}`}
                           href={linkItem.href}
                           onClick={() => setIndustriesOpen(false)}
-                          className="block py-1.5 text-sm text-slate-100/90 transition hover:text-[#46a7a6]"
+                          className="block py-1.5 text-sm text-slate-100/88 transition hover:text-white"
                         >
                           {linkItem.label}
                         </Link>
@@ -172,15 +179,15 @@ export default function Navbar() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 rounded-xl border border-[#46a7a6]/20 bg-[#163c4d]/75 p-3">
-                <p className="text-xs uppercase tracking-[0.16em] text-[#46a7a6]">All Industries</p>
-                <div className="mt-2 grid grid-cols-2 gap-1.5 md:grid-cols-5">
+              <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+                <p className="text-xs uppercase tracking-[0.16em] text-white/50">All Industries</p>
+                <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 md:grid-cols-3 xl:grid-cols-5">
                   {topIndustryLinks.map((industry) => (
                     <Link
                       key={industry.href}
                       href={industry.href}
                       onClick={() => setIndustriesOpen(false)}
-                      className="py-1.5 text-xs text-slate-100/85 transition hover:text-[#46a7a6]"
+                      className="py-1.5 text-xs text-slate-100/82 transition hover:text-white"
                     >
                       {industry.label}
                     </Link>

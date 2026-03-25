@@ -8,9 +8,9 @@ import HeroGyrateShimmer from '@/components/visuals/HeroGyrateShimmer';
 import MotionDiv from '@/components/visuals/MotionDiv';
 
 const highlights = [
-  'Accept payments in-store, online, and on the go',
-  'Deploy POS, payroll, and funding in one stack',
-  'Scale with cleaner reporting and lower operational drag'
+  'Payments in-store, online, and on the go',
+  'POS, payroll, and funding in one stack',
+  'Cleaner reporting with less operational drag'
 ];
 
 const trustChips = ['Harbor House Group', 'Northline Inns', 'Elm Street Eats', 'Summit Service Co'];
@@ -38,7 +38,7 @@ export default function Hero() {
                   Accept Payments Anywhere. Run Your Entire Business with NextPay.
                 </h1>
                 <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-white md:text-lg">
-                  NextPay provides payment processing, POS systems, financing, payroll, and growth tools designed to help businesses operate more efficiently and scale with confidence.
+                  Payment processing, POS, financing, payroll, and growth tools in one connected platform.
                 </p>
                 <ul className="mx-auto mt-8 flex max-w-5xl flex-wrap justify-center gap-3 text-white">
                   {highlights.map((item, index) => (
@@ -73,7 +73,7 @@ export default function Hero() {
                   transition={{ duration: 0.62, delay: 0.15 }}
                   className="mt-10 text-center"
                 >
-                  <p className="text-sm text-slate-100/95">Trusted by operators across hospitality, retail, and service businesses</p>
+                  <p className="text-sm text-slate-100/95">Trusted across hospitality, retail, and service businesses</p>
                   <div className="mt-4 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
                     {trustChips.map((chip, index) => (
                       <motion.span

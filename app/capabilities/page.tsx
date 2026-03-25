@@ -52,8 +52,7 @@ export default async function CapabilitiesPage() {
             Strategic Capabilities For Operationally Strong Businesses
           </h1>
           <p className="mt-4 max-w-4xl text-base leading-relaxed text-slate-100/92">
-            NextPay helps businesses become more streamlined, efficient, and financially healthier by
-            strengthening operations, financial workflows, integrations, automation, reporting, and implementation support.
+            Strengthen operations, financial workflows, integrations, automation, reporting, and implementation support in one coordinated operating model.
           </p>
           <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-100/88">
             This capabilities hub gives decision-makers a clear view of where each capability fits, what it improves,

@@ -82,7 +82,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
 
           <div className="p-8 md:p-10">
             <div className="max-w-4xl text-left">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#63d7d5]">Business Service</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[#63d7d5]">Service</p>
               <h1 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
                 {service.name}
               </h1>

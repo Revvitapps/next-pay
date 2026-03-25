@@ -9,10 +9,10 @@ export default function ServicesSection() {
   return (
     <section className="px-6 py-20 lg:px-12" id="business-services">
       <div className="mx-auto w-full max-w-[1380px] rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-        <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Business Services</p>
+        <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Services</p>
         <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">Business Services</h2>
         <p className="mt-3 max-w-5xl text-sm leading-relaxed text-slate-100/90">
-          NextPay helps businesses accept payments, streamline operations, and grow with a complete suite of business solutions. From payment processing and POS systems to financing, payroll, and marketing tools, our platform provides the technology and support businesses need to operate efficiently and scale confidently.
+          Payments, POS, financing, payroll, marketing, and brokerage support in one connected stack.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           {['Payments', 'POS', 'Financing', 'Payroll', 'Marketing', 'Brokerage'].map((chip) => (

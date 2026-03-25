@@ -23,10 +23,19 @@ function getRecipients() {
     .filter(Boolean);
 }
 
+function getCcRecipients() {
+  const ccRaw = process.env.CONTACT_CC_EMAIL?.trim() || '';
+  return ccRaw
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 async function sendTemplateEmail(subject: string, text: string) {
   const client = getResendClient();
   const from = process.env.CONTACT_FROM_EMAIL?.trim();
   const to = getRecipients();
+  const cc = getCcRecipients();
 
   if (!client || !from || !to.length) {
     console.info('[resend_skipped]', { hasClient: Boolean(client), hasFrom: Boolean(from), toCount: to.length, subject });
@@ -36,6 +45,7 @@ async function sendTemplateEmail(subject: string, text: string) {
   await client.emails.send({
     from,
     to,
+    cc: cc.length ? cc : undefined,
     subject,
     text
   });

@@ -96,12 +96,12 @@ export default function IndustrySelector() {
       <div className="mx-auto w-full max-w-[1380px] rounded-3xl border border-[#46a7a6]/20 bg-[#163c4d]/55 p-6 shadow-card md:p-10">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Industries We Serve</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Industries</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               Industries We Serve
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-100/90">
-              NextPay provides payment processing, POS systems, and business solutions for businesses across many industries. Our platform is designed to adapt to the unique needs of each industry while providing reliable payment technology and operational tools.
+              Payment processing, POS, and operational tools tailored to the way each industry runs.
             </p>
           </div>
           <button

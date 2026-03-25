@@ -24,7 +24,7 @@ export const serviceOfferings: ServiceOffering[] = [
     name: 'Payment Processing & Merchant Services',
     tagline: 'Accept payments anywhere your customers are.',
     summary:
-      'NextPay provides flexible payment solutions designed for modern businesses. Whether you operate in-store, online, or on the go, our platform allows you to accept payments securely and efficiently while giving customers the convenience they expect.',
+      'Flexible payment acceptance for in-store, online, and mobile transactions.',
     offerings: [
       'Credit & Debit Card Processing',
       'Contactless Payments (Tap to Pay, Apple Pay, Google Pay)',
@@ -94,7 +94,7 @@ export const serviceOfferings: ServiceOffering[] = [
     name: 'Online Payments, E-Commerce & Invoicing',
     tagline: 'Secure, flexible tools designed for digital commerce and remote payments.',
     summary:
-      'NextPay helps businesses accept payments online with secure, flexible tools designed for digital commerce and remote payments.',
+      'Online payment tools for e-commerce, invoicing, recurring billing, and customer payment pages.',
     offerings: ['E-Commerce Checkout Integration', 'Online Payment Gateway', 'Email & Text Invoices', 'Recurring Billing', 'Customer Payment Pages'],
     detailGroups: [
       {
@@ -109,7 +109,7 @@ export const serviceOfferings: ServiceOffering[] = [
     slug: 'business-financing-funding',
     name: 'Business Financing & Funding',
     tagline: 'Access capital when your business needs it most.',
-    summary: 'NextPay helps businesses access capital when they need it most.',
+    summary: 'Funding options for working capital, equipment, expansion, and short-term cash flow needs.',
     offerings: ['Merchant Cash Advances', 'Equipment Financing', 'Working Capital Loans', 'Expansion Financing'],
     detailGroups: [
       {
@@ -125,7 +125,7 @@ export const serviceOfferings: ServiceOffering[] = [
     name: "Payroll & Workers' Compensation",
     tagline: 'Payroll and workforce tools built to simplify employee management.',
     summary:
-      "NextPay provides payroll and workforce management tools designed to simplify employee management.",
+      "Payroll, HR, time tracking, and workers' compensation support in one workflow.",
     offerings: ['Payroll Processing', 'HR Tools', 'Time Tracking', "Workers' Compensation"],
     detailGroups: [
       {
@@ -141,7 +141,7 @@ export const serviceOfferings: ServiceOffering[] = [
     name: 'Marketing, Outreach & Lead Generation',
     tagline: 'Modern marketing and outreach tools to attract and retain customers.',
     summary:
-      'NextPay helps businesses attract and retain customers with modern marketing and outreach tools.',
+      'Digital outreach, reputation management, and campaign support built to grow pipeline and retention.',
     offerings: ['Digital Marketing', 'Lead Generation Campaigns', 'Reputation Management', 'Email & SMS Marketing', 'AI-Driven Outreach including LinkedIn'],
     detailGroups: [
       {
@@ -157,7 +157,7 @@ export const serviceOfferings: ServiceOffering[] = [
     name: 'Business Brokerage',
     tagline: 'Support for buying, selling, and expanding businesses.',
     summary:
-      'NextPay also supports business owners looking to buy, sell, or expand businesses.',
+      'Advisory support for buying, selling, acquiring, or expanding a business.',
     offerings: ['Buy a business', 'Sell a business', 'Expand through acquisitions', 'Explore franchise opportunities'],
     detailGroups: [
       {
