@@ -33,7 +33,7 @@ function statusTone(status: StatementAnalysisStatus) {
 export default async function AdminStatementsPage({ searchParams }: StatementsPageProps) {
   const params = await searchParams;
   const filter = (params.filter?.trim() || 'all') as 'all' | 'pending' | 'manual_review' | 'complete' | 'failed';
-  const records = listStatementRecords(filter);
+  const records = await listStatementRecords(filter);
 
   return (
     <section className="space-y-5">

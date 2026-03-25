@@ -29,15 +29,15 @@ function displayCurrency(value: number | null) {
 
 export default async function StatementDetailPage({ params }: StatementDetailPageProps) {
   const { id } = await params;
-  const statement = getStatementRecord(id);
+  const statement = await getStatementRecord(id);
 
   if (!statement) notFound();
 
-  const lead = statement.leadId ? getLeadRecord(statement.leadId) : null;
-  const quote = statement.leadId ? listQuoteRecords(statement.leadId)[0] ?? null : null;
-  const notes = listReviewNotes('statement', statement.id);
-  const statusHistory = listStatusHistory('statement', statement.id);
-  const auditLogs = listAuditLogs('statement', statement.id);
+  const lead = statement.leadId ? await getLeadRecord(statement.leadId) : null;
+  const quote = statement.leadId ? (await listQuoteRecords(statement.leadId))[0] ?? null : null;
+  const notes = await listReviewNotes('statement', statement.id);
+  const statusHistory = await listStatusHistory('statement', statement.id);
+  const auditLogs = await listAuditLogs('statement', statement.id);
 
   return (
     <section className="space-y-6">

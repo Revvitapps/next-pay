@@ -30,7 +30,7 @@ export default async function AdminLeadsPage({ searchParams }: LeadsPageProps) {
   const status = params.status?.trim() || 'all';
   const type = params.type?.trim() || 'all';
 
-  const records = listLeadRecords({
+  const records = await listLeadRecords({
     query,
     status,
     submissionType: type

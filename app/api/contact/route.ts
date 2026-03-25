@@ -100,7 +100,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: captchaCheck.error }, { status: captchaCheck.status });
     }
 
-    const lead = createLeadFromContactSubmission({
+    const lead = await createLeadFromContactSubmission({
       fullName: body.fullName,
       company: body.company,
       email: body.email,

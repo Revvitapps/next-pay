@@ -36,9 +36,9 @@ export async function updateLeadStatusAction(formData: FormData) {
   const status = String(formData.get('status') || '') as LeadStatus;
 
   if (!id || !status) return;
-  const updatedLead = updateLeadStatus({ id, status });
+  const updatedLead = await updateLeadStatus({ id, status });
   if (updatedLead && status === 'quote_in_progress') {
-    const quote = listQuoteRecords(updatedLead.id)[0];
+    const quote = (await listQuoteRecords(updatedLead.id))[0];
     if (quote) {
       await sendQuoteReadyNotification({
         leadId: updatedLead.id,
@@ -57,7 +57,7 @@ export async function markLeadContactedAction(formData: FormData) {
   await assertAdminAccess();
   const id = String(formData.get('id') || '');
   if (!id) return;
-  markLeadContacted(id);
+  await markLeadContacted(id);
   revalidateAdminPaths();
 }
 
@@ -65,9 +65,9 @@ export async function markLeadReadyForQuoteAction(formData: FormData) {
   await assertAdminAccess();
   const id = String(formData.get('id') || '');
   if (!id) return;
-  const updatedLead = markLeadReadyForQuote(id);
+  const updatedLead = await markLeadReadyForQuote(id);
   if (updatedLead) {
-    const quote = listQuoteRecords(updatedLead.id)[0];
+    const quote = (await listQuoteRecords(updatedLead.id))[0];
     if (quote) {
       await sendQuoteReadyNotification({
         leadId: updatedLead.id,
@@ -90,7 +90,7 @@ export async function updateStatementAnalysisAction(formData: FormData) {
 
   if (!statementId || !analysisStatus) return;
 
-  updateStatementAnalysisStatusInput({
+  await updateStatementAnalysisStatusInput({
     statementId,
     analysisStatus,
     manualReviewRequired,
@@ -111,7 +111,7 @@ export async function addReviewNoteAction(formData: FormData) {
 
   if (!recordType || !recordId || !note.trim()) return;
 
-  addReviewNote({
+  await addReviewNote({
     recordType,
     recordId,
     note,
@@ -133,7 +133,7 @@ export async function updateQuoteWorkflowAction(formData: FormData) {
 
   if (!quoteId) return;
 
-  updateQuoteWorkflow({
+  await updateQuoteWorkflow({
     quoteId,
     pricingModelUnderConsideration: pricingModel,
     recommendedNextStep,

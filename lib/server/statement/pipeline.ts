@@ -57,7 +57,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
   let leadId: string | undefined = input.leadId;
 
   if (!leadId && input.linkedLead?.type === 'contact') {
-    const lead = createLeadFromContactSubmission({
+    const lead = await createLeadFromContactSubmission({
       fullName: input.linkedLead.fullName,
       company: input.linkedLead.company ?? input.businessName,
       email: input.email,
@@ -68,7 +68,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
   }
 
   if (!leadId && input.linkedLead?.type === 'service-lead') {
-    const lead = createLeadFromServiceSubmission({
+    const lead = await createLeadFromServiceSubmission({
       serviceSlug: input.linkedLead.serviceSlug ?? 'payment-processing-merchant-services',
       fullName: input.linkedLead.fullName ?? 'Unknown',
       legalBusinessName: input.linkedLead.legalBusinessName ?? input.businessName,
@@ -81,7 +81,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
 
   const statementId = `stmt_${randomUUID().slice(0, 12)}`;
 
-  createStatementSkeleton({
+  await createStatementSkeleton({
     id: statementId,
     leadId: leadId ?? null,
     sourceForm: input.sourceForm,
@@ -95,7 +95,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
     fileSize: input.file.size!
   });
 
-  updateStatementStatus({ statementId, analysisStatus: 'uploaded', actor: 'pipeline' });
+  await updateStatementStatus({ statementId, analysisStatus: 'uploaded', actor: 'pipeline' });
 
   const stored = await storeStatementFile({
     statementId,
@@ -109,7 +109,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
 
   const signedDownloadUrl = await getSignedStatementDownloadUrl(stored.storageReference);
 
-  updateStatementFileMetadata({
+  await updateStatementFileMetadata({
     statementId,
     storageReference: stored.storageReference,
     signedDownloadUrl,
@@ -120,8 +120,8 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
     uploadedAt: stored.uploadedAt
   });
 
-  updateStatementStatus({ statementId, analysisStatus: 'storage_complete', actor: 'pipeline' });
-  updateStatementStatus({ statementId, analysisStatus: 'extraction_pending', actor: 'pipeline' });
+  await updateStatementStatus({ statementId, analysisStatus: 'storage_complete', actor: 'pipeline' });
+  await updateStatementStatus({ statementId, analysisStatus: 'extraction_pending', actor: 'pipeline' });
 
   let stage: 'extraction' | 'parsing' = 'extraction';
 
@@ -133,7 +133,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
       fileName: input.file.name!
     });
 
-    updateStatementExtraction({
+    await updateStatementExtraction({
       statementId,
       extraction: {
         rawText: extraction.rawText,
@@ -146,31 +146,31 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
       rawMetadata: extraction.rawMetadata
     });
 
-    updateStatementStatus({ statementId, analysisStatus: 'extracted', actor: 'pipeline' });
-    updateStatementStatus({ statementId, analysisStatus: 'parsing_pending', actor: 'pipeline' });
+    await updateStatementStatus({ statementId, analysisStatus: 'extracted', actor: 'pipeline' });
+    await updateStatementStatus({ statementId, analysisStatus: 'parsing_pending', actor: 'pipeline' });
 
     stage = 'parsing';
     const parser = getStatementParser();
     const parsed = await parser.parse({ extraction });
 
-    const existing = getStatementRecord(statementId);
+    const existing = await getStatementRecord(statementId);
     if (!existing) {
       throw new Error('Statement not found after extraction.');
     }
 
     const merged = mergeParseOutputIntoAnalysis(existing.analysis, parsed);
 
-    updateStatementAnalysis({
+    await updateStatementAnalysis({
       statementId,
       analysis: merged,
       actor: 'pipeline',
       reason: parsed.requiresManualReview ? 'Parser flagged manual review.' : undefined
     });
 
-    updateStatementStatus({ statementId, analysisStatus: 'parsed', actor: 'pipeline' });
+    await updateStatementStatus({ statementId, analysisStatus: 'parsed', actor: 'pipeline' });
 
     const savings = buildSavingsEstimateFromAnalysis(merged);
-    updateStatementAnalysis({
+    await updateStatementAnalysis({
       statementId,
       analysis: {
         ...merged,
@@ -180,7 +180,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
       actor: 'pipeline'
     });
 
-    updateStatementStatus({
+    await updateStatementStatus({
       statementId,
       analysisStatus: parsed.requiresManualReview ? 'manual_review_required' : 'estimated',
       actor: 'pipeline',
@@ -206,8 +206,8 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
         monthlyVolume: input.monthlyVolume
       });
     } else if (leadId) {
-      const lead = getLeadRecord(leadId);
-      const quote = listQuoteRecords(leadId)[0];
+      const lead = await getLeadRecord(leadId);
+      const quote = (await listQuoteRecords(leadId))[0];
       if (lead && quote) {
         await sendQuoteReadyNotification({
           leadId: lead.id,
@@ -221,7 +221,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
     return getStatementRecord(statementId);
   } catch (error) {
     const reason = error instanceof Error ? error.message : 'Unknown ingestion failure.';
-    markStatementFailed(statementId, reason, 'pipeline', stage === 'parsing' ? 'parsing_failed' : 'extraction_failed');
+    await markStatementFailed(statementId, reason, 'pipeline', stage === 'parsing' ? 'parsing_failed' : 'extraction_failed');
     throw error;
   }
 }

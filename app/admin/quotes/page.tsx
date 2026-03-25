@@ -9,7 +9,11 @@ type QuotesPageProps = {
 export default async function AdminQuotesPage({ searchParams }: QuotesPageProps) {
   const params = await searchParams;
   const leadId = params.leadId?.trim();
-  const quotes = listQuoteRecords(leadId);
+  const quotes = await listQuoteRecords(leadId);
+  const leadsById = new Map(
+    (await Promise.all(quotes.map(async (quote) => [quote.leadId, await getLeadRecord(quote.leadId)] as const)))
+      .filter((entry) => entry[1])
+  );
 
   return (
     <section className="space-y-5">
@@ -20,7 +24,7 @@ export default async function AdminQuotesPage({ searchParams }: QuotesPageProps)
 
       <div className="space-y-4">
         {quotes.map((quote) => {
-          const lead = getLeadRecord(quote.leadId);
+          const lead = leadsById.get(quote.leadId) ?? null;
 
           return (
             <article key={quote.id} className="rounded-2xl border border-slate-700 bg-slate-900/70 p-5">

@@ -17,7 +17,7 @@ export async function GET(_: Request, { params }: RouteProps) {
   }
 
   const { id } = await params;
-  const statement = getStatementRecord(id);
+  const statement = await getStatementRecord(id);
 
   if (!statement || !statement.storageReference) {
     return NextResponse.json({ error: 'Statement file unavailable.' }, { status: 404 });
@@ -28,7 +28,7 @@ export async function GET(_: Request, { params }: RouteProps) {
     return NextResponse.json({ error: 'Unable to generate secure file URL.' }, { status: 502 });
   }
 
-  updateStatementFileMetadata({
+  await updateStatementFileMetadata({
     statementId: statement.id,
     storageReference: statement.storageReference,
     signedDownloadUrl: signedUrl,

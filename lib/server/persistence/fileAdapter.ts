@@ -1,37 +1,19 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { AdminDataState } from '@/lib/admin/types';
+import { createDefaultAdminDataState, normalizeAdminDataState } from '@/lib/server/persistence/adapter';
 import type { PersistenceAdapter } from '@/lib/server/persistence/adapter';
-
-const defaultState: AdminDataState = {
-  initializedAt: null,
-  leads: [],
-  statements: [],
-  quotes: [],
-  notes: [],
-  statusHistory: [],
-  auditLogs: []
-};
 
 function ensureDir(filePath: string) {
   const dir = path.dirname(filePath);
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function parseState(raw: string): AdminDataState {
+function parseState(raw: string) {
   try {
-    const parsed = JSON.parse(raw) as Partial<AdminDataState>;
-    return {
-      initializedAt: parsed.initializedAt ?? null,
-      leads: parsed.leads ?? [],
-      statements: parsed.statements ?? [],
-      quotes: parsed.quotes ?? [],
-      notes: parsed.notes ?? [],
-      statusHistory: parsed.statusHistory ?? [],
-      auditLogs: parsed.auditLogs ?? []
-    };
+    const parsed = JSON.parse(raw);
+    return normalizeAdminDataState(parsed);
   } catch {
-    return defaultState;
+    return createDefaultAdminDataState();
   }
 }
 
@@ -39,15 +21,15 @@ export function createFilePersistenceAdapter(filePath: string): PersistenceAdapt
   ensureDir(filePath);
 
   return {
-    loadState() {
+    async loadState() {
       if (!fs.existsSync(filePath)) {
-        return defaultState;
+        return createDefaultAdminDataState();
       }
 
       const raw = fs.readFileSync(filePath, 'utf8');
       return parseState(raw);
     },
-    saveState(state) {
+    async saveState(state) {
       ensureDir(filePath);
       const tmpPath = `${filePath}.tmp`;
       fs.writeFileSync(tmpPath, JSON.stringify(state, null, 2), 'utf8');

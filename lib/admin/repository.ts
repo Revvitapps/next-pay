@@ -34,7 +34,7 @@ function readState() {
 }
 
 function writeState(state: AdminDataState) {
-  adapter.saveState(state);
+  return adapter.saveState(state);
 }
 
 function appendAuditLog(state: AdminDataState, log: Omit<AuditLogRecord, 'id' | 'timestamp'>) {
@@ -155,7 +155,7 @@ function defaultSavings(): StatementSavingsEstimate {
   };
 }
 
-function ensureSeeded(state: AdminDataState) {
+async function ensureSeeded(state: AdminDataState) {
   if (state.initializedAt) return;
 
   state.initializedAt = nowIso();
@@ -241,12 +241,12 @@ function ensureSeeded(state: AdminDataState) {
   });
 
   upsertQuoteForLead(state, seededLeadId);
-  writeState(state);
+  await writeState(state);
 }
 
-function getState() {
-  const state = readState();
-  ensureSeeded(state);
+async function getState() {
+  const state = await readState();
+  await ensureSeeded(state);
   return state;
 }
 
@@ -254,12 +254,12 @@ function statementPendingStatuses(): StatementAnalysisStatus[] {
   return ['uploaded', 'storage_complete', 'extraction_pending', 'extracted', 'parsing_pending', 'parsed', 'estimated'];
 }
 
-export function listLeadRecords(params?: {
+export async function listLeadRecords(params?: {
   query?: string;
   submissionType?: string;
   status?: string;
 }) {
-  const state = getState();
+  const state = await getState();
   const query = params?.query?.toLowerCase().trim();
 
   return state.leads
@@ -272,13 +272,13 @@ export function listLeadRecords(params?: {
     .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
 }
 
-export function getLeadRecord(id: string) {
-  const state = getState();
+export async function getLeadRecord(id: string) {
+  const state = await getState();
   return state.leads.find((lead) => lead.id === id) ?? null;
 }
 
-export function listStatementRecords(filter: 'all' | 'pending' | 'manual_review' | 'complete' | 'failed' = 'all') {
-  const state = getState();
+export async function listStatementRecords(filter: 'all' | 'pending' | 'manual_review' | 'complete' | 'failed' = 'all') {
+  const state = await getState();
 
   return state.statements
     .filter((statement) => {
@@ -293,24 +293,24 @@ export function listStatementRecords(filter: 'all' | 'pending' | 'manual_review'
     .sort((a, b) => (a.submittedAt > b.submittedAt ? -1 : 1));
 }
 
-export function getStatementRecord(id: string) {
-  const state = getState();
+export async function getStatementRecord(id: string) {
+  const state = await getState();
   return state.statements.find((statement) => statement.id === id) ?? null;
 }
 
-export function listQuoteRecords(leadId?: string) {
-  const state = getState();
+export async function listQuoteRecords(leadId?: string) {
+  const state = await getState();
   const records = leadId ? state.quotes.filter((quote) => quote.leadId === leadId) : state.quotes;
   return records.sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
 }
 
-export function getQuoteRecord(id: string) {
-  const state = getState();
+export async function getQuoteRecord(id: string) {
+  const state = await getState();
   return state.quotes.find((quote) => quote.id === id) ?? null;
 }
 
-export function listReviewNotes(recordType?: 'lead' | 'statement' | 'quote', recordId?: string) {
-  const state = getState();
+export async function listReviewNotes(recordType?: 'lead' | 'statement' | 'quote', recordId?: string) {
+  const state = await getState();
 
   return state.notes
     .filter((note) => {
@@ -321,8 +321,8 @@ export function listReviewNotes(recordType?: 'lead' | 'statement' | 'quote', rec
     .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
 }
 
-export function listStatusHistory(recordType?: 'lead' | 'statement' | 'quote', recordId?: string) {
-  const state = getState();
+export async function listStatusHistory(recordType?: 'lead' | 'statement' | 'quote', recordId?: string) {
+  const state = await getState();
 
   return state.statusHistory
     .filter((item) => {
@@ -333,8 +333,8 @@ export function listStatusHistory(recordType?: 'lead' | 'statement' | 'quote', r
     .sort((a, b) => (a.changedAt > b.changedAt ? -1 : 1));
 }
 
-export function listAuditLogs(recordType?: 'lead' | 'statement' | 'quote', recordId?: string) {
-  const state = getState();
+export async function listAuditLogs(recordType?: 'lead' | 'statement' | 'quote', recordId?: string) {
+  const state = await getState();
 
   return state.auditLogs
     .filter((item) => {
@@ -345,14 +345,14 @@ export function listAuditLogs(recordType?: 'lead' | 'statement' | 'quote', recor
     .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
 }
 
-export function addReviewNote(params: {
+export async function addReviewNote(params: {
   recordType: 'lead' | 'statement' | 'quote';
   recordId: string;
   note: string;
   author?: string;
   category?: ReviewNote['category'];
 }) {
-  const state = getState();
+  const state = await getState();
 
   const trimmed = params.note.trim();
   if (!trimmed) return null;
@@ -378,12 +378,12 @@ export function addReviewNote(params: {
     actor: created.author
   });
 
-  writeState(state);
+  await writeState(state);
   return created;
 }
 
-export function updateLeadStatus(params: { id: string; status: LeadStatus; changedBy?: string; reason?: string }) {
-  const state = getState();
+export async function updateLeadStatus(params: { id: string; status: LeadStatus; changedBy?: string; reason?: string }) {
+  const state = await getState();
 
   const lead = state.leads.find((item) => item.id === params.id);
   if (!lead) return null;
@@ -414,25 +414,25 @@ export function updateLeadStatus(params: { id: string; status: LeadStatus; chang
   lead.status = params.status;
   upsertQuoteForLead(state, lead.id);
 
-  writeState(state);
+  await writeState(state);
   return lead;
 }
 
-export function markLeadContacted(id: string) {
+export async function markLeadContacted(id: string) {
   return updateLeadStatus({ id, status: 'contacted' });
 }
 
-export function markLeadReadyForQuote(id: string) {
+export async function markLeadReadyForQuote(id: string) {
   return updateLeadStatus({ id, status: 'quote_in_progress' });
 }
 
-export function updateQuoteWorkflow(params: {
+export async function updateQuoteWorkflow(params: {
   quoteId: string;
   pricingModelUnderConsideration?: QuoteRecord['pricingModelUnderConsideration'];
   recommendedNextStep?: QuoteNextStep;
   quoteReadiness?: QuoteReadiness;
 }) {
-  const state = getState();
+  const state = await getState();
 
   const quote = state.quotes.find((item) => item.id === params.quoteId);
   if (!quote) return null;
@@ -459,18 +459,18 @@ export function updateQuoteWorkflow(params: {
     actor: 'Internal Reviewer'
   });
 
-  writeState(state);
+  await writeState(state);
   return quote;
 }
 
-export function createLeadFromContactSubmission(payload: {
+export async function createLeadFromContactSubmission(payload: {
   fullName?: string;
   company?: string;
   email: string;
   phone: string;
   industry?: string;
 }) {
-  const state = getState();
+  const state = await getState();
 
   const createdAt = nowIso();
   const created: LeadRecord = {
@@ -501,11 +501,11 @@ export function createLeadFromContactSubmission(payload: {
     actor: 'public_form'
   });
 
-  writeState(state);
+  await writeState(state);
   return created;
 }
 
-export function createLeadFromServiceSubmission(payload: {
+export async function createLeadFromServiceSubmission(payload: {
   serviceSlug: string;
   fullName: string;
   legalBusinessName: string;
@@ -514,7 +514,7 @@ export function createLeadFromServiceSubmission(payload: {
   currentProcessor?: string;
   estimatedMonthlyVolume?: string;
 }) {
-  const state = getState();
+  const state = await getState();
 
   const createdAt = nowIso();
   const status: LeadStatus = payload.estimatedMonthlyVolume ? 'qualified' : 'awaiting_statement';
@@ -547,11 +547,11 @@ export function createLeadFromServiceSubmission(payload: {
     actor: 'public_form'
   });
 
-  writeState(state);
+  await writeState(state);
   return created;
 }
 
-export function createStatementSkeleton(params: {
+export async function createStatementSkeleton(params: {
   id: string;
   leadId: string | null;
   sourceForm: 'statement-upload' | 'service-lead';
@@ -564,7 +564,7 @@ export function createStatementSkeleton(params: {
   contentType: string;
   fileSize: number;
 }) {
-  const state = getState();
+  const state = await getState();
   const timestamp = nowIso();
 
   const statement: StatementRecord = {
@@ -616,11 +616,11 @@ export function createStatementSkeleton(params: {
     actor: 'public_form'
   });
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }
 
-export function updateStatementFileMetadata(params: {
+export async function updateStatementFileMetadata(params: {
   statementId: string;
   storageReference: string | null;
   signedDownloadUrl: string | null;
@@ -630,7 +630,7 @@ export function updateStatementFileMetadata(params: {
   fileSize: number;
   uploadedAt: string;
 }) {
-  const state = getState();
+  const state = await getState();
 
   const statement = state.statements.find((item) => item.id === params.statementId);
   if (!statement) return null;
@@ -662,17 +662,17 @@ export function updateStatementFileMetadata(params: {
     actor: 'pipeline'
   });
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }
 
-export function updateStatementStatus(params: {
+export async function updateStatementStatus(params: {
   statementId: string;
   analysisStatus: StatementAnalysisStatus;
   actor?: string;
   reason?: string;
 }) {
-  const state = getState();
+  const state = await getState();
 
   const statement = state.statements.find((item) => item.id === params.statementId);
   if (!statement) return null;
@@ -717,16 +717,16 @@ export function updateStatementStatus(params: {
     }
   }
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }
 
-export function updateStatementExtraction(params: {
+export async function updateStatementExtraction(params: {
   statementId: string;
   extraction: StatementRecord['extraction'];
   rawMetadata?: Record<string, unknown>;
 }) {
-  const state = getState();
+  const state = await getState();
   const statement = state.statements.find((item) => item.id === params.statementId);
   if (!statement) return null;
 
@@ -736,18 +736,18 @@ export function updateStatementExtraction(params: {
   statement.analysis.confidenceScore = params.extraction.extractionConfidence;
   statement.analysis.updatedAt = nowIso();
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }
 
-export function updateStatementAnalysis(params: {
+export async function updateStatementAnalysis(params: {
   statementId: string;
   analysis: StatementAnalysisRecord;
   savingsEstimate?: StatementSavingsEstimate;
   actor?: string;
   reason?: string;
 }) {
-  const state = getState();
+  const state = await getState();
   const statement = state.statements.find((item) => item.id === params.statementId);
   if (!statement) return null;
 
@@ -786,17 +786,17 @@ export function updateStatementAnalysis(params: {
     }
   }
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }
 
-export function markStatementFailed(
+export async function markStatementFailed(
   statementId: string,
   reason: string,
   actor = 'system',
   actionType: 'extraction_failed' | 'parsing_failed' = 'extraction_failed'
 ) {
-  const state = getState();
+  const state = await getState();
   const statement = state.statements.find((item) => item.id === statementId);
   if (!statement) return null;
 
@@ -838,11 +838,11 @@ export function markStatementFailed(
     }
   }
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }
 
-export function updateStatementAnalysisActionLegacy(params: {
+export async function updateStatementAnalysisActionLegacy(params: {
   statementId: string;
   analysisStatus?: StatementAnalysisStatus;
   manualReviewRequired?: boolean;
@@ -850,12 +850,12 @@ export function updateStatementAnalysisActionLegacy(params: {
   confidenceScore?: number | null;
   warning?: string;
 }) {
-  const state = getState();
+  const state = await getState();
   const statement = state.statements.find((item) => item.id === params.statementId);
   if (!statement) return null;
 
   if (params.analysisStatus) {
-    updateStatementStatus({
+    await updateStatementStatus({
       statementId: params.statementId,
       analysisStatus: params.analysisStatus,
       actor: 'Internal Reviewer',
@@ -885,7 +885,7 @@ export function updateStatementAnalysisActionLegacy(params: {
   });
 }
 
-export function updateStatementAnalysisStatusInput(params: {
+export async function updateStatementAnalysisStatusInput(params: {
   statementId: string;
   analysisStatus?: StatementAnalysisStatus;
   manualReviewRequired?: boolean;
@@ -896,7 +896,7 @@ export function updateStatementAnalysisStatusInput(params: {
   return updateStatementAnalysisActionLegacy(params);
 }
 
-export function createStatementFromUpload(payload: {
+export async function createStatementFromUpload(payload: {
   businessName: string;
   email: string;
   phone: string;
@@ -910,7 +910,7 @@ export function createStatementFromUpload(payload: {
   sourceForm?: 'statement-upload' | 'service-lead';
   leadId?: string;
 }) {
-  const state = getState();
+  const state = await getState();
   const submittedAt = nowIso();
   const leadId = payload.leadId ?? createId('lead');
 
@@ -973,6 +973,6 @@ export function createStatementFromUpload(payload: {
     upsertQuoteForLead(state, leadId);
   }
 
-  writeState(state);
+  await writeState(state);
   return statement;
 }

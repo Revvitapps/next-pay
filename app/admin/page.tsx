@@ -2,10 +2,10 @@ import Link from 'next/link';
 import StatusBadge from '@/components/admin/StatusBadge';
 import { listLeadRecords, listQuoteRecords, listStatementRecords } from '@/lib/admin/repository';
 
-export default function AdminOverviewPage() {
-  const leads = listLeadRecords();
-  const statements = listStatementRecords('all');
-  const quotes = listQuoteRecords();
+export default async function AdminOverviewPage() {
+  const leads = await listLeadRecords();
+  const statements = await listStatementRecords('all');
+  const quotes = await listQuoteRecords();
 
   const newLeads = leads.filter((lead) => lead.status === 'new').length;
   const manualReviewStatements = statements.filter((item) => item.analysis.analysisStatus === 'manual_review_required').length;
@@ -39,8 +39,8 @@ export default function AdminOverviewPage() {
       <article className="rounded-2xl border border-slate-700 bg-slate-900/70 p-5 text-sm text-slate-300">
         <h2 className="text-lg font-semibold text-white">Operational Notes</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5">
-          <li>Admin data is currently backed by in-memory adapter state and seeded records.</li>
-          <li>Submission flows from contact, service lead, and statement upload now write into this internal adapter.</li>
+          <li>Admin data now persists through the configured production adapter and retains seeded records for first-run demos.</li>
+          <li>Submission flows from contact, service lead, and statement upload write into the internal review store.</li>
           <li>TODO(authz): enforce role-based controls and per-action audit logs before production rollout.</li>
           <li>TODO(storage): route uploaded files to secure object storage and store only references.</li>
           <li>TODO(retention): implement retention/deletion policies for statements, extracted fields, and reviewer notes.</li>

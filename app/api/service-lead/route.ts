@@ -133,7 +133,7 @@ export async function POST(request: Request) {
 
     const route = routeServiceLead(leadPayload);
 
-    const adminLead = createLeadFromServiceSubmission({
+    const adminLead = await createLeadFromServiceSubmission({
       serviceSlug: leadPayload.serviceSlug,
       fullName: leadPayload.fullName,
       legalBusinessName: leadPayload.legalBusinessName,
