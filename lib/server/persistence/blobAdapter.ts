@@ -53,6 +53,7 @@ export function createBlobPersistenceAdapter(pathname: string, token: string): P
     async saveState(state) {
       await put(pathname, JSON.stringify(state, null, 2), {
         access: 'private',
+        allowOverwrite: true,
         addRandomSuffix: false,
         contentType: 'application/json',
         token
