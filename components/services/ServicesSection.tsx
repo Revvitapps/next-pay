@@ -14,6 +14,17 @@ export default function ServicesSection() {
         <p className="mt-3 max-w-5xl text-sm leading-relaxed text-slate-100/90">
           Payments, POS, financing, payroll, marketing, and brokerage support in one connected stack.
         </p>
+        <div className="mt-6 grid gap-3 text-sm text-slate-100/90 md:grid-cols-3">
+          <Link href="/pricing" className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/80 px-4 py-3 transition hover:border-[#46a7a6]/45">
+            Start your custom quote flow
+          </Link>
+          <Link href="/industries" className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/80 px-4 py-3 transition hover:border-[#46a7a6]/45">
+            Browse industry-specific setups
+          </Link>
+          <Link href="/case-studies" className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/80 px-4 py-3 transition hover:border-[#46a7a6]/45">
+            Review merchant savings examples
+          </Link>
+        </div>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           {['Payments', 'POS', 'Financing', 'Payroll', 'Marketing', 'Brokerage'].map((chip) => (
             <span

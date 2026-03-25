@@ -54,7 +54,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const desktopMenuClass =
-    'fixed left-1/2 top-[4.85rem] z-50 mt-0 w-[min(1120px,calc(100vw-1.5rem))] max-h-[min(72vh,620px)] -translate-x-1/2 overflow-y-auto rounded-[28px] border border-white/12 bg-black/72 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition 2xl:w-[1180px]';
+    'fixed left-1/2 top-[4.85rem] z-50 mt-0 w-[min(1120px,calc(100vw-1.5rem))] max-h-[min(72vh,620px)] -translate-x-1/2 overflow-y-auto rounded-[28px] border border-white/16 bg-black/86 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.62)] backdrop-blur-[28px] transition 2xl:w-[1180px]';
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#132c36]/82 backdrop-blur-xl">
@@ -126,7 +126,7 @@ export default function Navbar() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3 md:flex-row md:items-center md:justify-between">
+              <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-white/12 bg-white/[0.06] p-3 md:flex-row md:items-center md:justify-between">
                 <p className="text-sm text-slate-100/82">Need a guided recommendation for your business stack?</p>
                 <Link
                   href="/pricing"
@@ -179,7 +179,7 @@ export default function Navbar() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+              <div className="mt-4 rounded-2xl border border-white/12 bg-white/[0.06] p-3">
                 <p className="text-xs uppercase tracking-[0.16em] text-white/50">All Industries</p>
                 <div className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 md:grid-cols-3 xl:grid-cols-5">
                   {topIndustryLinks.map((industry) => (
