@@ -54,7 +54,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const desktopMenuClass =
-    'fixed left-1/2 top-[4.85rem] z-50 mt-0 w-[min(1120px,calc(100vw-1.5rem))] max-h-[min(72vh,620px)] -translate-x-1/2 overflow-y-auto rounded-[28px] border border-white/16 bg-black/86 p-5 shadow-[0_28px_90px_rgba(0,0,0,0.62)] backdrop-blur-[28px] transition 2xl:w-[1180px]';
+    'fixed left-1/2 top-[4.85rem] z-50 mt-0 w-[min(1120px,calc(100vw-1.5rem))] max-h-[min(72vh,620px)] -translate-x-1/2 overflow-y-auto rounded-[28px] border border-white/12 bg-black p-5 shadow-[0_28px_90px_rgba(0,0,0,0.72)] transition 2xl:w-[1180px]';
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#132c36]/82 backdrop-blur-xl">
