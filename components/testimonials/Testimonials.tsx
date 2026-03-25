@@ -5,6 +5,8 @@ import { Quote } from 'lucide-react';
 import { clientLogos, placeholderTestimonials } from '@/lib/placeholders/socialProof';
 
 export default function Testimonials() {
+  const marqueeLogos = [...clientLogos, ...clientLogos];
+
   return (
     <section className="px-6 py-20 lg:px-12">
       <div className="mx-auto w-full max-w-none">
@@ -19,15 +21,18 @@ export default function Testimonials() {
             Operators use NextPay to unify operations, integrations, and financial workflows across multiple locations and service models.
           </p>
         </div>
-        <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-          {clientLogos.map((logo) => (
-            <span
-              key={logo}
-              className="flex min-h-12 items-center justify-center rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-3 py-2 text-center text-sm font-medium leading-tight text-slate-100/95"
-            >
-              {logo}
-            </span>
-          ))}
+        <div className="mt-6 logo-marquee">
+          <div className="logo-marquee-track">
+            {marqueeLogos.map((logo, index) => (
+              <span
+                key={`${logo}-${index}`}
+                aria-hidden={index >= clientLogos.length}
+                className="logo-chip flex min-h-12 min-w-[250px] items-center justify-center px-3 py-2 text-center text-sm font-medium leading-tight text-slate-100/95"
+              >
+                {logo}
+              </span>
+            ))}
+          </div>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {placeholderTestimonials.slice(0, 3).map((item, index) => (
