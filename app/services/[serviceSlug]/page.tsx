@@ -74,7 +74,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         image={getServiceImage(service.slug)}
         alt={`${service.name} hero`}
         imagePosition={getServiceHeroImagePosition(service.slug)}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       >
         <p className="text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
@@ -133,9 +133,130 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       </div>
 
+      {service.featureCards?.length ? (
+        <section className="px-6 pb-16 lg:px-12">
+          <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">
+              {service.slug === 'point-of-sale-pos-systems' ? 'Operational Advantages' : 'Why NextPay'}
+            </p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+              {service.slug === 'point-of-sale-pos-systems'
+                ? 'POS capabilities built for day-to-day operations'
+                : 'Payment solutions designed to support growth and margin'}
+            </h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {service.featureCards.map((item) => (
+                <article key={item.title} className="np-card rounded-2xl p-5 text-left">
+                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {service.programCards?.length ? (
+        <section className="px-6 pb-16 lg:px-12">
+          <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">Programs</p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+              Pricing programs built around how your business gets paid
+            </h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {service.programCards.map((item) => (
+                <article key={item.title} className="np-card rounded-2xl p-5 text-left">
+                  {item.category ? (
+                    <p className="np-accent text-xs font-semibold uppercase tracking-[0.16em]">{item.category}</p>
+                  ) : null}
+                  <h3 className="mt-3 text-xl font-bold text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{item.subtitle}</p>
+                  <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
+                    {item.items.map((line) => (
+                      <li key={line} className="flex items-start gap-2">
+                        <span className="np-dot mt-2 h-1.5 w-1.5 rounded-full" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {item.note ? (
+                    <p className="mt-4 text-xs leading-relaxed text-slate-300/78">{item.note}</p>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {service.setupCards?.length ? (
+        <section className="px-6 pb-16 lg:px-12">
+          <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">Recommended Setups</p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+              POS setups tailored to how your business operates
+            </h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {service.setupCards.map((item) => (
+                <article key={item.title} className="np-card rounded-2xl p-5 text-left">
+                  <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {service.deviceSpecs?.length ? (
+        <section className="px-6 pb-16 lg:px-12">
+          <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">Device Highlights</p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+              Hardware details that matter in real-world operations
+            </h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {service.deviceSpecs.map((item) => (
+                <article key={item.label} className="np-card rounded-2xl p-5 text-left">
+                  <p className="np-accent text-xs font-semibold uppercase tracking-[0.16em]">{item.label}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{item.value}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {service.faqItems?.length ? (
+        <section className="px-6 pb-16 lg:px-12">
+          <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">Merchant Questions</p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+              Questions buyers usually ask before making a change
+            </h2>
+            <div className="mt-8 space-y-4">
+              {service.faqItems.map((item) => (
+                <details key={item.question} className="np-card rounded-2xl p-5 text-left">
+                  <summary className="cursor-pointer list-none text-lg font-bold text-white marker:hidden">
+                    {item.question}
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <LogoBand
-        eyebrow={service.slug === 'payment-processing-merchant-services' ? 'Payment Networks' : 'Connected Brands'}
-        title={service.slug === 'point-of-sale-pos-systems' ? 'Supported POS and Commerce Integrations' : `Brands Supporting ${service.name}`}
+        eyebrow=""
+        title={
+          service.slug === 'payment-processing-merchant-services'
+            ? 'Trusted Network'
+            : service.slug === 'point-of-sale-pos-systems'
+              ? 'Trusted POS Brands'
+              : 'Trusted Brands'
+        }
         logos={getServiceLogos(service.slug) ?? []}
       />
 
