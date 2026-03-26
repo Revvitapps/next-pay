@@ -24,7 +24,7 @@ export default function ReviewShell({ eyebrow, title, description, children }: R
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-2xl">
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-4 lg:px-12">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/images/nextpay.webp" alt="NextPay logo" width={148} height={38} className="h-8 w-auto" />
+            <Image src="/images/nextpay-logo.png" alt="NextPay logo" width={148} height={38} className="h-8 w-auto" />
             <div className="hidden md:block">
               <p className="text-[10px] uppercase tracking-[0.22em] text-white/45">Hidden Review</p>
               <p className="text-sm text-white/76">Alternate design environment</p>

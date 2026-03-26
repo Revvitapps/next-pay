@@ -45,11 +45,11 @@ export default function BlogPage() {
         image="/images/connected-stack-blog-image.png"
         imageAlt="NextPay blog and insights visual"
         chips={['Operations', 'Integrations', 'Payments', 'Workflow']}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'View Case Studies', href: '/case-studies' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Logos that reinforce modern business guidance',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />

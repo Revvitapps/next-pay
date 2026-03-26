@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ConversionCtas from '@/components/cta/ConversionCtas';
 import { industryProfiles } from '@/components/industries/industryData';
 import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
 import Navbar from '@/components/nav/Navbar';
@@ -67,10 +66,10 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
         description={industry.bestFor}
         image={getIndustryHeroImage(industry.id)}
         alt={`${industry.label} payments and operations`}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       />
-      <LogoBand eyebrow="Industry Trust" title={`Platforms Commonly Used Across ${industry.label}`} logos={getIndustryLogos(industry.id)} />
+      <LogoBand eyebrow="" title="Trusted Brands" logos={getIndustryLogos(industry.id)} />
       <div className="px-6 pb-16 lg:px-12">
         <section className="np-surface mx-auto w-full max-w-6xl rounded-3xl p-8 md:p-10">
           <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -86,15 +85,17 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
               </ul>
             </article>
             <article className="np-card rounded-2xl p-5 text-left">
-              <h2 className="text-xl font-bold text-white">Recommended Setup</h2>
-              <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
-                {industry.recommendedSetup.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="np-dot mt-2 h-1.5 w-1.5 rounded-full" />
-                    <span>{item}</span>
-                  </li>
+              <h2 className="text-xl font-bold text-white">Best Fit</h2>
+              <p className="mt-4 text-sm leading-relaxed text-slate-100/90">{industry.bestFor}</p>
+
+              <h3 className="np-accent mt-6 text-sm font-semibold uppercase tracking-[0.15em]">Typical Needs</h3>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {industry.subSectors.slice(0, 6).map((item) => (
+                  <span key={item} className="np-pill rounded-full px-3 py-1.5 text-xs text-slate-100/85">
+                    {item}
+                  </span>
                 ))}
-              </ul>
+              </div>
             </article>
 
             <article className="np-card rounded-2xl p-5 text-left md:col-span-2">
@@ -110,21 +111,21 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
             </article>
           </div>
 
-          <article className="np-card mt-5 rounded-2xl p-5 text-left">
-            <h2 className="text-xl font-bold text-white">Suggested Hardware</h2>
-            <div className="mt-4 grid gap-3 md:grid-cols-3">
-              {industry.suggestedHardware.map((hardware) => (
-                <div key={hardware.name} className="np-pill rounded-xl p-4">
-                  <p className="np-accent text-sm font-semibold">{hardware.name}</p>
-                  <p className="mt-2 text-sm text-slate-100/90">{hardware.summary}</p>
-                  <p className="mt-2 text-xs text-slate-200/80">Ideal for: {hardware.idealFor}</p>
-                </div>
-              ))}
-            </div>
-          </article>
-
           <div className="mt-8 space-y-3">
-            <ConversionCtas primary="customQuote" secondary="uploadStatement" />
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link
+                href="/contact?intent=quote"
+                className="inline-flex rounded-full bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
+              >
+                Start Your Journey
+              </Link>
+              <Link
+                href="/contact?intent=statement-upload"
+                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+              >
+                Upload My Statement
+              </Link>
+            </div>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/services"

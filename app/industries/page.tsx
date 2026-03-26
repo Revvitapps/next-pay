@@ -31,11 +31,11 @@ export default function IndustriesPage() {
         image="/images/hero-image.jpeg"
         imageAlt="Industry-specific payments and POS operations"
         chips={['Restaurants', 'Retail', 'Services', 'High-Risk']}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Brands and platforms that fit the industries we support',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />

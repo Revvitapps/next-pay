@@ -33,11 +33,11 @@ export default function ContactPage() {
         image="/images/next-pay-site-hero.jpeg"
         imageAlt="NextPay contact and rollout planning visual"
         chips={['Quote', 'Statement Review', 'Implementation', 'Support']}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Logos that reinforce every conversation',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />

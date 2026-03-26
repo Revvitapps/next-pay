@@ -1,6 +1,6 @@
 export const conversionCtas = {
   estimateRates: {
-    label: 'Start Quote Flow',
+    label: 'Start Your Journey',
     href: '/pricing#custom-quote'
   },
   uploadStatement: {
@@ -8,7 +8,7 @@ export const conversionCtas = {
     href: '/contact?intent=statement-upload'
   },
   customQuote: {
-    label: 'Get a Custom Quote',
+    label: 'Start Your Journey',
     href: '/contact?intent=quote'
   }
 } as const;

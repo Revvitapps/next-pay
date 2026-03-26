@@ -14,7 +14,7 @@ export function getServiceImage(slug: string) {
 
 export function getServiceImageClass(slug: string) {
   if (slug === 'business-brokerage') {
-    return 'object-contain scale-[0.9] bg-[#020814]';
+    return 'object-cover object-center';
   }
 
   return 'object-cover object-[center_20%]';
@@ -22,7 +22,7 @@ export function getServiceImageClass(slug: string) {
 
 export function getServiceHeroImagePosition(slug: string) {
   if (slug === 'business-brokerage') {
-    return 'object-center scale-[0.94]';
+    return 'object-center';
   }
 
   return 'object-center';

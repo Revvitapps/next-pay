@@ -29,7 +29,7 @@ const serviceGroups = [
   },
   {
     title: 'Growth & Back Office',
-    description: 'Financing, payroll, marketing, and expansion support in one business stack.',
+    description: 'Financing, payroll, network building, and expansion support in one business stack.',
     slugs: ['business-financing-funding', 'payroll-workers-compensation', 'marketing-outreach-lead-generation', 'business-brokerage']
   }
 ];
@@ -121,7 +121,7 @@ export default function ServicesRedesignSpecPage() {
               <div className="rounded-2xl border border-white/12 bg-black/55 p-4 backdrop-blur-md">
                 <p className="text-xs uppercase tracking-[0.18em] text-amber-100">Services Direction</p>
                 <p className="mt-2 text-sm text-slate-100/84">
-                  This concept page shows how the full services experience can feel more premium and less like repeated teal marketing blocks.
+                  This concept page shows how the full services experience can feel more premium and less like repeated teal service blocks.
                 </p>
               </div>
             </div>

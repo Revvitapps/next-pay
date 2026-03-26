@@ -15,7 +15,7 @@ export default function CapabilityCta({
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-100/90">{description}</p>
       <div className="mt-6 flex flex-wrap gap-3">
         <Link href="/contact?intent=quote" className="inline-flex rounded-full bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]">
-          Get a Custom Quote
+          Start Your Journey
         </Link>
         <Link
           href="/services"

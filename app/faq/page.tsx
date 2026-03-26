@@ -46,11 +46,11 @@ export default function FaqPage() {
         image="/images/financial-workflows.png"
         imageAlt="Financial workflows and operational systems visual"
         chips={['Services', 'Routing', 'Consultation', 'Workflow']}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Contact NextPay', href: '/contact' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Operational brands supporting the experience',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />

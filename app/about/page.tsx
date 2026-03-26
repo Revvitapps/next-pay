@@ -47,11 +47,11 @@ export default function AboutPage() {
         image="/images/business-operations.png"
         imageAlt="NextPay business operations visual"
         chips={['Efficiency', 'Visibility', 'Execution', 'Growth']}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Operational and payment brands that support the platform',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />
@@ -133,7 +133,7 @@ export default function AboutPage() {
           href="/contact?intent=quote"
           className="mt-8 inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
           >
-            Get a Custom Quote
+            Start Your Journey
           </Link>
         </section>
       </div>

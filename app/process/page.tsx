@@ -37,11 +37,11 @@ export default function ProcessPage() {
         image="/images/service-delivery-workflow.jpg"
         imageAlt="Service delivery workflow visual"
         chips={['Discovery', 'Qualification', 'Implementation', 'Optimization']}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Partner logos that reinforce the process',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />

@@ -61,7 +61,7 @@ export default function Navbar() {
       <nav className="mx-auto flex w-full max-w-none items-center justify-between px-6 py-4 lg:px-12">
         <Link href="/" className="flex items-center">
           <Image
-            src="/images/nextpay.webp"
+            src="/images/nextpay-logo.png"
             alt="NextPay logo"
             width={148}
             height={38}
@@ -133,7 +133,7 @@ export default function Navbar() {
                   onClick={() => setProductsOpen(false)}
                   className="rounded-full border border-white/18 bg-black/25 px-4 py-1.5 text-xs font-semibold text-white transition hover:border-white/35 hover:bg-white/5"
                 >
-                  Get a Custom Quote
+                  Start Your Journey
                 </Link>
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function Navbar() {
             onClick={() => track('book_call_click', { source: 'navbar_primary_consultation' })}
             className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition"
           >
-            {conversionCtas.customQuote.label}
+            Get Your Quote
           </Link>
           <Link
             href="/contact"

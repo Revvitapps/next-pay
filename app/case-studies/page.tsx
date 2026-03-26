@@ -35,10 +35,10 @@ export default function CaseStudiesPage() {
         imageAlt="Merchant reporting and savings performance visual"
         chips={['Pricing', 'Operations', 'Savings', 'Visibility']}
         primaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement' }}
-        secondaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         trustBand={{
-          eyebrow: 'Trusted by the networks',
-          title: 'Network logos that support every scenario',
+          eyebrow: '',
+          title: 'Trusted Network',
           logos: paymentsTrustLogos
         }}
       />

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ConversionCtas from '@/components/cta/ConversionCtas';
 import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
 import {
   industryProfiles,
@@ -59,10 +58,10 @@ export default async function SectorPage({ params }: SectorPageProps) {
         description={sector.subtitle}
         image={getSectorHeroImage(sectorId)}
         alt={`${sector.label} sector hero`}
-        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       />
-      <LogoBand eyebrow="Sector Brands" title={`Trusted Brands Across ${sector.label}`} logos={getSectorLogos(sectorId)} />
+      <LogoBand eyebrow="" title="Trusted Brands" logos={getSectorLogos(sectorId)} />
       <section className="px-6 pb-16 lg:px-12">
         <div className="np-surface mx-auto w-full max-w-[1280px] rounded-3xl p-8 md:p-10">
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -79,7 +78,20 @@ export default async function SectorPage({ params }: SectorPageProps) {
           </div>
 
           <div className="mt-8">
-            <ConversionCtas primary="customQuote" secondary="uploadStatement" />
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link
+                href="/contact?intent=quote"
+                className="inline-flex rounded-full bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
+              >
+                Start Your Journey
+              </Link>
+              <Link
+                href="/contact?intent=statement-upload"
+                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+              >
+                Upload My Statement
+              </Link>
+            </div>
           </div>
         </div>
       </section>
