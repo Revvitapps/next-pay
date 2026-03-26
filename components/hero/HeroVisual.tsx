@@ -41,7 +41,7 @@ export default function HeroVisual() {
 
   return (
     <div className="relative w-full">
-      <div className="absolute -inset-10 rounded-[2.5rem] bg-[#46a7a6]/10 blur-3xl" aria-hidden />
+      <div className="absolute -inset-10 rounded-[2.5rem] bg-white/5 blur-3xl" aria-hidden />
 
       <motion.div
         initial={isMobile ? false : { opacity: 0, x: -20, y: 10 }}
@@ -50,7 +50,7 @@ export default function HeroVisual() {
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="mx-auto w-full max-w-none text-center"
       >
-        <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Services</p>
+        <p className="text-sm uppercase tracking-[0.2em] np-accent">Services</p>
         <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
           Enterprise power. Right-sized for your business.
         </h2>
@@ -79,9 +79,9 @@ export default function HeroVisual() {
               whileInView={isMobile ? {} : { opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="group relative overflow-hidden rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/90 shadow-card"
+              className="group relative overflow-hidden rounded-3xl border border-white/10 np-surface"
             >
-              <div className="relative h-[320px] w-full overflow-hidden bg-[#163c4d]/90 sm:h-[360px] md:h-[400px]">
+              <div className="relative h-[320px] w-full overflow-hidden bg-black/70 sm:h-[360px] md:h-[400px]">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -92,14 +92,14 @@ export default function HeroVisual() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-slate-950/45 to-slate-950/70" />
               </div>
 
-              <div className="relative z-10 mx-4 -mt-20 mb-4 space-y-4 rounded-2xl border border-[#46a7a6]/35 bg-[#1b4e61]/88 p-6 text-center backdrop-blur-md md:mx-6 md:-mt-24 md:p-8">
-                <div className="h-px w-full bg-gradient-to-r from-[#46a7a6]/60 via-white/10 to-transparent" />
+              <div className="relative z-10 mx-4 -mt-20 mb-4 space-y-4 rounded-2xl border border-white/10 np-card p-6 text-center backdrop-blur-md md:mx-6 md:-mt-24 md:p-8">
+                <div className="h-px w-full bg-gradient-to-r from-white/20 via-white/10 to-transparent" />
                 <h3 className="font-heading text-2xl font-bold text-zinc-100 md:text-3xl">{service.title}</h3>
                 <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-100/95">{service.description}</p>
                 <ul className="mx-auto flex w-full max-w-2xl flex-col items-center space-y-2 text-center text-sm text-slate-100/95">
                   {service.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-center justify-center gap-3">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                      <span className="h-1.5 w-1.5 rounded-full np-accent" />
                       <span>{bullet}</span>
                     </li>
                   ))}

@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import { industryProfiles } from '@/components/industries/industryData';
+import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import LogoBand from '@/components/trust/LogoBand';
+import { getIndustryHeroImage, getIndustryLogos } from '@/lib/content/industryVisuals';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
@@ -58,42 +61,48 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
         ])}
       />
       <Navbar />
-      <div className="px-6 py-16 lg:px-12">
-        <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Industry</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">{industry.label}</h1>
-          <p className="mt-4 max-w-4xl text-slate-100/90">{industry.bestFor}</p>
-
+      <PageShowcaseHero
+        eyebrow="Industry"
+        title={industry.label}
+        description={industry.bestFor}
+        image={getIndustryHeroImage(industry.id)}
+        alt={`${industry.label} payments and operations`}
+        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
+      />
+      <LogoBand eyebrow="Industry Trust" title={`Platforms Commonly Used Across ${industry.label}`} logos={getIndustryLogos(industry.id)} />
+      <div className="px-6 pb-16 lg:px-12">
+        <section className="np-surface mx-auto w-full max-w-6xl rounded-3xl p-8 md:p-10">
           <div className="mt-8 grid gap-5 md:grid-cols-2">
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
+            <article className="np-card rounded-2xl p-5 text-left">
               <h2 className="text-xl font-bold text-white">Common Business Types</h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
                 {industry.businessTypes.map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                    <span className="np-dot mt-2 h-1.5 w-1.5 rounded-full" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </article>
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
+            <article className="np-card rounded-2xl p-5 text-left">
               <h2 className="text-xl font-bold text-white">Recommended Setup</h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
                 {industry.recommendedSetup.map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                    <span className="np-dot mt-2 h-1.5 w-1.5 rounded-full" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </article>
 
-            <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5 md:col-span-2">
+            <article className="np-card rounded-2xl p-5 text-left md:col-span-2">
               <h2 className="text-xl font-bold text-white">Operational Wins</h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
                 {industry.operationalWins.map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                    <span className="np-dot mt-2 h-1.5 w-1.5 rounded-full" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -101,12 +110,12 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
             </article>
           </div>
 
-          <article className="mt-5 rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">
+          <article className="np-card mt-5 rounded-2xl p-5 text-left">
             <h2 className="text-xl font-bold text-white">Suggested Hardware</h2>
             <div className="mt-4 grid gap-3 md:grid-cols-3">
               {industry.suggestedHardware.map((hardware) => (
-                <div key={hardware.name} className="rounded-xl border border-[#46a7a6]/20 bg-[#163c4d]/75 p-4">
-                  <p className="text-sm font-semibold text-[#46a7a6]">{hardware.name}</p>
+                <div key={hardware.name} className="np-pill rounded-xl p-4">
+                  <p className="np-accent text-sm font-semibold">{hardware.name}</p>
                   <p className="mt-2 text-sm text-slate-100/90">{hardware.summary}</p>
                   <p className="mt-2 text-xs text-slate-200/80">Ideal for: {hardware.idealFor}</p>
                 </div>
@@ -119,19 +128,19 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/services"
-                className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
+                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18"
               >
                 Explore Services
               </Link>
               <Link
                 href="/case-studies"
-                className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
+                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18"
               >
                 View Savings Examples
               </Link>
               <Link
                 href="/industries"
-                className="inline-flex rounded-full border border-[#46a7a6]/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10"
+                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18"
               >
                 Back to Industries
               </Link>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ConversionCtas from '@/components/cta/ConversionCtas';
+import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
 import {
   industryProfiles,
   industrySectorMeta,
@@ -9,6 +10,8 @@ import {
 } from '@/components/industries/industryData';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
+import LogoBand from '@/components/trust/LogoBand';
+import { getSectorHeroImage, getSectorLogos } from '@/lib/content/industryVisuals';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 type SectorPageProps = {
@@ -50,18 +53,24 @@ export default async function SectorPage({ params }: SectorPageProps) {
   return (
     <main className="pt-16">
       <Navbar />
-      <section className="px-6 py-16 lg:px-12">
-        <div className="mx-auto w-full max-w-[1280px] rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Sector</p>
-          <h1 className="mt-3 font-heading text-4xl font-extrabold text-white md:text-5xl">{sector.label}</h1>
-          <p className="mt-3 text-slate-100/90">{sector.subtitle}</p>
-
+      <PageShowcaseHero
+        eyebrow="Sector"
+        title={sector.label}
+        description={sector.subtitle}
+        image={getSectorHeroImage(sectorId)}
+        alt={`${sector.label} sector hero`}
+        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
+      />
+      <LogoBand eyebrow="Sector Brands" title={`Trusted Brands Across ${sector.label}`} logos={getSectorLogos(sectorId)} />
+      <section className="px-6 pb-16 lg:px-12">
+        <div className="np-surface mx-auto w-full max-w-[1280px] rounded-3xl p-8 md:p-10">
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry) => (
               <Link
                 key={industry.id}
                 href={`/industries/${industry.id}`}
-                className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5 transition hover:border-[#46a7a6]/45"
+                className="np-card rounded-2xl p-5 text-left transition hover:border-white/18"
               >
                 <p className="text-lg font-semibold text-white">{industry.label}</p>
                 <p className="mt-2 text-sm text-slate-100/85">{industry.bestFor}</p>

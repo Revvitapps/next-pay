@@ -30,8 +30,8 @@ export default function Hero() {
             className="mx-auto w-full max-w-6xl text-center"
           >
             <MotionDiv>
-              <div className="rounded-3xl border border-white/20 bg-black/35 p-6 text-center shadow-[0_30px_70px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10">
-                <span className="inline-flex rounded-full border border-[#46a7a6]/60 bg-[#163c4d]/85 px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#46a7a6] shadow-[0_0_18px_rgba(70,167,166,0.25)]">
+              <div className="np-surface rounded-3xl p-6 text-center shadow-[0_30px_70px_rgba(0,0,0,0.48)] md:p-10">
+                <span className="inline-flex rounded-full border border-white/12 np-pill px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] np-accent shadow-[0_0_18px_rgba(104,132,140,0.12)]">
                   NextPay Platform
                 </span>
                 <h1 className="mx-auto mt-6 max-w-5xl font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white sm:text-5xl md:text-6xl">
@@ -47,10 +47,10 @@ export default function Hero() {
                       initial={{ opacity: 0, x: index % 2 === 0 ? -28 : 28, y: 10 }}
                       whileInView={{ opacity: 1, x: 0, y: 0 }}
                       viewport={{ once: true, amount: 0.5 }}
-                      transition={{ duration: 0.58, delay: index * 0.06 }}
-                      className="inline-flex items-center gap-2 rounded-full border border-[#46a7a6]/50 bg-[#163c4d]/85 px-5 py-2 text-sm font-semibold shadow-[0_0_18px_rgba(70,167,166,0.2)] md:text-base"
+                    transition={{ duration: 0.58, delay: index * 0.06 }}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/12 np-pill px-5 py-2 text-sm font-semibold md:text-base"
                     >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-[#46a7a6]" />
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none np-accent" />
                       <span>{item}</span>
                     </motion.li>
                   ))}

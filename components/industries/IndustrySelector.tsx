@@ -18,6 +18,10 @@ import {
 import { industryProfiles, slugifySubSector } from '@/components/industries/industryData';
 import { prefillAndScrollContact, track } from '@/lib/utils';
 
+type IndustrySelectorProps = {
+  showHeader?: boolean;
+};
+
 const industryVisuals: Record<
   string,
   {
@@ -67,7 +71,7 @@ const industryVisuals: Record<
   }
 };
 
-export default function IndustrySelector() {
+export default function IndustrySelector({ showHeader = true }: IndustrySelectorProps) {
   const [activeIndustryId, setActiveIndustryId] = useState(industryProfiles[0].id);
   const [activeSector, setActiveSector] = useState<'restaurants' | 'retail' | 'services' | 'high-risk'>('services');
 
@@ -93,50 +97,52 @@ export default function IndustrySelector() {
 
   return (
     <section id="industries" className="px-6 py-20 lg:px-12">
-      <div className="mx-auto w-full max-w-[1380px] rounded-3xl border border-[#46a7a6]/20 bg-[#163c4d]/55 p-6 shadow-card md:p-10">
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Industries</p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Industries We Serve
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-100/90">
-              Payment processing, POS, and operational tools tailored to the way each industry runs.
-            </p>
+      <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-6 shadow-card md:p-10">
+        {showHeader ? (
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="np-accent text-sm uppercase tracking-[0.2em]">Industries</p>
+              <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                Industries We Serve
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-100/90">
+                Payment processing, POS, and operational tools tailored to the way each industry runs.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                track('book_call_click', { source: 'industry_request_stack', industry: activeProfile.label });
+                prefillAndScrollContact({
+                  industry: activeProfile.label,
+                  message: `Please send a suggested ${activeProfile.label} business stack.`
+                });
+              }}
+              className="np-pill justify-self-start rounded-full px-5 py-2.5 text-sm font-semibold text-[#7dd9d8] transition hover:border-white/18 hover:bg-black/70"
+            >
+              Get a Custom Quote
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              track('book_call_click', { source: 'industry_request_stack', industry: activeProfile.label });
-              prefillAndScrollContact({
-                industry: activeProfile.label,
-                message: `Please send a suggested ${activeProfile.label} business stack.`
-              });
-            }}
-            className="justify-self-start rounded-full border border-[#46a7a6]/50 px-5 py-2.5 text-sm font-semibold text-[#46a7a6] transition hover:border-[#46a7a6] hover:bg-[#46a7a6]/10"
-          >
-            Get a Custom Quote
-          </button>
-        </div>
+        ) : null}
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {sectorTiles.map((sector) => {
             const isActive = activeSector === sector.id;
             return (
-              <div
-                key={sector.id}
-                className={`rounded-2xl border p-4 text-left transition ${
-                  isActive
-                    ? 'border-[#46a7a6]/65 bg-[#163c4d]/90'
-                    : 'border-[#46a7a6]/25 bg-[#163c4d]/75 hover:border-[#46a7a6]/40 hover:bg-[#163c4d]/85'
+                <div
+                  key={sector.id}
+                  className={`rounded-2xl border p-4 text-left transition ${
+                    isActive
+                    ? 'np-card border-white/18'
+                    : 'np-card-soft hover:border-white/14'
                 }`}
               >
-                <p className="text-[10px] uppercase tracking-[0.2em] text-[#46a7a6]/85">Sector</p>
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">Sector</p>
                 <p className="mt-2 text-base font-semibold text-white">{sector.label}</p>
                 <p className="mt-1 text-xs text-slate-100/75">{sector.subtitle}</p>
                 <div className="mt-3 flex gap-2">
-                  <button
-                    type="button"
+                    <button
+                      type="button"
                     onClick={() => {
                       setActiveSector(sector.id as 'restaurants' | 'retail' | 'services' | 'high-risk');
                       const first = industryProfiles.find((industry) => industry.sector === sector.id);
@@ -144,13 +150,13 @@ export default function IndustrySelector() {
                         setActiveIndustryId(first.id);
                       }
                     }}
-                    className="inline-flex rounded-full border border-[#46a7a6]/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/65 hover:bg-[#46a7a6]/10"
+                    className="np-pill inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-white/18"
                   >
                     Preview
                   </button>
                   <Link
                     href={`/industries/sectors/${sector.id}`}
-                    className="inline-flex rounded-full border border-[#46a7a6]/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/65 hover:bg-[#46a7a6]/10"
+                    className="np-pill inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-white/18"
                   >
                     Open Page
                   </Link>
@@ -167,12 +173,12 @@ export default function IndustrySelector() {
             const isActive = activeProfile.id === industry.id;
 
             return (
-              <div
-                key={industry.id}
-                className={`group rounded-2xl border p-4 text-left transition ${
-                  isActive
-                    ? 'border-[#46a7a6]/70 bg-[#163c4d]/85'
-                    : 'border-[#46a7a6]/25 bg-[#163c4d]/75 hover:border-[#46a7a6]/40 hover:bg-[#163c4d]/85'
+                <div
+                  key={industry.id}
+                  className={`group rounded-2xl border p-4 text-left transition ${
+                    isActive
+                    ? 'np-card border-white/18'
+                    : 'np-card-soft hover:border-white/14'
                 }`}
               >
                 <div className="flex items-center gap-4">
@@ -196,7 +202,7 @@ export default function IndustrySelector() {
                         <Link
                           key={`${industry.id}-${subSector}`}
                           href={`/industries/sub-sectors/${slugifySubSector(subSector)}`}
-                          className="rounded-full border border-[#46a7a6]/25 px-2 py-0.5 text-[10px] text-slate-100/80 transition hover:border-[#46a7a6]/55"
+                          className="np-pill rounded-full px-2 py-0.5 text-[10px] text-slate-100/80 transition hover:border-white/18"
                         >
                           {subSector}
                         </Link>
@@ -211,13 +217,13 @@ export default function IndustrySelector() {
                       setActiveIndustryId(industry.id);
                       track('industry_select', { industry: industry.label });
                     }}
-                    className="rounded-full border border-[#46a7a6]/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/60"
+                    className="np-pill rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-white/18"
                   >
                     Preview
                   </button>
                   <Link
                     href={`/industries/${industry.id}`}
-                    className="rounded-full border border-[#46a7a6]/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-[#46a7a6]/60"
+                    className="np-pill rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/90 transition hover:border-white/18"
                   >
                     Open Page
                   </Link>
@@ -234,38 +240,38 @@ export default function IndustrySelector() {
           transition={{ duration: 0.8 }}
           className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
         >
-          <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6">
+          <article className="np-card rounded-2xl p-6">
             <h3 className="text-xl font-bold text-white">Recommended Setup</h3>
             <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
               {activeProfile.recommendedSetup.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-[#46a7a6]" />
+                  <span className="np-dot mt-1 h-1.5 w-1.5 flex-none rounded-full" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h4 className="mt-7 text-sm font-semibold uppercase tracking-[0.15em] text-[#46a7a6]">Best For</h4>
+            <h4 className="np-accent mt-7 text-sm font-semibold uppercase tracking-[0.15em]">Best For</h4>
             <p className="mt-2 text-sm leading-relaxed text-slate-100/90">{activeProfile.bestFor}</p>
 
-            <h4 className="mt-7 text-sm font-semibold uppercase tracking-[0.15em] text-[#46a7a6]">Operational Wins</h4>
+            <h4 className="np-accent mt-7 text-sm font-semibold uppercase tracking-[0.15em]">Operational Wins</h4>
             <ul className="mt-3 grid gap-2 text-sm text-white sm:grid-cols-3">
               {activeProfile.operationalWins.map((item) => (
-                <li key={item} className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/90 px-3 py-2">
+                <li key={item} className="np-pill rounded-xl px-3 py-2">
                   {item}
                 </li>
               ))}
             </ul>
           </article>
 
-          <article className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6">
+          <article className="np-card rounded-2xl p-6">
             <h3 className="text-xl font-bold text-white">Recommended Tools &amp; Infrastructure</h3>
             <div className="mt-4 space-y-3">
               {activeProfile.suggestedHardware.map((hardware) => (
-                <div key={hardware.name} className="rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/90 p-4">
+                <div key={hardware.name} className="np-pill rounded-xl p-4">
                   <div className="flex items-center justify-between gap-2">
-                    <p className="text-sm font-semibold text-[#46a7a6]">{hardware.name}</p>
-                    <span className="rounded-full border border-[#46a7a6]/20 px-2 py-0.5 text-[10px] uppercase tracking-[0.15em] text-slate-200/80">
+                    <p className="np-accent text-sm font-semibold">{hardware.name}</p>
+                    <span className="np-pill rounded-full px-2 py-0.5 text-[10px] uppercase tracking-[0.15em] text-slate-200/80">
                       Suggested
                     </span>
                   </div>

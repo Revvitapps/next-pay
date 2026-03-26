@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/ui/PageHero';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import { paymentsTrustLogos } from '@/lib/content/logos';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
@@ -28,9 +30,24 @@ export default function ProcessPage() {
         ])}
       />
       <Navbar />
+      <PageHero
+        eyebrow="Process"
+        title="Process"
+        description="Review the discovery, qualification, implementation, and optimization process for service engagements."
+        image="/images/service-delivery-workflow.jpg"
+        imageAlt="Service delivery workflow visual"
+        chips={['Discovery', 'Qualification', 'Implementation', 'Optimization']}
+        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        trustBand={{
+          eyebrow: 'Trusted by the networks',
+          title: 'Partner logos that reinforce the process',
+          logos: paymentsTrustLogos
+        }}
+      />
       <div className="px-6 py-16 lg:px-12">
         <section className="mx-auto w-full max-w-5xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/90 p-8 md:p-10">
-          <h1 className="font-heading text-4xl font-extrabold text-white">Process</h1>
+          <h2 className="font-heading text-3xl font-extrabold text-white">Process steps</h2>
           <ul className="mt-6 space-y-2 text-slate-100/90">
             {steps.map((step) => (
               <li key={step} className="flex items-start gap-2">

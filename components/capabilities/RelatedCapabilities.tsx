@@ -12,7 +12,7 @@ export default function RelatedCapabilities({ currentSlug, items }: RelatedCapab
   }
 
   return (
-    <section className="rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 md:p-8">
+    <section className="np-surface rounded-3xl p-6 md:p-8">
       <h2 className="text-2xl font-bold text-white">Related Capabilities</h2>
       <div className="mt-5 space-y-3">
         {items
@@ -21,7 +21,7 @@ export default function RelatedCapabilities({ currentSlug, items }: RelatedCapab
             <Link
               key={item.slug}
               href={`/capabilities/${item.slug}`}
-              className="block rounded-xl border border-[#46a7a6]/20 bg-[#163c4d]/90 px-4 py-3 text-sm text-slate-100/90 transition hover:border-[#46a7a6]/45 hover:text-white"
+              className="np-card block rounded-xl px-4 py-3 text-sm text-slate-100/90 transition hover:border-white/18 hover:text-white"
             >
               <p className="font-semibold text-white">{item.title}</p>
               <p className="mt-1 text-xs text-slate-200/80">{item.description}</p>

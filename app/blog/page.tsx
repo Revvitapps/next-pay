@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import PageHero from '@/components/ui/PageHero';
 import { blogPosts } from '@/lib/content/blogPosts';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import { paymentsTrustLogos } from '@/lib/content/logos';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { blogPostingJsonLd, breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
@@ -36,14 +38,23 @@ export default function BlogPage() {
         />
       ))}
       <Navbar />
+      <PageHero
+        eyebrow="Blog"
+        title="Insights"
+        description="Practical guidance for teams modernizing operations, integrations, and financial workflows."
+        image="/images/connected-stack-blog-image.png"
+        imageAlt="NextPay blog and insights visual"
+        chips={['Operations', 'Integrations', 'Payments', 'Workflow']}
+        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'View Case Studies', href: '/case-studies' }}
+        trustBand={{
+          eyebrow: 'Trusted by the networks',
+          title: 'Logos that reinforce modern business guidance',
+          logos: paymentsTrustLogos
+        }}
+      />
       <div className="px-6 py-20 lg:px-12">
         <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Blog</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">Insights</h1>
-          <p className="mt-4 max-w-3xl text-slate-100/90">
-            Practical guidance for teams modernizing operations, integrations, and financial workflows.
-          </p>
-
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {blogPosts.map((post) => (
               <Link

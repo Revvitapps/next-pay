@@ -9,13 +9,13 @@ export default function CapabilityBreadcrumbs({ title }: CapabilityBreadcrumbsPr
     <nav aria-label="Breadcrumb" className="text-sm text-slate-200/80">
       <ol className="flex flex-wrap items-center gap-2">
         <li>
-          <Link href="/" className="transition hover:text-[#46a7a6]">
+          <Link href="/" className="transition hover:text-[#7dd9d8]">
             Home
           </Link>
         </li>
         <li aria-hidden="true">/</li>
         <li>
-          <Link href="/capabilities" className="transition hover:text-[#46a7a6]">
+          <Link href="/capabilities" className="transition hover:text-[#7dd9d8]">
             Capabilities
           </Link>
         </li>

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import PageHero from '@/components/ui/PageHero';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import { paymentsTrustLogos } from '@/lib/content/logos';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
@@ -38,17 +40,27 @@ export default function AboutPage() {
         ])}
       />
       <Navbar />
+      <PageHero
+        eyebrow="About"
+        title="About NextPay"
+        description="NextPay helps organizations operate with more clarity, efficiency, and confidence through systems that support long-term growth."
+        image="/images/business-operations.png"
+        imageAlt="NextPay business operations visual"
+        chips={['Efficiency', 'Visibility', 'Execution', 'Growth']}
+        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        trustBand={{
+          eyebrow: 'Trusted by the networks',
+          title: 'Operational and payment brands that support the platform',
+          logos: paymentsTrustLogos
+        }}
+      />
       <div className="px-6 py-20 lg:px-12">
         <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
           <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">About</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            About NextPay
-          </h1>
-          <p className="mt-4 max-w-3xl text-slate-100/90">
-            NextPay helps organizations operate with more clarity, efficiency, and confidence. We
-            work with businesses from multiple operational angles to strengthen the systems, processes, and
-            services that keep companies moving forward.
-          </p>
+          <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+            Helping businesses build stronger operating foundations
+          </h2>
           <p className="mt-4 max-w-4xl text-slate-100/90">
             Our focus is simple: help businesses become more streamlined, more efficient, and more financially healthy
             at the same time.

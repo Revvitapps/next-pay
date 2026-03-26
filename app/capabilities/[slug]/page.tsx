@@ -105,9 +105,9 @@ export default async function CapabilityDetailPage({ params }: CapabilityDetailP
               {neighbors.previous ? (
                 <Link
                   href={`/capabilities/${neighbors.previous.slug}`}
-                  className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/85 px-4 py-3 text-sm text-slate-100/90 transition hover:border-[#46a7a6]/45"
+                  className="np-card rounded-2xl px-4 py-3 text-sm text-slate-100/90 transition hover:border-white/18"
                 >
-                  <span className="text-xs uppercase tracking-[0.14em] text-[#46a7a6]">Previous</span>
+                  <span className="text-xs uppercase tracking-[0.14em] np-accent">Previous</span>
                   <p className="mt-1 font-semibold text-white">{neighbors.previous.title}</p>
                 </Link>
               ) : (
@@ -116,9 +116,9 @@ export default async function CapabilityDetailPage({ params }: CapabilityDetailP
               {neighbors.next ? (
                 <Link
                   href={`/capabilities/${neighbors.next.slug}`}
-                  className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/85 px-4 py-3 text-sm text-slate-100/90 transition hover:border-[#46a7a6]/45"
+                  className="np-card rounded-2xl px-4 py-3 text-sm text-slate-100/90 transition hover:border-white/18"
                 >
-                  <span className="text-xs uppercase tracking-[0.14em] text-[#46a7a6]">Next</span>
+                  <span className="text-xs uppercase tracking-[0.14em] np-accent">Next</span>
                   <p className="mt-1 font-semibold text-white">{neighbors.next.title}</p>
                 </Link>
               ) : null}
@@ -126,12 +126,12 @@ export default async function CapabilityDetailPage({ params }: CapabilityDetailP
           </section>
 
           <aside className="space-y-6">
-            <section className="rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6">
+            <section className="np-surface rounded-3xl p-6">
               <h2 className="text-lg font-bold text-white">On This Page</h2>
               <ul className="mt-4 space-y-2 text-sm text-slate-100/90">
                 {capability.headings.map((heading) => (
                   <li key={heading.id}>
-                    <a href={`#${heading.id}`} className="transition hover:text-[#46a7a6]">
+                    <a href={`#${heading.id}`} className="transition hover:text-[#7dd9d8]">
                       {heading.text}
                     </a>
                   </li>

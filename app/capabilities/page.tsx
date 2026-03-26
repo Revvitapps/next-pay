@@ -4,7 +4,9 @@ import CapabilityCard from '@/components/capabilities/CapabilityCard';
 import CapabilityCta from '@/components/capabilities/CapabilityCta';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
+import PageHero from '@/components/ui/PageHero';
 import JsonLd from '@/components/seo/JsonLd';
+import { operationsTrustLogos } from '@/lib/content/logos';
 import { getAllCapabilities } from '@/lib/capabilities/content';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/seo/jsonLd';
@@ -44,22 +46,21 @@ export default async function CapabilitiesPage() {
         })}
       />
       <Navbar />
-
-      <div className="px-6 py-16 lg:px-12">
-        <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 shadow-card md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Capabilities Knowledge Hub</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            Strategic Capabilities For Operationally Strong Businesses
-          </h1>
-          <p className="mt-4 max-w-4xl text-base leading-relaxed text-slate-100/92">
-            Strengthen operations, financial workflows, integrations, automation, reporting, and implementation support in one coordinated operating model.
-          </p>
-          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-100/88">
-            This capabilities hub gives decision-makers a clear view of where each capability fits, what it improves,
-            and how it supports long-term execution across modern organizations.
-          </p>
-        </section>
-      </div>
+      <PageHero
+        eyebrow="Capabilities Knowledge Hub"
+        title="Strategic Capabilities For Operationally Strong Businesses"
+        description="Strengthen operations, financial workflows, integrations, automation, reporting, and implementation support in one coordinated operating model."
+        image="/images/capabilities/technology-integrations.jpg"
+        imageAlt="Technology integrations and operational capabilities"
+        chips={['Operations', 'Automation', 'Reporting', 'Integrations']}
+        primaryCta={{ label: 'Discuss Your Operating Model', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        trustBand={{
+          eyebrow: 'Trusted by the platforms',
+          title: 'Core systems that support execution and visibility',
+          logos: operationsTrustLogos
+        }}
+      />
 
       <section className="px-6 pb-16 lg:px-12" aria-labelledby="capabilities-grid-heading">
         <div className="mx-auto w-full max-w-6xl">
@@ -67,7 +68,7 @@ export default async function CapabilitiesPage() {
             <h2 id="capabilities-grid-heading" className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               Capability Areas
             </h2>
-            <Link href="/contact" className="text-sm font-semibold text-[#46a7a6] transition hover:text-[#7dd9d8]">
+            <Link href="/contact" className="text-sm font-semibold text-[#7dd9d8] transition hover:text-white">
               Discuss your operating model
             </Link>
           </div>
@@ -80,7 +81,7 @@ export default async function CapabilitiesPage() {
       </section>
 
       <section className="px-6 pb-16 lg:px-12" aria-labelledby="alignment-heading">
-        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
+        <div className="np-surface mx-auto w-full max-w-6xl rounded-3xl p-8 md:p-10">
           <h2 id="alignment-heading" className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
             Why Operational Alignment Matters
           </h2>
@@ -91,7 +92,7 @@ export default async function CapabilitiesPage() {
           </p>
           <ul className="mt-6 grid gap-3 md:grid-cols-2">
             {alignmentPrinciples.map((item) => (
-              <li key={item} className="rounded-xl border border-[#46a7a6]/20 bg-[#163c4d]/90 px-4 py-3 text-sm text-slate-100/90">
+              <li key={item} className="np-card rounded-xl px-4 py-3 text-sm text-slate-100/90">
                 {item}
               </li>
             ))}

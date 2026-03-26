@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/ui/PageHero';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import { paymentsTrustLogos } from '@/lib/content/logos';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, faqPageJsonLd } from '@/lib/seo/jsonLd';
 
@@ -37,10 +39,23 @@ export default function FaqPage() {
       />
       <JsonLd data={faqPageJsonLd(faqItems)} />
       <Navbar />
+      <PageHero
+        eyebrow="FAQ"
+        title="Frequently Asked Questions"
+        description="Answers to common questions about service offerings, lead routing, and consultation workflows."
+        image="/images/financial-workflows.png"
+        imageAlt="Financial workflows and operational systems visual"
+        chips={['Services', 'Routing', 'Consultation', 'Workflow']}
+        primaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        secondaryCta={{ label: 'Contact NextPay', href: '/contact' }}
+        trustBand={{
+          eyebrow: 'Trusted by the networks',
+          title: 'Operational brands supporting the experience',
+          logos: paymentsTrustLogos
+        }}
+      />
       <div className="px-6 py-20 lg:px-12">
         <section className="mx-auto w-full max-w-5xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/90 p-8 md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">FAQ</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">Frequently Asked Questions</h1>
           <div className="mt-8 space-y-4">
             {faqItems.map((item) => (
               <article key={item.question} className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/80 p-5">

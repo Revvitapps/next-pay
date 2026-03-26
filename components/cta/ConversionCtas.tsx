@@ -13,8 +13,8 @@ function CtaLink({ ctaKey, style }: { ctaKey: ConversionCtaKey; style: 'primary'
 
   const styleClass =
     style === 'primary'
-      ? 'bg-accent-gradient text-slate-950 shadow-glow'
-      : 'border border-[#46a7a6]/35 text-white transition hover:border-[#46a7a6]/60 hover:bg-[#46a7a6]/10';
+      ? 'bg-[#eceff2] text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]'
+      : 'np-pill text-white transition hover:border-white/18 hover:bg-black/72';
 
   return (
     <Link href={cta.href} className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold ${styleClass}`}>

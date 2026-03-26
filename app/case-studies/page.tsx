@@ -3,9 +3,11 @@ import Link from 'next/link';
 import ComplianceNote from '@/components/compliance/ComplianceNote';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import { merchantSavingsCases } from '@/lib/content/merchantSavings';
+import PageHero from '@/components/ui/PageHero';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import { paymentsTrustLogos } from '@/lib/content/logos';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
@@ -25,16 +27,24 @@ export default function CaseStudiesPage() {
         ])}
       />
       <Navbar />
+      <PageHero
+        eyebrow="Case Studies"
+        title="Merchant Performance Scenarios"
+        description="Representative examples showing how pricing optimization and operational alignment can impact monthly performance."
+        image="/images/reporting-visibility.png"
+        imageAlt="Merchant reporting and savings performance visual"
+        chips={['Pricing', 'Operations', 'Savings', 'Visibility']}
+        primaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement' }}
+        secondaryCta={{ label: 'Get a Custom Quote', href: '/contact?intent=quote' }}
+        trustBand={{
+          eyebrow: 'Trusted by the networks',
+          title: 'Network logos that support every scenario',
+          logos: paymentsTrustLogos
+        }}
+      />
       <div className="px-6 py-20 lg:px-12">
         <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Case Studies</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            Merchant Performance Scenarios
-          </h1>
-          <p className="mt-4 max-w-3xl text-slate-100/90">
-            Representative examples showing how pricing optimization and operational alignment can impact monthly performance.
-          </p>
-          <ComplianceNote text="savingsExamples" className="mt-4 max-w-4xl" />
+          <ComplianceNote text="savingsExamples" className="max-w-4xl" />
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {merchantSavingsCases.slice(0, 3).map((study) => (

@@ -4,6 +4,13 @@
 
 :root {
   color-scheme: dark;
+  --marketing-bg: rgba(6, 8, 11, 0.96);
+  --marketing-bg-soft: rgba(10, 12, 16, 0.84);
+  --marketing-bg-frost: rgba(10, 12, 16, 0.72);
+  --marketing-border: rgba(148, 163, 184, 0.18);
+  --marketing-border-strong: rgba(125, 217, 216, 0.2);
+  --marketing-accent: rgba(125, 217, 216, 0.95);
+  --marketing-accent-soft: rgba(125, 217, 216, 0.08);
 }
 
 * {
@@ -20,6 +27,43 @@ body {
   position: relative;
 }
 
+.nextpay-surface {
+  background: linear-gradient(180deg, rgba(4, 7, 10, 0.92) 0%, rgba(8, 12, 16, 0.88) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+}
+
+.nextpay-surface-strong {
+  background: linear-gradient(180deg, rgba(2, 4, 6, 0.96) 0%, rgba(8, 10, 13, 0.92) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(18px);
+}
+
+.nextpay-pill {
+  background: linear-gradient(180deg, rgba(6, 9, 12, 0.9) 0%, rgba(14, 18, 22, 0.82) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.nextpay-pill-accent {
+  background: linear-gradient(180deg, rgba(8, 11, 15, 0.95) 0%, rgba(6, 9, 12, 0.9) 100%) !important;
+  border-color: rgba(70, 167, 166, 0.28) !important;
+  box-shadow:
+    0 0 0 1px rgba(70, 167, 166, 0.08),
+    0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.nextpay-panel-image {
+  background:
+    radial-gradient(circle at top, rgba(70, 167, 166, 0.14), rgba(4, 7, 10, 0.92) 52%, rgba(2, 4, 6, 0.98) 100%);
+}
+
 main:not([data-admin]) {
   text-align: center;
 }
@@ -31,6 +75,79 @@ main:not([data-admin]) .text-left {
 main:not([data-admin]) [class*='max-w-'] {
   margin-left: auto;
   margin-right: auto;
+}
+
+main:not([data-admin]) :is(
+  [class*='bg-[#163c4d]'],
+  [class*='bg-[#102f3d]'],
+  [class*='bg-[#0b2531]'],
+  [class*='bg-[#0f3443]'],
+  [class*='bg-[#1b4e61]'],
+  [class*='bg-[#0f2b36]'],
+  [class*='bg-[#163c4d]/'],
+  [class*='bg-[#102f3d]/'],
+  [class*='bg-[#0b2531]/'],
+  [class*='bg-[#0f3443]/'],
+  [class*='bg-[#1b4e61]/'],
+  [class*='bg-[#0f2b36]/'],
+  [class*='bg-slate-900/'],
+  [class*='bg-slate-950/']
+) {
+  background:
+    radial-gradient(circle at top, rgba(125, 217, 216, 0.07), transparent 42%),
+    linear-gradient(180deg, rgba(6, 8, 11, 0.98) 0%, rgba(10, 12, 16, 0.92) 100%) !important;
+  box-shadow:
+    0 24px 52px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(18px) saturate(120%);
+}
+
+main:not([data-admin]) :is(
+  [class*='border-[#46a7a6]'],
+  [class*='border-slate-700'],
+  [class*='border-slate-600']
+) {
+  border-color: var(--marketing-border) !important;
+}
+
+main:not([data-admin]) :is(
+  [class*='bg-[#46a7a6]'],
+  [class*='bg-[#46a7a6]/']
+) {
+  background:
+    radial-gradient(circle at top, rgba(125, 217, 216, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(7, 9, 12, 0.94), rgba(12, 14, 18, 0.9)) !important;
+}
+
+main:not([data-admin]) :is(
+  [class*='bg-[#46a7a6]/10'],
+  [class*='bg-[#46a7a6]/20'],
+  [class*='bg-[#46a7a6]/25'],
+  [class*='bg-[#46a7a6]/30'],
+  [class*='bg-[#46a7a6]/35'],
+  [class*='bg-[#46a7a6]/40'],
+  [class*='bg-[#46a7a6]/45'],
+  [class*='bg-[#46a7a6]/50'],
+  [class*='bg-[#46a7a6]/55'],
+  [class*='bg-[#46a7a6]/60'],
+  [class*='bg-[#46a7a6]/65'],
+  [class*='bg-[#46a7a6]/70'],
+  [class*='bg-[#46a7a6]/75'],
+  [class*='bg-[#46a7a6]/80'],
+  [class*='bg-[#46a7a6]/85'],
+  [class*='bg-[#46a7a6]/90'],
+  [class*='bg-[#46a7a6]/95']
+) {
+  background:
+    radial-gradient(circle at top, var(--marketing-accent-soft), transparent 42%),
+    linear-gradient(180deg, rgba(6, 8, 11, 0.96), rgba(10, 12, 16, 0.88)) !important;
+}
+
+main:not([data-admin]) :is(
+  [class*='text-[#46a7a6]'],
+  [class*='hover:text-[#46a7a6]']
+) {
+  color: var(--marketing-accent) !important;
 }
 
 main:not([data-admin]) .rounded-2xl,
@@ -51,6 +168,70 @@ a {
 ::selection {
   background: rgba(70, 167, 166, 0.25);
   color: #fff;
+}
+
+.np-surface {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background:
+    radial-gradient(circle at top, rgba(112, 128, 138, 0.06), transparent 42%),
+    linear-gradient(180deg, rgba(4, 7, 10, 0.94), rgba(9, 12, 17, 0.9));
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.np-surface-subtle {
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background:
+    linear-gradient(180deg, rgba(6, 9, 13, 0.82), rgba(9, 12, 16, 0.76));
+  box-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.np-card {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background:
+    radial-gradient(circle at top, rgba(102, 124, 132, 0.05), transparent 40%),
+    linear-gradient(180deg, rgba(6, 9, 13, 0.94), rgba(10, 13, 18, 0.88));
+}
+
+.np-card-soft {
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background:
+    linear-gradient(180deg, rgba(6, 9, 13, 0.82), rgba(9, 12, 16, 0.74));
+}
+
+.np-pill,
+.np-link-card {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background:
+    linear-gradient(180deg, rgba(6, 9, 12, 0.94), rgba(11, 14, 18, 0.86));
+}
+
+.np-accent {
+  color: rgba(117, 196, 203, 0.86);
+}
+
+.np-dot {
+  background: rgba(117, 196, 203, 0.86);
+}
+
+.np-hero-image {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(7, 10, 15, 0.88);
+}
+
+.np-hero-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 4, 6, 0.12), rgba(2, 4, 6, 0.6)),
+    radial-gradient(circle at center, rgba(104, 132, 140, 0.07), transparent 42%);
+  pointer-events: none;
 }
 
 .capability-markdown {
@@ -125,12 +306,12 @@ a {
 }
 
 .logo-image-clear {
-  filter: grayscale(1) brightness(0.18) contrast(1.24);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   backface-visibility: hidden;
   transform: translateZ(0);
-  opacity: 0.95;
+  opacity: 1;
 }
 
 @keyframes logo-marquee {
