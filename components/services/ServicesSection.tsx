@@ -21,7 +21,7 @@ const featuredJourneys = [
     chips: ['Payment Processing', 'POS Systems'],
     links: ['Payment Processing', 'POS Systems'],
     accentClass:
-      'border-cyan-300/18 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-cyan-200/30 hover:bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.22),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))]'
+      'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.22),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'
   },
   {
     href: '/services/business-financing-funding',
@@ -31,7 +31,7 @@ const featuredJourneys = [
     chips: ['Working Capital', 'Equipment Financing'],
     links: ['Working Capital', 'Equipment Financing'],
     accentClass:
-      'border-amber-300/18 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-amber-200/30 hover:bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))]'
+      'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'
   },
   {
     href: '/services/marketing-outreach-lead-generation',
@@ -41,7 +41,28 @@ const featuredJourneys = [
     chips: ['Outreach', 'Reputation', 'Retention'],
     links: ['Outreach', 'Reputation', 'Retention'],
     accentClass:
-      'border-violet-300/18 bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-violet-200/30 hover:bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))]'
+      'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'
+  }
+] as const;
+
+const supportingCapabilities = [
+  {
+    href: '/capabilities/business-operations',
+    title: 'Operations + Infrastructure Stack',
+    description: 'Align tools, team coverage, and access controls around how work actually moves through the business.',
+    image: '/images/business-operations.png'
+  },
+  {
+    href: '/capabilities/implementation-support',
+    title: 'Service Delivery Workflow',
+    description: 'Keep onboarding, training, and service execution moving with clearer ownership and fewer handoff issues.',
+    image: '/images/reporting-visibility.png'
+  },
+  {
+    href: '/capabilities/automation-enablement',
+    title: 'Automation + Enablement',
+    description: 'Use automations, reporting, and system coordination to reduce drag and protect margin over time.',
+    image: '/images/technology-integrations.png'
   }
 ] as const;
 
@@ -80,7 +101,10 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
         </div>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           {['Payments & POS', 'Business Lending', 'Network Building'].map((chip) => (
-            <span key={chip} className="np-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-100 transition duration-200 hover:border-white/24 hover:bg-[linear-gradient(180deg,rgba(10,14,18,0.96),rgba(16,20,26,0.9))]">
+            <span
+              key={chip}
+              className="inline-flex items-center rounded-full border border-[#46a7a6]/42 bg-[linear-gradient(180deg,rgba(8,12,16,0.96),rgba(12,16,21,0.88))] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition duration-200 hover:border-[#7dd9d8]/72 hover:bg-[linear-gradient(180deg,rgba(10,14,18,0.98),rgba(16,20,26,0.92))]"
+            >
               {chip}
             </span>
           ))}
@@ -103,7 +127,10 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
               <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{journey.description}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {journey.chips.map((chip) => (
-                  <span key={chip} className="np-pill rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/92 transition duration-200 group-hover:border-white/22">
+                  <span
+                    key={chip}
+                    className="rounded-full border border-[#46a7a6]/38 bg-[linear-gradient(180deg,rgba(8,12,16,0.96),rgba(12,16,21,0.88))] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/92 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition duration-200 group-hover:border-[#7dd9d8]/72"
+                  >
                     {chip}
                   </span>
                 ))}
@@ -111,7 +138,10 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex flex-wrap gap-2">
                   {journey.links.map((item) => (
-                    <span key={item} className="np-pill rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/92 transition duration-200 group-hover:border-white/22">
+                    <span
+                      key={item}
+                      className="rounded-full border border-[#46a7a6]/38 bg-[linear-gradient(180deg,rgba(8,12,16,0.96),rgba(12,16,21,0.88))] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/92 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition duration-200 group-hover:border-[#7dd9d8]/72"
+                    >
                       {item}
                     </span>
                   ))}
@@ -145,7 +175,7 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className={`${getServiceImageClass(service.slug)} transition duration-500 group-hover:scale-[1.03]`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/18 via-black/30 to-black/82" />
+                <div className={`absolute inset-0 ${service.slug === 'business-brokerage' ? 'bg-gradient-to-b from-black/10 via-black/22 to-black/72' : 'bg-gradient-to-b from-black/18 via-black/30 to-black/82'}`} />
               </div>
 
               <div className={`p-5 ${service.slug === 'business-brokerage' ? 'text-center' : ''}`}>
@@ -153,6 +183,35 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
                 <p className="mt-2 text-sm text-slate-100/90">{service.tagline}</p>
                 <p className="np-accent mt-3 text-xs font-semibold uppercase tracking-[0.16em]">
                   View Service Details
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {supportingCapabilities.map((capability) => (
+            <Link
+              key={capability.title}
+              href={capability.href}
+              className="np-card group overflow-hidden rounded-2xl text-left transition hover:-translate-y-0.5 hover:border-white/18"
+            >
+              <div className="relative isolate h-[190px] w-full md:h-[220px]">
+                <Image
+                  src={capability.image}
+                  alt={`${capability.title} background`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/18 via-black/30 to-black/82" />
+              </div>
+
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-white md:text-xl">{capability.title}</h3>
+                <p className="mt-2 text-sm text-slate-100/90">{capability.description}</p>
+                <p className="np-accent mt-3 text-xs font-semibold uppercase tracking-[0.16em]">
+                  Explore Capability
                 </p>
               </div>
             </Link>

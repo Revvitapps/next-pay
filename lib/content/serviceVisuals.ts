@@ -14,7 +14,7 @@ export function getServiceImage(slug: string) {
 
 export function getServiceImageClass(slug: string) {
   if (slug === 'business-brokerage') {
-    return 'object-cover object-center';
+    return 'object-contain object-center bg-black';
   }
 
   return 'object-cover object-[center_20%]';

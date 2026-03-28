@@ -209,6 +209,76 @@ a {
     linear-gradient(180deg, rgba(6, 9, 12, 0.94), rgba(11, 14, 18, 0.86));
 }
 
+main:not([data-admin]) :is(a, button, summary, [role='button']) {
+  transition:
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    filter 180ms ease,
+    opacity 180ms ease;
+}
+
+main:not([data-admin]) :is(a, button, summary, [role='button']):hover {
+  filter: brightness(1.1);
+}
+
+main:not([data-admin]) :is(
+  a.rounded-full:hover,
+  button.rounded-full:hover,
+  a.rounded-xl:hover,
+  button.rounded-xl:hover,
+  a.rounded-2xl:hover,
+  button.rounded-2xl:hover,
+  a.rounded-3xl:hover,
+  button.rounded-3xl:hover
+) {
+  box-shadow:
+    0 0 0 1px rgba(125, 217, 216, 0.22),
+    0 0 18px rgba(125, 217, 216, 0.1),
+    0 16px 38px rgba(0, 0, 0, 0.34);
+}
+
+main:not([data-admin]) :is(
+  a:hover,
+  button:hover,
+  summary:hover,
+  [role='button']:hover
+) :is(
+  .np-accent,
+  .text-slate-100,
+  .text-slate-100\/88,
+  .text-slate-100\/90,
+  .text-slate-100\/92,
+  .text-slate-100\/95,
+  .text-white
+) {
+  color: #ffffff !important;
+}
+
+main:not([data-admin]) :is(
+  a.np-card:hover,
+  a.np-link-card:hover,
+  a.np-pill:hover,
+  .np-card a:hover,
+  .np-surface a:hover
+) {
+  border-color: rgba(125, 217, 216, 0.28) !important;
+  box-shadow:
+    0 0 0 1px rgba(125, 217, 216, 0.16),
+    0 0 20px rgba(125, 217, 216, 0.08),
+    0 18px 42px rgba(0, 0, 0, 0.34);
+}
+
+main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(125, 217, 216, 0.32),
+    0 0 0 5px rgba(125, 217, 216, 0.08),
+    0 16px 38px rgba(0, 0, 0, 0.34);
+}
+
 .np-accent {
   color: rgba(117, 196, 203, 0.86);
 }

@@ -20,6 +20,11 @@ type PageShowcaseHeroProps = {
   imagePosition?: string;
 };
 
+function isJourneyLabel(label: string) {
+  const normalized = label.toLowerCase();
+  return normalized.includes('journey') || normalized.includes('quote');
+}
+
 export default function PageShowcaseHero({
   eyebrow,
   title,
@@ -62,7 +67,11 @@ export default function PageShowcaseHero({
                   {primaryCta ? (
                     <Link
                       href={primaryCta.href}
-                      className="inline-flex rounded-full border border-white/10 bg-[#eceff2] px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_18px_40px_rgba(0,0,0,0.4)] transition hover:bg-white"
+                      className={`inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                        isJourneyLabel(primaryCta.label)
+                          ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
+                          : 'border border-white/12 bg-black/55 text-white hover:border-white/18 hover:bg-black/72'
+                      }`}
                     >
                       {primaryCta.label}
                     </Link>

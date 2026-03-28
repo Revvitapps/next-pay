@@ -8,13 +8,17 @@ type ConversionCtasProps = {
   className?: string;
 };
 
-function CtaLink({ ctaKey, style }: { ctaKey: ConversionCtaKey; style: 'primary' | 'secondary' | 'tertiary' }) {
-  const cta = conversionCtas[ctaKey];
+function isJourneyCta(ctaKey: ConversionCtaKey) {
+  return ctaKey === 'customQuote' || ctaKey === 'estimateRates';
+}
 
-  const styleClass =
-    style === 'primary'
-      ? 'bg-[#eceff2] text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]'
-      : 'np-pill text-white transition hover:border-white/18 hover:bg-black/72';
+function CtaLink({ ctaKey }: { ctaKey: ConversionCtaKey }) {
+  const cta = conversionCtas[ctaKey];
+  const journeyCta = isJourneyCta(ctaKey);
+
+  const styleClass = journeyCta
+    ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow transition hover:brightness-110'
+    : 'np-pill text-white transition hover:border-white/18 hover:bg-black/72';
 
   return (
     <Link href={cta.href} className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold ${styleClass}`}>
@@ -26,9 +30,9 @@ function CtaLink({ ctaKey, style }: { ctaKey: ConversionCtaKey; style: 'primary'
 export default function ConversionCtas({ primary, secondary, tertiary, className }: ConversionCtasProps) {
   return (
     <div className={['flex flex-wrap justify-center gap-3', className ?? ''].join(' ').trim()}>
-      <CtaLink ctaKey={primary} style="primary" />
-      {secondary ? <CtaLink ctaKey={secondary} style="secondary" /> : null}
-      {tertiary ? <CtaLink ctaKey={tertiary} style="tertiary" /> : null}
+      <CtaLink ctaKey={primary} />
+      {secondary ? <CtaLink ctaKey={secondary} /> : null}
+      {tertiary ? <CtaLink ctaKey={tertiary} /> : null}
     </div>
   );
 }

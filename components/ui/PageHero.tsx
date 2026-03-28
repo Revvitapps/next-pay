@@ -8,6 +8,11 @@ type HeroLink = {
   label: string;
 };
 
+function isJourneyLabel(label: string) {
+  const normalized = label.toLowerCase();
+  return normalized.includes('journey') || normalized.includes('quote');
+}
+
 type PageHeroProps = {
   eyebrow: string;
   title: string;
@@ -77,7 +82,11 @@ export default function PageHero({
               {primaryCta ? (
                 <Link
                   href={primaryCta.href}
-                  className="inline-flex rounded-full border border-white/10 bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
+                  className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold transition ${
+                    isJourneyLabel(primaryCta.label)
+                      ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
+                      : 'border border-white/12 bg-black/55 text-white hover:border-white/18 hover:bg-black/72'
+                  }`}
                 >
                   {primaryCta.label}
                 </Link>
