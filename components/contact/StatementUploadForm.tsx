@@ -178,7 +178,11 @@ export default function StatementUploadForm() {
             {error ? <p className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100 md:col-span-2">{error}</p> : null}
 
             <div className="md:col-span-2">
-              <button type="submit" disabled={submitting} className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow">
+              <button
+                type="submit"
+                disabled={submitting}
+                className="rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(6,9,12,0.96),rgba(10,14,18,0.9))] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(125,217,216,0.08),0_12px_30px_rgba(0,0,0,0.34)] transition hover:border-[#7dd9d8]/46 hover:bg-[linear-gradient(180deg,rgba(8,12,16,0.98),rgba(12,16,20,0.94))]"
+              >
                 {submitting ? 'Uploading...' : 'Upload My Statement'}
               </button>
             </div>

@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import ComplianceNote from '@/components/compliance/ComplianceNote';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import LogoBand from '@/components/trust/LogoBand';
@@ -10,6 +13,7 @@ import { serviceOfferings } from '@/lib/services/catalog';
 type ServicesSectionProps = {
   showHeader?: boolean;
   showTrustBand?: boolean;
+  showFeaturedJourneys?: boolean;
 };
 
 const featuredJourneys = [
@@ -19,7 +23,6 @@ const featuredJourneys = [
     description:
       'Start with payment acceptance, checkout hardware, and day-to-day operations in one path.',
     chips: ['Payment Processing', 'POS Systems'],
-    links: ['Payment Processing', 'POS Systems'],
     accentClass:
       'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.22),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'
   },
@@ -29,7 +32,6 @@ const featuredJourneys = [
     description:
       'Move into capital planning for working capital, equipment purchases, and expansion timing.',
     chips: ['Working Capital', 'Equipment Financing'],
-    links: ['Working Capital', 'Equipment Financing'],
     accentClass:
       'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'
   },
@@ -39,7 +41,6 @@ const featuredJourneys = [
     description:
       'Layer in relationship-driven growth, retention support, and outreach once operations are dialed in.',
     chips: ['Outreach', 'Reputation', 'Retention'],
-    links: ['Outreach', 'Reputation', 'Retention'],
     accentClass:
       'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'
   }
@@ -66,7 +67,40 @@ const supportingCapabilities = [
   }
 ] as const;
 
-export default function ServicesSection({ showHeader = true, showTrustBand = false }: ServicesSectionProps) {
+const gridReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.06
+    }
+  }
+} as const;
+
+const cardReveal = {
+  hidden: (index: number) => ({
+    opacity: 0,
+    y: 56,
+    x: index % 2 === 0 ? -28 : 28,
+    scale: 0.97
+  }),
+  visible: {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.82,
+      ease: [0.22, 1, 0.36, 1] as const
+    }
+  }
+} as const;
+
+export default function ServicesSection({
+  showHeader = true,
+  showTrustBand = false,
+  showFeaturedJourneys = true
+}: ServicesSectionProps) {
   const secondaryServices = serviceOfferings.filter(
     (service) =>
       ![
@@ -89,7 +123,7 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
           </>
         ) : null}
         <div className={`${showHeader ? 'mt-6' : ''} grid gap-3 text-sm text-slate-100/90 md:grid-cols-3`}>
-          <Link href="/contact?intent=quote" className="np-link-card rounded-xl px-4 py-3 transition hover:border-white/18">
+          <Link href="/pricing#custom-quote" className="np-link-card rounded-xl px-4 py-3 transition hover:border-white/18">
             Start your journey
           </Link>
           <Link href="/industries" className="np-link-card rounded-xl px-4 py-3 transition hover:border-white/18">
@@ -99,16 +133,6 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
             See savings examples
           </Link>
         </div>
-        <div className="mt-5 flex flex-wrap justify-center gap-3">
-          {['Payments & POS', 'Business Lending', 'Network Building'].map((chip) => (
-            <span
-              key={chip}
-              className="inline-flex items-center rounded-full border border-[#46a7a6]/42 bg-[linear-gradient(180deg,rgba(8,12,16,0.96),rgba(12,16,21,0.88))] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition duration-200 hover:border-[#7dd9d8]/72 hover:bg-[linear-gradient(180deg,rgba(10,14,18,0.98),rgba(16,20,26,0.92))]"
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
 
         {showTrustBand ? (
           <div className="mt-8">
@@ -116,56 +140,45 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
           </div>
         ) : null}
 
-        <div className="mt-10 grid gap-5 xl:grid-cols-3">
-          {featuredJourneys.map((journey) => (
-            <Link
-              key={journey.title}
-              href={journey.href}
-              className={`group rounded-2xl border p-6 text-left shadow-[0_22px_48px_rgba(0,0,0,0.34)] transition duration-200 hover:-translate-y-0.5 ${journey.accentClass}`}
-            >
-              <h3 className="mt-3 text-2xl font-bold text-white">{journey.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{journey.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {journey.chips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full border border-[#46a7a6]/38 bg-[linear-gradient(180deg,rgba(8,12,16,0.96),rgba(12,16,21,0.88))] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/92 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition duration-200 group-hover:border-[#7dd9d8]/72"
-                  >
-                    {chip}
+        {showFeaturedJourneys ? (
+          <div className="mt-10 grid gap-5 xl:grid-cols-3">
+            {featuredJourneys.map((journey) => (
+              <Link
+                key={journey.title}
+                href={journey.href}
+                className={`group rounded-2xl border p-6 text-left shadow-[0_22px_48px_rgba(0,0,0,0.34)] transition duration-200 hover:-translate-y-0.5 ${journey.accentClass}`}
+              >
+                <h3 className="mt-3 text-2xl font-bold text-white">{journey.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{journey.description}</p>
+                <div className="mt-6 flex items-center justify-end">
+                  <span className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">
+                    Start Your Journey
                   </span>
-                ))}
-              </div>
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-wrap gap-2">
-                  {journey.links.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-[#46a7a6]/38 bg-[linear-gradient(180deg,rgba(8,12,16,0.96),rgba(12,16,21,0.88))] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100/92 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition duration-200 group-hover:border-[#7dd9d8]/72"
-                    >
-                      {item}
-                    </span>
-                  ))}
                 </div>
-                <span className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">
-                  Start Your Journey
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : null}
 
-        <div className="mt-12 flex items-center gap-4">
+        <div className={`${showFeaturedJourneys ? 'mt-16' : 'mt-20'} flex items-center gap-4`}>
           <div className="h-px flex-1 bg-white/10" />
-          <p className="np-accent text-xs font-semibold uppercase tracking-[0.2em]">Additional Support Services</p>
+          <p className="np-accent text-xs font-semibold uppercase tracking-[0.2em]">Additional Business Services</p>
           <div className="h-px flex-1 bg-white/10" />
         </div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {secondaryServices.map((service) => (
-            <Link
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.18 }}
+          variants={gridReveal}
+          className="mt-14 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3"
+        >
+          {secondaryServices.map((service, index) => (
+            <motion.div key={service.slug} custom={index} variants={cardReveal}>
+              <Link
               key={service.slug}
               href={`/services/${service.slug}`}
-              className="np-card group overflow-hidden rounded-2xl text-left transition hover:-translate-y-0.5 hover:border-white/18"
+              className="np-card group block overflow-hidden rounded-2xl text-left transition duration-300 hover:-translate-y-1.5 hover:border-white/18 hover:shadow-[0_28px_60px_rgba(0,0,0,0.4)]"
             >
               <div className="relative isolate h-[190px] w-full md:h-[220px]">
                 <Image
@@ -173,7 +186,7 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
                   alt={`${service.name} background`}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className={`${getServiceImageClass(service.slug)} transition duration-500 group-hover:scale-[1.03]`}
+                  className={`${getServiceImageClass(service.slug)} transition duration-700 ease-out group-hover:scale-[1.06]`}
                 />
                 <div className={`absolute inset-0 ${service.slug === 'business-brokerage' ? 'bg-gradient-to-b from-black/10 via-black/22 to-black/72' : 'bg-gradient-to-b from-black/18 via-black/30 to-black/82'}`} />
               </div>
@@ -185,28 +198,25 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
                   View Service Details
                 </p>
               </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {supportingCapabilities.map((capability) => (
-            <Link
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.18 }}
+          variants={gridReveal}
+          className="mt-16 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3"
+        >
+          {supportingCapabilities.map((capability, index) => (
+            <motion.div key={capability.title} custom={index} variants={cardReveal}>
+              <Link
               key={capability.title}
               href={capability.href}
-              className="np-card group overflow-hidden rounded-2xl text-left transition hover:-translate-y-0.5 hover:border-white/18"
+              className="np-card-soft group block overflow-hidden rounded-2xl text-left transition duration-300 hover:-translate-y-1.5 hover:border-white/18 hover:shadow-[0_24px_54px_rgba(0,0,0,0.34)]"
             >
-              <div className="relative isolate h-[190px] w-full md:h-[220px]">
-                <Image
-                  src={capability.image}
-                  alt={`${capability.title} background`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/18 via-black/30 to-black/82" />
-              </div>
-
               <div className="p-5">
                 <h3 className="text-lg font-bold text-white md:text-xl">{capability.title}</h3>
                 <p className="mt-2 text-sm text-slate-100/90">{capability.description}</p>
@@ -214,9 +224,10 @@ export default function ServicesSection({ showHeader = true, showTrustBand = fal
                   Explore Capability
                 </p>
               </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <ComplianceNote text="pricingPrograms" tone="soft" className="mt-6" />
         <ConversionCtas primary="customQuote" secondary="uploadStatement" className="mt-8" />

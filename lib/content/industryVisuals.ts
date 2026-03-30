@@ -2,14 +2,14 @@ import type { TrustLogo } from '@/lib/content/logos';
 import { operationsPlatformLogos, paymentsTrustLogos, posPlatformLogos } from '@/lib/content/logos';
 
 export const industryHeroImageById: Record<string, string> = {
-  'automotive-businesses': '/images/service-delivery-workflow.jpg',
-  'beauty-and-personal-care': '/images/implementation-support.png',
-  'entertainment-and-specialty-businesses': '/images/technology-integrations.png',
-  'fitness-and-membership-businesses': '/images/automation-enablement.jpg',
-  'healthcare-and-medical-practices': '/images/reporting-visibility.png',
-  'high-risk': '/images/business-operations.png',
-  'home-services-and-contractors': '/images/operations-infastructure-stack.jpg',
-  'professional-and-business-services': '/images/business-operations.png',
+  'automotive-businesses': '/images/top-right-image.jpg',
+  'beauty-and-personal-care': '/images/top-right-image.jpg',
+  'entertainment-and-specialty-businesses': '/images/top-right-image.jpg',
+  'fitness-and-membership-businesses': '/images/top-right-image.jpg',
+  'healthcare-and-medical-practices': '/images/top-right-image.jpg',
+  'high-risk': '/images/top-right-image.jpg',
+  'home-services-and-contractors': '/images/top-right-image.jpg',
+  'professional-and-business-services': '/images/top-right-image.jpg',
   'restaurants-and-hospitality': '/images/modern-pos.jpeg',
   'retail-businesses': '/images/futuristic-pos-nextpay.png'
 };
@@ -17,16 +17,16 @@ export const industryHeroImageById: Record<string, string> = {
 export const sectorHeroImageById: Record<string, string> = {
   restaurants: '/images/modern-pos.jpeg',
   retail: '/images/futuristic-pos-nextpay.png',
-  services: '/images/business-operations.png',
-  'high-risk': '/images/financial-workflows.png'
+  services: '/images/top-right-image.jpg',
+  'high-risk': '/images/top-right-image.jpg'
 };
 
 export function getIndustryHeroImage(industryId: string) {
-  return industryHeroImageById[industryId] ?? '/images/main-page-hero.jpeg';
+  return industryHeroImageById[industryId] ?? '/images/top-right-image.jpg';
 }
 
 export function getSectorHeroImage(sectorId: string) {
-  return sectorHeroImageById[sectorId] ?? '/images/main-page-hero.jpeg';
+  return sectorHeroImageById[sectorId] ?? '/images/top-right-image.jpg';
 }
 
 export function getIndustryLogos(industryId: string): TrustLogo[] {

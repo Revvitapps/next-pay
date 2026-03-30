@@ -37,9 +37,9 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Business Services"
         description="Start with the three paths most businesses ask for: payments and POS, business lending, and stronger network building."
-        image="/images/next-pay-site-hero.jpeg"
+        image="/images/top-right-image.jpg"
         alt="NextPay business services overview"
-        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       >
         <div className="grid gap-3 text-sm text-slate-100/90 md:grid-cols-3">
@@ -55,7 +55,7 @@ export default function ServicesPage() {
         </div>
       </PageShowcaseHero>
       <LogoBand eyebrow="" title="Trusted Network" logos={commerceTrustLogos} />
-      <ServicesSection showHeader={false} showTrustBand={false} />
+      <ServicesSection showHeader={false} showTrustBand={false} showFeaturedJourneys={false} />
       <LogoBand eyebrow="" title="Trusted POS Brands" logos={posPlatformLogos} />
       <SiteFooter />
     </main>

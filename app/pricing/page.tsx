@@ -23,18 +23,7 @@ export default function PricingPage() {
         ])}
       />
       <Navbar />
-      <section className="px-6 pt-12 lg:px-12">
-        <div className="mx-auto w-full max-w-5xl text-center">
-          <p className="text-sm uppercase tracking-[0.22em] text-[#46a7a6]/85">Start Your Journey</p>
-          <h1 className="mt-4 font-heading text-4xl font-extrabold text-white md:text-5xl">
-            Find the right NextPay setup in a few quick steps
-          </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base text-slate-100/84">
-            Choose the options that fit your business. We will guide you to the right payment, POS, funding, and support path before collecting your details.
-          </p>
-        </div>
-      </section>
-      <div id="custom-quote" className="pb-6">
+      <div id="custom-quote" className="pb-6 pt-10">
         <GuidedSolutionQuiz industries={industryProfiles.map((industry) => ({ id: industry.id, label: industry.label }))} />
       </div>
       <SiteFooter />

@@ -9,7 +9,7 @@ export const conversionCtas = {
   },
   customQuote: {
     label: 'Start Your Journey',
-    href: '/contact?intent=quote'
+    href: '/pricing#custom-quote'
   }
 } as const;
 

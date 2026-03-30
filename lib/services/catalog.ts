@@ -133,7 +133,7 @@ export const serviceOfferings: ServiceOffering[] = [
     programCards: [
       {
         category: 'Merchant Pay',
-        title: 'Flat Rate Pricing',
+        title: 'Flat Rate',
         subtitle: 'A stable rate structure for newer businesses and owners that want predictability.',
         items: [
           'One consistent rate across card types',
@@ -196,6 +196,16 @@ export const serviceOfferings: ServiceOffering[] = [
         question: 'When do deposits typically reach my bank account?',
         answer:
           'For eligible merchants, funding may be available on the next business day after the batch is closed. Timing can vary by processor, bank, and account setup.'
+      },
+      {
+        question: 'Can batches close automatically each day?',
+        answer:
+          'Yes. Auto batch scheduling can be configured on many setups so transactions close on a consistent schedule and deposits stay more predictable.'
+      },
+      {
+        question: 'Will I have access to cleaner reporting?',
+        answer:
+          'Yes. Reporting tools can surface batch detail, funding timing, transaction mix, and day-to-day activity so owners can reconcile faster and spot issues earlier.'
       }
     ]
   },

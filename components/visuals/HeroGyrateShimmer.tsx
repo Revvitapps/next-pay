@@ -42,15 +42,15 @@ export default function HeroGyrateShimmer() {
         className="absolute inset-0 z-20"
         style={{
           background:
-            "linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0.10) 55%, transparent 100%)",
+            "linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 55%, transparent 100%)",
           mixBlendMode: "screen",
-          opacity: 0.9
+          opacity: 0.6
         }}
         animate={{ x: ["-120%", "120%"] }}
         transition={{ duration: 3.2, repeat: Infinity, ease: "linear" }}
       />
 
-      <div className="absolute inset-0 z-30 bg-[radial-gradient(900px_circle_at_50%_40%,transparent_20%,rgba(5,6,10,0.64)_74%)]" />
+      <div className="absolute inset-0 z-30 bg-[radial-gradient(900px_circle_at_50%_40%,transparent_28%,rgba(5,6,10,0.36)_76%)]" />
     </div>
   );
 }

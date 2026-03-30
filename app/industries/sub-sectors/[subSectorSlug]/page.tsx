@@ -57,7 +57,7 @@ export default async function SubSectorPage({ params }: SubSectorPageProps) {
         description="Recommended industries and service fit for this business type."
         image={getIndustryHeroImage(matchingIndustries[0]?.id ?? 'retail-businesses')}
         alt={`${subSectorEntry.label} sub-sector hero`}
-        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       />
       <LogoBand eyebrow="" title="Trusted Brands" logos={getSectorLogos(matchingIndustries[0]?.sector ?? 'services')} />
@@ -79,7 +79,7 @@ export default async function SubSectorPage({ params }: SubSectorPageProps) {
           <div className="mt-8">
             <div className="flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?intent=quote"
+                href="/pricing#custom-quote"
                 className="inline-flex rounded-full bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
               >
                 Start Your Journey

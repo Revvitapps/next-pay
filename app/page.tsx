@@ -8,9 +8,7 @@ import JsonLd from '@/components/seo/JsonLd';
 import MerchantSavingsCards from '@/components/savings/MerchantSavingsCards';
 import SavingsAnalyzerCta from '@/components/savings/SavingsAnalyzerCta';
 import ServicesSection from '@/components/services/ServicesSection';
-import LogoBand from '@/components/trust/LogoBand';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { paymentsTrustLogos } from '@/lib/content/logos';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
@@ -37,9 +35,7 @@ export default function HomePage() {
       <Navbar />
       <Hero />
 
-      <LogoBand eyebrow="Payment Networks" title="Trusted Payment Network Integrations" logos={paymentsTrustLogos} />
-
-      <ServicesSection />
+      <ServicesSection showFeaturedJourneys={false} />
       <IndustrySelector />
 
       <MerchantSavingsCards />

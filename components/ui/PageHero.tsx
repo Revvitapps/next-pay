@@ -41,66 +41,68 @@ export default function PageHero({
   trustBand
 }: PageHeroProps) {
   return (
-    <section className="px-6 py-16 lg:px-12">
-      <div className="np-surface mx-auto w-full max-w-[1380px] overflow-hidden rounded-3xl">
-        <div className="relative isolate h-[250px] w-full sm:h-[300px] lg:h-[360px]">
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(104,132,140,0.1),transparent_40%),linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.78))]" />
-        </div>
+    <section className="relative w-full overflow-hidden">
+      <div className="relative isolate min-h-[420px] w-full sm:min-h-[500px] lg:min-h-[620px]">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          priority
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(104,132,140,0.08),transparent_34%),linear-gradient(90deg,rgba(2,4,6,0.72)_0%,rgba(2,4,6,0.44)_28%,rgba(2,4,6,0.16)_52%,rgba(2,4,6,0.22)_100%),linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.7))]" />
 
-        <div className="px-8 py-8 text-center md:px-10 md:py-10">
-          <p className="np-accent text-sm uppercase tracking-[0.22em]">{eyebrow}</p>
-          <h1 className="mx-auto mt-4 max-w-5xl font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            {title}
-          </h1>
-          <p className="mx-auto mt-4 max-w-4xl text-sm leading-relaxed text-slate-100/90 md:text-base">
-            {description}
-          </p>
+        <div className="absolute inset-x-0 top-0 flex min-h-full items-center px-6 py-16 lg:px-12">
+          <div className="mx-auto w-full max-w-[1380px]">
+            <div className="max-w-4xl text-center md:max-w-4xl">
+              <p className="np-accent text-sm uppercase tracking-[0.22em]">{eyebrow}</p>
+              <h1 className="mx-auto mt-4 max-w-5xl font-heading text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_18px_34px_rgba(0,0,0,0.32)] md:text-5xl lg:text-6xl">
+                {title}
+              </h1>
+              <p className="mx-auto mt-4 max-w-4xl text-sm leading-relaxed text-slate-100/90 md:text-base lg:text-lg">
+                {description}
+              </p>
 
-          {chips?.length ? (
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              {chips.map((chip) => (
-                <span
-                  key={chip}
-                  className="np-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-100/90"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-          ) : null}
-
-          {(primaryCta || secondaryCta) && (
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              {primaryCta ? (
-                <Link
-                  href={primaryCta.href}
-                  className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold transition ${
-                    isJourneyLabel(primaryCta.label)
-                      ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
-                      : 'border border-white/12 bg-black/55 text-white hover:border-white/18 hover:bg-black/72'
-                  }`}
-                >
-                  {primaryCta.label}
-                </Link>
+              {chips?.length ? (
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  {chips.map((chip) => (
+                    <span
+                      key={chip}
+                      className="np-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-100/90"
+                    >
+                      {chip}
+                    </span>
+                  ))}
+                </div>
               ) : null}
-              {secondaryCta ? (
-                <Link
-                  href={secondaryCta.href}
-                  className="inline-flex rounded-full border border-white/12 bg-black/55 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
-                >
-                  {secondaryCta.label}
-                </Link>
-              ) : null}
+
+              {(primaryCta || secondaryCta) && (
+                <div className="mt-8 flex flex-wrap justify-center gap-3">
+                  {primaryCta ? (
+                    <Link
+                      href={primaryCta.href}
+                      className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold transition ${
+                        isJourneyLabel(primaryCta.label)
+                          ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
+                          : 'border border-white/12 bg-black/55 text-white hover:border-white/18 hover:bg-black/72'
+                      }`}
+                    >
+                      {primaryCta.label}
+                    </Link>
+                  ) : null}
+                  {secondaryCta ? (
+                    <Link
+                      href={secondaryCta.href}
+                      className="inline-flex rounded-full border border-white/12 bg-black/55 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+                    >
+                      {secondaryCta.label}
+                    </Link>
+                  ) : null}
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
 

@@ -14,7 +14,7 @@ import {
   UtensilsCrossed,
   Store
 } from 'lucide-react';
-import { industryProfiles, slugifySubSector } from '@/components/industries/industryData';
+import { industryProfiles } from '@/components/industries/industryData';
 
 type IndustrySelectorProps = {
   showHeader?: boolean;
@@ -72,9 +72,9 @@ const industryVisuals: Record<
 export default function IndustrySelector({ showHeader = true }: IndustrySelectorProps) {
   const sectorTiles = useMemo(
     () => [
-      { id: 'restaurants', label: 'Restaurants', subtitle: 'Food & beverage operators' },
       { id: 'retail', label: 'Retail', subtitle: 'Storefront and specialty retail' },
       { id: 'services', label: 'Services', subtitle: 'Professional and field services' },
+      { id: 'restaurants', label: 'Restaurants', subtitle: 'Food & beverage operators' },
       { id: 'high-risk', label: 'High-Risk Businesses', subtitle: 'Specialized underwriting lanes' }
     ],
     []
@@ -95,7 +95,7 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
               </p>
             </div>
             <Link
-              href="/contact?intent=quote"
+              href="/pricing#custom-quote"
               className="np-pill justify-self-start rounded-full px-5 py-2.5 text-sm font-semibold text-[#7dd9d8] transition hover:border-white/18 hover:bg-black/70"
             >
               Start Your Journey
@@ -109,7 +109,7 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
               <Link
                 key={sector.id}
                 href={`/industries/sectors/${sector.id}`}
-                className="np-card-soft rounded-2xl border p-4 text-left transition hover:border-white/14"
+                className="np-card-soft rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:border-white/14"
               >
                 <p className="np-accent text-[10px] uppercase tracking-[0.2em]">Sector</p>
                 <p className="mt-2 text-base font-semibold text-white">{sector.label}</p>
@@ -128,7 +128,7 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
               <Link
                 key={industry.id}
                 href={`/industries/${industry.id}`}
-                className="group np-card-soft rounded-2xl border p-4 text-left transition hover:border-white/14"
+                className="group np-card-soft rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:border-white/14"
               >
                 <div className="flex items-center gap-4">
                   <div
@@ -147,13 +147,12 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
                     <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/55">Industry</p>
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       {industry.subSectors.slice(0, 3).map((subSector) => (
-                        <Link
+                        <span
                           key={`${industry.id}-${subSector}`}
-                          href={`/industries/sub-sectors/${slugifySubSector(subSector)}`}
-                          className="np-pill rounded-full px-2 py-0.5 text-[10px] text-slate-100/80 transition hover:border-white/18"
+                          className="np-pill rounded-full px-2 py-0.5 text-[10px] text-slate-100/80"
                         >
                           {subSector}
-                        </Link>
+                        </span>
                       ))}
                     </div>
                   </div>

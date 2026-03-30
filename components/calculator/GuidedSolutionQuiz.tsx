@@ -90,7 +90,7 @@ const defaultLeadForm: JourneyLeadForm = {
   turnstileToken: ''
 };
 
-const stepLabels = ['Getting Started', 'Industry', 'System', 'Sales', 'Timeline'];
+const stepLabels = ['Business Stage', 'Industry', 'Needs', 'Volume', 'Timeline'];
 
 const industryVisuals: Record<
   string,
@@ -272,6 +272,40 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
     document.head.appendChild(script);
   }, [quizComplete, turnstileSiteKey]);
 
+  function advanceStepIfPossible(nextAnswers: QuizAnswers, targetStep = stepIndex) {
+    if (targetStep === 0 && nextAnswers.businessStage) {
+      setError(null);
+      setStepIndex(1);
+      return;
+    }
+
+    if (targetStep === 1 && nextAnswers.industrySector && nextAnswers.industry && nextAnswers.businessType) {
+      setError(null);
+      setStepIndex(2);
+      return;
+    }
+
+    if (
+      targetStep === 3 &&
+      nextAnswers.monthlyCardVolume > 0 &&
+      nextAnswers.averageTicketSize > 0 &&
+      nextAnswers.numberOfLocations > 0
+    ) {
+      setError(null);
+      setStepIndex(4);
+      return;
+    }
+
+    if (targetStep === 4 && nextAnswers.timeline) {
+      setError(null);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        setQuizComplete(true);
+      }, 450);
+    }
+  }
+
   function canContinueStep() {
     if (stepIndex === 0) return Boolean(answers.businessStage);
     if (stepIndex === 1) return Boolean(answers.industrySector && answers.industry);
@@ -393,10 +427,35 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
     <section className="px-6 py-20 lg:px-12">
       <form
         onSubmit={onSubmit}
-        className="mx-auto w-full max-w-[1180px] rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,15,18,.98),rgba(18,21,26,.96))] p-8 shadow-[0_28px_80px_rgba(0,0,0,.45)] md:p-10"
+        className="mx-auto w-full max-w-[1080px] rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(8,11,14,0.98),rgba(10,14,18,0.96))] p-8 shadow-[0_28px_80px_rgba(0,0,0,.52)] md:p-10"
       >
-        <p className="text-center text-sm uppercase tracking-[0.2em] text-slate-300/72">NextPay Journey</p>
-        <h2 className="mt-3 text-center font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+        <p className="text-center text-sm uppercase tracking-[0.26em] text-[#7dd9d8]/82">Start Your Journey</p>
+        <h1 className="mt-4 text-center font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+          Find the right NextPay setup one step at a time
+        </h1>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-base text-slate-300/82">
+          Make one decision per step. Recommendations stay hidden until the end, and we only ask for your contact details after the setup is ready.
+        </p>
+
+        <div className="mx-auto mt-8 max-w-4xl">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/8">
+            <div className="h-full bg-gradient-to-r from-[#7dd9d8] via-[#46a7a6] to-[#2fb7d3] transition-all duration-300" style={{ width: `${quizProgress}%` }} />
+          </div>
+          <div className="mt-4 grid grid-cols-5 gap-2 text-center">
+            {stepLabels.map((label, index) => (
+              <p
+                key={label}
+                className={`text-[11px] font-semibold uppercase tracking-[0.16em] ${
+                  index <= stepIndex ? 'text-white' : 'text-slate-300/50'
+                }`}
+              >
+                {label}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <h2 className="mt-10 text-center font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
           {stepIndex === 0
             ? 'What defines you best?'
             : stepIndex === 1
@@ -424,7 +483,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
         </p>
 
         {!quizComplete ? (
-          <div className="mt-10 rounded-[1.75rem] border border-white/7 bg-[rgba(38,40,45,.72)] p-5 backdrop-blur-xl md:p-8">
+          <div className="mt-10 rounded-[1.75rem] border border-white/7 bg-[linear-gradient(180deg,rgba(16,20,25,0.92),rgba(20,24,29,0.86))] p-5 backdrop-blur-xl md:p-8">
             {stepIndex === 0 ? (
               <div>
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -436,12 +495,16 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                       key={value}
                       type="button"
                       onClick={() =>
-                        setAnswers((prev) => ({ ...prev, businessStage: value as 'existing' | 'new' }))
+                        setAnswers((prev) => {
+                          const nextAnswers = { ...prev, businessStage: value as 'existing' | 'new' };
+                          advanceStepIfPossible(nextAnswers, 0);
+                          return nextAnswers;
+                        })
                       }
                       className={`min-h-[190px] rounded-[1.5rem] border p-8 text-center transition xl:min-h-[210px] ${
                         answers.businessStage === value
-                          ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.3)]'
-                          : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/88 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                          ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.36)]'
+                          : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/88 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                       }`}
                     >
                       <p className="text-xl font-semibold xl:text-2xl">{label}</p>
@@ -473,8 +536,8 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                       }
                       className={`min-h-[150px] rounded-[1.5rem] border p-6 text-center transition xl:min-h-[164px] ${
                         answers.industrySector === value
-                          ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.3)]'
-                          : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/88 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                          ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.36)]'
+                          : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/88 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                       }`}
                     >
                       <p className="text-lg font-semibold">{label}</p>
@@ -494,16 +557,19 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                             key={industry.id}
                             type="button"
                             onClick={() =>
-                              setAnswers((prev) => ({
-                                ...prev,
-                                industry: industry.id,
-                                businessType: industry.subSectors[0] ?? ''
-                              }))
+                              setAnswers((prev) => {
+                                const nextAnswers = {
+                                  ...prev,
+                                  industry: industry.id,
+                                  businessType: industry.subSectors[0] ?? ''
+                                };
+                                return nextAnswers;
+                              })
                             }
                             className={`rounded-[1.25rem] border p-4 text-left transition ${
                               answers.industry === industry.id
-                                ? 'border-sky-300/70 bg-[rgba(86,38,38,.85)] shadow-[0_0_0_1px_rgba(125,211,252,.18)]'
-                                : 'border-white/8 bg-[rgba(78,78,83,.76)] hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                                ? 'border-[#7dd9d8]/72 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.14),transparent_50%),linear-gradient(180deg,rgba(8,16,20,0.92),rgba(9,13,17,0.9))] shadow-[0_0_0_1px_rgba(125,217,216,0.18)]'
+                                : 'border-white/8 bg-[rgba(24,28,34,0.84)] hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                             }`}
                           >
                             <div className="flex items-center gap-3">
@@ -527,10 +593,16 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                         <button
                           key={subSector}
                           type="button"
-                          onClick={() => setAnswers((prev) => ({ ...prev, businessType: subSector }))}
+                          onClick={() =>
+                            setAnswers((prev) => {
+                              const nextAnswers = { ...prev, businessType: subSector };
+                              advanceStepIfPossible(nextAnswers, 1);
+                              return nextAnswers;
+                            })
+                          }
                             className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
                               answers.businessType === subSector
-                              ? 'border-sky-300/70 bg-[rgba(86,38,38,.88)] text-white'
+                              ? 'border-[#7dd9d8]/70 bg-[rgba(10,28,34,0.9)] text-white'
                               : 'border-white/10 bg-black/45 text-slate-100/85 hover:border-white/18'
                             }`}
                           >
@@ -565,8 +637,8 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                         }
                         className={`min-h-[104px] rounded-[1.25rem] border p-5 text-left transition ${
                           checked
-                            ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.24)]'
-                            : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                            ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.32)]'
+                            : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                         }`}
                       >
                         <div className="flex items-center justify-between">
@@ -592,11 +664,17 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                     <button
                       key={label}
                       type="button"
-                      onClick={() => setAnswers((prev) => ({ ...prev, monthlyCardVolume: Number(value) }))}
+                      onClick={() =>
+                        setAnswers((prev) => {
+                          const nextAnswers = { ...prev, monthlyCardVolume: Number(value) };
+                          advanceStepIfPossible(nextAnswers, 3);
+                          return nextAnswers;
+                        })
+                      }
                       className={`min-h-[112px] rounded-[1.25rem] border p-5 text-center transition ${
                         answers.monthlyCardVolume === value
-                          ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.24)]'
-                          : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                          ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.32)]'
+                          : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                       }`}
                     >
                       <p className="text-lg font-semibold">{label}</p>
@@ -614,11 +692,17 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                     <button
                       key={label}
                       type="button"
-                      onClick={() => setAnswers((prev) => ({ ...prev, averageTicketSize: Number(value) }))}
+                      onClick={() =>
+                        setAnswers((prev) => {
+                          const nextAnswers = { ...prev, averageTicketSize: Number(value) };
+                          advanceStepIfPossible(nextAnswers, 3);
+                          return nextAnswers;
+                        })
+                      }
                       className={`rounded-[1.25rem] border p-5 text-center transition ${
                         answers.averageTicketSize === value
-                          ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.24)]'
-                          : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                          ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.32)]'
+                          : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                       }`}
                     >
                       <p className="text-lg font-semibold">{label}</p>
@@ -636,11 +720,17 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                     <button
                       key={label}
                       type="button"
-                      onClick={() => setAnswers((prev) => ({ ...prev, numberOfLocations: Number(value) }))}
+                      onClick={() =>
+                        setAnswers((prev) => {
+                          const nextAnswers = { ...prev, numberOfLocations: Number(value) };
+                          advanceStepIfPossible(nextAnswers, 3);
+                          return nextAnswers;
+                        })
+                      }
                       className={`rounded-[1.25rem] border p-5 text-center transition ${
                         answers.numberOfLocations === value
-                          ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.24)]'
-                          : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                          ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.32)]'
+                          : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                       }`}
                     >
                       <p className="text-lg font-semibold">{label}</p>
@@ -661,11 +751,17 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                     <button
                       key={value}
                       type="button"
-                      onClick={() => setAnswers((prev) => ({ ...prev, timeline: value as QuizAnswers['timeline'] }))}
+                      onClick={() =>
+                        setAnswers((prev) => {
+                          const nextAnswers = { ...prev, timeline: value as QuizAnswers['timeline'] };
+                          advanceStepIfPossible(nextAnswers, 4);
+                          return nextAnswers;
+                        })
+                      }
                       className={`min-h-[190px] rounded-[1.5rem] border p-8 text-center transition xl:min-h-[210px] ${
                         answers.timeline === value
-                          ? 'border-sky-300/80 bg-gradient-to-br from-[#6e2c2c] to-[#4d2020] text-white shadow-[0_0_0_1px_rgba(125,211,252,.2),0_18px_40px_rgba(95,32,32,.3)]'
-                          : 'border-white/8 bg-[rgba(78,78,83,.76)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(92,92,98,.8)]'
+                          ? 'border-[#7dd9d8]/80 bg-[radial-gradient(circle_at_top,rgba(125,217,216,0.18),transparent_44%),linear-gradient(180deg,rgba(8,16,20,0.96),rgba(8,12,16,0.92))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.2),0_18px_40px_rgba(6,18,22,0.36)]'
+                          : 'border-white/8 bg-[rgba(24,28,34,0.84)] text-slate-100/90 hover:border-white/16 hover:bg-[rgba(30,34,40,0.92)]'
                       }`}
                     >
                       <p className="text-2xl font-semibold">{label}</p>
@@ -698,35 +794,17 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2 text-sm font-semibold text-slate-950 shadow-[0_10px_30px_rgba(255,255,255,.08)]"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                 >
                   {stepIndex === stepLabels.length - 1 ? (loading ? 'Generating...' : 'Generate Recommendations') : 'Next'}
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-
-              <div className="mt-5">
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/8">
-                  <div className="h-full bg-gradient-to-r from-white/90 to-sky-300 transition-all duration-300" style={{ width: `${quizProgress}%` }} />
-                </div>
-                <div className="mt-3 grid grid-cols-5 gap-2 text-center">
-                  {stepLabels.map((label, index) => (
-                    <p
-                      key={label}
-                      className={`text-[11px] font-semibold uppercase tracking-[0.14em] ${
-                        index <= stepIndex ? 'text-white' : 'text-slate-300/55'
-                      }`}
-                    >
-                      {label}
-                    </p>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         ) : (
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
-            <article className="rounded-[1.5rem] border border-white/8 bg-[rgba(38,40,45,.72)] p-5 text-left">
+            <article className="rounded-[1.5rem] border border-white/8 bg-[rgba(18,22,27,.84)] p-5 text-left">
               <h3 className="text-lg font-bold text-white">Recommended Product Stack</h3>
               <p className="mt-3 text-sm text-slate-100/90">
                 <span className="font-semibold text-white">POS recommendation:</span> {recommendedPos}
@@ -742,7 +820,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
               </p>
             </article>
 
-            <article className="rounded-[1.5rem] border border-white/8 bg-[rgba(38,40,45,.72)] p-5 text-left">
+            <article className="rounded-[1.5rem] border border-white/8 bg-[rgba(18,22,27,.84)] p-5 text-left">
               <h3 className="text-lg font-bold text-white">Recommended NextPay Services</h3>
               <ul className="mt-3 space-y-2 text-sm text-slate-100/90">
                 {recommendedServices.map((service) => (
@@ -758,7 +836,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
               <p className="mt-1 text-sm text-slate-100/90">Locations: {answers.numberOfLocations}</p>
             </article>
 
-            <article className="rounded-[1.5rem] border border-white/8 bg-[rgba(38,40,45,.72)] p-5 text-left lg:col-span-2">
+            <article className="rounded-[1.5rem] border border-white/8 bg-[rgba(18,22,27,.84)] p-5 text-left lg:col-span-2">
               <h3 className="text-lg font-bold text-white">Recommended Next Step</h3>
               <p className="mt-2 text-sm text-slate-100/90">
                 Your direction is ready. Leave your contact details below and we will send the right next-step plan for this setup.
@@ -851,7 +929,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                     <button
                       type="submit"
                       disabled={submittingLead}
-                      className="inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_10px_30px_rgba(255,255,255,.08)] transition hover:brightness-110"
+                      className="inline-flex rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                     >
                       {submittingLead ? 'Sending...' : 'Send My Journey'}
                     </button>

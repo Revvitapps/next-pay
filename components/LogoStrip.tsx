@@ -4,15 +4,16 @@ type LogoStripProps = {
   logos: TrustLogo[];
   reverse?: boolean;
   className?: string;
+  mode?: 'logos' | 'wordmarks' | 'mixedMonochrome';
 };
 
 function getLogoClass(assetPath?: string) {
   return assetPath?.endsWith('.svg')
-    ? 'h-12 w-auto max-w-[186px] object-contain logo-image-clear md:h-14'
-    : 'h-10 w-auto max-w-[164px] object-contain logo-image-clear md:h-11';
+    ? 'h-10 w-auto max-w-[170px] object-contain logo-image-clear md:h-12'
+    : 'h-9 w-auto max-w-[150px] object-contain logo-image-clear md:h-10';
 }
 
-function LogoAsset({ logo }: { logo: TrustLogo }) {
+function LogoAsset({ logo, monochrome = false }: { logo: TrustLogo; monochrome?: boolean }) {
   const src = logo.assetPath ?? logo.fallbackAssetPath;
   if (!src) {
     return (
@@ -31,7 +32,7 @@ function LogoAsset({ logo }: { logo: TrustLogo }) {
       <img
         src={src}
         alt={logo.alt}
-        className={getLogoClass(logo.assetPath)}
+        className={`${getLogoClass(logo.assetPath)} ${monochrome ? 'logo-image-monochrome' : ''}`.trim()}
         loading="lazy"
         decoding="async"
       />
@@ -39,7 +40,7 @@ function LogoAsset({ logo }: { logo: TrustLogo }) {
   );
 }
 
-export default function LogoStrip({ logos, reverse = false, className = '' }: LogoStripProps) {
+export default function LogoStrip({ logos, reverse = false, className = '', mode = 'logos' }: LogoStripProps) {
   const forward = [...logos, ...logos];
 
   return (
@@ -50,9 +51,34 @@ export default function LogoStrip({ logos, reverse = false, className = '' }: Lo
             key={`logo-strip-${logo.name}-${index}`}
             aria-label={logo.alt}
             aria-hidden={index >= logos.length}
-            className="logo-chip flex min-h-16 min-w-[190px] items-center justify-center text-center text-sm font-semibold text-slate-100/85"
+            className={`logo-chip flex items-center justify-center px-2 py-1 text-center ${
+              mode === 'wordmarks' || mode === 'mixedMonochrome'
+                ? 'min-w-[180px] md:min-w-[220px]'
+                : 'min-w-[150px] flex-col gap-2 text-sm font-semibold text-slate-100/85 md:min-w-[180px]'
+            }`}
           >
-            <LogoAsset logo={logo} />
+            {mode === 'wordmarks' ? (
+              <span className="logo-wordmark whitespace-nowrap font-heading text-xl font-semibold tracking-[-0.02em] text-current md:text-2xl">
+                {logo.name}
+              </span>
+            ) : mode === 'mixedMonochrome' ? (
+              logo.assetPath || logo.fallbackAssetPath ? (
+                <span className="logo-mark-shell inline-flex items-center justify-center">
+                  <LogoAsset logo={logo} monochrome />
+                </span>
+              ) : (
+                <span className="logo-wordmark whitespace-nowrap font-heading text-xl font-semibold tracking-[-0.02em] text-current md:text-2xl">
+                  {logo.name}
+                </span>
+              )
+            ) : (
+              <>
+                <LogoAsset logo={logo} />
+                <span className="logo-label text-[11px] font-semibold uppercase tracking-[0.14em] text-current/80 md:text-xs">
+                  {logo.name}
+                </span>
+              </>
+            )}
           </div>
         ))}
       </div>

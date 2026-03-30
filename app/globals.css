@@ -221,7 +221,8 @@ main:not([data-admin]) :is(a, button, summary, [role='button']) {
 }
 
 main:not([data-admin]) :is(a, button, summary, [role='button']):hover {
-  filter: brightness(1.1);
+  filter: brightness(1.12);
+  transform: translateY(-1px);
 }
 
 main:not([data-admin]) :is(
@@ -235,9 +236,9 @@ main:not([data-admin]) :is(
   button.rounded-3xl:hover
 ) {
   box-shadow:
-    0 0 0 1px rgba(125, 217, 216, 0.22),
-    0 0 18px rgba(125, 217, 216, 0.1),
-    0 16px 38px rgba(0, 0, 0, 0.34);
+    0 0 0 1px rgba(125, 217, 216, 0.28),
+    0 0 26px rgba(125, 217, 216, 0.16),
+    0 22px 44px rgba(0, 0, 0, 0.38);
 }
 
 main:not([data-admin]) :is(
@@ -266,9 +267,9 @@ main:not([data-admin]) :is(
 ) {
   border-color: rgba(125, 217, 216, 0.28) !important;
   box-shadow:
-    0 0 0 1px rgba(125, 217, 216, 0.16),
-    0 0 20px rgba(125, 217, 216, 0.08),
-    0 18px 42px rgba(0, 0, 0, 0.34);
+    0 0 0 1px rgba(125, 217, 216, 0.22),
+    0 0 28px rgba(125, 217, 216, 0.14),
+    0 22px 46px rgba(0, 0, 0, 0.38);
 }
 
 main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
@@ -361,9 +362,10 @@ main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
 .logo-marquee-track {
   display: flex;
   width: max-content;
-  gap: 2rem;
-  animation: logo-marquee 92s linear infinite;
+  gap: 2.5rem;
+  animation: logo-marquee 64s linear infinite;
   will-change: transform;
+  align-items: center;
 }
 
 .logo-marquee-track-reverse {
@@ -373,6 +375,13 @@ main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
 
 .logo-chip {
   backdrop-filter: none;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.logo-marquee .logo-chip:hover {
+  transform: translateY(-2px);
 }
 
 .logo-image-clear {
@@ -382,6 +391,76 @@ main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
   backface-visibility: hidden;
   transform: translateZ(0);
   opacity: 1;
+}
+
+.logo-image-monochrome {
+  filter: brightness(0) invert(1) grayscale(1) drop-shadow(0 10px 24px rgba(0, 0, 0, 0.3));
+}
+
+.logo-marquee .logo-chip:hover .logo-image-clear {
+  filter: drop-shadow(0 12px 28px rgba(15, 143, 152, 0.26));
+}
+
+.logo-marquee .logo-chip:hover .logo-image-monochrome {
+  filter: brightness(0) invert(1) grayscale(1) drop-shadow(0 12px 28px rgba(125, 217, 216, 0.24));
+}
+
+.logo-marquee .logo-chip:hover .logo-label {
+  color: #0f8f98;
+}
+
+.logo-wordmark {
+  letter-spacing: -0.03em;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+}
+
+.homepage-wordmark-marquee {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.homepage-wordmark-marquee .logo-marquee-track {
+  gap: 3.75rem;
+  animation-duration: 40s;
+}
+
+.homepage-wordmark-marquee .logo-chip {
+  min-width: 220px;
+}
+
+.homepage-wordmark-marquee .logo-wordmark {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 14px 36px rgba(0, 0, 0, 0.42);
+}
+
+.homepage-partner-marquee {
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.homepage-partner-marquee .logo-marquee-track {
+  gap: 3rem;
+  animation-duration: 38s;
+}
+
+.homepage-partner-marquee .logo-chip {
+  min-width: 170px;
+}
+
+.homepage-partner-marquee .logo-mark-shell {
+  min-height: 40px;
+}
+
+.homepage-partner-marquee .logo-wordmark {
+  font-size: clamp(1.3rem, 1.75vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
 }
 
 @keyframes logo-marquee {

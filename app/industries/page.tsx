@@ -28,10 +28,10 @@ export default function IndustriesPage() {
         eyebrow="Industries"
         title="Industries We Serve"
         description="Payment processing, POS, and operational tools tailored to the way each industry runs."
-        image="/images/hero-image.jpeg"
+        image="/images/top-right-image.jpg"
         imageAlt="Industry-specific payments and POS operations"
         chips={['Restaurants', 'Retail', 'Services', 'High-Risk']}
-        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
           eyebrow: '',

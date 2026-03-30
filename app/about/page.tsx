@@ -47,7 +47,7 @@ export default function AboutPage() {
         image="/images/business-operations.png"
         imageAlt="NextPay business operations visual"
         chips={['Efficiency', 'Visibility', 'Execution', 'Growth']}
-        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
           eyebrow: '',
@@ -130,7 +130,7 @@ export default function AboutPage() {
         </p>
 
         <Link
-          href="/contact?intent=quote"
+          href="/pricing#custom-quote"
           className="mt-8 inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
           >
             Start Your Journey

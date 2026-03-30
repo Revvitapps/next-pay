@@ -66,7 +66,7 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
         description={industry.bestFor}
         image={getIndustryHeroImage(industry.id)}
         alt={`${industry.label} payments and operations`}
-        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       />
       <LogoBand eyebrow="" title="Trusted Brands" logos={getIndustryLogos(industry.id)} />
@@ -114,7 +114,7 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
           <div className="mt-8 space-y-3">
             <div className="flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?intent=quote"
+                href="/pricing#custom-quote"
                 className="inline-flex rounded-full bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
               >
                 Start Your Journey

@@ -1,19 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import HeroVisual from '@/components/hero/HeroVisual';
+import LogoStrip from '@/components/LogoStrip';
 import HeroGyrateShimmer from '@/components/visuals/HeroGyrateShimmer';
 import MotionDiv from '@/components/visuals/MotionDiv';
+import type { TrustLogo } from '@/lib/content/logos';
 
-const highlights = [
-  'Payments in-store, online, and on the go',
-  'POS, payroll, and funding in one stack',
-  'Cleaner reporting with less operational drag'
+const highlights = ['Payments in-store, online, and on the go', 'POS, payroll, and funding in one stack', 'Cleaner reporting with less operational drag'];
+
+const homepageTrustedLogos: TrustLogo[] = [
+  { name: 'American Express', alt: 'American Express logo', assetPath: '/logos/american-express.svg', fallbackAssetPath: '/logos/american-express.png' },
+  { name: 'Visa', alt: 'Visa logo', assetPath: '/logos/visa.svg', fallbackAssetPath: '/logos/visa.png' },
+  { name: 'Discover', alt: 'Discover wordmark' },
+  { name: 'Mastercard', alt: 'Mastercard logo', assetPath: '/logos/mastercard.svg', fallbackAssetPath: '/logos/mastercard.png' },
+  { name: 'TSYS', alt: 'TSYS wordmark' },
+  { name: 'Fiserv', alt: 'Fiserv wordmark' },
+  { name: 'Apple Pay', alt: 'Apple Pay logo', assetPath: '/logos/apple-pay.svg', fallbackAssetPath: '/logos/apple-pay.png' },
+  { name: 'Google Pay', alt: 'Google Pay wordmark' }
 ];
-
-const trustChips = ['Harbor House Group', 'Northline Inns', 'Elm Street Eats', 'Summit Service Co'];
 
 export default function Hero() {
   return (
@@ -30,27 +36,27 @@ export default function Hero() {
             className="mx-auto w-full max-w-6xl text-center"
           >
             <MotionDiv>
-              <div className="np-surface rounded-3xl p-6 text-center shadow-[0_30px_70px_rgba(0,0,0,0.48)] md:p-10">
-                <span className="inline-flex rounded-full border border-white/12 np-pill px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] np-accent shadow-[0_0_18px_rgba(104,132,140,0.12)]">
+              <div className="p-6 text-center md:p-10">
+                <span className="inline-flex text-sm font-semibold uppercase tracking-[0.28em] text-[#89e6e2]">
                   NextPay Platform
                 </span>
-                <h1 className="mx-auto mt-6 max-w-5xl font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white sm:text-5xl md:text-6xl">
+                <h1 className="mx-auto mt-5 max-w-5xl font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_18px_36px_rgba(0,0,0,0.34)] sm:text-5xl md:text-6xl">
                   Accept Payments Anywhere. Run Your Entire Business with NextPay.
                 </h1>
-                <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-white md:text-lg">
+                <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-white/92 md:text-lg">
                   Payment processing, POS, financing, payroll, and growth tools in one connected platform.
                 </p>
-                <ul className="mx-auto mt-8 flex max-w-5xl flex-wrap justify-center gap-3 text-white">
+                <ul className="mx-auto mt-8 flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white">
                   {highlights.map((item, index) => (
                     <motion.li
                       key={item}
                       initial={{ opacity: 0, x: index % 2 === 0 ? -28 : 28, y: 10 }}
                       whileInView={{ opacity: 1, x: 0, y: 0 }}
                       viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.58, delay: index * 0.06 }}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/12 np-pill px-5 py-2 text-sm font-semibold md:text-base"
+                      transition={{ duration: 0.58, delay: index * 0.06 }}
+                      className="inline-flex items-center gap-3 text-sm font-semibold text-slate-100/94 md:text-base"
                     >
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none np-accent" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#7dd9d8]" />
                       <span>{item}</span>
                     </motion.li>
                   ))}
@@ -63,37 +69,28 @@ export default function Hero() {
                   transition={{ duration: 0.62, delay: 0.12 }}
                   className="mt-8 flex justify-center"
                 >
-                  <ConversionCtas primary="customQuote" secondary="uploadStatement" />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -22 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.62, delay: 0.15 }}
-                  className="mt-10 text-center"
-                >
-                  <p className="text-sm text-slate-100/95">Trusted across hospitality, retail, and service businesses</p>
-                  <div className="mt-4 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-                    {trustChips.map((chip, index) => (
-                      <motion.span
-                        key={chip}
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{
-                          duration: 3.4,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                          delay: index * 0.22
-                        }}
-                        className="text-base font-semibold tracking-[0.08em] text-slate-100/90 md:text-lg"
-                      >
-                        {chip}
-                      </motion.span>
-                    ))}
-                  </div>
+                  <ConversionCtas
+                    primary="customQuote"
+                    secondary="uploadStatement"
+                    labelOverrides={{ customQuote: 'Take The Quiz' }}
+                  />
                 </motion.div>
               </div>
             </MotionDiv>
+            <div className="relative left-1/2 mt-32 w-screen -translate-x-1/2">
+              <div className="px-6 py-2 text-center md:px-10">
+                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/62">
+                  Trusted Network
+                </p>
+                <div className="mt-4">
+                  <LogoStrip
+                    logos={homepageTrustedLogos}
+                    mode="mixedMonochrome"
+                    className="homepage-partner-marquee [&_.logo-chip]:text-white/94"
+                  />
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

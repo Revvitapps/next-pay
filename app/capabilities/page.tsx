@@ -53,7 +53,7 @@ export default async function CapabilitiesPage() {
         image="/images/capabilities/technology-integrations.jpg"
         imageAlt="Technology integrations and operational capabilities"
         chips={['Operations', 'Automation', 'Reporting', 'Integrations']}
-        primaryCta={{ label: 'Discuss Your Operating Model', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Discuss Your Operating Model', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
           eyebrow: 'Trusted by the platforms',

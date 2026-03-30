@@ -37,26 +37,26 @@ export default function PageShowcaseHero({
   imagePosition = 'object-center'
 }: PageShowcaseHeroProps) {
   return (
-    <section className="px-6 py-16 lg:px-12">
-      <div className="np-surface mx-auto w-full max-w-[1380px] overflow-hidden rounded-3xl">
-        <div className="relative isolate min-h-[430px] md:min-h-[520px] lg:min-h-[620px]">
-          <Image
-            src={image}
-            alt={alt}
-            fill
-            priority
-            sizes="100vw"
-            className={`object-cover ${imagePosition}`}
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(104,132,140,0.1),transparent_35%),linear-gradient(180deg,rgba(2,4,6,0.14),rgba(2,4,6,0.48)_38%,rgba(1,2,4,0.88)_58%,rgba(0,0,0,0.97)_100%)]" />
+    <section className="relative w-full overflow-hidden">
+      <div className="relative isolate min-h-[460px] md:min-h-[560px] lg:min-h-[680px]">
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          priority
+          sizes="100vw"
+          className={`object-cover ${imagePosition}`}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(104,132,140,0.08),transparent_30%),linear-gradient(90deg,rgba(2,4,6,0.72)_0%,rgba(2,4,6,0.48)_28%,rgba(2,4,6,0.18)_50%,rgba(2,4,6,0.22)_100%),linear-gradient(180deg,rgba(2,4,6,0.16),rgba(2,4,6,0.4)_45%,rgba(1,2,4,0.74)_100%)]" />
 
-          <div className="absolute inset-x-0 bottom-0 p-5 md:p-8 lg:p-10">
-            <div className="max-w-4xl rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(10,15,22,0.72),rgba(5,8,12,0.84))] p-6 text-left shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-xl md:p-8">
+        <div className="absolute inset-x-0 bottom-0 top-0 flex items-center px-6 py-16 lg:px-12">
+          <div className="mx-auto w-full max-w-[1380px]">
+            <div className="max-w-4xl text-left md:max-w-3xl lg:max-w-4xl">
               <p className="np-accent text-xs uppercase tracking-[0.22em]">{eyebrow}</p>
-              <h1 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+              <h1 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white drop-shadow-[0_18px_34px_rgba(0,0,0,0.32)] md:text-5xl lg:text-6xl">
                 {title}
               </h1>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-100/92 md:text-base">
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-100/92 md:text-base lg:text-lg">
                 {description}
               </p>
 

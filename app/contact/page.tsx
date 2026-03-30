@@ -30,10 +30,10 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Let&apos;s Plan Your Rollout"
         description="Tell us about your locations, workflow needs, and timeline. We will map a recommended stack and next-step implementation plan."
-        image="/images/next-pay-site-hero.jpeg"
+        image="/images/top-right-image.jpg"
         imageAlt="NextPay contact and rollout planning visual"
         chips={['Quote', 'Statement Review', 'Implementation', 'Support']}
-        primaryCta={{ label: 'Start Your Journey', href: '/contact?intent=quote' }}
+        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Review Services', href: '/services' }}
         trustBand={{
           eyebrow: '',

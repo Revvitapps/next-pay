@@ -222,7 +222,7 @@ export default function Navbar() {
           <Link
             href={conversionCtas.customQuote.href}
             onClick={() => track('book_call_click', { source: 'navbar_primary_consultation' })}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
           >
             Get Your Quote
           </Link>
@@ -238,7 +238,7 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`border-t border-[#46a7a6]/20 bg-[#163c4d]/95 px-6 py-4 backdrop-blur-xl transition md:hidden ${
+        className={`border-t border-[#46a7a6]/20 bg-[#163c4d]/95 px-6 py-4 backdrop-blur-xl transition ${
           mobileMenuOpen ? 'block' : 'hidden'
         } xl:hidden`}
       >
