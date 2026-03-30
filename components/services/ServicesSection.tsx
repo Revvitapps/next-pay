@@ -186,7 +186,7 @@ export default function ServicesSection({
                   alt={`${service.name} background`}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className={`${getServiceImageClass(service.slug)} transition duration-700 ease-out group-hover:scale-[1.06]`}
+                  className={`${getServiceImageClass()} transition duration-700 ease-out group-hover:scale-[1.06]`}
                 />
                 <div className={`absolute inset-0 ${service.slug === 'business-brokerage' ? 'bg-gradient-to-b from-black/10 via-black/22 to-black/72' : 'bg-gradient-to-b from-black/18 via-black/30 to-black/82'}`} />
               </div>

@@ -73,7 +73,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         description={service.summary}
         image={getServiceImage(service.slug)}
         alt={`${service.name} hero`}
-        imagePosition={getServiceHeroImagePosition(service.slug)}
+        imagePosition={getServiceHeroImagePosition()}
         primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       >

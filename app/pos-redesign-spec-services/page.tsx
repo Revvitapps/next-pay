@@ -172,7 +172,7 @@ export default function ServicesRedesignSpecPage() {
                               alt={service.name}
                               fill
                               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                              className={`${getServiceImageClass(service.slug)} transition duration-500 group-hover:scale-[1.03]`}
+                              className={`${getServiceImageClass()} transition duration-500 group-hover:scale-[1.03]`}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
                           </div>
