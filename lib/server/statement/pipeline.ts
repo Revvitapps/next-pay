@@ -193,7 +193,9 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
       email: input.email,
       phone: input.phone,
       currentProcessor: input.currentProcessor,
-      monthlyVolume: input.monthlyVolume
+      monthlyVolume: input.monthlyVolume,
+      originalFileName: stored.originalFileName,
+      signedDownloadUrl
     });
 
     if (parsed.requiresManualReview) {
@@ -203,7 +205,9 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
         email: input.email,
         phone: input.phone,
         currentProcessor: input.currentProcessor,
-        monthlyVolume: input.monthlyVolume
+        monthlyVolume: input.monthlyVolume,
+        originalFileName: stored.originalFileName,
+        signedDownloadUrl
       });
     } else if (leadId) {
       const lead = await getLeadRecord(leadId);

@@ -16,6 +16,8 @@ export type StatementNotificationInput = {
   phone: string;
   currentProcessor: string;
   monthlyVolume: string;
+  originalFileName?: string | null;
+  signedDownloadUrl?: string | null;
 };
 
 export type QuoteReadyNotificationInput = {
@@ -51,7 +53,9 @@ export function statementUploadTemplate(input: StatementNotificationInput) {
     `Email: ${input.email}`,
     `Phone: ${input.phone}`,
     `Current Processor: ${input.currentProcessor}`,
-    `Monthly Volume: ${input.monthlyVolume}`
+    `Monthly Volume: ${input.monthlyVolume}`,
+    `Uploaded File: ${input.originalFileName ?? 'Uploaded statement'}`,
+    ...(input.signedDownloadUrl ? [`Statement Download: ${input.signedDownloadUrl}`] : [])
   ].join('\n');
 
   return { subject, text };
@@ -64,7 +68,9 @@ export function manualReviewTemplate(input: StatementNotificationInput) {
     `Statement ID: ${input.statementId}`,
     `Business: ${input.businessName}`,
     `Processor: ${input.currentProcessor}`,
-    `Volume: ${input.monthlyVolume}`
+    `Volume: ${input.monthlyVolume}`,
+    `Uploaded File: ${input.originalFileName ?? 'Uploaded statement'}`,
+    ...(input.signedDownloadUrl ? [`Statement Download: ${input.signedDownloadUrl}`] : [])
   ].join('\n');
 
   return { subject, text };
