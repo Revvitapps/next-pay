@@ -36,9 +36,7 @@ export function leadNotificationTemplate(input: LeadNotificationInput) {
     `Email: ${input.email}`,
     `Phone: ${input.phone}`,
     `Service Interest: ${input.serviceInterest ?? 'N/A'}`,
-    input.journeySummary ? '',
-    input.journeySummary ? 'Journey Summary:' : '',
-    input.journeySummary ?? ''
+    ...(input.journeySummary ? ['', 'Journey Summary:', input.journeySummary] : [])
   ].join('\n');
 
   return { subject, text };

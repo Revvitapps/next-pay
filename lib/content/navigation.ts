@@ -51,15 +51,6 @@ export const productMenuColumns: NavColumn[] = [
 
 export const industryMenuColumns: NavColumn[] = [
   {
-    title: 'Restaurants',
-    links: [
-      { label: 'Full-Service Restaurants', href: '/industries/restaurants-and-hospitality' },
-      { label: 'Quick Service Restaurants', href: '/industries/restaurants-and-hospitality' },
-      { label: 'Food Trucks', href: '/industries/restaurants-and-hospitality' },
-      { label: 'Bars & Nightclubs', href: '/industries/restaurants-and-hospitality' }
-    ]
-  },
-  {
     title: 'Retail',
     links: [
       { label: 'Clothing Stores', href: '/industries/retail-businesses' },
@@ -75,6 +66,15 @@ export const industryMenuColumns: NavColumn[] = [
       { label: 'Professional Services', href: '/industries/professional-and-business-services' },
       { label: 'Beauty & Personal Care', href: '/industries/beauty-and-personal-care' },
       { label: 'Healthcare Practices', href: '/industries/healthcare-and-medical-practices' }
+    ]
+  },
+  {
+    title: 'Restaurants',
+    links: [
+      { label: 'Full-Service Restaurants', href: '/industries/restaurants-and-hospitality' },
+      { label: 'Quick Service Restaurants', href: '/industries/restaurants-and-hospitality' },
+      { label: 'Food Trucks', href: '/industries/restaurants-and-hospitality' },
+      { label: 'Bars & Nightclubs', href: '/industries/restaurants-and-hospitality' }
     ]
   },
   {
