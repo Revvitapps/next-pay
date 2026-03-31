@@ -934,7 +934,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                       disabled={submittingLead}
                       className="inline-flex rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                     >
-                      {submittingLead ? 'Sending...' : 'Send My Journey'}
+                      {submittingLead ? 'Sending...' : 'Send My Quiz Results'}
                     </button>
                     <Link
                       href="/contact?intent=statement-upload"

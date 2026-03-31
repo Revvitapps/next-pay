@@ -38,16 +38,40 @@ async function sendTemplateEmail(subject: string, text: string) {
   const cc = getCcRecipients();
 
   if (!client || !from || !to.length) {
-    console.info('[resend_skipped]', { hasClient: Boolean(client), hasFrom: Boolean(from), toCount: to.length, subject });
-    return;
+    const config = {
+      hasClient: Boolean(client),
+      hasFrom: Boolean(from),
+      toCount: to.length,
+      ccCount: cc.length,
+      subject
+    };
+    console.error('[resend_not_configured]', config);
+    throw new Error('Email delivery is not configured.');
   }
 
-  await client.emails.send({
+  const result = await client.emails.send({
     from,
     to,
     cc: cc.length ? cc : undefined,
     subject,
     text
+  });
+
+  if (result.error) {
+    console.error('[resend_send_failed]', {
+      subject,
+      toCount: to.length,
+      ccCount: cc.length,
+      error: result.error
+    });
+    throw new Error(typeof result.error.message === 'string' ? result.error.message : 'Email delivery failed.');
+  }
+
+  console.info('[resend_send_succeeded]', {
+    subject,
+    emailId: result.data?.id ?? null,
+    toCount: to.length,
+    ccCount: cc.length
   });
 }
 
