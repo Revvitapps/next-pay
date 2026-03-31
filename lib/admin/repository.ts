@@ -174,6 +174,7 @@ async function ensureSeeded(state: AdminDataState) {
     currentProcessor: 'Legacy Processor Co.',
     monthlyVolume: '$120,000',
     serviceInterest: 'Payment Processing & Merchant Services',
+    journeySummary: null,
     createdAt,
     status: 'manual_review_required',
     assignedReviewer: null,
@@ -267,7 +268,9 @@ export async function listLeadRecords(params?: {
       if (params?.submissionType && params.submissionType !== 'all' && lead.submissionType !== params.submissionType) return false;
       if (params?.status && params.status !== 'all' && lead.status !== params.status) return false;
       if (!query) return true;
-      return [lead.businessName, lead.contactName, lead.email, lead.phone, lead.serviceInterest].some((field) => field?.toLowerCase().includes(query));
+      return [lead.businessName, lead.contactName, lead.email, lead.phone, lead.serviceInterest, lead.journeySummary].some((field) =>
+        field?.toLowerCase().includes(query)
+      );
     })
     .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
 }
@@ -464,18 +467,20 @@ export async function updateQuoteWorkflow(params: {
 }
 
 export async function createLeadFromContactSubmission(payload: {
+  submissionType?: 'contact' | 'journey';
   fullName?: string;
   company?: string;
   email: string;
   phone: string;
   industry?: string;
+  message?: string;
 }) {
   const state = await getState();
 
   const createdAt = nowIso();
   const created: LeadRecord = {
     id: createId('lead'),
-    submissionType: 'contact',
+    submissionType: payload.submissionType ?? 'contact',
     businessName: normalizeBusinessName(payload.company),
     contactName: payload.fullName?.trim() || null,
     email: payload.email,
@@ -483,6 +488,7 @@ export async function createLeadFromContactSubmission(payload: {
     currentProcessor: null,
     monthlyVolume: null,
     serviceInterest: payload.industry?.trim() || null,
+    journeySummary: payload.message?.trim() || null,
     createdAt,
     status: 'new',
     assignedReviewer: null,
@@ -529,6 +535,7 @@ export async function createLeadFromServiceSubmission(payload: {
     currentProcessor: payload.currentProcessor?.trim() || null,
     monthlyVolume: payload.estimatedMonthlyVolume?.trim() || null,
     serviceInterest: payload.serviceSlug,
+    journeySummary: null,
     createdAt,
     status,
     assignedReviewer: null,
@@ -926,6 +933,7 @@ export async function createStatementFromUpload(payload: {
       currentProcessor: payload.currentProcessor,
       monthlyVolume: payload.monthlyVolume,
       serviceInterest: 'Payment Processing & Merchant Services',
+      journeySummary: null,
       createdAt: submittedAt,
       status: 'awaiting_statement',
       assignedReviewer: null,

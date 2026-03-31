@@ -53,6 +53,7 @@ export default async function AdminLeadsPage({ searchParams }: LeadsPageProps) {
           <select name="type" defaultValue={type} className="rounded-xl border border-slate-600 bg-slate-950 px-4 py-2 text-sm text-white">
             <option value="all">All submission types</option>
             <option value="contact">Contact</option>
+            <option value="journey">Journey</option>
             <option value="service-lead">Service Lead</option>
             <option value="statement-upload">Statement Upload</option>
           </select>

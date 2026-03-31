@@ -393,6 +393,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          submissionType: 'journey',
           fullName: leadForm.fullName,
           company: leadForm.company,
           email: leadForm.email,
@@ -912,7 +913,9 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                   {turnstileSiteKey ? (
                     <div className="md:col-span-2">
                       <div className="rounded-[1.5rem] border border-white/10 bg-black/25 p-3">
-                        <div ref={widgetRef} />
+                        <div className="flex justify-center">
+                          <div ref={widgetRef} />
+                        </div>
                       </div>
                     </div>
                   ) : (

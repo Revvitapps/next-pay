@@ -1,4 +1,4 @@
-export type LeadSubmissionType = 'contact' | 'service-lead' | 'statement-upload';
+export type LeadSubmissionType = 'contact' | 'journey' | 'service-lead' | 'statement-upload';
 
 export type LeadStatus =
   | 'new'
@@ -154,6 +154,7 @@ export type LeadRecord = {
   currentProcessor: string | null;
   monthlyVolume: string | null;
   serviceInterest: string | null;
+  journeySummary: string | null;
   createdAt: string;
   status: LeadStatus;
   assignedReviewer: string | null;

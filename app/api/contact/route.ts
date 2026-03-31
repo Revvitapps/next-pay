@@ -6,7 +6,7 @@ import { ingestStatementUpload } from '@/lib/server/statement/pipeline';
 export const runtime = 'nodejs';
 
 type ContactPayload = {
-  submissionType?: 'contact' | 'statement-upload';
+  submissionType?: 'contact' | 'journey' | 'statement-upload';
   fullName?: string;
   company?: string;
   email?: string;
@@ -101,20 +101,23 @@ export async function POST(request: Request) {
     }
 
     const lead = await createLeadFromContactSubmission({
+      submissionType,
       fullName: body.fullName,
       company: body.company,
       email: body.email,
       phone: body.phone,
-      industry: body.industry
+      industry: body.industry,
+      message: body.message
     });
 
     await sendLeadNotification({
-      submissionType: 'contact',
+      submissionType,
       businessName: lead.businessName,
       contactName: lead.contactName,
       email: lead.email,
       phone: lead.phone,
       serviceInterest: lead.serviceInterest,
+      journeySummary: lead.journeySummary,
       leadId: lead.id
     });
 

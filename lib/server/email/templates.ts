@@ -1,10 +1,11 @@
 export type LeadNotificationInput = {
-  submissionType: 'contact' | 'service-lead';
+  submissionType: 'contact' | 'journey' | 'service-lead';
   businessName: string;
   contactName: string | null;
   email: string;
   phone: string;
   serviceInterest?: string | null;
+  journeySummary?: string | null;
   leadId: string;
 };
 
@@ -34,7 +35,10 @@ export function leadNotificationTemplate(input: LeadNotificationInput) {
     `Contact: ${input.contactName ?? 'N/A'}`,
     `Email: ${input.email}`,
     `Phone: ${input.phone}`,
-    `Service Interest: ${input.serviceInterest ?? 'N/A'}`
+    `Service Interest: ${input.serviceInterest ?? 'N/A'}`,
+    input.journeySummary ? '',
+    input.journeySummary ? 'Journey Summary:' : '',
+    input.journeySummary ?? ''
   ].join('\n');
 
   return { subject, text };

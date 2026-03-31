@@ -22,7 +22,12 @@ export const metadata: Metadata = {
     title: 'NextPay | Payments, POS, and Business Services',
     description: 'Infrastructure for modern business with connected operations, integrations, and financial workflows.',
     path: '/'
-  })
+  }),
+  icons: {
+    icon: '/images/favicon-nextpay.png',
+    shortcut: '/images/favicon-nextpay.png',
+    apple: '/images/favicon-nextpay.png'
+  }
 };
 
 export default function RootLayout({
