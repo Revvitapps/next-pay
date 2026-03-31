@@ -324,8 +324,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
     return false;
   }
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function continueJourney() {
     if (!canContinueStep()) {
       setError('Please complete this step before continuing.');
       return;
@@ -426,8 +425,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
 
   return (
     <section className="px-6 py-20 lg:px-12">
-      <form
-        onSubmit={onSubmit}
+      <div
         className="mx-auto w-full max-w-[1080px] rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(8,11,14,0.98),rgba(10,14,18,0.96))] p-8 shadow-[0_28px_80px_rgba(0,0,0,.52)] md:p-10"
       >
         <p className="text-center text-sm uppercase tracking-[0.26em] text-[#7dd9d8]/82">Start Your Journey</p>
@@ -793,7 +791,8 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                   Back
                 </button>
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={continueJourney}
                   disabled={loading}
                   className="inline-flex items-center gap-2 rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-2 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                 >
@@ -955,7 +954,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
             </article>
           </div>
         )}
-      </form>
+      </div>
     </section>
   );
 }
