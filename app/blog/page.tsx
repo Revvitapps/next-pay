@@ -45,7 +45,7 @@ export default function BlogPage() {
         image="/images/connected-stack-blog-image.png"
         imageAlt="NextPay blog and insights visual"
         chips={['Operations', 'Integrations', 'Payments', 'Workflow']}
-        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'View Case Studies', href: '/case-studies' }}
         trustBand={{
           eyebrow: '',

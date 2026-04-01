@@ -46,7 +46,7 @@ export default function FaqPage() {
         image="/images/financial-workflows.png"
         imageAlt="Financial workflows and operational systems visual"
         chips={['Services', 'Routing', 'Consultation', 'Workflow']}
-        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Contact NextPay', href: '/contact' }}
         trustBand={{
           eyebrow: '',

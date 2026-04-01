@@ -200,7 +200,7 @@ export default function ContactForm() {
       <MotionDiv variant="right">
         <div className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-10">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Contact / Start Your Journey</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Contact / Take The Quiz</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               Tell us your setup goals and we will map your rollout
             </h2>
@@ -319,7 +319,7 @@ export default function ContactForm() {
                   disabled={submitting}
                   className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                 >
-                  {submitting ? 'Submitting...' : 'Start Your Journey'}
+                  {submitting ? 'Submitting...' : 'Take The Quiz'}
                 </button>
               </div>
             </form>

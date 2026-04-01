@@ -98,7 +98,7 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
               href="/pricing#custom-quote"
               className="np-pill justify-self-start rounded-full px-5 py-2.5 text-sm font-semibold text-[#7dd9d8] transition hover:border-white/18 hover:bg-black/70"
             >
-              Start Your Journey
+              Take The Quiz
             </Link>
           </div>
         ) : null}

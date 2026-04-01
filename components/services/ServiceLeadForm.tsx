@@ -218,7 +218,7 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
 
   return (
     <div className="rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-8">
-      <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Start Your Journey</p>
+      <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Take The Quiz</p>
       <h2 className="mt-3 text-2xl font-bold text-white">{serviceName} Request Form</h2>
       <p className="mt-2 text-sm text-slate-100/90">Submit core business details and we will route your request internally.</p>
 
@@ -637,7 +637,7 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
               disabled={submitting}
               className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
             >
-              {submitting ? 'Submitting...' : 'Start Your Journey'}
+              {submitting ? 'Submitting...' : 'Take The Quiz'}
             </button>
           </div>
         </form>

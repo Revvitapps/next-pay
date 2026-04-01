@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#132c36]/82 backdrop-blur-xl">
       <nav className="mx-auto flex w-full max-w-none items-center justify-between px-6 py-4 lg:px-12">
-        <Link href="/" className="flex items-center">
+        <Link href="/#home" className="flex items-center">
           <Image
             src="/images/nextpay-logo.png"
             alt="NextPay logo"
@@ -133,7 +133,7 @@ export default function Navbar() {
                   onClick={() => setProductsOpen(false)}
                   className="rounded-full border border-white/18 bg-black/25 px-4 py-1.5 text-xs font-semibold text-white transition hover:border-white/35 hover:bg-white/5"
                 >
-                  Start Your Journey
+                  Take The Quiz
                 </Link>
               </div>
             </div>

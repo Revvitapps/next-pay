@@ -3,7 +3,6 @@
 import { FormEvent, useState } from 'react';
 import { useEffect } from 'react';
 import ComplianceNote from '@/components/compliance/ComplianceNote';
-import ConversionCtas from '@/components/cta/ConversionCtas';
 import { emptyStatementExtractedData, fileToDataUrl, type StatementExtractedData, validateStatementFile } from '@/lib/forms/statementUpload';
 
 type StatementUploadPayload = {
@@ -104,6 +103,7 @@ export default function StatementUploadForm() {
         <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Savings Analyzer</p>
         <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">Upload Your Merchant Statement</h2>
         <p className="mt-3 max-w-3xl text-sm text-slate-100/90">Share your latest statement and our team will prepare a directional savings analysis.</p>
+        <p className="mt-2 max-w-3xl text-sm text-slate-100/76">If you want a guided setup recommendation first, take the quiz and we will show you what to move forward with next.</p>
 
         {submitted ? (
           <div className="mt-6 rounded-2xl border border-[#46a7a6]/40 bg-[#46a7a6]/10 p-5 text-sm text-slate-100/95">
@@ -181,14 +181,13 @@ export default function StatementUploadForm() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(6,9,12,0.96),rgba(10,14,18,0.9))] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(125,217,216,0.08),0_12px_30px_rgba(0,0,0,0.34)] transition hover:border-[#7dd9d8]/46 hover:bg-[linear-gradient(180deg,rgba(8,12,16,0.98),rgba(12,16,20,0.94))]"
+                className="rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
               >
                 {submitting ? 'Uploading...' : 'Upload My Statement'}
               </button>
             </div>
           </form>
         )}
-        <ConversionCtas primary="customQuote" className="mt-6" />
       </div>
     </section>
   );

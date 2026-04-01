@@ -23,11 +23,11 @@ const homepageTrustedLogos: TrustLogo[] = [
 
 export default function Hero() {
   return (
-    <section id="home" className="w-full">
-      <div className="relative isolate flex w-full min-h-screen min-h-[100svh] items-center overflow-hidden">
+    <section id="home" className="w-full overflow-x-clip">
+      <div className="relative isolate flex w-full min-h-[88svh] items-center overflow-hidden md:min-h-screen md:min-h-[100svh]">
         <HeroGyrateShimmer />
 
-        <div className="relative z-40 w-full px-6 pb-16 pt-[24vh] sm:pb-20 sm:pt-[25vh] md:pb-24 md:pt-[24vh] lg:px-12">
+        <div className="relative z-40 w-full px-6 pb-12 pt-[17vh] sm:pb-16 sm:pt-[19vh] md:pb-24 md:pt-[24vh] lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function Hero() {
                 </motion.div>
               </div>
             </MotionDiv>
-            <div className="relative left-1/2 mt-32 w-screen -translate-x-1/2">
+            <div className="relative left-1/2 mt-14 w-screen -translate-x-1/2 md:mt-32">
               <div className="px-6 py-2 text-center md:px-10">
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/62">
                   Trusted Network
@@ -95,7 +95,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <section className="px-6 pb-20 pt-10 md:pt-14 lg:px-12">
+      <section className="px-6 pb-16 pt-4 md:pb-20 md:pt-14 lg:px-12">
         <motion.div
           initial={{ opacity: 0, x: 30, y: 14 }}
           whileInView={{ opacity: 1, x: 0, y: 0 }}

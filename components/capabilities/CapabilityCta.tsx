@@ -7,7 +7,7 @@ type CapabilityCtaProps = {
 
 export default function CapabilityCta({
   title = 'Build A Stronger Operating Foundation',
-  description = 'Tell us where execution is breaking down and we will map a practical capability plan tailored to your business.'
+  description = 'Tell us where execution is breaking down and we will map a practical support plan tailored to your business.'
 }: CapabilityCtaProps) {
   return (
     <section className="np-surface rounded-3xl p-6 md:p-8">
@@ -15,7 +15,7 @@ export default function CapabilityCta({
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-100/90">{description}</p>
       <div className="mt-6 flex flex-wrap gap-3">
         <Link href="/pricing#custom-quote" className="inline-flex rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110">
-          Start Your Journey
+          Take The Quiz
         </Link>
         <Link
           href="/services"

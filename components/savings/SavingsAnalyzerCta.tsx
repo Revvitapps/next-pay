@@ -21,6 +21,7 @@ export default function SavingsAnalyzerCta({
       <div className="np-surface mx-auto w-full max-w-none rounded-3xl p-8 md:p-10">
         <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">{title}</h2>
         <p className="mt-3 max-w-4xl text-sm text-slate-100/90">{description}</p>
+        <p className="mt-2 max-w-4xl text-sm text-slate-100/76">Take the quiz to get a clearer direction on what you need next and how to move forward.</p>
         <ConversionCtas primary={primary} secondary={secondary} tertiary={tertiary} className="mt-6" />
       </div>
     </section>

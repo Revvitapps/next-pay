@@ -40,7 +40,7 @@ export default function CapabilityCard({ capability }: CapabilityCardProps) {
         <p className="mt-3 text-sm leading-relaxed text-slate-100/90">{capability.description}</p>
         <p className="mt-4 text-xs text-slate-200/75">{capability.readingTimeMinutes} min read</p>
         <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-[#7dd9d8] transition group-hover:text-white">
-          Explore capability
+          View details
           <ArrowUpRight className="h-4 w-4" />
         </span>
       </div>

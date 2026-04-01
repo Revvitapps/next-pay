@@ -120,6 +120,9 @@ export default function ServicesSection({
             <p className="mt-4 max-w-5xl text-sm leading-relaxed text-slate-100/90">
               Start with payments and POS, move into lending, and then build stronger demand with a more connected growth path.
             </p>
+            <p className="mt-3 max-w-5xl text-sm leading-relaxed text-slate-100/78">
+              Take the quiz to get the right next-step plan and service mix for where your business is headed.
+            </p>
           </>
         ) : null}
         <div className={`${showHeader ? 'mt-6' : ''} grid gap-3 text-sm text-slate-100/90 md:grid-cols-3`}>
@@ -152,7 +155,7 @@ export default function ServicesSection({
                 <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{journey.description}</p>
                 <div className="mt-6 flex items-center justify-end">
                   <span className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">
-                    Start Your Journey
+                    Take The Quiz
                   </span>
                 </div>
               </Link>

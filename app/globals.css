@@ -354,7 +354,10 @@ main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
 
 .logo-marquee {
   position: relative;
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
+  overflow-x: clip;
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
@@ -461,6 +464,23 @@ main:not([data-admin]) :is(a, button, summary, [role='button']):focus-visible {
   letter-spacing: -0.035em;
   color: rgba(255, 255, 255, 0.95);
   text-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+}
+
+@media (max-width: 767px) {
+  .homepage-partner-marquee .logo-marquee-track {
+    gap: 1.6rem;
+    animation-duration: 28s;
+  }
+
+  .homepage-partner-marquee .logo-chip {
+    min-width: 132px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .homepage-partner-marquee .logo-wordmark {
+    font-size: 1.05rem;
+  }
 }
 
 @keyframes logo-marquee {

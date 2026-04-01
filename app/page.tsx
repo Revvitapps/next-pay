@@ -44,9 +44,8 @@ export default function HomePage() {
 
       <SavingsAnalyzerCta
         title="Ready to Launch with NextPay?"
-        description="Get a tailored quote and rollout plan for payments, POS, pricing strategy, and operational setup."
+        description="Take the quiz to get a tailored rollout plan for payments, POS, pricing strategy, and operational setup."
         primary="customQuote"
-        secondary="uploadStatement"
       />
 
       <SiteFooter />

@@ -33,8 +33,8 @@ export default function ContactPage() {
         image="/images/top-right-image.jpg"
         imageAlt="NextPay contact and rollout planning visual"
         chips={['Quote', 'Statement Review', 'Implementation', 'Support']}
-        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
-        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
+        secondaryCta={{ label: 'Explore Services', href: '/services' }}
         trustBand={{
           eyebrow: '',
           title: 'Trusted Network',

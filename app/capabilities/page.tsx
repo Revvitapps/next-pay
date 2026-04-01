@@ -14,7 +14,7 @@ import { breadcrumbJsonLd, webPageJsonLd } from '@/lib/seo/jsonLd';
 export const metadata: Metadata = buildMetadata({
   title: 'Capabilities | NextPay',
   description:
-    'Explore business operations, financial workflows, integrations, automation, reporting, and support capabilities built for operational clarity and growth.',
+    'Explore business operations, financial workflows, integrations, automation, reporting, and support services built for clearer execution and growth.',
   path: '/capabilities',
   image: '/images/capabilities/business-operations.jpg'
 });
@@ -39,37 +39,37 @@ export default async function CapabilitiesPage() {
       />
       <JsonLd
         data={webPageJsonLd({
-          name: 'Capabilities Knowledge Hub',
+          name: 'NextPay Business Support',
           description:
-            'Operational and financial capability guides for business operations, workflows, integrations, automation, and reporting.',
+            'Operational and financial support guides for business operations, workflows, integrations, automation, and reporting.',
           path: '/capabilities'
         })}
       />
       <Navbar />
       <PageHero
-        eyebrow="Capabilities Knowledge Hub"
-        title="Strategic Capabilities For Operationally Strong Businesses"
-        description="Strengthen operations, financial workflows, integrations, automation, reporting, and implementation support in one coordinated operating model."
+        eyebrow="Business Support"
+        title="Tools And Support For Better Business Operations"
+        description="Strengthen operations, financial workflows, integrations, automation, reporting, and implementation support with a clearer path forward."
         image="/images/capabilities/technology-integrations.jpg"
-        imageAlt="Technology integrations and operational capabilities"
+        imageAlt="Technology integrations and business support services"
         chips={['Operations', 'Automation', 'Reporting', 'Integrations']}
-        primaryCta={{ label: 'Discuss Your Operating Model', href: '/pricing#custom-quote' }}
-        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
+        secondaryCta={{ label: 'Explore Services', href: '/services' }}
         trustBand={{
-          eyebrow: 'Trusted by the platforms',
-          title: 'Core systems that support execution and visibility',
+          eyebrow: 'Trusted Brands',
+          title: 'Connected systems that support day-to-day operations',
           logos: operationsTrustLogos
         }}
       />
 
       <section className="px-6 pb-16 lg:px-12" aria-labelledby="capabilities-grid-heading">
         <div className="mx-auto w-full max-w-6xl">
-          <div className="mb-6 flex items-end justify-between gap-4">
+          <div className="mb-6 flex flex-col items-center justify-center gap-3 text-center">
             <h2 id="capabilities-grid-heading" className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Capability Areas
+              Business Support Areas
             </h2>
-            <Link href="/contact" className="text-sm font-semibold text-[#7dd9d8] transition hover:text-white">
-              Discuss your operating model
+            <Link href="/services" className="text-sm font-semibold text-[#7dd9d8] transition hover:text-white">
+              Explore services
             </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -83,10 +83,10 @@ export default async function CapabilitiesPage() {
       <section className="px-6 pb-16 lg:px-12" aria-labelledby="alignment-heading">
         <div className="np-surface mx-auto w-full max-w-6xl rounded-3xl p-8 md:p-10">
           <h2 id="alignment-heading" className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            Why Operational Alignment Matters
+            Why Better Operational Alignment Matters
           </h2>
           <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-100/90">
-            Organizations move faster when operations, finance, and delivery systems are aligned. Our capability model
+            Businesses move faster when operations, finance, and service delivery systems are aligned. Our support approach
             helps businesses build consistent workflows, reduce operational drag, and improve visibility into
             performance and cash flow.
           </p>
@@ -103,8 +103,8 @@ export default async function CapabilitiesPage() {
       <section className="px-6 pb-20 lg:px-12">
         <div className="mx-auto w-full max-w-6xl">
           <CapabilityCta
-            title="Turn Capability Strategy Into Execution"
-            description="If your teams are dealing with workflow friction, reporting blind spots, or disconnected systems, we can help you map a practical path forward."
+            title="Turn Better Systems Into Better Execution"
+            description="If your teams are dealing with workflow friction, reporting blind spots, or disconnected systems, we can help you find a practical next step."
           />
         </div>
       </section>

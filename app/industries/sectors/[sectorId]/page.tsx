@@ -58,7 +58,7 @@ export default async function SectorPage({ params }: SectorPageProps) {
         description={sector.subtitle}
         image={getSectorHeroImage(sectorId)}
         alt={`${sector.label} sector hero`}
-        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       />
       <LogoBand eyebrow="" title="Trusted Brands" logos={getSectorLogos(sectorId)} />
@@ -83,7 +83,7 @@ export default async function SectorPage({ params }: SectorPageProps) {
                 href="/pricing#custom-quote"
                 className="inline-flex rounded-full bg-[#eceff2] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
               >
-                Start Your Journey
+                Take The Quiz
               </Link>
               <Link
                 href="/contact?intent=statement-upload"

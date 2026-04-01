@@ -47,8 +47,8 @@ export default function AboutPage() {
         image="/images/business-operations.png"
         imageAlt="NextPay business operations visual"
         chips={['Efficiency', 'Visibility', 'Execution', 'Growth']}
-        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
-        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
+        secondaryCta={{ label: 'Explore Services', href: '/services' }}
         trustBand={{
           eyebrow: '',
           title: 'Trusted Network',
@@ -133,7 +133,7 @@ export default function AboutPage() {
           href="/pricing#custom-quote"
           className="mt-8 inline-flex rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow"
           >
-            Start Your Journey
+            Take The Quiz
           </Link>
         </section>
       </div>

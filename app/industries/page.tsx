@@ -31,8 +31,8 @@ export default function IndustriesPage() {
         image="/images/top-right-image.jpg"
         imageAlt="Industry-specific payments and POS operations"
         chips={['Retail', 'Services', 'Restaurants', 'High-Risk']}
-        primaryCta={{ label: 'Start Your Journey', href: '/pricing#custom-quote' }}
-        secondaryCta={{ label: 'Review Services', href: '/services' }}
+        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
+        secondaryCta={{ label: 'Explore Services', href: '/services' }}
         trustBand={{
           eyebrow: '',
           title: 'Trusted Network',

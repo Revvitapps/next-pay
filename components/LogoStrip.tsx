@@ -44,7 +44,7 @@ export default function LogoStrip({ logos, reverse = false, className = '', mode
   const forward = [...logos, ...logos];
 
   return (
-    <div className={`logo-marquee ${className}`.trim()}>
+    <div className={`logo-marquee max-w-full [contain:layout_paint] ${className}`.trim()}>
       <div className={`logo-marquee-track ${reverse ? 'logo-marquee-track-reverse' : ''}`}>
         {forward.map((logo, index) => (
           <div

@@ -65,28 +65,24 @@ export default function HeroVisual() {
         </p>
       </motion.div>
 
-      <div className="mt-10 space-y-6">
+      <div className="mt-8 space-y-5 md:mt-10 md:space-y-6">
         {services.map((service, index) => {
           const isOdd = index % 2 === 1;
           return (
             <motion.div
               key={service.title}
-              initial={
-                isMobile
-                  ? false
-                  : {
-                      opacity: 0,
-                      x: isOdd ? 24 : -24,
-                      y: 12
-                    }
-              }
-              whileInView={isMobile ? {} : { opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+              initial={{
+                opacity: 0,
+                x: isMobile ? 0 : isOdd ? 24 : -24,
+                y: isMobile ? 28 : 12
+              }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, amount: isMobile ? 0.18 : 0.25 }}
+              transition={{ duration: isMobile ? 0.42 : 0.5, ease: 'easeOut' }}
               className="group relative overflow-hidden rounded-3xl border border-white/10 np-surface"
             >
               <Link href={service.href} className="block">
-                <div className="relative h-[320px] w-full overflow-hidden bg-black/70 sm:h-[360px] md:h-[400px]">
+                <div className="relative h-[240px] w-full overflow-hidden bg-black/70 sm:h-[300px] md:h-[400px]">
                   <Image
                     src={service.image}
                     alt={service.title}
@@ -97,7 +93,7 @@ export default function HeroVisual() {
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-slate-950/45 to-slate-950/70" />
                 </div>
 
-                <div className="relative z-10 mx-4 -mt-20 mb-4 space-y-4 rounded-2xl border border-white/10 np-card p-6 text-center backdrop-blur-md md:mx-6 md:-mt-24 md:p-8">
+                <div className="relative z-10 mx-3 -mt-14 mb-3 space-y-4 rounded-2xl border border-white/10 np-card p-5 text-center backdrop-blur-md md:mx-6 md:-mt-24 md:mb-4 md:p-8">
                   <div className="h-px w-full bg-gradient-to-r from-white/20 via-white/10 to-transparent" />
                   <h3 className="font-heading text-2xl font-bold text-zinc-100 md:text-3xl">{service.title}</h3>
                   <p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-100/95">{service.description}</p>
@@ -109,7 +105,7 @@ export default function HeroVisual() {
                       </li>
                     ))}
                   </ul>
-                  <p className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">Start Your Journey</p>
+                  <p className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">Take The Quiz</p>
                 </div>
               </Link>
             </motion.div>
