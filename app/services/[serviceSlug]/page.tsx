@@ -81,9 +81,21 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       </PageShowcaseHero>
       <div className="px-6 pb-16 lg:px-12">
         <section className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
+            {service.sectionTitle || service.sectionIntro ? (
+              <div className="mb-6 max-w-4xl">
+                {service.sectionTitle ? (
+                  <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                    {service.sectionTitle}
+                  </h2>
+                ) : null}
+                {service.sectionIntro ? (
+                  <p className="mt-3 text-sm leading-relaxed text-slate-100/88 md:text-base">{service.sectionIntro}</p>
+                ) : null}
+              </div>
+            ) : null}
             <div className="mt-0 grid gap-5 md:grid-cols-2">
               <article className="np-card rounded-2xl p-5 text-left">
-              <h2 className="text-xl font-bold text-white">Service Details</h2>
+              <h2 className="text-xl font-bold text-white">{service.detailCardTitle ?? 'Service Details'}</h2>
               <div className="mt-4 space-y-4 text-sm text-slate-100/90">
                 {service.detailGroups.map((group) => (
                   <div key={group.title}>
@@ -101,8 +113,19 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
               </div>
               </article>
               <article className="np-card rounded-2xl p-5 text-left">
-              <h2 className="text-xl font-bold text-white">Best Fit</h2>
+              <h2 className="text-xl font-bold text-white">{service.fitCardTitle ?? 'Best Fit'}</h2>
               <p className="mt-4 text-sm text-slate-100/90">{service.idealFor}</p>
+              {service.fitCardIntro ? <p className="mt-3 text-sm text-slate-100/82">{service.fitCardIntro}</p> : null}
+              {service.idealForPoints?.length ? (
+                <ul className="mt-4 space-y-2 text-sm text-slate-100/88">
+                  {service.idealForPoints.map((point) => (
+                    <li key={point} className="flex items-start gap-2">
+                      <span className="np-dot mt-2 h-1.5 w-1.5 rounded-full" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               <div className="mt-4 space-y-2 text-sm text-slate-100/90">
                 <Link href="/pricing" className="np-link-card block rounded-xl px-3 py-2 transition hover:border-white/18">
                   Estimate pricing for this service
@@ -136,13 +159,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       {service.featureCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
-            <p className="np-accent text-sm uppercase tracking-[0.2em]">
-              {service.slug === 'point-of-sale-pos-systems' ? 'Operational Advantages' : 'Why NextPay'}
-            </p>
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.featureSectionEyebrow ?? 'Why NextPay'}</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              {service.slug === 'point-of-sale-pos-systems'
-                ? 'POS capabilities built for day-to-day operations'
-                : 'Payment solutions designed to support growth and margin'}
+              {service.featureSectionTitle ?? 'Solutions designed to support growth and operations'}
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {service.featureCards.map((item) => (
@@ -159,9 +178,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       {service.programCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
-            <p className="np-accent text-sm uppercase tracking-[0.2em]">Programs</p>
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.programSectionEyebrow ?? 'Programs'}</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Pricing programs built around how your business gets paid
+              {service.programSectionTitle ?? 'Programs built around how your business gets paid'}
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {service.programCards.map((item) => (
@@ -192,9 +211,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       {service.setupCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
-            <p className="np-accent text-sm uppercase tracking-[0.2em]">Recommended Setups</p>
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.setupSectionEyebrow ?? 'Recommended Setups'}</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              POS setups tailored to how your business operates
+              {service.setupSectionTitle ?? 'Setups tailored to how your business operates'}
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {service.setupCards.map((item) => (
@@ -211,9 +230,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       {service.deviceSpecs?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
-            <p className="np-accent text-sm uppercase tracking-[0.2em]">Device Highlights</p>
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.deviceSectionEyebrow ?? 'Device Highlights'}</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Hardware details that matter in real-world operations
+              {service.deviceSectionTitle ?? 'Hardware details that matter in real-world operations'}
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {service.deviceSpecs.map((item) => (
@@ -227,12 +246,44 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
+      {service.quizCtas?.length ? (
+        <section className="px-6 pb-16 lg:px-12">
+          <div className="mx-auto grid w-full max-w-[1380px] gap-4">
+            {service.quizCtas.map((item) => (
+              <article key={item.title} className="np-surface rounded-3xl p-8 md:p-10">
+                <p className="np-accent text-sm uppercase tracking-[0.2em]">{item.eyebrow}</p>
+                <h2 className="mt-3 max-w-3xl font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+                  {item.title}
+                </h2>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-100/88 md:text-base">{item.description}</p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={item.primaryHref ?? '/pricing#custom-quote'}
+                    className="inline-flex rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
+                  >
+                    {item.primaryLabel ?? 'Take The Quiz'}
+                  </Link>
+                  {item.secondaryLabel ? (
+                    <Link
+                      href={item.secondaryHref ?? '/contact?intent=statement-upload'}
+                      className="inline-flex rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(6,9,12,0.96),rgba(10,14,18,0.9))] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(125,217,216,0.08),0_12px_30px_rgba(0,0,0,0.34)] transition hover:border-[#7dd9d8]/46 hover:bg-[linear-gradient(180deg,rgba(8,12,16,0.98),rgba(12,16,20,0.94))]"
+                    >
+                      {item.secondaryLabel}
+                    </Link>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {service.faqItems?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
-            <p className="np-accent text-sm uppercase tracking-[0.2em]">Merchant Questions</p>
+            <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.faqSectionEyebrow ?? 'Merchant Questions'}</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Questions buyers usually ask before making a change
+              {service.faqSectionTitle ?? 'Questions buyers usually ask before making a change'}
             </h2>
             <div className="mt-8 space-y-4">
               {service.faqItems.map((item) => (

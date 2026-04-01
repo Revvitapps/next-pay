@@ -22,7 +22,7 @@ type PageShowcaseHeroProps = {
 
 function isJourneyLabel(label: string) {
   const normalized = label.toLowerCase();
-  return normalized.includes('journey') || normalized.includes('quote');
+  return normalized.includes('journey') || normalized.includes('quote') || normalized.includes('quiz');
 }
 
 export default function PageShowcaseHero({

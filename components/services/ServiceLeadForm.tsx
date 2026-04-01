@@ -219,8 +219,10 @@ export default function ServiceLeadForm({ serviceSlug, serviceName }: ServiceLea
   return (
     <div className="rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-8">
       <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Take The Quiz</p>
-      <h2 className="mt-3 text-2xl font-bold text-white">{serviceName} Request Form</h2>
-      <p className="mt-2 text-sm text-slate-100/90">Submit core business details and we will route your request internally.</p>
+      <h2 className="mt-3 text-2xl font-bold text-white">Find the right next setup for {serviceName}</h2>
+      <p className="mt-2 max-w-3xl text-sm text-slate-100/90">
+        Take the quiz to share your business details, volume, and workflow. This helps narrow what you need next instead of pushing every business into the same recommendation.
+      </p>
 
       {submitted ? (
         <div className="mt-6 rounded-2xl border border-[#46a7a6]/35 bg-[#46a7a6]/10 p-4 text-sm text-white">

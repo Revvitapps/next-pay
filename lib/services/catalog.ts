@@ -10,6 +10,16 @@ export type ServiceFeatureCard = {
   description: string;
 };
 
+export type ServiceQuizCta = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+};
+
 export type ServiceProgramCard = {
   category?: string;
   title: string;
@@ -44,15 +54,32 @@ export type ServiceOffering = {
   faqItems?: ServiceFaqItem[];
   setupCards?: ServiceFeatureCard[];
   deviceSpecs?: ServiceDeviceSpec[];
+  idealForPoints?: string[];
+  sectionTitle?: string;
+  sectionIntro?: string;
+  detailCardTitle?: string;
+  fitCardTitle?: string;
+  fitCardIntro?: string;
+  featureSectionEyebrow?: string;
+  featureSectionTitle?: string;
+  programSectionEyebrow?: string;
+  programSectionTitle?: string;
+  setupSectionEyebrow?: string;
+  setupSectionTitle?: string;
+  deviceSectionEyebrow?: string;
+  deviceSectionTitle?: string;
+  faqSectionEyebrow?: string;
+  faqSectionTitle?: string;
+  quizCtas?: ServiceQuizCta[];
 };
 
 export const serviceOfferings: ServiceOffering[] = [
   {
     slug: 'payment-processing-merchant-services',
     name: 'Payment Processing & Merchant Services',
-    tagline: 'Accept payments anywhere your customers are.',
+    tagline: 'Find the right payment setup for your business.',
     summary:
-      'Flexible payment acceptance for in-store, online, and mobile transactions.',
+      'Payment processing built for in-store, online, and mobile acceptance, with guidance that helps businesses choose the right mix of devices, pricing, and workflows.',
     offerings: [
       'Credit & Debit Card Processing',
       'Contactless Payments (Tap to Pay, Apple Pay, Google Pay)',
@@ -70,16 +97,16 @@ export const serviceOfferings: ServiceOffering[] = [
     ],
     detailGroups: [
       {
-        title: 'Payment Methods',
+        title: 'What this solution includes',
         items: [
           'Credit & Debit Card Processing',
           'Contactless Payments (Tap to Pay, Apple Pay, Google Pay)',
-          'Mobile Payments',
+          'In-store, mobile, and virtual payment acceptance',
           'ACH & Bank Transfers'
         ]
       },
       {
-        title: 'Customer Payment Solutions',
+        title: 'How you can accept payments',
         items: [
           'Text-to-Pay',
           'Payment Links',
@@ -90,51 +117,68 @@ export const serviceOfferings: ServiceOffering[] = [
         ]
       },
       {
-        title: 'Pricing Programs',
-        items: ['Dual Pricing', 'Cash Discount Programs', 'Interchange Plus Pricing']
+        title: 'Common pricing paths',
+        items: ['Flat-rate pricing', 'Interchange Plus Pricing', 'Dual Pricing and Cash Discount programs']
       }
     ],
-    idealFor: 'Businesses that need secure, flexible payment acceptance across in-person and digital channels.',
+    idealFor: 'Businesses that need a reliable way to accept payments, understand their options, and move into a setup that matches how they sell.',
     formType: 'merchant-services',
+    sectionTitle: 'Payment processing that matches how your business gets paid',
+    sectionIntro:
+      'Not every business needs the same terminal, pricing model, or acceptance flow. This page is built to show what payment processing covers, who it fits, and how the quiz helps narrow the right next step.',
+    detailCardTitle: 'What this solution is',
+    fitCardTitle: 'Who it is for',
+    fitCardIntro:
+      'A strong fit starts with how you take payments today, what channels you need next, and how much visibility you want into pricing and reporting.',
+    idealForPoints: [
+      'Retail, restaurant, service, and field businesses that accept cards in person',
+      'Operators that also need invoices, payment links, or mobile payment acceptance',
+      'Businesses reviewing terminals, gateways, or ways to reduce payment friction',
+      'Owners who want a guided way to compare merchant-pay and customer-pay setups'
+    ],
+    featureSectionEyebrow: 'Why Businesses Choose It',
+    featureSectionTitle: 'Why businesses upgrade payment processing instead of piecing it together',
     featureCards: [
       {
-        title: 'Flexible Terms',
-        description: 'Month-to-month options, simple setup, and fast onboarding for merchants that want less friction.'
+        title: 'One connected payment stack',
+        description: 'Bring in-store, online, invoice, and mobile acceptance into a cleaner setup instead of managing disconnected tools.'
       },
       {
-        title: 'Accepts All Major Cards',
-        description: 'Process Visa, Mastercard, American Express, Discover, contactless wallets, and digital payments.'
+        title: 'A fit for how customers pay',
+        description: 'Support chip, tap, wallets, card-not-present payments, and bank transfers where those methods make sense.'
       },
       {
-        title: 'Speed & Security',
-        description: 'Modern encryption, chip and tap support, and secure transaction handling across in-person and online channels.'
+        title: 'Clearer setup decisions',
+        description: 'Choose between terminal-led, mobile, virtual, or blended acceptance with less guesswork around the right equipment and flow.'
       },
       {
-        title: 'Transparent Pricing',
-        description: 'Clear pricing programs with fewer surprises, fewer line-item questions, and stronger rate visibility.'
+        title: 'Pricing visibility',
+        description: 'Review pricing models with a clearer understanding of where fees come from and which structure is more likely to fit your transaction mix.'
       },
       {
-        title: '24/7 Support',
-        description: 'Responsive support for funding questions, terminal troubleshooting, and transaction issues.'
+        title: 'Operational support',
+        description: 'Get help with onboarding, device setup, funding questions, and day-to-day payment issues when you need it.'
       },
       {
-        title: 'Next-Day Funding',
-        description: 'Eligible merchants can access funding on the next business day after the batch is closed.'
+        title: 'Faster funding visibility',
+        description: 'Eligible merchants can access next-business-day funding, with a setup that makes deposit timing easier to follow.'
       },
       {
-        title: 'Auto Batch-Out',
-        description: 'Automatically close daily batches on schedule to simplify operations and reduce avoidable processing mistakes.'
+        title: 'Cleaner closeout workflows',
+        description: 'Use scheduled batch handling and reporting tools to reduce end-of-day mistakes and improve reconciliation.'
       },
       {
-        title: 'Reporting Visibility',
-        description: 'Get cleaner payment reporting to support reconciliation, payroll planning, and operating visibility.'
+        title: 'Reporting that helps decisions',
+        description: 'Track transaction mix, funding activity, and payment patterns so owners can make better channel and pricing decisions.'
       }
     ],
+    programSectionEyebrow: 'Recommended Fit',
+    programSectionTitle: 'Common payment setups and how businesses usually evaluate them',
     programCards: [
       {
         category: 'Merchant Pay',
         title: 'Flat Rate',
-        subtitle: 'A stable rate structure for newer businesses and owners that want predictability.',
+        subtitle: 'Often considered by newer businesses or teams that want a simpler pricing structure.',
         items: [
           'One consistent rate across card types',
           'Simple billing with fewer pricing surprises',
@@ -145,7 +189,7 @@ export const serviceOfferings: ServiceOffering[] = [
       {
         category: 'Merchant Pay',
         title: 'Interchange Plus',
-        subtitle: 'A transparent pricing model often used by higher-volume businesses.',
+        subtitle: 'Often reviewed by businesses that want more transparency into the underlying card costs.',
         items: [
           'Interchange cost plus a fixed markup',
           'Stronger visibility into qualified transaction pricing',
@@ -156,7 +200,7 @@ export const serviceOfferings: ServiceOffering[] = [
       {
         category: 'Customer Pay',
         title: 'Dual Pricing / Customer Pay',
-        subtitle: 'A program designed to reduce or eliminate a large share of processing expense.',
+        subtitle: 'A path some businesses explore when reducing processing expense is a major priority.',
         items: [
           'Card pricing and cash pricing are shown clearly to the customer',
           'Debit handling and program setup are structured for compliance',
@@ -167,7 +211,7 @@ export const serviceOfferings: ServiceOffering[] = [
       {
         category: 'Customer Pay',
         title: 'Cash Discount',
-        subtitle: 'A cash incentive model that can reduce fees while giving customers another payment option.',
+        subtitle: 'A cash-oriented approach that can lower processing costs when it matches the customer experience.',
         items: [
           'Encourages cash use through an immediate discount',
           'Helps reduce card-processing burden for eligible merchants',
@@ -176,130 +220,217 @@ export const serviceOfferings: ServiceOffering[] = [
         note: 'Program structure should be reviewed for legal, operational, and customer-experience fit.'
       }
     ],
+    quizCtas: [
+      {
+        eyebrow: 'Take The Quiz',
+        title: 'Take the quiz to see what fits your business, volume, and workflow',
+        description:
+          'Not every business needs the same setup. The quiz helps narrow the right next step based on where you accept payments, what you process, and how you want the experience to work.',
+        primaryLabel: 'Take The Quiz',
+        primaryHref: '/pricing#custom-quote',
+        secondaryLabel: 'Upload My Statement',
+        secondaryHref: '/contact?intent=statement-upload'
+      }
+    ],
+    faqSectionEyebrow: 'FAQ',
+    faqSectionTitle: 'Questions businesses ask when comparing payment processing options',
     faqItems: [
       {
-        question: 'Want lower processing costs without creating customer friction?',
+        question: 'What is the difference between payment processing and a POS system?',
         answer:
-          'Cash discount and customer-pay programs can reduce or eliminate a large portion of processing fees when they are set up clearly and compliantly. The right fit depends on your customers, transaction style, and state-level rules.'
+          'Payment processing is the infrastructure that lets you accept card, wallet, and bank-based payments. A POS system adds business software on top of that, such as item management, staff controls, ticketing, and sales workflows. Some businesses only need payment acceptance, while others need a POS plus processing.'
       },
       {
-        question: 'Should I absorb the fees or pass some of them through?',
+        question: 'How do I choose the right device or setup?',
         answer:
-          'That depends on your margin structure, customer expectations, average ticket size, and local compliance requirements. Some merchants prefer predictable merchant-pay pricing, while others prioritize reducing monthly processing expense.'
+          'Start with where you sell: countertop, tableside, mobile, online, or a blend of channels. Then look at average ticket size, payment volume, connectivity, and whether you need features beyond payment acceptance. The quiz is designed to narrow those factors into a more practical recommendation.'
       },
       {
-        question: 'How does NextPay help with chargebacks or payment disputes?',
+        question: 'Can I accept payments in-store, online, and on the go?',
         answer:
-          'NextPay helps merchants organize transaction records, receipts, and supporting evidence so disputes can be responded to faster and with better documentation.'
+          'Yes. Depending on the setup, you can combine card-present devices with mobile acceptance, payment links, invoicing, customer payment pages, and other remote payment tools.'
       },
       {
-        question: 'When do deposits typically reach my bank account?',
+        question: 'Does the setup support chip, tap, and digital wallets?',
         answer:
-          'For eligible merchants, funding may be available on the next business day after the batch is closed. Timing can vary by processor, bank, and account setup.'
+          'Most modern setups support EMV chip cards, contactless tap payments, and mobile wallets such as Apple Pay and Google Pay. Exact support depends on the device and platform selected.'
       },
       {
-        question: 'Can batches close automatically each day?',
+        question: 'Will I have reporting to track transactions and deposits?',
         answer:
-          'Yes. Auto batch scheduling can be configured on many setups so transactions close on a consistent schedule and deposits stay more predictable.'
+          'Yes. Reporting can help you review transaction activity, batch detail, funding timing, and channel mix so reconciliation is easier to manage.'
       },
       {
-        question: 'Will I have access to cleaner reporting?',
+        question: 'How long does setup usually take?',
         answer:
-          'Yes. Reporting tools can surface batch detail, funding timing, transaction mix, and day-to-day activity so owners can reconcile faster and spot issues earlier.'
+          'Setup time depends on underwriting, the equipment involved, and whether you are replacing an existing provider or building a new workflow. Simpler virtual or mobile setups can move faster, while multi-device or integrated deployments take longer.'
+      },
+      {
+        question: 'Can I keep some of my current equipment?',
+        answer:
+          'Sometimes. Equipment compatibility depends on the device model, processor requirements, security standards, and the workflow you are trying to support. It should be evaluated before assuming a device can be reused.'
+      },
+      {
+        question: 'Can the right setup help lower payment costs?',
+        answer:
+          'Potentially, yes. Lowering costs depends on pricing structure, transaction mix, business type, and whether merchant-pay or customer-pay programs are appropriate. The goal is to match the pricing model to the way the business actually processes payments.'
+      },
+      {
+        question: 'How does the quiz help narrow the best fit?',
+        answer:
+          'The quiz helps sort businesses by sales channel, payment volume, workflow, and setup needs so the next conversation starts with a narrower set of options instead of a generic quote request.'
       }
     ]
   },
   {
     slug: 'point-of-sale-pos-systems',
     name: 'Point of Sale Systems',
-    tagline: 'Powerful POS systems designed to simplify transactions and operations.',
+    tagline: 'Find the right POS system for the way you sell.',
     summary:
-      'NextPay offers powerful POS systems designed to simplify transactions, manage operations, and improve the customer experience.',
+      'POS systems built for checkout, ordering, inventory, staff workflows, and reporting, with guidance that helps businesses choose the right setup before they buy.',
     offerings: ['Restaurant POS', 'Retail POS', 'Mobile POS', 'Self-Service Kiosks', 'Inventory Management', 'Staff Management', 'Loyalty Programs'],
     detailGroups: [
       {
-        title: 'POS Solutions',
+        title: 'What this solution includes',
         items: ['Restaurant POS', 'Retail POS', 'Mobile POS', 'Self-Service Kiosks']
       },
       {
-        title: 'Operational Tools',
+        title: 'What the system can help manage',
         items: ['Inventory Management', 'Staff Management', 'Loyalty Programs']
       }
     ],
-    idealFor: 'Operators improving checkout speed, service quality, and reporting consistency.',
+    idealFor: 'Businesses that need more than payment acceptance and want a POS system built around checkout, ordering, reporting, and day-to-day operations.',
     formType: 'core',
+    sectionTitle: 'POS systems for businesses that need software, hardware, and payments to work together',
+    sectionIntro:
+      'A POS system should fit the way you sell, not force your operation into the wrong workflow. This page explains what POS covers, who it is for, and how the quiz helps narrow the right setup before you commit to equipment or software.',
+    detailCardTitle: 'What this solution is',
+    fitCardTitle: 'Who it is for',
+    fitCardIntro:
+      'The right POS depends on your sales environment, your team, your inventory complexity, and whether you need one station or a larger system.',
+    idealForPoints: [
+      'Restaurants and hospitality teams managing tickets, modifiers, tips, and front-of-house speed',
+      'Retail operators that need inventory, barcodes, receipts, and checkout consistency',
+      'Mobile and service businesses that want POS flexibility outside a fixed counter',
+      'Multi-location businesses that need reporting, staff controls, and operational visibility'
+    ],
+    featureSectionEyebrow: 'Why Businesses Choose It',
+    featureSectionTitle: 'Why businesses move from basic terminals to a true POS system',
     setupCards: [
       {
         title: 'Countertop Station',
-        description: 'A fixed lane setup for fast checkout, receipt printing, chip/tap, and everyday retail or service counter use.'
+        description: 'A fixed checkout setup for front-counter sales, barcode workflows, receipt printing, and dependable in-store payment acceptance.'
       },
       {
         title: 'Mobile POS',
-        description: 'A flexible setup for tableside service, field payments, curbside workflows, and on-the-go transactions.'
+        description: 'A flexible setup for tableside service, curbside workflows, events, field sales, and businesses that need to move with the customer.'
       },
       {
         title: 'Full Service POS',
-        description: 'A larger operating station for restaurants, multi-location operators, inventory-heavy businesses, and staff workflows.'
+        description: 'A more robust station for restaurants, inventory-heavy retail, multi-terminal environments, and staff-driven workflows.'
       },
       {
         title: 'Self-Service Kiosk',
-        description: 'A guided self-order or self-checkout path designed to reduce queue pressure and speed up order flow.'
+        description: 'A self-order or self-checkout option designed to reduce line pressure and support higher-throughput service environments.'
       }
     ],
+    setupSectionEyebrow: 'Recommended Fit',
+    setupSectionTitle: 'Common POS setups based on how a business sells',
     featureCards: [
       {
         title: 'Fast Checkout',
-        description: 'Designed to reduce friction at the register, speed up service, and keep transactions moving.'
+        description: 'Reduce friction at the register, keep lines moving, and support better service speed in busy periods.'
       },
       {
         title: 'Inventory & Staff Controls',
-        description: 'Track items, team activity, and day-to-day operations with fewer manual workarounds.'
+        description: 'Track items, permissions, and team activity with fewer manual workarounds across shifts and locations.'
       },
       {
         title: 'Reporting & Payroll Visibility',
-        description: 'Detailed reports can help owners review service versus product sales, commissions, and team performance.'
+        description: 'Use reporting to review sales mix, labor patterns, tips, commissions, and broader operating performance.'
       },
       {
-        title: 'Auto Batch Scheduling',
-        description: 'Batch closeout can be scheduled to support cleaner operations and more consistent funding cycles.'
+        title: 'Omnichannel Flexibility',
+        description: 'Connect in-store selling with online ordering, invoicing, remote payments, or mobile acceptance when the business model requires it.'
       },
       {
-        title: 'Payment Integration',
-        description: 'Connect in-person sales with payment processing, digital invoicing, and online ordering flows.'
+        title: 'Customer Experience Tools',
+        description: 'Support tips, modifiers, receipts, customer lookup, loyalty, and other workflows that shape the checkout experience.'
       },
       {
         title: 'Security & Compliance',
-        description: 'Built to support chip, tap, encrypted payments, and modern device-level security standards.'
+        description: 'Support chip, tap, encrypted payments, and device-level security standards that matter in real-world operation.'
       }
     ],
+    deviceSectionEyebrow: 'Key Features',
+    deviceSectionTitle: 'POS capabilities buyers usually want to confirm before selecting a system',
     deviceSpecs: [
-      { label: 'Printer', value: 'Thermal receipt printing for fast in-store transaction flow.' },
-      { label: 'Scanner', value: '1D and 2D barcode support for faster inventory and checkout handling.' },
-      { label: 'Chip / Tap', value: 'EMV chip acceptance and contactless wallet support.' },
-      { label: 'Connectivity', value: 'Ethernet and Wi-Fi options depending on the device and deployment.' },
-      { label: 'Security', value: 'PCI-focused terminal standards and encrypted transaction handling.' },
-      { label: 'Reporting', value: 'Detailed sales and transaction reporting for owners and managers.' }
+      { label: 'Payments', value: 'Support for chip, tap, digital wallets, and card acceptance tied directly into the POS workflow.' },
+      { label: 'Receipts', value: 'Printed or digital receipt options depending on the device, environment, and customer flow.' },
+      { label: 'Inventory', value: 'Item tracking, SKU support, and inventory visibility for businesses that need more than a standalone terminal.' },
+      { label: 'Staff', value: 'User permissions, employee activity controls, and workflows for tips, shifts, and day-to-day operations.' },
+      { label: 'Reporting', value: 'Sales, category, item, and team reporting to help owners manage performance and reconcile activity.' },
+      { label: 'Connectivity', value: 'Deployment options can include Ethernet, Wi-Fi, or mobile connectivity based on the device and selling environment.' }
     ],
+    quizCtas: [
+      {
+        eyebrow: 'Take The Quiz',
+        title: 'Take the quiz to see what fits your business, volume, and workflow',
+        description:
+          'Not every business needs the same POS setup. The quiz helps narrow the right next step based on how you sell, what you need to manage, and whether a counter station, mobile POS, or larger system makes more sense.',
+        primaryLabel: 'Take The Quiz',
+        primaryHref: '/pricing#custom-quote',
+        secondaryLabel: 'Upload My Statement',
+        secondaryHref: '/contact?intent=statement-upload'
+      }
+    ],
+    faqSectionEyebrow: 'FAQ',
+    faqSectionTitle: 'Questions buyers ask when choosing a POS system',
     faqItems: [
       {
-        question: 'Does the POS system support auto batch scheduling?',
+        question: 'What is the difference between a POS system and payment processing?',
         answer:
-          'Yes. Many setups can be configured to close the batch automatically at a specific time each day to simplify end-of-day processing.'
+          'Payment processing handles the transaction itself. A POS system adds the software and operational layer around the sale, including items, tickets, staff permissions, inventory, reporting, and customer-facing workflows.'
       },
       {
-        question: 'Can the system provide detailed sales reports for payroll or commission planning?',
+        question: 'How do I know which POS setup is right for my business?',
         answer:
-          'Yes. Reporting can help separate service sales and product sales so teams can review performance and payout calculations more accurately.'
+          'The right fit depends on how and where you sell, whether you manage inventory, how your team takes orders, and what devices your operation needs. The quiz is meant to narrow those requirements before you choose hardware or software.'
       },
       {
-        question: 'When do funds typically hit the bank account?',
+        question: 'Can a POS system support in-store, online, and mobile selling?',
         answer:
-          'Eligible merchants may receive next-business-day funding once the batch is closed. Actual timing depends on processor setup and bank timing.'
+          'Many POS platforms can support a blended model that includes in-store checkout, mobile selling, and online or remote payment workflows. The exact mix depends on the platform and integration path.'
       },
       {
-        question: 'Can the POS setup support chargeback response and transaction research?',
+        question: 'Does the system support chip, tap, and digital wallets?',
         answer:
-          'Yes. Transaction records, ticket details, and customer activity logs can help owners respond faster when a payment dispute needs supporting information.'
+          'Most modern POS environments support EMV chip cards, contactless tap payments, and digital wallet acceptance when paired with compatible payment hardware.'
+      },
+      {
+        question: 'Will I have reporting for sales, staff, and operations?',
+        answer:
+          'Yes. Reporting is one of the main reasons businesses move into POS, especially when they need insight into sales mix, staff activity, item performance, or location-level visibility.'
+      },
+      {
+        question: 'How long does POS setup usually take?',
+        answer:
+          'It depends on whether you are installing a simple station or a more involved system with menus, inventory, staff permissions, and multiple devices. More operational complexity usually means more setup work upfront.'
+      },
+      {
+        question: 'Can existing hardware or peripherals be reused?',
+        answer:
+          'Sometimes. Compatibility depends on the platform, the processor relationship, device certification, and whether the hardware supports the workflow you need.'
+      },
+      {
+        question: 'Can the POS help with inventory, staff, receipts, and tips?',
+        answer:
+          'Yes. Those are common reasons businesses move into POS. The exact capabilities depend on the platform selected, but inventory control, staff permissions, receipts, and tipping workflows are typical evaluation points.'
+      },
+      {
+        question: 'How does the quiz help narrow the best fit?',
+        answer:
+          'The quiz helps sort your business by workflow, sales environment, volume, and operational needs so the recommendation starts from a narrower list of POS options instead of a generic sales conversation.'
       }
     ]
   },
