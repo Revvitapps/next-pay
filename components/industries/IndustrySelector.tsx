@@ -14,6 +14,7 @@ import {
   UtensilsCrossed,
   Store
 } from 'lucide-react';
+import { quizMessaging } from '@/lib/content/quizMessaging';
 import { industryProfiles } from '@/components/industries/industryData';
 
 type IndustrySelectorProps = {
@@ -74,7 +75,7 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
     () => [
       { id: 'retail', label: 'Retail', subtitle: 'Storefront and specialty retail' },
       { id: 'services', label: 'Services', subtitle: 'Professional and field services' },
-      { id: 'restaurants', label: 'Restaurants', subtitle: 'Food & beverage operators' },
+      { id: 'restaurants', label: 'Food and Beverage', subtitle: 'Restaurants, bars, cafes, and beverage operators' },
       { id: 'high-risk', label: 'High-Risk Businesses', subtitle: 'Specialized underwriting lanes' }
     ],
     []
@@ -84,7 +85,7 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
     <section id="industries" className="px-6 py-20 lg:px-12">
       <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-6 shadow-card md:p-10">
         {showHeader ? (
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
             <div>
               <p className="np-accent text-sm uppercase tracking-[0.2em]">Industries</p>
               <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
@@ -93,13 +94,33 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
               <p className="mt-3 text-sm leading-relaxed text-slate-100/90">
                 Payment processing, POS, and operational tools tailored to the way each industry runs.
               </p>
+              <p className="mt-3 max-w-4xl text-sm leading-relaxed text-slate-100/76">
+                Use this section to see where NextPay typically fits, why industry context matters, and when the quiz is the better path if you are between multiple options.
+              </p>
             </div>
-            <Link
-              href="/pricing#custom-quote"
-              className="np-pill justify-self-start rounded-full px-5 py-2.5 text-sm font-semibold text-[#7dd9d8] transition hover:border-white/18 hover:bg-black/70"
-            >
-              Take The Quiz
-            </Link>
+            <div className="mt-6 grid gap-3 md:grid-cols-3">
+              <article className="np-card-soft rounded-2xl border p-4 text-left">
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">What</p>
+                <p className="mt-2 text-base font-semibold text-white">Industry-specific setup guidance</p>
+                <p className="mt-2 text-sm text-slate-100/76">
+                  Different industries need different combinations of devices, workflows, reporting, and payment acceptance.
+                </p>
+              </article>
+              <article className="np-card-soft rounded-2xl border p-4 text-left">
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">Why</p>
+                <p className="mt-2 text-base font-semibold text-white">Fit matters more than generic features</p>
+                <p className="mt-2 text-sm text-slate-100/76">
+                  The right setup depends on how your customers pay, how your staff works, and what your operation needs day to day.
+                </p>
+              </article>
+              <article className="np-card-soft rounded-2xl border p-4 text-left">
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">Where To Start</p>
+                <p className="mt-2 text-base font-semibold text-white">{quizMessaging.action[2]}</p>
+                <p className="mt-2 text-sm text-slate-100/76">
+                  If you already know your industry path, start there. If not, the quiz helps narrow the right direction before you compare setups.
+                </p>
+              </article>
+            </div>
           </div>
         ) : null}
 

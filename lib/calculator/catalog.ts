@@ -97,7 +97,7 @@ const INDUSTRY_BLUEPRINTS: Record<IndustryId, IndustryBlueprint> = {
   },
   'restaurants-and-hospitality': {
     id: 'restaurants-and-hospitality',
-    label: 'Restaurants & Hospitality',
+    label: 'Food and Beverage',
     positioning: 'High transaction velocity with service-period volume swings and gratuity workflows.',
     solutionPathDefaults: ['Raise approval reliability during peak periods', 'Improve shift close reporting consistency', 'Unify tableside and front-desk payment data']
   },

@@ -19,7 +19,7 @@ export default function CapabilityCta({
         </Link>
         <Link
           href="/services"
-          className="inline-flex rounded-full border border-white/12 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/70"
+          className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
         >
           Explore Services
         </Link>

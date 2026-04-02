@@ -1,11 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowDown } from 'lucide-react';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import HeroVisual from '@/components/hero/HeroVisual';
 import LogoStrip from '@/components/LogoStrip';
 import HeroGyrateShimmer from '@/components/visuals/HeroGyrateShimmer';
 import MotionDiv from '@/components/visuals/MotionDiv';
+import { getQuizPromptSet } from '@/lib/content/quizMessaging';
 import type { TrustLogo } from '@/lib/content/logos';
 
 const highlights = ['Payments in-store, online, and on the go', 'POS, payroll, and funding in one stack', 'Cleaner reporting with less operational drag'];
@@ -22,6 +25,9 @@ const homepageTrustedLogos: TrustLogo[] = [
 ];
 
 export default function Hero() {
+  const quizPrompts = getQuizPromptSet();
+  const quizHref = '/pricing#custom-quote';
+
   return (
     <section id="home" className="w-full overflow-x-clip">
       <div className="relative isolate flex w-full min-h-[88svh] items-center overflow-hidden md:min-h-screen md:min-h-[100svh]">
@@ -37,14 +43,43 @@ export default function Hero() {
           >
             <MotionDiv>
               <div className="p-6 text-center md:p-10">
-                <span className="inline-flex text-sm font-semibold uppercase tracking-[0.28em] text-[#89e6e2]">
+                <span className="inline-flex select-none text-sm font-semibold uppercase tracking-[0.28em] text-[#89e6e2]">
                   NextPay Platform
                 </span>
-                <h1 className="mx-auto mt-5 max-w-5xl font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_18px_36px_rgba(0,0,0,0.34)] sm:text-5xl md:text-6xl">
+                <h1 className="mx-auto mt-5 max-w-5xl select-none font-heading text-4xl font-extrabold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_18px_36px_rgba(0,0,0,0.34)] sm:text-5xl md:text-6xl">
                   Accept Payments Anywhere. Run Your Entire Business with NextPay.
                 </h1>
-                <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-white/92 md:text-lg">
+                <p className="mx-auto mt-6 max-w-4xl select-none text-[17px] font-medium leading-relaxed text-white/92 md:text-[19px]">
                   Payment processing, POS, financing, payroll, and growth tools in one connected platform.
+                </p>
+                <div className="relative mx-auto mt-8 flex max-w-5xl flex-col items-center text-center">
+                  {(() => {
+                    const pillClass =
+                      'inline-flex items-center rounded-full border border-white/18 bg-black px-6 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(0,0,0,0.3)] transition hover:border-white/26 hover:bg-black';
+                    const pillWidthClass = 'min-w-[min(46rem,92vw)] justify-center';
+                    return (
+                      <>
+                        <Link href={quizHref} className={`${pillClass} ${pillWidthClass}`}>
+                          <span>{quizPrompts.curiosity}</span>
+                        </Link>
+                        <span className="my-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#46a7a6]/35 bg-black text-[#7dd9d8] shadow-[0_0_18px_rgba(70,167,166,0.18)]">
+                          <ArrowDown className="h-4 w-4" />
+                        </span>
+                        <Link href={quizHref} className={`${pillClass} ${pillWidthClass}`}>
+                          {quizPrompts.action}
+                        </Link>
+                        <span className="my-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#46a7a6]/35 bg-black text-[#7dd9d8] shadow-[0_0_18px_rgba(70,167,166,0.18)]">
+                          <ArrowDown className="h-4 w-4" />
+                        </span>
+                        <Link href={quizHref} className={`${pillClass} ${pillWidthClass}`}>
+                          {quizPrompts.trust}
+                        </Link>
+                      </>
+                    );
+                  })()}
+                </div>
+                <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-100/78 md:text-base">
+                  Answer a few questions about your business, volume, and workflow, and we&apos;ll narrow the right next step before you spend time reviewing the wrong options.
                 </p>
                 <ul className="mx-auto mt-8 flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white">
                   {highlights.map((item, index) => (

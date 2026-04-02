@@ -15,7 +15,7 @@ export function buildMetadata({
   description,
   path,
   keywords,
-  image = '/images/updated-main-hero.jpeg',
+  image = '/images/main-page-hero.jpeg',
   noIndex = false
 }: BuildMetadataInput): Metadata {
   const canonical = absoluteUrl(path);

@@ -3,7 +3,7 @@ title: Business Operations
 slug: business-operations
 category: Capabilities
 description: Operational infrastructure and workflow design that connects teams, systems, and execution across modern organizations.
-image: /images/business-operations.png
+image: /images/capabilities/business-operations.jpg
 featured: true
 order: 1
 ---

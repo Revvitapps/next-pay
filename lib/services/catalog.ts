@@ -131,7 +131,7 @@ export const serviceOfferings: ServiceOffering[] = [
     fitCardIntro:
       'A strong fit starts with how you take payments today, what channels you need next, and how much visibility you want into pricing and reporting.',
     idealForPoints: [
-      'Retail, restaurant, service, and field businesses that accept cards in person',
+      'Retail, food and beverage, service, and field businesses that accept cards in person',
       'Operators that also need invoices, payment links, or mobile payment acceptance',
       'Businesses reviewing terminals, gateways, or ways to reduce payment friction',
       'Owners who want a guided way to compare merchant-pay and customer-pay setups'
@@ -288,11 +288,11 @@ export const serviceOfferings: ServiceOffering[] = [
     tagline: 'Find the right POS system for the way you sell.',
     summary:
       'POS systems built for checkout, ordering, inventory, staff workflows, and reporting, with guidance that helps businesses choose the right setup before they buy.',
-    offerings: ['Restaurant POS', 'Retail POS', 'Mobile POS', 'Self-Service Kiosks', 'Inventory Management', 'Staff Management', 'Loyalty Programs'],
+    offerings: ['Food and Beverage POS', 'Retail POS', 'Mobile POS', 'Self-Service Kiosks', 'Inventory Management', 'Staff Management', 'Loyalty Programs'],
     detailGroups: [
       {
         title: 'What this solution includes',
-        items: ['Restaurant POS', 'Retail POS', 'Mobile POS', 'Self-Service Kiosks']
+        items: ['Food and Beverage POS', 'Retail POS', 'Mobile POS', 'Self-Service Kiosks']
       },
       {
         title: 'What the system can help manage',
@@ -309,7 +309,7 @@ export const serviceOfferings: ServiceOffering[] = [
     fitCardIntro:
       'The right POS depends on your sales environment, your team, your inventory complexity, and whether you need one station or a larger system.',
     idealForPoints: [
-      'Restaurants and hospitality teams managing tickets, modifiers, tips, and front-of-house speed',
+      'Food and beverage teams managing tickets, modifiers, tips, and front-of-house speed',
       'Retail operators that need inventory, barcodes, receipts, and checkout consistency',
       'Mobile and service businesses that want POS flexibility outside a fixed counter',
       'Multi-location businesses that need reporting, staff controls, and operational visibility'
@@ -327,7 +327,7 @@ export const serviceOfferings: ServiceOffering[] = [
       },
       {
         title: 'Full Service POS',
-        description: 'A more robust station for restaurants, inventory-heavy retail, multi-terminal environments, and staff-driven workflows.'
+        description: 'A more robust station for food and beverage operations, inventory-heavy retail, multi-terminal environments, and staff-driven workflows.'
       },
       {
         title: 'Self-Service Kiosk',

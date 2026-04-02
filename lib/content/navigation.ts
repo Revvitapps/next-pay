@@ -14,7 +14,7 @@ export const productMenuColumns: NavColumn[] = [
   {
     title: 'POS Hardware',
     links: [
-      { label: 'Restaurant POS', href: '/services/point-of-sale-pos-systems' },
+      { label: 'Food and Beverage POS', href: '/services/point-of-sale-pos-systems' },
       { label: 'Retail POS', href: '/services/point-of-sale-pos-systems' },
       { label: 'Mobile POS', href: '/services/point-of-sale-pos-systems' },
       { label: 'Self-Service Kiosks', href: '/services/point-of-sale-pos-systems' }
@@ -69,10 +69,10 @@ export const industryMenuColumns: NavColumn[] = [
     ]
   },
   {
-    title: 'Restaurants',
+    title: 'Food and Beverage',
     links: [
       { label: 'Full-Service Restaurants', href: '/industries/restaurants-and-hospitality' },
-      { label: 'Quick Service Restaurants', href: '/industries/restaurants-and-hospitality' },
+      { label: 'Quick-Service Restaurants', href: '/industries/restaurants-and-hospitality' },
       { label: 'Food Trucks', href: '/industries/restaurants-and-hospitality' },
       { label: 'Bars & Nightclubs', href: '/industries/restaurants-and-hospitality' }
     ]

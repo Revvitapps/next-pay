@@ -10,12 +10,12 @@ const CAPABILITIES_DIR = path.join(process.cwd(), 'content/capabilities');
 const CONTENT_EXTENSIONS = ['.md', '.mdx'] as const;
 
 const CAPABILITY_IMAGE_FALLBACKS: Record<string, string> = {
-  'business-operations': '/images/business-operations.png',
-  'financial-workflows': '/images/financial-workflows.png',
-  'technology-integrations': '/images/technology-integrations.png',
-  'automation-enablement': '/images/automation-enablement.png',
-  'reporting-visibility': '/images/reporting-visibility.png',
-  'implementation-support': '/images/implementation-support.png'
+  'business-operations': '/images/capabilities/business-operations.jpg',
+  'financial-workflows': '/images/capabilities/financial-workflows.jpg',
+  'technology-integrations': '/images/capabilities/technology-integrations.jpg',
+  'automation-enablement': '/images/capabilities/automation-enablement.jpg',
+  'reporting-visibility': '/images/capabilities/reporting-visibility.jpg',
+  'implementation-support': '/images/capabilities/implementation-support.jpg'
 };
 
 export type CapabilityFrontmatter = {
@@ -62,7 +62,7 @@ function stripContentExtension(fileName: string) {
 }
 
 function resolveCapabilityImage(slug: string, image?: string) {
-  return image || CAPABILITY_IMAGE_FALLBACKS[slug] || '/images/business-operations.png';
+  return image || CAPABILITY_IMAGE_FALLBACKS[slug] || '/images/capabilities/business-operations.jpg';
 }
 
 function toSlugId(input: string) {

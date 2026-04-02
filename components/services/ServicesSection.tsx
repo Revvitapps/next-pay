@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import ComplianceNote from '@/components/compliance/ComplianceNote';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import LogoBand from '@/components/trust/LogoBand';
+import { quizMessaging } from '@/lib/content/quizMessaging';
 import { paymentsTrustLogos } from '@/lib/content/logos';
 import { getServiceImage, getServiceImageClass } from '@/lib/content/serviceVisuals';
 import { serviceOfferings } from '@/lib/services/catalog';
@@ -118,16 +119,39 @@ export default function ServicesSection({
           <>
             <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">Business Services</h2>
             <p className="mt-4 max-w-5xl text-sm leading-relaxed text-slate-100/90">
-              Start with payments and POS, move into lending, and then build stronger demand with a more connected growth path.
+              NextPay brings together the core systems businesses usually evaluate separately: payments, POS, funding, payroll, and growth support.
             </p>
             <p className="mt-3 max-w-5xl text-sm leading-relaxed text-slate-100/78">
-              Take the quiz to get the right next-step plan and service mix for where your business is headed.
+              Start here if you want to understand what the platform covers, why businesses change setups, and where to begin if you are still figuring out the right fit.
             </p>
+            <div className="mt-6 grid gap-3 md:grid-cols-3">
+              <article className="np-card-soft rounded-2xl border p-4 text-left">
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">What</p>
+                <p className="mt-2 text-base font-semibold text-white">One connected business stack</p>
+                <p className="mt-2 text-sm text-slate-100/76">
+                  Payments, POS, pricing guidance, and adjacent services designed to work together instead of as disconnected vendors.
+                </p>
+              </article>
+              <article className="np-card-soft rounded-2xl border p-4 text-left">
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">Why</p>
+                <p className="mt-2 text-base font-semibold text-white">Less guesswork and operational drag</p>
+                <p className="mt-2 text-sm text-slate-100/76">
+                  Businesses usually change when costs, workflows, reporting, or device fit are no longer aligned with how they actually operate.
+                </p>
+              </article>
+              <article className="np-card-soft rounded-2xl border p-4 text-left">
+                <p className="np-accent text-[10px] uppercase tracking-[0.2em]">Where To Start</p>
+                <p className="mt-2 text-base font-semibold text-white">{quizMessaging.curiosity[2]}</p>
+                <p className="mt-2 text-sm text-slate-100/76">
+                  Not every business needs the same setup. The quiz helps sort what to review first based on your workflow, sales channels, and next priority.
+                </p>
+              </article>
+            </div>
           </>
         ) : null}
         <div className={`${showHeader ? 'mt-6' : ''} grid gap-3 text-sm text-slate-100/90 md:grid-cols-3`}>
           <Link href="/pricing#custom-quote" className="np-link-card rounded-xl px-4 py-3 transition hover:border-white/18">
-            Start your journey
+            Take The Quiz
           </Link>
           <Link href="/industries" className="np-link-card rounded-xl px-4 py-3 transition hover:border-white/18">
             Find your industry path
@@ -153,6 +177,7 @@ export default function ServicesSection({
               >
                 <h3 className="mt-3 text-2xl font-bold text-white">{journey.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{journey.description}</p>
+                <p className="mt-5 text-sm font-medium text-slate-100/74">{quizMessaging.action[0]}</p>
                 <div className="mt-6 flex items-center justify-end">
                   <span className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">
                     Take The Quiz
@@ -189,7 +214,7 @@ export default function ServicesSection({
                   alt={`${service.name} background`}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className={`${getServiceImageClass()} transition duration-700 ease-out group-hover:scale-[1.06]`}
+                  className={`${getServiceImageClass(service.slug)} transition duration-700 ease-out group-hover:scale-[1.03]`}
                 />
                 <div className={`absolute inset-0 ${service.slug === 'business-brokerage' ? 'bg-gradient-to-b from-black/10 via-black/22 to-black/72' : 'bg-gradient-to-b from-black/18 via-black/30 to-black/82'}`} />
               </div>

@@ -19,7 +19,7 @@ function CtaLink({ ctaKey, labelOverride }: { ctaKey: ConversionCtaKey; labelOve
 
   const styleClass = journeyCta
     ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow transition hover:brightness-110'
-    : 'border border-white/14 bg-[linear-gradient(180deg,rgba(6,9,12,0.96),rgba(10,14,18,0.9))] text-white shadow-[0_0_0_1px_rgba(125,217,216,0.08),0_12px_30px_rgba(0,0,0,0.34)] transition hover:border-[#7dd9d8]/46 hover:bg-[linear-gradient(180deg,rgba(8,12,16,0.98),rgba(12,16,20,0.94))]';
+    : 'np-button-secondary transition';
 
   return (
     <Link href={cta.href} className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold ${styleClass}`}>

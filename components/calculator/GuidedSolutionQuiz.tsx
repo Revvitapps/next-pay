@@ -198,6 +198,8 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
     [answers.industrySector]
   );
 
+  const hasSingleIndustryOption = industryOptions.length === 1;
+
   const selectedIndustry = useMemo(
     () => industryProfiles.find((item) => item.id === answers.industry) ?? null,
     [answers.industry]
@@ -221,6 +223,23 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
   const recommendedServices = useMemo(() => resolveServiceRecommendations(answers), [answers]);
 
   const quizProgress = useMemo(() => Math.round(((stepIndex + 1) / stepLabels.length) * 100), [stepIndex]);
+
+  useEffect(() => {
+    if (!answers.industrySector || industryOptions.length !== 1) {
+      return;
+    }
+
+    const onlyIndustry = industryOptions[0];
+    if (answers.industry === onlyIndustry.id) {
+      return;
+    }
+
+    setAnswers((prev) => ({
+      ...prev,
+      industry: onlyIndustry.id,
+      businessType: ''
+    }));
+  }, [answers.industrySector, answers.industry, industryOptions]);
 
   useEffect(() => {
     if (!quizComplete || !turnstileSiteKey || typeof window === 'undefined') {
@@ -308,7 +327,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
 
   function canContinueStep() {
     if (stepIndex === 0) return Boolean(answers.businessStage);
-    if (stepIndex === 1) return Boolean(answers.industrySector && answers.industry);
+    if (stepIndex === 1) return Boolean(answers.industrySector && answers.industry && answers.businessType);
     if (stepIndex === 2)
       return (
         answers.needPosSystem ||
@@ -471,7 +490,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
           {stepIndex === 0
             ? 'Choose the option that best reflects where your business is today.'
             : stepIndex === 1
-              ? 'Select the industry and business type that best matches your operation.'
+              ? 'Select the industry and sub-sector that best matches your operation.'
               : stepIndex === 2
                 ? 'Pick the services that matter most to your next phase.'
                 : stepIndex === 3
@@ -517,7 +536,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
               <div>
                 <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                   {[
-                    ['restaurants', 'Restaurants'],
+                    ['restaurants', 'Food and Beverage'],
                     ['retail', 'Retail'],
                     ['services', 'Services'],
                     ['high-risk', 'High-Risk Businesses']
@@ -544,7 +563,7 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
                   ))}
                 </div>
 
-                {answers.industrySector ? (
+                {answers.industrySector && !hasSingleIndustryOption ? (
                   <>
                     <h4 className="mt-7 text-lg font-semibold text-white">Choose your business type</h4>
                     <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -586,7 +605,9 @@ export default function GuidedSolutionQuiz({ industries }: GuidedSolutionQuizPro
 
                 {selectedIndustry ? (
                   <div className="mt-6">
-                    <p className="text-sm font-semibold text-white">Select a sub-sector</p>
+                    <p className="text-sm font-semibold text-white">
+                      {hasSingleIndustryOption ? `Select your ${answers.industrySector === 'restaurants' ? 'food and beverage' : answers.industrySector === 'high-risk' ? 'high-risk' : answers.industrySector} business type` : 'Select a sub-sector'}
+                    </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {selectedIndustry.subSectors.map((subSector) => (
                         <button

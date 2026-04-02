@@ -209,6 +209,28 @@ a {
     linear-gradient(180deg, rgba(6, 9, 12, 0.94), rgba(11, 14, 18, 0.86));
 }
 
+.np-button-secondary {
+  border: 1px solid rgba(70, 167, 166, 0.5);
+  background: linear-gradient(180deg, rgba(4, 6, 9, 0.96), rgba(8, 11, 15, 0.92));
+  color: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(70, 167, 166, 0.08),
+    0 12px 30px rgba(0, 0, 0, 0.34);
+  will-change: transform, box-shadow, background, color;
+}
+
+.np-button-secondary:hover {
+  border-color: rgba(125, 217, 216, 0.78) !important;
+  background: linear-gradient(180deg, rgba(125, 217, 216, 0.98), rgba(70, 167, 166, 0.94)) !important;
+  color: rgba(7, 10, 14, 0.98) !important;
+  box-shadow:
+    0 0 0 1px rgba(125, 217, 216, 0.34),
+    0 0 28px rgba(125, 217, 216, 0.22),
+    0 22px 44px rgba(0, 0, 0, 0.38);
+  transform: translateY(-2px) scale(1.02);
+  filter: none !important;
+}
+
 main:not([data-admin]) :is(a, button, summary, [role='button']) {
   transition:
     box-shadow 180ms ease,
@@ -221,24 +243,34 @@ main:not([data-admin]) :is(a, button, summary, [role='button']) {
 }
 
 main:not([data-admin]) :is(a, button, summary, [role='button']):hover {
-  filter: brightness(1.12);
-  transform: translateY(-1px);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
 }
 
-main:not([data-admin]) :is(
-  a.rounded-full:hover,
-  button.rounded-full:hover,
-  a.rounded-xl:hover,
-  button.rounded-xl:hover,
-  a.rounded-2xl:hover,
-  button.rounded-2xl:hover,
-  a.rounded-3xl:hover,
-  button.rounded-3xl:hover
-) {
+main:not([data-admin]) :is(a, button, summary, [role='button']):is(.rounded-full, .rounded-xl, .rounded-2xl, .rounded-3xl) {
+  will-change: transform, box-shadow, filter, background, color;
+}
+
+main:not([data-admin]) :is(a, button, summary, [role='button']):is(.rounded-full, .rounded-xl, .rounded-2xl, .rounded-3xl):hover {
   box-shadow:
     0 0 0 1px rgba(125, 217, 216, 0.28),
     0 0 26px rgba(125, 217, 216, 0.16),
-    0 22px 44px rgba(0, 0, 0, 0.38);
+    0 24px 46px rgba(0, 0, 0, 0.42);
+  transform: translateY(-2px) scale(1.02);
+}
+
+main:not([data-admin]) :is(a, button, summary, [role='button']):is(.bg-accent-gradient, .shadow-glow):hover {
+  box-shadow:
+    0 0 0 1px rgba(125, 217, 216, 0.38),
+    0 0 34px rgba(125, 217, 216, 0.24),
+    0 24px 50px rgba(0, 0, 0, 0.42);
+  filter: brightness(1.04) saturate(1.08);
+  transform: translateY(-3px) scale(1.025);
+}
+
+main:not([data-admin]) :is(a, button, summary, [role='button']):is(.bg-accent-gradient, .shadow-glow):active,
+main:not([data-admin]) :is(a, button, summary, [role='button']).np-button-secondary:active {
+  transform: translateY(0) scale(0.99);
 }
 
 main:not([data-admin]) :is(

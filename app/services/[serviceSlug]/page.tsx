@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
               </div>
               <Link
                 href="/services"
-                className="np-pill mt-6 inline-flex rounded-full px-5 py-2 text-sm font-semibold text-white transition hover:border-white/18"
+                className="np-button-secondary mt-6 inline-flex rounded-full px-5 py-2 text-sm font-semibold transition"
               >
                 Back to Services
               </Link>
@@ -266,7 +266,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
                   {item.secondaryLabel ? (
                     <Link
                       href={item.secondaryHref ?? '/contact?intent=statement-upload'}
-                      className="inline-flex rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(6,9,12,0.96),rgba(10,14,18,0.9))] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(125,217,216,0.08),0_12px_30px_rgba(0,0,0,0.34)] transition hover:border-[#7dd9d8]/46 hover:bg-[linear-gradient(180deg,rgba(8,12,16,0.98),rgba(12,16,20,0.94))]"
+                      className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
                     >
                       {item.secondaryLabel}
                     </Link>
@@ -287,9 +287,12 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
             </h2>
             <div className="mt-8 space-y-4">
               {service.faqItems.map((item) => (
-                <details key={item.question} className="np-card rounded-2xl p-5 text-left">
-                  <summary className="cursor-pointer list-none text-lg font-bold text-white marker:hidden">
-                    {item.question}
+                <details key={item.question} className="group np-card rounded-2xl p-5 text-left">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold text-white marker:hidden">
+                    <span>{item.question}</span>
+                    <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#46a7a6]/35 text-xl font-semibold text-[#7dd9d8] transition duration-300 group-hover:border-[#8ff7f4]/70 group-hover:text-[#b6fffd] group-hover:shadow-[0_0_16px_rgba(70,167,166,0.35)] group-open:rotate-45">
+                      +
+                    </span>
                   </summary>
                   <p className="mt-3 text-sm leading-relaxed text-slate-100/88">{item.answer}</p>
                 </details>

@@ -8,6 +8,8 @@ type HeroLink = {
   label: string;
 };
 
+type HeroChip = string | HeroLink;
+
 function isJourneyLabel(label: string) {
   const normalized = label.toLowerCase();
   return normalized.includes('journey') || normalized.includes('quote');
@@ -19,7 +21,7 @@ type PageHeroProps = {
   description: string;
   image: string;
   imageAlt: string;
-  chips?: string[];
+  chips?: HeroChip[];
   primaryCta?: HeroLink;
   secondaryCta?: HeroLink;
   trustBand?: {
@@ -67,12 +69,22 @@ export default function PageHero({
               {chips?.length ? (
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   {chips.map((chip) => (
-                    <span
-                      key={chip}
-                      className="np-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-100/90"
-                    >
-                      {chip}
-                    </span>
+                    typeof chip === 'string' ? (
+                      <span
+                        key={chip}
+                        className="np-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-100/90"
+                      >
+                        {chip}
+                      </span>
+                    ) : (
+                      <Link
+                        key={`${chip.label}-${chip.href}`}
+                        href={chip.href}
+                        className="np-pill inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-100/90 transition hover:border-white/18 hover:bg-black/70"
+                      >
+                        {chip.label}
+                      </Link>
+                    )
                   ))}
                 </div>
               ) : null}
@@ -85,7 +97,7 @@ export default function PageHero({
                       className={`inline-flex rounded-full px-6 py-3 text-sm font-semibold transition ${
                         isJourneyLabel(primaryCta.label)
                           ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
-                          : 'border border-white/12 bg-black/55 text-white hover:border-white/18 hover:bg-black/72'
+                          : 'np-button-secondary'
                       }`}
                     >
                       {primaryCta.label}
@@ -94,7 +106,7 @@ export default function PageHero({
                   {secondaryCta ? (
                     <Link
                       href={secondaryCta.href}
-                      className="inline-flex rounded-full border border-white/12 bg-black/55 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+                      className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
                     >
                       {secondaryCta.label}
                     </Link>

@@ -28,9 +28,14 @@ export default function IndustriesPage() {
         eyebrow="Industries"
         title="Industries We Serve"
         description="Payment processing, POS, and operational tools tailored to the way each industry runs."
-        image="/images/top-right-image.jpg"
+        image="/images/industries-retail-clothing-convience-liquor-specialty.png"
         imageAlt="Industry-specific payments and POS operations"
-        chips={['Retail', 'Services', 'Restaurants', 'High-Risk']}
+        chips={[
+          { label: 'Retail', href: '/industries/sectors/retail' },
+          { label: 'Services', href: '/industries/sectors/services' },
+          { label: 'Food and Beverage', href: '/industries/sectors/restaurants' },
+          { label: 'High-Risk', href: '/industries/sectors/high-risk' }
+        ]}
         primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Explore Services', href: '/services' }}
         trustBand={{

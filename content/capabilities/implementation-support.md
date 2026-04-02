@@ -3,7 +3,7 @@ title: Implementation Support
 slug: implementation-support
 category: Capabilities
 description: Implementation guidance, operational support, and long-term optimization for businesses building stronger infrastructure.
-image: /images/implementation-support.png
+image: /images/capabilities/implementation-support.jpg
 featured: true
 order: 6
 ---

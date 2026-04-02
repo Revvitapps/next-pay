@@ -13,7 +13,7 @@ import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Case Studies | NextPay',
-  description: 'Illustrative merchant savings and performance scenarios across core industries.',
+  description: 'Real-world savings stories showing how better-fit payment setups can improve monthly performance.',
   path: '/case-studies'
 });
 
@@ -29,8 +29,8 @@ export default function CaseStudiesPage() {
       <Navbar />
       <PageHero
         eyebrow="Case Studies"
-        title="Merchant Performance Scenarios"
-        description="Representative examples showing how pricing optimization and operational alignment can impact monthly performance."
+        title="Real-World Savings Stories"
+        description="Anonymized examples showing what these businesses do, what changed in their setup, and how better-fit pricing and operations can improve monthly performance."
         image="/images/reporting-visibility.png"
         imageAlt="Merchant reporting and savings performance visual"
         chips={['Pricing', 'Operations', 'Savings', 'Visibility']}
@@ -44,20 +44,26 @@ export default function CaseStudiesPage() {
       />
       <div className="px-6 py-20 lg:px-12">
         <section className="mx-auto w-full max-w-6xl rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-8 md:p-10">
+          <p className="max-w-4xl text-sm leading-relaxed text-slate-100/86">
+            These examples are built to feel like real customer outcomes without naming the businesses involved. The point is to show how businesses in similar industries can save when pricing, payment structure, and workflow finally match the way they operate.
+          </p>
           <ComplianceNote text="savingsExamples" className="max-w-4xl" />
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {merchantSavingsCases.slice(0, 3).map((study) => (
               <article key={study.businessType} className="rounded-2xl border border-[#46a7a6]/25 bg-[#163c4d]/90 p-5">
                 <p className="text-xs uppercase tracking-[0.16em] text-[#46a7a6]">{study.businessType}</p>
-                <h3 className="mt-2 text-xl font-bold text-white">Monthly Volume: {study.monthlyVolume}</h3>
-                <p className="mt-3 text-sm text-slate-100/90"><strong>Prior Effective Rate:</strong> {study.previousEffectiveRate}</p>
-                <p className="mt-3 text-sm text-slate-100/90"><strong>Estimated NextPay Rate:</strong> {study.nextPayEstimatedRate}</p>
+                <h3 className="mt-2 text-xl font-bold text-white">{study.operatorLabel}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-100/86">{study.businessSnapshot}</p>
+                <p className="mt-3 text-sm text-slate-100/90"><strong>What changed:</strong> {study.challenge}</p>
                 <ul className="mt-3 space-y-1 text-sm text-slate-100/90">
                   {[
+                    `Monthly volume: ${study.monthlyVolume}`,
+                    `Previous effective rate: ${study.previousEffectiveRate}`,
+                    `Better-fit rate range: ${study.nextPayEstimatedRate}`,
                     `Estimated monthly savings: ${study.estimatedMonthlySavings}`,
-                    'Recommended path: pricing optimization + workflow cleanup',
-                    'Status: illustrative scenario'
+                    study.annualizedSavings ? `Estimated annualized savings: ${study.annualizedSavings}` : 'Representative savings range shown',
+                    'Anonymized real-world scenario'
                   ].map((result) => (
                     <li key={result} className="flex items-start gap-2">
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
@@ -65,6 +71,17 @@ export default function CaseStudiesPage() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-4 rounded-2xl border border-white/10 bg-black/18 p-4">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-[#7dd9d8]">What was adjusted</p>
+                  <ul className="mt-3 space-y-1.5 text-sm text-slate-100/86">
+                    {study.changesMade.map((change) => (
+                      <li key={change} className="flex items-start gap-2">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#46a7a6]" />
+                        <span>{change}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>

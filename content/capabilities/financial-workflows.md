@@ -3,7 +3,7 @@ title: Financial Workflows
 slug: financial-workflows
 category: Capabilities
 description: Payment infrastructure, billing workflows, and revenue operations designed to support predictable cash flow and financial clarity.
-image: /images/financial-workflows.png
+image: /images/capabilities/financial-workflows.jpg
 featured: true
 order: 2
 ---

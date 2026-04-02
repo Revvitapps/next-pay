@@ -86,7 +86,7 @@ export default async function SubSectorPage({ params }: SubSectorPageProps) {
               </Link>
               <Link
                 href="/contact?intent=statement-upload"
-                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+                className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 Upload My Statement
               </Link>

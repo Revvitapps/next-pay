@@ -93,7 +93,7 @@ export default async function CapabilityDetailPage({ params }: CapabilityDetailP
         <CapabilityHero capability={capability} />
       </div>
 
-      <div className="px-6 pb-16 lg:px-12">
+      <div className="px-6 pb-16 pt-4 lg:px-12 lg:pt-6">
         <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1fr_320px]">
           <section aria-labelledby="capability-content-heading">
             <h2 id="capability-content-heading" className="sr-only">

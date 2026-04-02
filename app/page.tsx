@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import StatementUploadForm from '@/components/contact/StatementUploadForm';
 import Hero from '@/components/hero/Hero';
+import HomeFaqSection from '@/components/home/HomeFaqSection';
 import IndustrySelector from '@/components/industries/IndustrySelector';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
@@ -37,6 +38,7 @@ export default function HomePage() {
 
       <ServicesSection showFeaturedJourneys={false} />
       <IndustrySelector />
+      <HomeFaqSection />
 
       <MerchantSavingsCards />
 

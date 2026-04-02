@@ -200,7 +200,7 @@ export default function IndustryMiniQuote({ profile }: IndustryMiniQuoteProps) {
             </Link>
             <Link
               href="/contact?intent=statement-upload"
-              className="inline-flex rounded-full border border-white/12 bg-black/55 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+              className="np-button-secondary inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition"
             >
               Upload My Statement
             </Link>

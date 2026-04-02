@@ -20,7 +20,7 @@ export type IndustryProfile = {
 export type IndustrySectorId = IndustryProfile['sector'];
 
 export const industrySectorMeta: Record<IndustrySectorId, { label: string; subtitle: string }> = {
-  restaurants: { label: 'Restaurants', subtitle: 'Food & beverage operators' },
+  restaurants: { label: 'Food and Beverage', subtitle: 'Restaurants, bars, cafes, and beverage operators' },
   retail: { label: 'Retail', subtitle: 'Storefront and specialty retail' },
   services: { label: 'Services', subtitle: 'Professional and field services' },
   'high-risk': { label: 'High-Risk Businesses', subtitle: 'Specialized underwriting lanes' }
@@ -139,11 +139,25 @@ export const industryProfiles: IndustryProfile[] = [
     id: 'high-risk',
     label: 'High-Risk Businesses',
     sector: 'high-risk',
-    subSectors: ['CBD', 'Smoke/Vape', 'Peptides', 'Travel Agency', 'SEO Marketing'],
+    subSectors: ['CBD', 'Smoke/Vape', 'Peptides', 'Travel Agency', 'SEO Marketing', 'Nutraceuticals', 'Telemedicine'],
     icon: 'briefcase',
     bestFor: 'Payment and risk controls for industries that require specialized underwriting-aware setups.',
-    businessTypes: ['CBD businesses', 'Smoke and vape shops', 'Peptide businesses', 'Travel agencies', 'SEO agencies'],
-    recommendedSetup: ['Risk-aware gateway configuration', 'Chargeback response workflows', 'Multi-descriptor and routing support'],
+    businessTypes: [
+      'CBD businesses',
+      'Smoke and vape shops',
+      'Peptide businesses',
+      'Travel agencies',
+      'SEO agencies',
+      'Supplement and nutraceutical brands',
+      'Telemedicine businesses',
+      'Subscription continuity businesses'
+    ],
+    recommendedSetup: [
+      'Risk-aware gateway configuration',
+      'Chargeback response workflows',
+      'Multi-descriptor and routing support',
+      'Approval-aware underwriting guidance'
+    ],
     operationalWins: ['Improved processing stability', 'Better dispute preparedness', 'More predictable settlement operations'],
     suggestedHardware: [
       { name: 'Mobile POS', summary: 'Field-ready acceptance with fallback options.', idealFor: 'Hybrid models' },
@@ -193,14 +207,14 @@ export const industryProfiles: IndustryProfile[] = [
   },
   {
     id: 'restaurants-and-hospitality',
-    label: 'Restaurants & Hospitality',
+    label: 'Food and Beverage',
     sector: 'restaurants',
     subSectors: ['Full Service', 'Quick Service', 'Cafe', 'Bar/Nightclub', 'Food Truck'],
     icon: 'utensils',
     bestFor: 'Hospitality operators managing high transaction volume and peak service windows.',
     businessTypes: [
       'Full-service restaurants',
-      'Quick service restaurants',
+      'Quick-service restaurants',
       'Cafes and coffee shops',
       'Bars and nightclubs',
       'Pizzerias',

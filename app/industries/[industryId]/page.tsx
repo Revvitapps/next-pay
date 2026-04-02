@@ -8,6 +8,7 @@ import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
 import LogoBand from '@/components/trust/LogoBand';
 import { getIndustryHeroImage, getIndustryLogos } from '@/lib/content/industryVisuals';
+import { getHighRiskQuizPromptSet, quizMessaging } from '@/lib/content/quizMessaging';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd } from '@/lib/seo/jsonLd';
 
@@ -50,6 +51,9 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
     notFound();
   }
 
+  const isHighRisk = industry.id === 'high-risk';
+  const highRiskPrompts = getHighRiskQuizPromptSet();
+
   return (
     <main className="pt-16">
       <JsonLd
@@ -88,15 +92,36 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
               <h2 className="text-xl font-bold text-white">Best Fit</h2>
               <p className="mt-4 text-sm leading-relaxed text-slate-100/90">{industry.bestFor}</p>
 
-              <h3 className="np-accent mt-6 text-sm font-semibold uppercase tracking-[0.15em]">Typical Needs</h3>
+              <h3 className="np-accent mt-6 text-sm font-semibold uppercase tracking-[0.15em]">Common Needs</h3>
               <div className="mt-3 flex flex-wrap gap-2">
-                {industry.subSectors.slice(0, 6).map((item) => (
+                {industry.recommendedSetup.slice(0, 6).map((item) => (
                   <span key={item} className="np-pill rounded-full px-3 py-1.5 text-xs text-slate-100/85">
                     {item}
                   </span>
                 ))}
               </div>
             </article>
+
+            {isHighRisk ? (
+              <article className="np-card rounded-2xl p-5 text-left md:col-span-2">
+                <p className="np-accent text-sm font-semibold uppercase tracking-[0.18em]">Trust And Safety</p>
+                <h2 className="mt-3 text-2xl font-bold text-white">{highRiskPrompts.curiosity}</h2>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-100/86">
+                  High-risk businesses usually need a more careful path through underwriting, gateway fit, chargeback readiness, and operational setup. The quiz helps narrow that path without guesswork and without forcing you into a generic recommendation.
+                </p>
+                <div className="mt-6 grid gap-3 md:grid-cols-3">
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                    <p className="text-sm font-semibold text-white">{highRiskPrompts.action}</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                    <p className="text-sm font-semibold text-white">{highRiskPrompts.trust}</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                    <p className="text-sm font-semibold text-white">{quizMessaging.trust[4]}</p>
+                  </div>
+                </div>
+              </article>
+            ) : null}
 
             <article className="np-card rounded-2xl p-5 text-left md:col-span-2">
               <h2 className="text-xl font-bold text-white">Operational Wins</h2>
@@ -112,6 +137,15 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
           </div>
 
           <div className="mt-8 space-y-3">
+            {isHighRisk ? (
+              <p className="text-center text-sm leading-relaxed text-slate-100/76">
+                {quizMessaging.trust[1]} The quiz is the fastest way to narrow a more approval-aware setup for your business type.
+              </p>
+            ) : (
+              <p className="text-center text-sm leading-relaxed text-slate-100/76">
+                {quizMessaging.curiosity[1]} The quiz helps narrow the right next step before you spend time on the wrong setup.
+              </p>
+            )}
             <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/pricing#custom-quote"
@@ -121,7 +155,7 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
               </Link>
               <Link
                 href="/contact?intent=statement-upload"
-                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+                className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 Upload My Statement
               </Link>
@@ -129,19 +163,19 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/services"
-                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18"
+                className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 Explore Services
               </Link>
               <Link
                 href="/case-studies"
-                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18"
+                className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 View Savings Examples
               </Link>
               <Link
                 href="/industries"
-                className="np-pill inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:border-white/18"
+                className="np-button-secondary inline-flex rounded-full px-6 py-3 text-sm font-semibold transition"
               >
                 Back to Industries
               </Link>

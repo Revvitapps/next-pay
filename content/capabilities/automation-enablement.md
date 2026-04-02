@@ -3,7 +3,7 @@ title: Automation + Enablement
 slug: automation-enablement
 category: Capabilities
 description: Automation frameworks that streamline workflows, reduce manual effort, and accelerate operational execution.
-image: /images/automation-enablement.png
+image: /images/capabilities/automation-enablement.jpg
 featured: true
 order: 4
 ---

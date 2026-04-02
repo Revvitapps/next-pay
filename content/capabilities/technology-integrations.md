@@ -3,7 +3,7 @@ title: Technology Integrations
 slug: technology-integrations
 category: Capabilities
 description: System integrations and data architecture that connect platforms across the modern business technology stack.
-image: /images/technology-integrations.png
+image: /images/capabilities/technology-integrations.jpg
 featured: true
 order: 3
 ---

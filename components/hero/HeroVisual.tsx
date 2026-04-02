@@ -12,6 +12,7 @@ const services = [
       'Launch with payment acceptance, POS hardware, and checkout systems built around the way your business operates.',
     bullets: ['In-person + online payments', 'Countertop, mobile, and full POS', 'Faster checkout + cleaner reporting'],
     image: '/images/payment-processing.png',
+    imageClass: 'object-contain object-center scale-[0.94]',
     href: '/services/payment-processing-merchant-services'
   },
   {
@@ -20,6 +21,7 @@ const services = [
       'Add working capital, equipment financing, and expansion funding when the business is ready to grow.',
     bullets: ['Working capital options', 'Equipment financing', 'Expansion funding'],
     image: '/images/financial-workflows.png',
+    imageClass: 'object-contain object-center scale-[0.94]',
     href: '/services/business-financing-funding'
   },
   {
@@ -28,6 +30,7 @@ const services = [
       'Strengthen visibility, outreach, and reputation once your payments and operations foundation is in place.',
     bullets: ['Reputation support', 'Outreach systems', 'Relationship-driven growth'],
     image: '/images/connected-stack-blog-image.png',
+    imageClass: 'object-contain object-center scale-[0.95]',
     href: '/services/marketing-outreach-lead-generation'
   }
 ];
@@ -88,7 +91,7 @@ export default function HeroVisual() {
                     alt={service.title}
                     fill
                     sizes="100vw"
-                    className="object-cover object-center opacity-90 transition duration-700 group-hover:scale-[1.01]"
+                    className={`${service.imageClass} opacity-92 transition duration-500 group-hover:scale-[1.01]`}
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-slate-950/45 to-slate-950/70" />
                 </div>
@@ -105,7 +108,11 @@ export default function HeroVisual() {
                       </li>
                     ))}
                   </ul>
-                  <p className="np-accent text-sm font-semibold uppercase tracking-[0.16em]">Take The Quiz</p>
+                  <div className="pt-1">
+                    <span className="inline-flex rounded-full border border-[#46a7a6]/70 px-4 py-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#7fdedd] shadow-[0_0_0_rgba(70,167,166,0)] transition duration-300 group-hover:border-[#8ff7f4] group-hover:text-[#b6fffd] group-hover:shadow-[0_0_16px_rgba(70,167,166,0.45)]">
+                      Take The Quiz
+                    </span>
+                  </div>
                 </div>
               </Link>
             </motion.div>

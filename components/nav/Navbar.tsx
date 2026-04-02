@@ -66,7 +66,7 @@ export default function Navbar() {
             width={148}
             height={38}
             priority
-            className="h-8 w-auto md:h-9"
+            className="h-8 w-auto brightness-[1.42] contrast-[1.16] saturate-[1.18] drop-shadow-[0_0_14px_rgba(125,217,216,0.18)] md:h-9"
           />
         </Link>
 

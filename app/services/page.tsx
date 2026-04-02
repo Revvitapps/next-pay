@@ -37,8 +37,9 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Business Services"
         description="Start with the three paths most businesses ask for: payments and POS, business lending, and stronger network building."
-        image="/images/top-right-image.jpg"
+        image="/images/services-hero.png"
         alt="NextPay business services overview"
+        imagePosition="object-center md:object-[center_38%]"
         primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       >

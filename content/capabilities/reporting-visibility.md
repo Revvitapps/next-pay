@@ -3,7 +3,7 @@ title: Reporting + Visibility
 slug: reporting-visibility
 category: Capabilities
 description: Unified reporting systems that provide operational and financial insight across the organization.
-image: /images/reporting-visibility.png
+image: /images/capabilities/reporting-visibility.jpg
 featured: true
 order: 5
 ---

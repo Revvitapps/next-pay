@@ -19,7 +19,7 @@ export const metadata: Metadata = buildMetadata({
 
 const useCases = [
   {
-    title: 'Restaurants & Hospitality',
+    title: 'Food and Beverage',
     description: 'Fast service, modifiers, tabs, and reporting for full-service, quick-service, and bar operations.',
     href: '/industries/restaurants-and-hospitality',
     image: '/images/futuristic-pos-nextpay.png'
@@ -111,7 +111,7 @@ const capabilities = [
 ];
 
 const linkedIndustries = [
-  { title: 'Restaurants & Hospitality', href: '/industries/restaurants-and-hospitality' },
+  { title: 'Food and Beverage', href: '/industries/restaurants-and-hospitality' },
   { title: 'Retail Businesses', href: '/industries/retail-businesses' },
   { title: 'Beauty & Personal Care', href: '/industries/beauty-and-personal-care' },
   { title: 'Home Services & Contractors', href: '/industries/home-services-and-contractors' },
@@ -145,7 +145,7 @@ export default function PosRedesignSpecPage() {
           <div className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr] xl:items-center">
             <div className="max-w-2xl">
               <div className="mt-6 flex flex-wrap gap-3">
-                {['Restaurants', 'Retail', 'Mobile POS', 'Multi-Location', 'Integrated Reporting'].map((item, index) => (
+                {['Food and Beverage', 'Retail', 'Mobile POS', 'Multi-Location', 'Integrated Reporting'].map((item, index) => (
                   <span
                     key={item}
                     className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] ${

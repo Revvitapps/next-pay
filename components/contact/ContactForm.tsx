@@ -62,6 +62,7 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [hiddenForIntent, setHiddenForIntent] = useState(false);
   const widgetRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<string | null>(null);
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -75,6 +76,7 @@ export default function ContactForm() {
     const industry = params.get('industry');
     const message = params.get('message');
     const intent = params.get('intent');
+    setHiddenForIntent(intent === 'statement-upload');
     const intentMessage =
       intent === 'statement-upload'
         ? 'I want a custom savings analysis based on my current merchant statement.'
@@ -195,17 +197,21 @@ export default function ContactForm() {
     }
   }
 
+  if (hiddenForIntent) {
+    return null;
+  }
+
   return (
     <section id="contact" className="px-6 py-20 lg:px-12">
       <MotionDiv variant="right">
         <div className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-10">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Contact / Take The Quiz</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Contact</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               Tell us your setup goals and we will map your rollout
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-slate-100/90">
-              Tell us what your business needs — we will recommend the right stack and implementation path.
+              Tell us what your business needs and we will follow up with the right next-step plan.
             </p>
           </div>
 
@@ -319,7 +325,7 @@ export default function ContactForm() {
                   disabled={submitting}
                   className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                 >
-                  {submitting ? 'Submitting...' : 'Take The Quiz'}
+                  {submitting ? 'Submitting...' : 'Send My Request'}
                 </button>
               </div>
             </form>

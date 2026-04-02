@@ -70,7 +70,7 @@ export default function PageShowcaseHero({
                       className={`inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                         isJourneyLabel(primaryCta.label)
                           ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
-                          : 'border border-white/12 bg-black/55 text-white hover:border-white/18 hover:bg-black/72'
+                          : 'np-button-secondary'
                       }`}
                     >
                       {primaryCta.label}
@@ -79,7 +79,7 @@ export default function PageShowcaseHero({
                   {secondaryCta ? (
                     <Link
                       href={secondaryCta.href}
-                      className="inline-flex rounded-full border border-white/12 bg-black/55 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/18 hover:bg-black/72"
+                      className="np-button-secondary inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition"
                     >
                       {secondaryCta.label}
                     </Link>

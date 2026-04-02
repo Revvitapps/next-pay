@@ -17,15 +17,15 @@ export default function CapabilityHero({ capability }: CapabilityHeroProps) {
         Designed for businesses that need practical systems, operational alignment, and reliable execution across teams.
       </div>
 
-      <div className="relative mt-7 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/70 md:aspect-[21/9]">
+      <div className="relative mt-7 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/78 md:aspect-[16/9]">
         <Image
           src={capability.image}
           alt={`${capability.title} featured visual`}
           fill
-          className="object-cover object-center scale-[1.02]"
+          className="object-contain object-center"
           sizes="(max-width: 1200px) 100vw, 1200px"
           priority
-          quality={90}
+          quality={95}
         />
       </div>
     </section>
