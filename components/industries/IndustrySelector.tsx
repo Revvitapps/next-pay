@@ -25,48 +25,37 @@ const industryVisuals: Record<
   string,
   {
     icon: React.ComponentType<{ className?: string }>;
-    badge: string;
   }
 > = {
   'automotive-businesses': {
-    icon: CarFront,
-    badge: 'bg-gradient-to-br from-cyan-400 to-blue-600 shadow-[0_0_18px_rgba(34,211,238,0.28)]'
+    icon: CarFront
   },
   'beauty-and-personal-care': {
-    icon: Sparkles,
-    badge: 'bg-gradient-to-br from-pink-400 to-fuchsia-600 shadow-[0_0_18px_rgba(232,121,249,0.26)]'
+    icon: Sparkles
   },
   'entertainment-and-specialty-businesses': {
-    icon: Ticket,
-    badge: 'bg-gradient-to-br from-violet-500 to-purple-700 shadow-[0_0_18px_rgba(139,92,246,0.26)]'
+    icon: Ticket
   },
   'fitness-and-membership-businesses': {
-    icon: Dumbbell,
-    badge: 'bg-gradient-to-br from-lime-400 to-green-600 shadow-[0_0_18px_rgba(132,204,22,0.24)]'
+    icon: Dumbbell
   },
   'healthcare-and-medical-practices': {
-    icon: HeartPulse,
-    badge: 'bg-gradient-to-br from-teal-400 to-cyan-600 shadow-[0_0_18px_rgba(45,212,191,0.24)]'
+    icon: HeartPulse
   },
   'high-risk': {
-    icon: ShieldAlert,
-    badge: 'bg-gradient-to-br from-orange-500 to-red-600 shadow-[0_0_18px_rgba(249,115,22,0.24)]'
+    icon: ShieldAlert
   },
   'home-services-and-contractors': {
-    icon: Hammer,
-    badge: 'bg-gradient-to-br from-amber-400 to-yellow-600 shadow-[0_0_18px_rgba(245,158,11,0.24)]'
+    icon: Hammer
   },
   'professional-and-business-services': {
-    icon: BriefcaseBusiness,
-    badge: 'bg-gradient-to-br from-slate-500 to-indigo-600 shadow-[0_0_18px_rgba(99,102,241,0.20)]'
+    icon: BriefcaseBusiness
   },
   'restaurants-and-hospitality': {
-    icon: UtensilsCrossed,
-    badge: 'bg-gradient-to-br from-orange-400 to-rose-500 shadow-[0_0_18px_rgba(251,146,60,0.24)]'
+    icon: UtensilsCrossed
   },
   'retail-businesses': {
-    icon: Store,
-    badge: 'bg-gradient-to-br from-sky-400 to-indigo-600 shadow-[0_0_18px_rgba(56,189,248,0.24)]'
+    icon: Store
   }
 };
 
@@ -154,13 +143,13 @@ export default function IndustrySelector({ showHeader = true }: IndustrySelector
                 <div className="flex items-center gap-4">
                   <div
                     className={[
-                      'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10',
+                      'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/14',
+                      'bg-[linear-gradient(180deg,rgba(12,12,12,0.96),rgba(28,28,28,0.9))] shadow-[0_12px_28px_rgba(0,0,0,0.34)]',
                       'transition-all duration-200',
                       'group-hover:-translate-y-0.5 group-hover:scale-[1.03]',
-                      visual?.badge ?? 'bg-white/10'
                     ].join(' ')}
                   >
-                    <Icon className="h-5 w-5 text-white" />
+                    <Icon className="h-5 w-5 text-white/92" />
                   </div>
 
                   <div className="min-w-0">
