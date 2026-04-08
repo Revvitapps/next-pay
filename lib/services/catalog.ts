@@ -453,17 +453,155 @@ export const serviceOfferings: ServiceOffering[] = [
   {
     slug: 'business-financing-funding',
     name: 'Business Financing & Funding',
-    tagline: 'Access capital when your business needs it most.',
-    summary: 'Funding options for working capital, equipment, expansion, and short-term cash flow needs.',
-    offerings: ['Merchant Cash Advances', 'Equipment Financing', 'Working Capital Loans', 'Expansion Financing'],
+    tagline: 'Fast, flexible funding programs for working capital, equipment, expansion, and real estate deals.',
+    summary:
+      'Explore business funding, equipment financing, lines of credit, term loans, and real estate programs with application paths built for faster approvals.',
+    offerings: [
+      'Equipment Financing',
+      'Revenue Based Financing',
+      'Term Loans',
+      'Business Lines of Credit',
+      'Real Estate Short-Term Loans',
+      'Real Estate Long-Term Loans'
+    ],
     detailGroups: [
       {
-        title: 'Funding Options',
-        items: ['Merchant Cash Advances', 'Equipment Financing', 'Working Capital Loans', 'Expansion Financing']
+        title: 'Business funding programs',
+        items: ['Equipment Financing', 'Revenue Based Financing', 'Term Loans', 'Business Lines of Credit']
+      },
+      {
+        title: 'Real estate programs',
+        items: ['Fix and Flip', 'Bridge / Cash-Out Refi', 'DSCR Rental Loans', 'Ground-Up Construction', 'Commercial Real Estate']
       }
     ],
-    idealFor: 'Businesses evaluating short-term liquidity or growth-focused capital strategies.',
-    formType: 'business-financing'
+    idealFor:
+      'Businesses and investors that need a faster path to capital for inventory, payroll, equipment, expansions, acquisitions, or property-based projects.',
+    formType: 'business-financing',
+    sectionTitle: 'Funding options built around working capital needs, equipment purchases, and property-based deals',
+    sectionIntro:
+      'This page is structured around the active Reveal Lending application flow and the funding programs currently being offered through the partner page. It gives buyers a clearer view of what types of capital are available before they start the application.',
+    detailCardTitle: 'Programs currently available',
+    fitCardTitle: 'Who this is for',
+    fitCardIntro:
+      'A strong funding recommendation depends on what the capital is for, how quickly it is needed, current revenue or property performance, and the borrower profile.',
+    idealForPoints: [
+      'Owners managing cash-flow pressure around payroll, taxes, inventory, or day-to-day working capital',
+      'Businesses financing equipment while preserving cash for operations',
+      'Borrowers comparing lump-sum term debt against revolving access to capital',
+      'Real estate investors seeking acquisition, rehab, rental, bridge, or commercial financing'
+    ],
+    featureSectionEyebrow: 'Why Borrowers Apply',
+    featureSectionTitle: 'Why businesses use a faster lending channel instead of waiting on a bank process',
+    featureCards: [
+      {
+        title: 'Soft-pull prequalification',
+        description: 'The current application flow positions borrowers to check eligibility before committing to a full traditional bank underwriting cycle.'
+      },
+      {
+        title: 'Faster approvals',
+        description: 'Several programs are positioned around decisions in roughly 24 hours, with some products moving faster than conventional lending timelines.'
+      },
+      {
+        title: 'Funding matched to use case',
+        description: 'Choose between equipment financing, revenue-based capital, fixed-term financing, revolving credit, and real estate-specific programs.'
+      },
+      {
+        title: 'Short-term and long-term options',
+        description: 'The current mix covers immediate working-capital needs as well as longer-horizon property and commercial financing structures.'
+      },
+      {
+        title: 'Business and real estate in one application path',
+        description: 'Borrowers can start the same core application and branch into either business funding or property-backed lending based on what they need.'
+      },
+      {
+        title: 'Document-led review',
+        description: 'The active form is built around collecting bank statements, ownership information, and property documents upfront to accelerate review.'
+      }
+    ],
+    programSectionEyebrow: 'Funding Paths',
+    programSectionTitle: 'Program types and how borrowers usually evaluate them',
+    programCards: [
+      {
+        category: 'Business Funding',
+        title: 'Equipment Financing',
+        subtitle: 'A fit when the goal is to preserve cash while spreading equipment costs over a defined term.',
+        items: ['$10,000 to $750,000', 'Typical terms from 6 months to 10 years', 'Can be used for equipment, installation, and related soft costs']
+      },
+      {
+        category: 'Business Funding',
+        title: 'Revenue Based Financing',
+        subtitle: 'Often considered when flexible repayment tied to revenue is a better fit than a rigid fixed-payment structure.',
+        items: ['$2,000 to $1,000,000', 'Typical terms from 3 to 18 months', 'Useful for working capital, payroll, inventory, taxes, hiring, or improvements']
+      },
+      {
+        category: 'Business Funding',
+        title: 'Term Loans and Lines of Credit',
+        subtitle: 'A stronger fit for borrowers comparing fixed payoff schedules against revolving access to capital.',
+        items: ['Term loans from $25,000 to $500,000', 'Business lines of credit up to $750,000', 'Revolving structures charge interest only on the amount drawn']
+      },
+      {
+        category: 'Real Estate Funding',
+        title: 'Investor and Property Programs',
+        subtitle: 'Built for acquisition, rehab, refinance, rental, construction, and commercial real estate needs.',
+        items: ['Short-term fix-and-flip, bridge, and construction programs', 'DSCR rental options with cash-flow-based qualification', 'Commercial real estate options with longer amortization paths']
+      }
+    ],
+    deviceSectionEyebrow: 'Application Scope',
+    deviceSectionTitle: 'What the active funding application is set up to collect',
+    deviceSpecs: [
+      { label: 'Business profile', value: 'Funding type, legal business name, DBA, company email, phone, structure, federal tax ID, industry, NAICS code, and website.' },
+      { label: 'Operating history', value: 'Average monthly deposits, business founded date, owned-since date, and homeownership status for the primary owner.' },
+      { label: 'Location and ownership', value: 'Primary business address plus owner identity, date of birth, ownership percentage, phone, and home address.' },
+      { label: 'Financing request', value: 'Amount requested, credit score estimate, primary use of funds, and any current loans or cash advances.' },
+      { label: 'Real estate underwriting', value: 'Borrower role, property state, experience, loan type, transaction details, property details, and deal numbers when real estate funding is selected.' },
+      { label: 'Required documents', value: 'At minimum the form requests recent bank statements, and the real estate path expands into ID, contracts, mortgage statements, budgets, leases, insurance, and property photos.' }
+    ],
+    quizCtas: [
+      {
+        eyebrow: 'Start The Application',
+        title: 'Use the live funding application to check fit for business or real estate financing',
+        description:
+          'The active application already branches into business funding and real estate funding. It captures the exact underwriting fields currently being used so the page and the form stay aligned.',
+        primaryLabel: 'Open Funding Application',
+        primaryHref: '#funding-application',
+        secondaryLabel: 'Review Programs',
+        secondaryHref: '#funding-programs'
+      }
+    ],
+    faqSectionEyebrow: 'FAQ',
+    faqSectionTitle: 'Questions borrowers usually ask before starting the application',
+    faqItems: [
+      {
+        question: 'What funding options are currently being presented?',
+        answer:
+          'The current program mix includes equipment financing, revenue-based financing, term loans, business lines of credit, short-term real estate loans, and long-term real estate programs such as DSCR and commercial real estate financing.'
+      },
+      {
+        question: 'Can the same application handle both business funding and real estate funding?',
+        answer:
+          'Yes. The active application starts by asking which type of funding you are applying for, then branches into the fields and documents required for that path.'
+      },
+      {
+        question: 'What documents should a business borrower expect to provide?',
+        answer:
+          'For the business-funding path, the active form requests company details, owner details, the requested amount, current obligations, and the most recent three months of bank statements.'
+      },
+      {
+        question: 'What documents are required for real estate deals?',
+        answer:
+          'The real estate path expands into property information, credit and experience questions, deal numbers, and a broader document set such as ID, bank statements, purchase contract, mortgage statement, insurance, photos, and budget materials.'
+      },
+      {
+        question: 'How fast can approvals or funding move?',
+        answer:
+          'The partner landing page positions several programs around approvals within about 24 hours, some working-capital products around very fast turnaround, and certain real estate programs around multi-day to multi-week closing windows depending on the structure.'
+      },
+      {
+        question: 'What is the difference between a term loan and a line of credit?',
+        answer:
+          'A term loan provides a set amount with a defined repayment schedule. A line of credit is revolving capital, where the borrower draws what is needed and pays for the amount actually used.'
+      }
+    ]
   },
   {
     slug: 'payroll-workers-compensation',

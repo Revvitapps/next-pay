@@ -7,13 +7,15 @@ import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
+import BusinessFinancingExperience from '@/components/services/BusinessFinancingExperience';
+import BusinessFinancingHero from '@/components/services/BusinessFinancingHero';
 import ServiceLeadForm from '@/components/services/ServiceLeadForm';
 import LogoBand from '@/components/trust/LogoBand';
 import { getServiceLogos } from '@/lib/content/logos';
 import { getServiceHeroImagePosition, getServiceImage } from '@/lib/content/serviceVisuals';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo/jsonLd';
-import { getServiceBySlug, serviceOfferings } from '@/lib/services/catalog';
+import { getServiceBySlug, isBusinessFinancingService, serviceOfferings } from '@/lib/services/catalog';
 
 type ServiceDetailPageProps = {
   params: Promise<{ serviceSlug: string }>;
@@ -50,6 +52,8 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
     notFound();
   }
 
+  const isBusinessFinancing = isBusinessFinancingService(service.slug);
+
   return (
     <main className="pt-16">
       <JsonLd
@@ -67,18 +71,28 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         })}
       />
       <Navbar />
-      <PageShowcaseHero
-        eyebrow="Service"
-        title={service.name}
-        description={service.summary}
-        image={getServiceImage(service.slug)}
-        alt={`${service.name} hero`}
-        imagePosition={getServiceHeroImagePosition()}
-        primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
-        secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
-      >
-        <p className="text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
-      </PageShowcaseHero>
+      {isBusinessFinancing ? (
+        <BusinessFinancingHero />
+      ) : (
+        <PageShowcaseHero
+          eyebrow="Service"
+          title={service.name}
+          description={service.summary}
+          image={getServiceImage(service.slug)}
+          alt={`${service.name} hero`}
+          imagePosition={getServiceHeroImagePosition()}
+          primaryCta={{
+            label: 'Take The Quiz',
+            href: '/pricing#custom-quote'
+          }}
+          secondaryCta={{
+            label: 'Upload My Statement',
+            href: '/contact?intent=statement-upload'
+          }}
+        >
+          <p className="text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
+        </PageShowcaseHero>
+      )}
       <div className="px-6 pb-16 lg:px-12">
         <section className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             {service.sectionTitle || service.sectionIntro ? (
@@ -152,7 +166,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
                 className="mt-3"
               />
             ) : null}
-            <ConversionCtas primary="customQuote" secondary="uploadStatement" className="mt-6" />
+            {!isBusinessFinancing ? <ConversionCtas primary="customQuote" secondary="uploadStatement" className="mt-6" /> : null}
         </section>
       </div>
 
@@ -302,6 +316,8 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
+      {isBusinessFinancing ? <BusinessFinancingExperience /> : null}
+
       <LogoBand
         eyebrow=""
         title={
@@ -314,11 +330,13 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         logos={getServiceLogos(service.slug) ?? []}
       />
 
-      <section className="px-6 pb-20 lg:px-12">
-        <div className="mx-auto w-full max-w-[1380px]">
-          <ServiceLeadForm serviceSlug={service.slug} serviceName={service.name} />
-        </div>
-      </section>
+      {!isBusinessFinancing ? (
+        <section className="px-6 pb-20 lg:px-12">
+          <div className="mx-auto w-full max-w-[1380px]">
+            <ServiceLeadForm serviceSlug={service.slug} serviceName={service.name} />
+          </div>
+        </section>
+      ) : null}
 
       <SiteFooter />
     </main>
