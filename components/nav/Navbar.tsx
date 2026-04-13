@@ -57,22 +57,22 @@ export default function Navbar() {
     'fixed left-1/2 top-[4.85rem] z-50 mt-0 w-[min(1120px,calc(100vw-1.5rem))] max-h-[min(72vh,620px)] -translate-x-1/2 overflow-y-auto rounded-[28px] border border-white/12 bg-black p-5 shadow-[0_28px_90px_rgba(0,0,0,0.72)] transition 2xl:w-[1180px]';
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#132c36]/82 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[#46a7a6]/18 bg-white">
       <nav className="mx-auto flex w-full max-w-none items-center justify-between px-6 py-4 lg:px-12">
         <Link href="/#home" className="flex items-center">
           <Image
-            src="/images/nextpay-logo.png"
+            src="/images/next-white-logo.jpg"
             alt="NextPay logo"
             width={148}
             height={38}
             priority
-            className="h-8 w-auto brightness-[1.42] contrast-[1.16] saturate-[1.18] drop-shadow-[0_0_14px_rgba(125,217,216,0.18)] md:h-9"
+            className="h-9 w-auto contrast-[1.06] saturate-[1.08] md:h-10"
           />
         </Link>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full border border-[#46a7a6]/35 p-2 text-slate-100 transition hover:border-[#46a7a6]/65 hover:text-[#46a7a6] xl:hidden"
+          className="inline-flex items-center justify-center rounded-full border border-[#163c4d]/18 p-2 text-[#4f6b7b] transition hover:border-[#46a7a6]/55 hover:text-[#4f6b7b] xl:hidden"
           aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -81,7 +81,7 @@ export default function Navbar() {
         </button>
 
         <div className="hidden items-center gap-0.5 xl:flex 2xl:gap-1">
-          <Link href="/" className="group relative rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]">
+          <Link href="/" className="group relative rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b]">
             Home
             <span className="absolute inset-x-3 bottom-1 h-px scale-x-0 bg-[#46a7a6] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
@@ -92,8 +92,8 @@ export default function Navbar() {
                 setProductsOpen((prev) => !prev);
                 setIndustriesOpen(false);
               }}
-              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-white ${
-                productsOpen ? 'bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-md' : ''
+              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b] ${
+                productsOpen ? 'bg-black/5 ring-1 ring-black/10 backdrop-blur-md' : ''
               }`}
               aria-haspopup="menu"
               aria-expanded={productsOpen}
@@ -145,8 +145,8 @@ export default function Navbar() {
                 setIndustriesOpen((prev) => !prev);
                 setProductsOpen(false);
               }}
-              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-white ${
-                industriesOpen ? 'bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-md' : ''
+              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b] ${
+                industriesOpen ? 'bg-black/5 ring-1 ring-black/10 backdrop-blur-md' : ''
               }`}
               aria-haspopup="menu"
               aria-expanded={industriesOpen}
@@ -196,23 +196,23 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <Link href="/capabilities" className="group relative rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]">
+          <Link href="/capabilities" className="group relative rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b]">
             Capabilities
             <span className="absolute inset-x-3 bottom-1 h-px scale-x-0 bg-[#46a7a6] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
-          <Link href="/services" className="group relative rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]">
+          <Link href="/services" className="group relative rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b]">
             Services
             <span className="absolute inset-x-3 bottom-1 h-px scale-x-0 bg-[#46a7a6] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
-          <Link href="/blog" className="group relative rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]">
+          <Link href="/blog" className="group relative rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b]">
             Blog
             <span className="absolute inset-x-3 bottom-1 h-px scale-x-0 bg-[#46a7a6] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
-          <Link href="/about" className="group relative rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]">
+          <Link href="/about" className="group relative rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b]">
             About
             <span className="absolute inset-x-3 bottom-1 h-px scale-x-0 bg-[#46a7a6] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
-          <Link href="/contact" className="group relative rounded-full px-3 py-2 text-sm text-slate-100/90 transition hover:text-[#46a7a6]">
+          <Link href="/contact" className="group relative rounded-full px-3 py-2 text-sm font-semibold text-[#4f6b7b] transition hover:text-[#4f6b7b]">
             Contact
             <span className="absolute inset-x-3 bottom-1 h-px scale-x-0 bg-[#46a7a6] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
@@ -222,14 +222,14 @@ export default function Navbar() {
           <Link
             href={conversionCtas.customQuote.href}
             onClick={() => track('book_call_click', { source: 'navbar_primary_consultation' })}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[#46a7a6]/40 bg-accent-gradient px-4 py-2 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-[#163c4d]/10 bg-[#1f2329] px-4 py-2 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(0,0,0,0.12)] transition hover:brightness-110"
           >
             Get Your Quote
           </Link>
           <Link
             href="/contact"
             onClick={() => track('book_call_click', { source: 'navbar_secondary' })}
-            className="hidden items-center gap-1 rounded-full border border-[#46a7a6]/30 px-3 py-2 text-xs font-semibold text-slate-100/95 transition hover:border-[#46a7a6]/60 hover:text-[#46a7a6] 2xl:flex"
+            className="hidden items-center gap-1 rounded-full border border-black/10 px-3 py-2 text-xs font-semibold text-[#4f6b7b] transition hover:border-[#46a7a6]/45 hover:text-[#4f6b7b] 2xl:flex"
           >
             Contact
             <ArrowUpRight className="h-3.5 w-3.5" />

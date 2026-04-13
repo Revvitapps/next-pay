@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import CategoryLogoHero from '@/components/catalog/CategoryLogoHero';
+import ServiceCategoryExperience from '@/components/catalog/ServiceCategoryExperience';
 import ComplianceNote from '@/components/compliance/ComplianceNote';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
@@ -11,14 +13,25 @@ import BusinessFinancingExperience from '@/components/services/BusinessFinancing
 import BusinessFinancingHero from '@/components/services/BusinessFinancingHero';
 import ServiceLeadForm from '@/components/services/ServiceLeadForm';
 import LogoBand from '@/components/trust/LogoBand';
-import { getServiceLogos } from '@/lib/content/logos';
+import { getServiceLogos, type TrustLogo } from '@/lib/content/logos';
 import { getServiceHeroImagePosition, getServiceImage } from '@/lib/content/serviceVisuals';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo/jsonLd';
 import { getServiceBySlug, isBusinessFinancingService, serviceOfferings } from '@/lib/services/catalog';
+import {
+  getSolutionBrand,
+  getSolutionProductsByCategory,
+  type SolutionCategoryId
+} from '@/lib/catalog/solutions';
 
 type ServiceDetailPageProps = {
   params: Promise<{ serviceSlug: string }>;
+};
+
+const catalogServiceMap: Partial<Record<string, { categoryId: SolutionCategoryId; eyebrow: string }>> = {
+  'point-of-sale-pos-systems': { categoryId: 'pos', eyebrow: 'POS Systems' },
+  'payment-processing-merchant-services': { categoryId: 'terminals', eyebrow: 'Credit Card Terminals' },
+  'online-payments-ecommerce-invoicing': { categoryId: 'gateways', eyebrow: 'Online & Remote Payment Solutions' }
 };
 
 export function generateStaticParams() {
@@ -53,6 +66,30 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
   }
 
   const isBusinessFinancing = isBusinessFinancingService(service.slug);
+  const catalogService = catalogServiceMap[service.slug];
+  const categoryLogos: TrustLogo[] = catalogService
+    ? Array.from(
+        new Map(
+          getSolutionProductsByCategory(catalogService.categoryId).flatMap((product) => {
+            const brand = getSolutionBrand(product.brandSlug);
+            const assetPath = brand?.logoPath ?? product.logoPath;
+
+            return assetPath
+              ? [
+                  [
+                    product.brandSlug,
+                    {
+                      name: brand?.name ?? product.shortName,
+                      alt: `${brand?.name ?? product.shortName} logo`,
+                      assetPath
+                    } satisfies TrustLogo
+                  ] as const
+                ]
+              : [];
+          })
+        ).values()
+      )
+    : [];
 
   return (
     <main className="pt-16">
@@ -73,6 +110,22 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       <Navbar />
       {isBusinessFinancing ? (
         <BusinessFinancingHero />
+      ) : catalogService ? (
+        <CategoryLogoHero
+          eyebrow={catalogService.eyebrow}
+          title={service.name}
+          description={service.summary}
+          tagline={service.tagline}
+          logos={categoryLogos}
+          primaryCta={{
+            label: 'Take The Quiz',
+            href: '/pricing#custom-quote'
+          }}
+          secondaryCta={{
+            label: 'Get Your Quote',
+            href: '/contact'
+          }}
+        />
       ) : (
         <PageShowcaseHero
           eyebrow="Service"
@@ -93,6 +146,10 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
           <p className="text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
         </PageShowcaseHero>
       )}
+      {catalogService ? (
+        <ServiceCategoryExperience service={service} categoryId={catalogService.categoryId} eyebrow={catalogService.eyebrow} />
+      ) : null}
+      {!catalogService ? (
       <div className="px-6 pb-16 lg:px-12">
         <section className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             {service.sectionTitle || service.sectionIntro ? (
@@ -169,8 +226,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
             {!isBusinessFinancing ? <ConversionCtas primary="customQuote" secondary="uploadStatement" className="mt-6" /> : null}
         </section>
       </div>
+      ) : null}
 
-      {service.featureCards?.length ? (
+      {!catalogService && service.featureCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.featureSectionEyebrow ?? 'Why NextPay'}</p>
@@ -189,7 +247,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {service.programCards?.length ? (
+      {!catalogService && service.programCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.programSectionEyebrow ?? 'Programs'}</p>
@@ -222,7 +280,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {service.setupCards?.length ? (
+      {!catalogService && service.setupCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.setupSectionEyebrow ?? 'Recommended Setups'}</p>
@@ -241,7 +299,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {service.deviceSpecs?.length ? (
+      {!catalogService && service.deviceSpecs?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.deviceSectionEyebrow ?? 'Device Highlights'}</p>
@@ -260,7 +318,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {service.quizCtas?.length ? (
+      {!catalogService && service.quizCtas?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="mx-auto grid w-full max-w-[1380px] gap-4">
             {service.quizCtas.map((item) => (
@@ -292,7 +350,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {service.faqItems?.length ? (
+      {!catalogService && service.faqItems?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.faqSectionEyebrow ?? 'Merchant Questions'}</p>
@@ -318,7 +376,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
 
       {isBusinessFinancing ? <BusinessFinancingExperience /> : null}
 
-      <LogoBand
+      {!catalogService ? <LogoBand
         eyebrow=""
         title={
           service.slug === 'payment-processing-merchant-services'
@@ -328,9 +386,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
               : 'Trusted Brands'
         }
         logos={getServiceLogos(service.slug) ?? []}
-      />
+      /> : null}
 
-      {!isBusinessFinancing ? (
+      {!isBusinessFinancing && !catalogService ? (
         <section className="px-6 pb-20 lg:px-12">
           <div className="mx-auto w-full max-w-[1380px]">
             <ServiceLeadForm serviceSlug={service.slug} serviceName={service.name} />

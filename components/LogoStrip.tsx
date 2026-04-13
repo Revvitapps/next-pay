@@ -13,6 +13,15 @@ function getLogoClass(assetPath?: string) {
     : 'h-9 w-auto max-w-[150px] object-contain logo-image-clear md:h-10';
 }
 
+function getBrandAwareLogoClass(logo: TrustLogo) {
+  const base = getLogoClass(logo.assetPath);
+  const isClover = logo.name.toLowerCase().includes('clover');
+
+  if (!isClover) return base;
+
+  return `${base} max-w-[210px] md:max-w-[250px] md:h-14`;
+}
+
 function LogoAsset({ logo, monochrome = false }: { logo: TrustLogo; monochrome?: boolean }) {
   const src = logo.assetPath ?? logo.fallbackAssetPath;
   if (!src) {
@@ -32,7 +41,7 @@ function LogoAsset({ logo, monochrome = false }: { logo: TrustLogo; monochrome?:
       <img
         src={src}
         alt={logo.alt}
-        className={`${getLogoClass(logo.assetPath)} ${monochrome ? 'logo-image-monochrome' : ''}`.trim()}
+        className={`${getBrandAwareLogoClass(logo)} ${monochrome ? 'logo-image-monochrome' : ''}`.trim()}
         loading="lazy"
         decoding="async"
       />

@@ -233,6 +233,18 @@ export default function BusinessFinancingExperience() {
         </div>
       </section>
 
+      <div className="px-6 pb-12 lg:px-12">
+        <div className="mx-auto w-full max-w-[1380px] overflow-hidden rounded-[28px] border border-white/10 shadow-[0_26px_70px_rgba(0,0,0,0.34)]">
+          <LogoBand
+            eyebrow="Trusted Brands"
+            title="Platforms and partners supporting the broader lending and operations stack"
+            logos={operationsTrustLogos}
+            variant="darkGlass"
+            compact
+          />
+        </div>
+      </div>
+
       <section className="px-6 pb-16 lg:px-12">
         <div className="mx-auto w-full max-w-[1380px] rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(6,9,13,0.98),rgba(10,13,18,0.96))] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.42)] md:p-10">
           <div className="grid gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:items-center">
@@ -279,18 +291,6 @@ export default function BusinessFinancingExperience() {
           </div>
         </div>
       </section>
-
-      <div className="px-6 pb-12 lg:px-12">
-        <div className="mx-auto w-full max-w-[1380px] overflow-hidden rounded-[28px] border border-white/10 shadow-[0_26px_70px_rgba(0,0,0,0.34)]">
-          <LogoBand
-            eyebrow="Trusted Brands"
-            title="Platforms and partners supporting the broader lending and operations stack"
-            logos={operationsTrustLogos}
-            variant="darkGlass"
-            compact
-          />
-        </div>
-      </div>
 
       <section className="px-6 pb-16 lg:px-12">
         <div className="mx-auto w-full max-w-[1380px] rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(6,9,13,0.98),rgba(10,13,18,0.96))] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.42)] md:p-10">

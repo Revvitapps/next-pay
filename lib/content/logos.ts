@@ -27,19 +27,19 @@ export const paymentsTrustLogos: TrustLogo[] = [
 ];
 
 export const posPlatformLogos: TrustLogo[] = [
-  { name: 'SkyTab', alt: 'SkyTab logo', assetPath: '/logos/skytab.png' },
-  { name: 'Clover', alt: 'Clover logo', assetPath: '/logos/clover.svg', fallbackAssetPath: '/logos/clover.png' },
-  { name: 'Square', alt: 'Square logo', assetPath: '/logos/square.svg', fallbackAssetPath: '/logos/square.png' },
-  { name: 'Korona POS', alt: 'Korona POS logo', assetPath: '/logos/korona-pos.png' },
-  { name: 'Linga', alt: 'Linga logo', assetPath: '/logos/linga.png' },
-  { name: 'FieldPulse', alt: 'FieldPulse logo', assetPath: '/logos/fieldpulse.png' },
-  { name: 'SwipeSimple', alt: 'SwipeSimple logo', assetPath: '/logos/swipesimple.png' },
-  { name: 'Dejavoo', alt: 'Dejavoo logo', assetPath: '/logos/dejavoo.png' },
-  { name: 'PAX', alt: 'PAX logo', assetPath: '/logos/pax.png' },
-  { name: 'FluidPay', alt: 'FluidPay logo', assetPath: '/logos/fluidpay.png' },
-  { name: 'NMI', alt: 'NMI logo', assetPath: '/logos/nmi.png' },
-  { name: 'Authorize.net', alt: 'Authorize.net logo', assetPath: '/logos/authorize-net.png' },
-  { name: 'Valor', alt: 'Valor logo', assetPath: '/logos/valor.png' },
+  { name: 'SkyTab', alt: 'SkyTab logo', assetPath: '/logos/SkyTab_Logo_Horiz_PMS-updated.svg' },
+  { name: 'Clover', alt: 'Clover logo', assetPath: '/logos/clover-updated.svg', fallbackAssetPath: '/logos/clover.png' },
+  { name: 'Square', alt: 'Square logo', assetPath: '/logos/square-updated.svg', fallbackAssetPath: '/logos/square.png' },
+  { name: 'Korona POS', alt: 'Korona POS logo', assetPath: '/logos/korona-pos-updated.png' },
+  { name: 'Linga', alt: 'Linga logo', assetPath: '/logos/linga-updated.png' },
+  { name: 'FieldPulse', alt: 'FieldPulse logo', assetPath: '/logos/fieldpulse-updated.png' },
+  { name: 'SwipeSimple', alt: 'SwipeSimple logo', assetPath: '/logos/swipesimple-updated-updated.png' },
+  { name: 'Dejavoo', alt: 'Dejavoo logo', assetPath: '/logos/dejavoo-updated.webp' },
+  { name: 'PAX', alt: 'PAX logo', assetPath: '/logos/PAX_logo_1_irz9xh-updated.png' },
+  { name: 'FluidPay', alt: 'FluidPay logo', assetPath: '/logos/fluidpay-updated.svg' },
+  { name: 'NMI', alt: 'NMI logo', assetPath: '/logos/nmi-updated.webp' },
+  { name: 'Authorize.net', alt: 'Authorize.net logo', assetPath: '/logos/authorize.net-2' },
+  { name: 'Valor', alt: 'Valor logo', assetPath: '/logos/valor-updated.png' },
   { name: 'PayAnywhere', alt: 'PayAnywhere logo', assetPath: '/logos/payanywhere.png' },
   { name: 'QuickBooks', alt: 'QuickBooks logo', assetPath: '/logos/quickbooks.svg', fallbackAssetPath: '/logos/quickbooks.png' }
 ];
@@ -47,7 +47,7 @@ export const posPlatformLogos: TrustLogo[] = [
 export const onlinePaymentsLogos: TrustLogo[] = [
   { name: 'Apple Pay', alt: 'Apple Pay logo', assetPath: '/logos/apple-pay.svg', fallbackAssetPath: '/logos/apple-pay.png' },
   { name: 'Google Pay', alt: 'Google Pay logo', assetPath: '/logos/google-pay.svg', fallbackAssetPath: '/logos/google-pay.png' },
-  { name: 'Authorize.net', alt: 'Authorize.net logo', assetPath: '/logos/authorize-net.png' },
+  { name: 'Authorize.net', alt: 'Authorize.net logo', assetPath: '/logos/authorize.net-2' },
   { name: 'NMI', alt: 'NMI logo', assetPath: '/logos/nmi.png' },
   { name: 'FluidPay', alt: 'FluidPay logo', assetPath: '/logos/fluidpay.png' },
   { name: 'QuickBooks', alt: 'QuickBooks logo', assetPath: '/logos/quickbooks.svg', fallbackAssetPath: '/logos/quickbooks.png' }
@@ -55,11 +55,11 @@ export const onlinePaymentsLogos: TrustLogo[] = [
 
 export const operationsPlatformLogos: TrustLogo[] = [
   { name: 'QuickBooks', alt: 'QuickBooks logo', assetPath: '/logos/quickbooks.svg', fallbackAssetPath: '/logos/quickbooks.png' },
-  { name: 'FieldPulse', alt: 'FieldPulse logo', assetPath: '/logos/fieldpulse.png' },
-  { name: 'Square', alt: 'Square logo', assetPath: '/logos/square.svg', fallbackAssetPath: '/logos/square.png' },
-  { name: 'Clover', alt: 'Clover logo', assetPath: '/logos/clover.png' },
+  { name: 'FieldPulse', alt: 'FieldPulse logo', assetPath: '/logos/fieldpulse-updated.png' },
+  { name: 'Square', alt: 'Square logo', assetPath: '/logos/square-updated.svg', fallbackAssetPath: '/logos/square.png' },
+  { name: 'Clover', alt: 'Clover logo', assetPath: '/logos/clover-updated.svg' },
   { name: 'PayAnywhere', alt: 'PayAnywhere logo', assetPath: '/logos/payanywhere.png' },
-  { name: 'FluidPay', alt: 'FluidPay logo', assetPath: '/logos/fluidpay.png' }
+  { name: 'FluidPay', alt: 'FluidPay logo', assetPath: '/logos/fluidpay-updated.svg' }
 ];
 
 export function getServiceLogos(serviceSlug: string): TrustLogo[] | null {
