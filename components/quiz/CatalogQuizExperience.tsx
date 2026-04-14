@@ -227,7 +227,7 @@ export default function CatalogQuizExperience() {
                   choices={setupChoices}
                   value={answers.setupType}
                   onChange={(value) => {
-                    const nextAnswers = {
+                    const nextAnswers: SolutionQuizAnswers = {
                       ...answers,
                       setupType: value,
                       hardwarePreference: '',
