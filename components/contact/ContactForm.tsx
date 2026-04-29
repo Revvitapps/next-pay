@@ -45,6 +45,24 @@ const defaultForm: LeadPayload = {
   turnstileToken: ''
 };
 
+type ContactFormProps = {
+  sectionId?: string;
+  sectionClassName?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  submitLabel?: string;
+  submittingLabel?: string;
+  successTitle?: string;
+  successBody?: string;
+  successRedirectUrl?: string;
+  messagePlaceholder?: string;
+  initialIndustry?: string;
+  initialMessage?: string;
+  industryPlaceholder?: string;
+  hideTurnstileSetupNotice?: boolean;
+};
+
 async function submitLead(payload: LeadPayload) {
   const response = await fetch('/api/contact', {
     method: 'POST',
@@ -57,8 +75,30 @@ async function submitLead(payload: LeadPayload) {
   }
 }
 
-export default function ContactForm() {
-  const [formData, setFormData] = useState<LeadPayload>(defaultForm);
+export default function ContactForm({
+  sectionId = 'contact',
+  sectionClassName = '',
+  eyebrow = 'Contact',
+  title = 'Tell us your setup goals and we will map your rollout',
+  description = 'Tell us what your business needs and we will follow up with the right next-step plan.',
+  submitLabel = 'Send My Request',
+  submittingLabel = 'Submitting...',
+  successTitle = 'Thanks — we will reach out as soon as possible.',
+  successBody = 'Your consultation request has been received.',
+  successRedirectUrl,
+  messagePlaceholder = 'Tell us your timeline, locations, and integration priorities.',
+  initialIndustry,
+  initialMessage,
+  industryPlaceholder,
+  hideTurnstileSetupNotice = false
+}: ContactFormProps) {
+  const resolvedIndustryPlaceholder = industryPlaceholder?.trim();
+  const createDefaultForm = (): LeadPayload => ({
+    ...defaultForm,
+    industry: initialIndustry ?? (resolvedIndustryPlaceholder ? '' : defaultForm.industry),
+    message: initialMessage ?? defaultForm.message
+  });
+  const [formData, setFormData] = useState<LeadPayload>(createDefaultForm);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -183,7 +223,11 @@ export default function ContactForm() {
     try {
       await submitLead(formData);
       setSubmitted(true);
-      setFormData(defaultForm);
+      setFormData(createDefaultForm());
+      if (successRedirectUrl && typeof window !== 'undefined') {
+        window.location.assign(successRedirectUrl);
+        return;
+      }
     } catch (error) {
       console.error(error);
       setErrorMessage('Something went wrong. Please try again.');
@@ -202,24 +246,24 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="px-6 py-20 lg:px-12">
+    <section id={sectionId} className={`px-6 py-20 lg:px-12 ${sectionClassName}`.trim()}>
       <MotionDiv variant="right">
         <div className="mx-auto w-full max-w-none rounded-3xl border border-[#46a7a6]/25 bg-[#163c4d]/85 p-6 shadow-card md:p-10">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">Contact</p>
+            {eyebrow ? (
+              <p className="text-sm uppercase tracking-[0.2em] text-[#46a7a6]/85">{eyebrow}</p>
+            ) : null}
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Tell us your setup goals and we will map your rollout
+              {title}
             </h2>
-            <p className="mt-3 max-w-2xl text-sm text-slate-100/90">
-              Tell us what your business needs and we will follow up with the right next-step plan.
-            </p>
+            {description ? <p className="mt-3 max-w-2xl text-sm text-slate-100/90">{description}</p> : null}
           </div>
 
           {submitted ? (
             <div className="rounded-2xl border border-[#46a7a6]/40 bg-[#46a7a6]/10 p-6">
               <CheckCircle2 className="h-6 w-6 text-[#46a7a6]" />
-              <h3 className="mt-3 text-xl font-bold text-white">Thanks — we will reach out as soon as possible.</h3>
-              <p className="mt-2 text-sm text-slate-100/95">Your consultation request has been received.</p>
+              <h3 className="mt-3 text-xl font-bold text-white">{successTitle}</h3>
+              <p className="mt-2 text-sm text-slate-100/95">{successBody}</p>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="grid gap-4 md:grid-cols-2">
@@ -283,6 +327,11 @@ export default function ContactForm() {
                   onChange={(event) => setFormData((prev) => ({ ...prev, industry: event.target.value }))}
                   className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
                 >
+                  {resolvedIndustryPlaceholder ? (
+                    <option value="" disabled>
+                      {resolvedIndustryPlaceholder}
+                    </option>
+                  ) : null}
                   {industryOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
@@ -299,7 +348,7 @@ export default function ContactForm() {
                   value={formData.message}
                   onChange={(event) => setFormData((prev) => ({ ...prev, message: event.target.value }))}
                   className="w-full rounded-xl border border-[#46a7a6]/25 bg-[#163c4d]/70 px-4 py-3 text-white outline-none transition focus:border-[#46a7a6]/60"
-                  placeholder="Tell us your timeline, locations, and integration priorities."
+                  placeholder={messagePlaceholder}
                 />
               </label>
 
@@ -309,9 +358,9 @@ export default function ContactForm() {
                     <div ref={widgetRef} />
                   </div>
                 </div>
-              ) : (
+              ) : !hideTurnstileSetupNotice ? (
                 <p className="text-sm text-amber-200 md:col-span-2">Captcha setup missing. Add Turnstile site key to enable submissions.</p>
-              )}
+              ) : null}
 
               {errorMessage ? (
                 <p className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100 md:col-span-2">
@@ -325,7 +374,7 @@ export default function ContactForm() {
                   disabled={submitting}
                   className="rounded-full bg-accent-gradient px-6 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:brightness-110"
                 >
-                  {submitting ? 'Submitting...' : 'Send My Request'}
+                  {submitting ? submittingLabel : submitLabel}
                 </button>
               </div>
             </form>

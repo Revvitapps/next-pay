@@ -6,11 +6,13 @@ import ServiceCategoryExperience from '@/components/catalog/ServiceCategoryExper
 import ComplianceNote from '@/components/compliance/ComplianceNote';
 import ConversionCtas from '@/components/cta/ConversionCtas';
 import PageShowcaseHero from '@/components/marketing/PageShowcaseHero';
+import FunnelHeader from '@/components/nav/FunnelHeader';
 import Navbar from '@/components/nav/Navbar';
 import SiteFooter from '@/components/nav/SiteFooter';
 import JsonLd from '@/components/seo/JsonLd';
 import BusinessFinancingExperience from '@/components/services/BusinessFinancingExperience';
 import BusinessFinancingHero from '@/components/services/BusinessFinancingHero';
+import NextLinkLandingPage from '@/components/services/NextLinkLandingPage';
 import ServiceLeadForm from '@/components/services/ServiceLeadForm';
 import LogoBand from '@/components/trust/LogoBand';
 import { getServiceLogos, type TrustLogo } from '@/lib/content/logos';
@@ -50,11 +52,24 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
     });
   }
 
-  return buildMetadata({
+  const isNextLinkLanding = service.slug === 'marketing-outreach-lead-generation';
+
+  const metadata = buildMetadata({
     title: `${service.name} | NextPay`,
     description: service.summary,
-    path: `/services/${service.slug}`
+    path: `/services/${service.slug}`,
+    image: isNextLinkLanding ? '/logos/nextlink_logos-02_no_tagline.svg' : undefined
   });
+
+  if (isNextLinkLanding) {
+    metadata.icons = {
+      icon: '/logos/nextlink_favicon_02.svg',
+      shortcut: '/logos/nextlink_favicon_02.svg',
+      apple: '/logos/nextlink_favicon_02.svg'
+    };
+  }
+
+  return metadata;
 }
 
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
@@ -66,6 +81,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
   }
 
   const isBusinessFinancing = isBusinessFinancingService(service.slug);
+  const isNextLinkLanding = service.slug === 'marketing-outreach-lead-generation';
   const catalogService = catalogServiceMap[service.slug];
   const categoryLogos: TrustLogo[] = catalogService
     ? Array.from(
@@ -92,7 +108,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
     : [];
 
   return (
-    <main className="pt-16">
+    <main className={isNextLinkLanding ? 'pt-20' : 'pt-16'}>
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', path: '/' },
@@ -107,10 +123,22 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
           path: `/services/${service.slug}`
         })}
       />
-      <Navbar />
-      {isBusinessFinancing ? (
+      {isNextLinkLanding ? (
+        <FunnelHeader
+          logoSrc="/logos/nextlink_logos-02_no_tagline.svg"
+          logoAlt="NextLink logo"
+          logoWidth={168}
+          logoHeight={44}
+          brandName="NextLink"
+          contactHref="#contact-us"
+        />
+      ) : (
+        <Navbar />
+      )}
+      {isNextLinkLanding ? <NextLinkLandingPage /> : null}
+      {!isNextLinkLanding && isBusinessFinancing ? (
         <BusinessFinancingHero />
-      ) : catalogService ? (
+      ) : !isNextLinkLanding && catalogService ? (
         <CategoryLogoHero
           eyebrow={catalogService.eyebrow}
           title={service.name}
@@ -126,7 +154,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
             href: '/contact'
           }}
         />
-      ) : (
+      ) : !isNextLinkLanding ? (
         <PageShowcaseHero
           eyebrow="Service"
           title={service.name}
@@ -145,11 +173,11 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         >
           <p className="text-base text-slate-100/95 md:text-lg">{service.tagline}</p>
         </PageShowcaseHero>
-      )}
-      {catalogService ? (
+      ) : null}
+      {!isNextLinkLanding && catalogService ? (
         <ServiceCategoryExperience service={service} categoryId={catalogService.categoryId} eyebrow={catalogService.eyebrow} />
       ) : null}
-      {!catalogService ? (
+      {!isNextLinkLanding && !catalogService ? (
       <div className="px-6 pb-16 lg:px-12">
         <section className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             {service.sectionTitle || service.sectionIntro ? (
@@ -228,7 +256,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       </div>
       ) : null}
 
-      {!catalogService && service.featureCards?.length ? (
+      {!isNextLinkLanding && !catalogService && service.featureCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.featureSectionEyebrow ?? 'Why NextPay'}</p>
@@ -247,7 +275,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {!catalogService && service.programCards?.length ? (
+      {!isNextLinkLanding && !catalogService && service.programCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.programSectionEyebrow ?? 'Programs'}</p>
@@ -280,7 +308,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {!catalogService && service.setupCards?.length ? (
+      {!isNextLinkLanding && !catalogService && service.setupCards?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.setupSectionEyebrow ?? 'Recommended Setups'}</p>
@@ -299,7 +327,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {!catalogService && service.deviceSpecs?.length ? (
+      {!isNextLinkLanding && !catalogService && service.deviceSpecs?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.deviceSectionEyebrow ?? 'Device Highlights'}</p>
@@ -318,7 +346,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {!catalogService && service.quizCtas?.length ? (
+      {!isNextLinkLanding && !catalogService && service.quizCtas?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="mx-auto grid w-full max-w-[1380px] gap-4">
             {service.quizCtas.map((item) => (
@@ -350,7 +378,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {!catalogService && service.faqItems?.length ? (
+      {!isNextLinkLanding && !catalogService && service.faqItems?.length ? (
         <section className="px-6 pb-16 lg:px-12">
           <div className="np-surface mx-auto w-full max-w-[1380px] rounded-3xl p-8 md:p-10">
             <p className="np-accent text-sm uppercase tracking-[0.2em]">{service.faqSectionEyebrow ?? 'Merchant Questions'}</p>
@@ -374,9 +402,9 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         </section>
       ) : null}
 
-      {isBusinessFinancing ? <BusinessFinancingExperience /> : null}
+      {!isNextLinkLanding && isBusinessFinancing ? <BusinessFinancingExperience /> : null}
 
-      {!catalogService ? <LogoBand
+      {!isNextLinkLanding && !catalogService ? <LogoBand
         eyebrow=""
         title={
           service.slug === 'payment-processing-merchant-services'
@@ -388,7 +416,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         logos={getServiceLogos(service.slug) ?? []}
       /> : null}
 
-      {!isBusinessFinancing && !catalogService ? (
+      {!isNextLinkLanding && !isBusinessFinancing && !catalogService ? (
         <section className="px-6 pb-20 lg:px-12">
           <div className="mx-auto w-full max-w-[1380px]">
             <ServiceLeadForm serviceSlug={service.slug} serviceName={service.name} />
