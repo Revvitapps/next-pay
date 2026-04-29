@@ -44,7 +44,7 @@ export default function FunnelHeader({
           </Link>
           <Link
             href={bylineHref}
-            className="relative -top-0.5 shrink-0 text-[11px] font-medium tracking-[0.12em] text-slate-500 transition hover:text-[#163c4d] md:-top-1 md:text-sm"
+            className="relative top- shrink-0 text-[11px] font-medium tracking-[0.12em] text-slate-500 transition hover:text-[#163c4d] md:top md:text-sm"
           >
             by NextPay
           </Link>

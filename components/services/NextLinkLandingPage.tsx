@@ -158,21 +158,21 @@ export default function NextLinkLandingPage() {
             <div className="flex justify-center lg:min-w-[170px] lg:items-center lg:border-r lg:border-amber-300/12 lg:pr-8">
               <AlertTriangle className="h-14 w-14 text-amber-200 lg:h-20 lg:w-20" />
             </div>
-            <div className="flex-1">
-              <h2 className="text-center font-heading text-3xl font-extrabold tracking-tight text-amber-50 md:text-4xl">
+            <div className="flex-1 lg:max-w-3xl">
+              <h2 className="font-heading text-3xl font-extrabold tracking-tight text-amber-50 md:text-4xl">
                 What&apos;s at Risk
               </h2>
-              <p className="mt-3 text-center text-sm uppercase tracking-[0.2em] text-amber-200/90">
+              <p className="mt-3 text-sm uppercase tracking-[0.2em] text-amber-200/90">
                 If nothing changes…
               </p>
               <div className="mt-8">
-                <ul className="mx-auto flex max-w-3xl flex-col items-center space-y-4 text-center">
-                {riskItems.map((item) => (
-                    <li key={item} className="flex items-start justify-center gap-3 text-base font-medium leading-7 text-slate-100/92">
+                <ul className="flex max-w-3xl flex-col space-y-4">
+                  {riskItems.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-base font-medium leading-7 text-slate-100/92">
                       <span className="mt-2 h-2.5 w-2.5 rounded-full bg-amber-200" />
                       <span>{item}</span>
                     </li>
-                ))}
+                  ))}
                 </ul>
               </div>
             </div>

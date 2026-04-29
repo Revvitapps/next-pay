@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import { isValidElement, type ReactNode } from 'react';
 
 type PageShowcaseHeroProps = {
-  eyebrow: string;
+  eyebrow: ReactNode;
   title: string;
   description: string;
   image: string;
@@ -20,6 +20,7 @@ type PageShowcaseHeroProps = {
   imagePosition?: string;
   contentAlignment?: 'left' | 'center';
   ctaClassName?: string;
+  descriptionClassName?: string;
 };
 
 function isJourneyLabel(label: string) {
@@ -38,9 +39,11 @@ export default function PageShowcaseHero({
   children,
   imagePosition = 'object-center',
   contentAlignment = 'left',
-  ctaClassName = ''
+  ctaClassName = '',
+  descriptionClassName = ''
 }: PageShowcaseHeroProps) {
   const isCentered = contentAlignment === 'center';
+  const eyebrowIsElement = isValidElement(eyebrow);
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -62,14 +65,18 @@ export default function PageShowcaseHero({
                 isCentered ? 'mx-auto text-center' : 'text-left'
               }`}
             >
-              <p className="np-accent text-xs uppercase tracking-[0.22em]">{eyebrow}</p>
+              {eyebrowIsElement ? (
+                <div className="mb-4">{eyebrow}</div>
+              ) : (
+                <p className="np-accent text-xs uppercase tracking-[0.22em]">{eyebrow}</p>
+              )}
               <h1 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white drop-shadow-[0_18px_34px_rgba(0,0,0,0.32)] md:text-5xl lg:text-6xl">
                 {title}
               </h1>
               <p
                 className={`mt-4 max-w-3xl text-sm leading-relaxed text-slate-100/92 md:text-base lg:text-lg ${
                   isCentered ? 'mx-auto' : ''
-                }`}
+                } ${descriptionClassName}`.trim()}
               >
                 {description}
               </p>
