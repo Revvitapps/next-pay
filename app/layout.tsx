@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     path: '/'
   }),
   icons: {
-    icon: '/images/favicon-nextpay.png',
-    shortcut: '/images/favicon-nextpay.png',
-    apple: '/images/favicon-nextpay.png'
+    icon: '/images/next-white-logo.jpg',
+    shortcut: '/images/next-white-logo.jpg',
+    apple: '/images/next-white-logo.jpg'
   }
 };
 

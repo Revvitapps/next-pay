@@ -38,9 +38,9 @@ const featuredJourneys = [
   },
   {
     href: '/services/marketing-outreach-lead-generation',
-    title: 'Network Building',
+    title: 'Client Engagement Platform',
     description:
-      'Layer in relationship-driven growth, retention support, and outreach once operations are dialed in.',
+      'Layer in relationship-driven growth, retention support, and scalable outreach once operations are dialed in.',
     chips: ['Outreach', 'Reputation', 'Retention'],
     accentClass:
       'border-2 border-[#46a7a6]/65 bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.14),transparent_42%),linear-gradient(180deg,rgba(6,9,13,0.96),rgba(9,12,16,0.88))] hover:border-[#7dd9d8]/90 hover:bg-[radial-gradient(circle_at_top,rgba(167,139,250,0.2),transparent_46%),linear-gradient(180deg,rgba(7,11,16,0.98),rgba(10,14,20,0.9))] hover:shadow-[0_0_0_2px_rgba(70,167,166,0.18),0_24px_54px_rgba(0,0,0,0.4)]'

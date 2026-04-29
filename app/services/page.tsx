@@ -12,7 +12,7 @@ import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo/jsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Business Services | NextPay',
-  description: 'Explore payments, POS, financing, payroll, network building, and brokerage services powered by NextPay.',
+  description: 'Explore payments, POS, financing, payroll, client engagement platforms, and brokerage services powered by NextPay.',
   path: '/services'
 });
 

@@ -621,18 +621,18 @@ export const serviceOfferings: ServiceOffering[] = [
   },
   {
     slug: 'marketing-outreach-lead-generation',
-    name: 'Network Building',
-    tagline: 'Modern tools to expand reach, strengthen connections, and grow demand.',
+    name: 'Client Engagement Platform',
+    tagline: 'Automated outreach and relationship workflows built to scale B2B engagement.',
     summary:
-      'Digital outreach, reputation management, and campaign support built to expand your network and strengthen retention.',
-    offerings: ['Network Building Strategy', 'Referral & Growth Campaigns', 'Reputation Management', 'Email & SMS Outreach', 'Relationship Outreach including LinkedIn'],
+      'NextLink helps automate outreach, unify conversations, and strengthen relationship-driven growth across channels.',
+    offerings: ['Client Engagement Workflows', 'Referral & Growth Campaigns', 'Reputation Management', 'Email & SMS Outreach', 'Relationship Outreach including LinkedIn'],
     detailGroups: [
       {
         title: 'Solutions',
-        items: ['Network Building Strategy', 'Referral & Growth Campaigns', 'Reputation Management', 'Email & SMS Outreach', 'Relationship Outreach including LinkedIn']
+        items: ['Client Engagement Workflows', 'Referral & Growth Campaigns', 'Reputation Management', 'Email & SMS Outreach', 'Relationship Outreach including LinkedIn']
       }
     ],
-    idealFor: 'Businesses that want stronger visibility, better relationship-building, and more consistent demand.',
+    idealFor: 'Businesses that want stronger visibility, better relationship-building, and more consistent outbound momentum.',
     formType: 'core'
   },
   {

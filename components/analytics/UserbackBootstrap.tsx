@@ -11,7 +11,7 @@ type UserbackWindow = Window & {
   __userbackInitialized?: boolean;
 };
 
-const USERBACK_TOKEN = process.env.NEXT_PUBLIC_USERBACK_TOKEN ?? 'A-HoZrXnPGvJoEmiC0zM7LtT2iN';
+const USERBACK_TOKEN = process.env.NEXT_PUBLIC_USERBACK_TOKEN?.trim() || '';
 const USERBACK_SCRIPT_ID = 'userback-widget-script';
 
 function initUserback() {
@@ -55,8 +55,8 @@ export default function UserbackBootstrap() {
     const script = document.createElement('script');
     script.id = USERBACK_SCRIPT_ID;
     script.src = 'https://static.userback.io/widget/v1.js';
-    script.async = false;
-    script.defer = false;
+    script.async = true;
+    script.defer = true;
     script.onload = initUserback;
     script.onerror = () => {
       console.error('[userback] failed to load script');

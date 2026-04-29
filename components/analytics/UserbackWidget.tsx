@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Userback from '@userback/widget';
 
-const USERBACK_TOKEN = process.env.NEXT_PUBLIC_USERBACK_TOKEN ?? 'A-HoZrXnPGvJoEmiC0zM7LtT2iN';
+const USERBACK_TOKEN = process.env.NEXT_PUBLIC_USERBACK_TOKEN?.trim() || '';
 
 export default function UserbackWidget() {
   const initializedRef = useRef(false);
