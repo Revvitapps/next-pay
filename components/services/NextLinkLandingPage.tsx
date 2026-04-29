@@ -154,22 +154,22 @@ export default function NextLinkLandingPage() {
 
       <section className="px-6 pb-14 lg:px-12 lg:pb-20">
         <div className="mx-auto w-full max-w-[1380px] rounded-[32px] border border-amber-300/15 bg-[radial-gradient(circle_at_top_left,rgba(245,158,11,0.12),transparent_34%),linear-gradient(180deg,rgba(30,18,10,0.94),rgba(14,10,8,0.98))] p-8 md:p-10">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10">
-            <div className="flex justify-center lg:min-w-[170px] lg:items-center lg:border-r lg:border-amber-300/12 lg:pr-8">
+          <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[132px_minmax(0,1fr)] lg:items-center lg:gap-x-2">
+            <div className="flex justify-center lg:min-h-[260px] lg:items-center lg:border-r lg:border-amber-300/12 lg:pr-3">
               <AlertTriangle className="h-14 w-14 text-amber-200 lg:h-20 lg:w-20" />
             </div>
-            <div className="flex-1 lg:max-w-3xl">
-              <h2 className="font-heading text-3xl font-extrabold tracking-tight text-amber-50 md:text-4xl">
-                What&apos;s at Risk
-              </h2>
-              <p className="mt-3 text-sm uppercase tracking-[0.2em] text-amber-200/90">
-                If nothing changes…
-              </p>
-              <div className="mt-8">
-                <ul className="flex max-w-3xl flex-col space-y-4">
+            <div className="flex w-full justify-start text-left lg:justify-self-start">
+              <div className="!ml-0 !mr-auto flex w-full max-w-[680px] self-start flex-col items-start text-left">
+                <h2 className="font-heading text-3xl font-extrabold tracking-tight text-amber-50 md:text-4xl">
+                  What&apos;s at Risk
+                </h2>
+                <p className="mt-3 text-sm uppercase tracking-[0.2em] text-amber-200/90">
+                  If nothing changes…
+                </p>
+                <ul className="mt-6 flex flex-col space-y-4">
                   {riskItems.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-base font-medium leading-7 text-slate-100/92">
-                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-amber-200" />
+                      <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-amber-200" />
                       <span>{item}</span>
                     </li>
                   ))}
