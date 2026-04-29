@@ -18,6 +18,8 @@ type PageShowcaseHeroProps = {
   };
   children?: ReactNode;
   imagePosition?: string;
+  contentAlignment?: 'left' | 'center';
+  ctaClassName?: string;
 };
 
 function isJourneyLabel(label: string) {
@@ -34,8 +36,12 @@ export default function PageShowcaseHero({
   primaryCta,
   secondaryCta,
   children,
-  imagePosition = 'object-center'
+  imagePosition = 'object-center',
+  contentAlignment = 'left',
+  ctaClassName = ''
 }: PageShowcaseHeroProps) {
+  const isCentered = contentAlignment === 'center';
+
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative isolate min-h-[460px] md:min-h-[560px] lg:min-h-[680px]">
@@ -51,42 +57,50 @@ export default function PageShowcaseHero({
 
         <div className="absolute inset-x-0 bottom-0 top-0 flex items-center px-6 py-16 lg:px-12">
           <div className="mx-auto w-full max-w-[1380px]">
-            <div className="max-w-4xl text-left md:max-w-3xl lg:max-w-4xl">
+            <div
+              className={`max-w-4xl md:max-w-3xl lg:max-w-4xl ${
+                isCentered ? 'mx-auto text-center' : 'text-left'
+              }`}
+            >
               <p className="np-accent text-xs uppercase tracking-[0.22em]">{eyebrow}</p>
               <h1 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white drop-shadow-[0_18px_34px_rgba(0,0,0,0.32)] md:text-5xl lg:text-6xl">
                 {title}
               </h1>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-100/92 md:text-base lg:text-lg">
+              <p
+                className={`mt-4 max-w-3xl text-sm leading-relaxed text-slate-100/92 md:text-base lg:text-lg ${
+                  isCentered ? 'mx-auto' : ''
+                }`}
+              >
                 {description}
               </p>
-
-              {children ? <div className="mt-5">{children}</div> : null}
-
-              {primaryCta || secondaryCta ? (
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {primaryCta ? (
-                    <Link
-                      href={primaryCta.href}
-                      className={`inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition ${
-                        isJourneyLabel(primaryCta.label)
-                          ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
-                          : 'np-button-secondary'
-                      }`}
-                    >
-                      {primaryCta.label}
-                    </Link>
-                  ) : null}
-                  {secondaryCta ? (
-                    <Link
-                      href={secondaryCta.href}
-                      className="np-button-secondary inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition"
-                    >
-                      {secondaryCta.label}
-                    </Link>
-                  ) : null}
-                </div>
-              ) : null}
             </div>
+
+            {children ? <div className="mt-6">{children}</div> : null}
+
+            {primaryCta || secondaryCta ? (
+              <div className={`mt-6 flex flex-wrap gap-3 ${isCentered ? 'justify-center' : ''} ${ctaClassName}`.trim()}>
+                {primaryCta ? (
+                  <Link
+                    href={primaryCta.href}
+                    className={`inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                      isJourneyLabel(primaryCta.label)
+                        ? 'border border-[#46a7a6]/40 bg-accent-gradient text-slate-950 shadow-glow hover:brightness-110'
+                        : 'np-button-secondary'
+                    }`}
+                  >
+                    {primaryCta.label}
+                  </Link>
+                ) : null}
+                {secondaryCta ? (
+                  <Link
+                    href={secondaryCta.href}
+                    className="np-button-secondary inline-flex rounded-full px-5 py-2.5 text-sm font-semibold transition"
+                  >
+                    {secondaryCta.label}
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
