@@ -108,6 +108,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
   });
 
   const signedDownloadUrl = await getSignedStatementDownloadUrl(stored.storageReference);
+  const fileBuffer = parseDataUrlToBuffer(input.file.dataUrl!);
 
   await updateStatementFileMetadata({
     statementId,
@@ -128,7 +129,7 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
   try {
     const extractor = getStatementExtractor();
     const extraction = await extractor.extract({
-      fileBuffer: parseDataUrlToBuffer(input.file.dataUrl!),
+      fileBuffer,
       contentType: input.file.type!,
       fileName: input.file.name!
     });
@@ -195,7 +196,11 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
       currentProcessor: input.currentProcessor,
       monthlyVolume: input.monthlyVolume,
       originalFileName: stored.originalFileName,
-      signedDownloadUrl
+      attachment: {
+        filename: stored.originalFileName,
+        content: fileBuffer,
+        contentType: stored.contentType
+      }
     });
 
     if (parsed.requiresManualReview) {
@@ -207,7 +212,11 @@ export async function ingestStatementUpload(input: IngestStatementInput) {
         currentProcessor: input.currentProcessor,
         monthlyVolume: input.monthlyVolume,
         originalFileName: stored.originalFileName,
-        signedDownloadUrl
+        attachment: {
+          filename: stored.originalFileName,
+          content: fileBuffer,
+          contentType: stored.contentType
+        }
       });
     } else if (leadId) {
       const lead = await getLeadRecord(leadId);

@@ -9,6 +9,12 @@ import {
   type StatementNotificationInput
 } from '@/lib/server/email/templates';
 
+type EmailAttachment = {
+  filename: string;
+  content: Buffer;
+  contentType?: string;
+};
+
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) return null;
@@ -31,7 +37,7 @@ function getCcRecipients() {
     .filter(Boolean);
 }
 
-async function sendTemplateEmail(subject: string, text: string) {
+async function sendTemplateEmail(subject: string, text: string, attachments?: EmailAttachment[]) {
   const client = getResendClient();
   const from = process.env.CONTACT_FROM_EMAIL?.trim();
   const to = getRecipients();
@@ -54,7 +60,8 @@ async function sendTemplateEmail(subject: string, text: string) {
     to,
     cc: cc.length ? cc : undefined,
     subject,
-    text
+    text,
+    attachments
   });
 
   if (result.error) {
@@ -82,12 +89,12 @@ export async function sendLeadNotification(input: LeadNotificationInput) {
 
 export async function sendStatementUploadNotification(input: StatementNotificationInput) {
   const { subject, text } = statementUploadTemplate(input);
-  await sendTemplateEmail(subject, text);
+  await sendTemplateEmail(subject, text, input.attachment ? [input.attachment] : undefined);
 }
 
 export async function sendManualReviewNotification(input: StatementNotificationInput) {
   const { subject, text } = manualReviewTemplate(input);
-  await sendTemplateEmail(subject, text);
+  await sendTemplateEmail(subject, text, input.attachment ? [input.attachment] : undefined);
 }
 
 export async function sendQuoteReadyNotification(input: QuoteReadyNotificationInput) {

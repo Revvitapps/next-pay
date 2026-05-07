@@ -17,7 +17,11 @@ export type StatementNotificationInput = {
   currentProcessor: string;
   monthlyVolume: string;
   originalFileName?: string | null;
-  signedDownloadUrl?: string | null;
+  attachment?: {
+    filename: string;
+    content: Buffer;
+    contentType?: string;
+  };
 };
 
 export type QuoteReadyNotificationInput = {
@@ -55,7 +59,7 @@ export function statementUploadTemplate(input: StatementNotificationInput) {
     `Current Processor: ${input.currentProcessor}`,
     `Monthly Volume: ${input.monthlyVolume}`,
     `Uploaded File: ${input.originalFileName ?? 'Uploaded statement'}`,
-    ...(input.signedDownloadUrl ? [`Statement Download: ${input.signedDownloadUrl}`] : [])
+    'Statement attached to this email.'
   ].join('\n');
 
   return { subject, text };
@@ -70,7 +74,7 @@ export function manualReviewTemplate(input: StatementNotificationInput) {
     `Processor: ${input.currentProcessor}`,
     `Volume: ${input.monthlyVolume}`,
     `Uploaded File: ${input.originalFileName ?? 'Uploaded statement'}`,
-    ...(input.signedDownloadUrl ? [`Statement Download: ${input.signedDownloadUrl}`] : [])
+    'Statement attached to this email.'
   ].join('\n');
 
   return { subject, text };
