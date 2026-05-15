@@ -42,11 +42,12 @@ export default function ServicesPage() {
         imagePosition="object-center md:object-[center_38%]"
         contentAlignment="center"
         verticalAlignment="top"
+        minHeightClassName="min-h-[1220px] md:min-h-[900px] lg:min-h-[760px]"
         ctaClassName="mt-10 lg:mt-12"
         primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
       >
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 md:max-w-[42rem] md:mx-auto lg:max-w-none lg:grid-cols-3">
           <Link
             href="/services/payment-processing-merchant-services"
             className="group min-h-[220px] rounded-[28px] bg-white px-7 py-7 text-slate-900 shadow-[0_20px_50px_rgba(15,23,42,0.28)] transition hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(15,23,42,0.34)] lg:min-h-[200px] lg:px-8"

@@ -20,6 +20,7 @@ type PageShowcaseHeroProps = {
   imagePosition?: string;
   contentAlignment?: 'left' | 'center';
   verticalAlignment?: 'center' | 'top';
+  minHeightClassName?: string;
   ctaClassName?: string;
   descriptionClassName?: string;
 };
@@ -41,6 +42,7 @@ export default function PageShowcaseHero({
   imagePosition = 'object-center',
   contentAlignment = 'left',
   verticalAlignment = 'center',
+  minHeightClassName = 'min-h-[460px] md:min-h-[560px] lg:min-h-[680px]',
   ctaClassName = '',
   descriptionClassName = ''
 }: PageShowcaseHeroProps) {
@@ -53,7 +55,7 @@ export default function PageShowcaseHero({
 
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="relative isolate min-h-[460px] md:min-h-[560px] lg:min-h-[680px]">
+      <div className={`relative isolate ${minHeightClassName}`}>
         <Image
           src={image}
           alt={alt}
