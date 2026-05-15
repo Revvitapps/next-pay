@@ -196,8 +196,7 @@ export default function ServicesSection({
 
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.18 }}
+          animate="visible"
           variants={gridReveal}
           className="mt-14 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3"
         >
@@ -233,8 +232,7 @@ export default function ServicesSection({
 
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.18 }}
+          animate="visible"
           variants={gridReveal}
           className="mt-16 grid gap-x-8 gap-y-10 md:grid-cols-2 xl:grid-cols-3"
         >

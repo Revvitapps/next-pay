@@ -19,6 +19,7 @@ type PageShowcaseHeroProps = {
   children?: ReactNode;
   imagePosition?: string;
   contentAlignment?: 'left' | 'center';
+  verticalAlignment?: 'center' | 'top';
   ctaClassName?: string;
   descriptionClassName?: string;
 };
@@ -39,11 +40,16 @@ export default function PageShowcaseHero({
   children,
   imagePosition = 'object-center',
   contentAlignment = 'left',
+  verticalAlignment = 'center',
   ctaClassName = '',
   descriptionClassName = ''
 }: PageShowcaseHeroProps) {
   const isCentered = contentAlignment === 'center';
   const eyebrowIsElement = isValidElement(eyebrow);
+  const heroContentAlignmentClass =
+    verticalAlignment === 'top'
+      ? 'items-start px-6 pb-16 pt-8 md:items-center md:px-6 md:py-16 lg:px-12'
+      : 'items-center px-6 py-16 lg:px-12';
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -58,7 +64,7 @@ export default function PageShowcaseHero({
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(104,132,140,0.08),transparent_30%),linear-gradient(90deg,rgba(2,4,6,0.72)_0%,rgba(2,4,6,0.48)_28%,rgba(2,4,6,0.18)_50%,rgba(2,4,6,0.22)_100%),linear-gradient(180deg,rgba(2,4,6,0.16),rgba(2,4,6,0.4)_45%,rgba(1,2,4,0.74)_100%)]" />
 
-        <div className="absolute inset-x-0 bottom-0 top-0 flex items-center px-6 py-16 lg:px-12">
+        <div className={`absolute inset-x-0 bottom-0 top-0 flex ${heroContentAlignmentClass}`}>
           <div className="mx-auto w-full max-w-[1380px]">
             <div
               className={`max-w-4xl md:max-w-3xl lg:max-w-4xl ${

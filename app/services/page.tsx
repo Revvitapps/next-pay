@@ -18,7 +18,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function ServicesPage() {
   return (
-    <main className="pt-16">
+    <main className="pt-24 md:pt-28">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', path: '/' },
@@ -41,6 +41,7 @@ export default function ServicesPage() {
         alt="NextPay business services overview"
         imagePosition="object-center md:object-[center_38%]"
         contentAlignment="center"
+        verticalAlignment="top"
         ctaClassName="mt-10 lg:mt-12"
         primaryCta={{ label: 'Take The Quiz', href: '/pricing#custom-quote' }}
         secondaryCta={{ label: 'Upload My Statement', href: '/contact?intent=statement-upload' }}
