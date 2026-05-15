@@ -50,7 +50,7 @@ export default function PageShowcaseHero({
   const eyebrowIsElement = isValidElement(eyebrow);
   const heroContentAlignmentClass =
     verticalAlignment === 'top'
-      ? 'items-start px-6 pb-16 pt-8 md:items-center md:px-6 md:py-16 lg:px-12'
+      ? 'items-start px-6 pb-16 pt-24 md:items-center md:px-6 md:py-16 lg:px-12'
       : 'items-center px-6 py-16 lg:px-12';
 
   return (
