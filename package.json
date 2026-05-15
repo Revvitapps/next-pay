@@ -9,7 +9,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@userback/widget": "^0.3.12",
     "@vercel/analytics": "^1.6.1",
     "@vercel/blob": "^2.3.1",
     "clsx": "^2.1.1",

@@ -1,24 +1,9 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
 import { GlowOrb } from '@/components/visuals/GlowOrb';
 import { GridOverlay } from '@/components/visuals/GridOverlay';
-import { useEffect, useState } from 'react';
 
 export function GradientBackground() {
-  const shouldReduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(max-width: 768px)');
-    const update = () => setIsMobile(media.matches);
-    update();
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-
-  const disableSweepMotion = shouldReduceMotion || isMobile;
-
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-20 overflow-hidden bg-[#0a0c10]">
       <div
@@ -39,16 +24,15 @@ export function GradientBackground() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_46%,rgba(0,0,0,0.22)_100%)]" />
       <GlowOrb className="left-[-12rem] top-20 h-[22rem] w-[22rem]" colorClassName="bg-white/[0.08]" />
       <GlowOrb className="bottom-[-10rem] right-[-8rem] h-[20rem] w-[20rem]" colorClassName="bg-slate-500/20" />
-      <motion.div
+      <div
         className="absolute inset-y-[-20%] left-[-24%] w-[52%] rotate-10"
         style={{
           background:
             'linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(186,230,253,0.05) 40%, rgba(255,255,255,0.14) 50%, rgba(186,230,253,0.05) 60%, rgba(255,255,255,0) 100%)',
           mixBlendMode: 'screen',
-          filter: 'blur(8px)'
+          filter: 'blur(8px)',
+          transform: 'translateX(-12%) rotate(10deg)'
         }}
-        animate={disableSweepMotion ? { x: 0 } : { x: ['-108%', '108%'] }}
-        transition={disableSweepMotion ? { duration: 0 } : { duration: 18, ease: 'linear', repeat: Infinity }}
       />
       <GridOverlay />
     </div>

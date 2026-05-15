@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import UserbackBootstrap from '@/components/analytics/UserbackBootstrap';
 import JsonLd from '@/components/seo/JsonLd';
 import { GradientBackground } from '@/components/visuals/GradientBackground';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -41,7 +40,6 @@ export default function RootLayout({
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={localBusinessJsonLd()} />
-        <UserbackBootstrap />
         <GradientBackground />
         {children}
         <Analytics />
